@@ -1,1 +1,7 @@
-<div class="flex  items-center justify-center">page content</div>
+<script>
+	import InputText from '../components/InputText.svelte';
+</script>
+
+<div class="flex  items-center justify-center">
+	<InputText id="name" name="name" label="Name:" placeholder="Insert Name" value="" type="text" />
+</div>
