@@ -1,1 +1,1 @@
-<div class="flex  items-center justify-center">ciao</div>
+<div class="flex  items-center justify-center">page content</div>
