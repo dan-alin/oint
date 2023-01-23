@@ -6,7 +6,25 @@
 	export let value: string | number | undefined;
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-	export let type: 'text' | 'number' | 'email' | 'password';
+	export let type:
+		| 'color'
+		| 'date'
+		| 'datetime-local'
+		| 'email'
+		| 'file'
+		| 'hidden'
+		| 'image'
+		| 'month'
+		| 'number'
+		| 'password'
+		| 'reset'
+		| 'submit'
+		| 'tel'
+		| 'text'
+		| 'time'
+		| 'url'
+		| 'week'
+		| 'search';
 </script>
 
 <div class="form-control w-full max-w-xs">
