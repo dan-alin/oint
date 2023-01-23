@@ -6,7 +6,7 @@
 	}
 </script>
 
-<div class="btm-nav z-10">
+<div class="btm-nav h-16">
 	<button class:active={active === 'home'} on:click={() => changeTab('home')}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

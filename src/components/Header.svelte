@@ -1,4 +1,4 @@
-<div class="navbar bg-base-300">
+<div class="navbar bg-base-300 sticky top-0">
 	<div class="navbar-start">
 		<label for="my-drawer" class="btn btn-sm btn-circle swap swap-rotate">
 			<!-- this hidden checkbox controls the state -->

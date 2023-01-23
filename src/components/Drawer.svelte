@@ -1,4 +1,4 @@
-<div class="drawer">
+<div class="drawer custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content">
 		<!-- Page content here -->
@@ -13,3 +13,9 @@
 		</ul>
 	</div>
 </div>
+
+<style>
+	.custom-height {
+		height: calc(100vh - 128px);
+	}
+</style>
