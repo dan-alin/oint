@@ -4,7 +4,6 @@
 	import { pwaInfo } from 'virtual:pwa-info';
 	import Header from '../components/Header.svelte';
 	import Drawer from '../components/Drawer.svelte';
-	import BottomNav from '../components/BottomNav.svelte';
 
 	let ReloadPrompt: any;
 
@@ -24,8 +23,6 @@
 <Drawer>
 	<slot />
 </Drawer>
-
-<BottomNav />
 
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />
