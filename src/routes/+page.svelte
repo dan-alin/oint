@@ -8,7 +8,5 @@
 </div>
 
 <div class="absolute bottom-10 right-10">
-	<Button label="testo" shape="square" kind="secondary" />
+	<Button class="btn-secondary">+</Button>
 </div>
-
-<div class="btn btn-secondary">ciao</div>
