@@ -2,7 +2,6 @@ import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST({ request }: RequestEvent) {
 	const user = await request.json();
-	console.log(user);
 	try {
 		const response = await fetch('https://oint-ms.vercel.app/registration', {
 			method: 'POST',

@@ -1,8 +1,12 @@
 <script lang="ts">
 	import Button from '../../components/Button.svelte';
 	import InputText from '../../components/InputText.svelte';
+	import Select from '../../components/Select.svelte';
 	import { t } from '../../i18n/i18n';
+	import type { Option } from '../../models';
 	import { apiCall } from '../../utils/api-call';
+
+	export let data: { phonePrefixes: Option[] };
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
@@ -12,7 +16,7 @@
 				surname: formData.get('surname') as string,
 				password: formData.get('password') as string,
 				email: formData.get('email') as string,
-				phone: `+${formData.get('phone') as string}`,
+				phone: `${formData.get('prefix') as string}${formData.get('phone') as string}`,
 				birthdate: formData.get('birthdate') as string
 			};
 			apiCall('/api/user', 'post', JSON.stringify(user));
@@ -33,52 +37,73 @@
 	<div class="grid gap-6 mb-6 md:grid-cols-3">
 		<InputText
 			type="text"
-			label="Name:"
+			label="Name"
 			id="name"
 			name="name"
 			placeholder="Insert the name"
 			required={true}
+			value=""
 		/>
 		<InputText
 			type="text"
-			label="Surname:"
+			label="Surname"
 			id="surname"
 			name="surname"
 			placeholder="Insert the surname"
 			required={true}
+			value=""
 		/>
 		<InputText
 			type="password"
-			label="Password:"
+			label="Password"
 			id="password"
 			name="password"
 			placeholder="Insert the password"
 			required={true}
+			value=""
 		/>
+	</div>
+	<div class="grid gap-6 mb-6 md:grid-cols-3">
 		<InputText
 			type="email"
-			label="Email:"
+			label="Email"
 			id="email"
 			name="email"
 			placeholder="Insert the email"
 			required={true}
-		/>
-		<InputText
-			type="number"
-			label="Phone:"
-			id="phone"
-			name="phone"
-			placeholder="Insert the phone"
-			required={true}
+			value=""
 		/>
 		<InputText
 			type="date"
-			label="Birthdate:"
+			label="Birthdate"
 			id="birthdate"
 			name="birthdate"
 			placeholder="Insert the birthdate"
 			required={true}
+			value=""
 		/>
+	</div>
+	<div class="grid gap-6 mb-6 md:grid-cols-12">
+		<div class="col-span-2">
+			<Select
+				id="prefix"
+				name="prefix"
+				label="Prefix"
+				options={data.phonePrefixes}
+				required={true}
+			/>
+		</div>
+		<div class="col-span-6">
+			<InputText
+				type="number"
+				label="Phone"
+				id="phone"
+				name="phone"
+				placeholder="Insert the phone"
+				required={true}
+				value=""
+			/>
+		</div>
 	</div>
 	<div class="grid gap-6 mb-6 md:grid-cols-6">
 		<div class="col-span-5" />
