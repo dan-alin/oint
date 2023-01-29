@@ -1,7 +1,8 @@
 <script>
-	import InputText from '../components/InputText.svelte';
+	import Button from '../components/Button.svelte';
 </script>
 
-<div class="flex  items-center justify-center">
-	<InputText id="name" name="name" label="Name:" placeholder="Insert Name" value="" type="date" />
+<!-- TODO resolve flicker when drawer is open -->
+<div class="absolute bottom-10 right-10">
+	<Button class="btn-square" text="+" />
 </div>
