@@ -25,20 +25,37 @@
 		| 'url'
 		| 'week'
 		| 'search';
+
+	let isDirty: boolean = false;
+
+	const typeAction = (node: HTMLInputElement) => {
+		node.type = type;
+	};
 </script>
 
 <div class="form-control w-full">
 	<label class="label" for={id}>
-		<span class="label-text">{label}</span>
+		<span class="label-text"
+			>{label}{#if required}*{/if}</span
+		>
 	</label>
 	<input
 		class="input input-bordered w-full "
-		{type}
-		{id}
-		{name}
+		class:input-error={required && isDirty && !value}
+		use:typeAction
 		{placeholder}
-		{value}
+		{name}
+		{id}
 		{required}
 		{disabled}
+		bind:value
+		on:keydown={() => {
+			isDirty = true;
+		}}
 	/>
+	{#if required && isDirty && !value}
+		<span class="label">
+			<span class="label-text-alt text-red-600">The {name} is required</span>
+		</span>
+	{/if}
 </div>
