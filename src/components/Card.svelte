@@ -1,10 +1,14 @@
-<div class="card w-96 bg-base-100 shadow-xl image-full">
-	<figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
+<script lang="ts">
+	export let event: any;
+</script>
+
+<div class="card w-96 bg-base-300 shadow-xl ">
 	<div class="card-body">
-		<h2 class="card-title">Shoes!</h2>
-		<p>If a dog chews shoes whose shoes does he choose?</p>
+		<h2 class="card-title">{event.title}</h2>
+		<p>{event.location}</p>
+		<p>{event.date}</p>
 		<div class="card-actions justify-end">
-			<button class="btn btn-primary">Buy Now</button>
+			<button class="btn btn-primary">View</button>
 		</div>
 	</div>
 </div>
