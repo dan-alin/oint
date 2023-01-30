@@ -6,6 +6,7 @@
 	import Drawer from '../components/Drawer.svelte';
 	import { toggleSpinner } from '../stores/spinner';
 	import { Jumper } from 'svelte-loading-spinners';
+	import Button from '../components/Button.svelte';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
