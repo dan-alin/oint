@@ -34,7 +34,7 @@
 <section />
 <h1>{$t('signup.title')}</h1>
 <form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 md:grid-cols-3">
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
 		<InputText
 			type="text"
 			label="Name"
@@ -105,8 +105,8 @@
 			/>
 		</div>
 	</div>
-	<div class="grid gap-6 mb-6 md:grid-cols-6">
-		<div class="col-span-5" />
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
+		<div class="md:col-span-5" />
 		<Button type="submit" text="Submit" />
 	</div>
 </form>
