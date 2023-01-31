@@ -14,12 +14,12 @@
 
 <div class="form-control w-full">
 	<label class="label" for={id}>
-		<span class="label-text"
+		<span class="label-text font-bold"
 			>{label}{#if required}*{/if}</span
 		>
 	</label>
 	<select
-		class="select w-full max-w-xs"
+		class="select select-bordered w-full max-w-xs"
 		class:input-error={required && isDirty && !selected}
 		{id}
 		{name}

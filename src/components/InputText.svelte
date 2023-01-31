@@ -35,7 +35,7 @@
 
 <div class="form-control w-full">
 	<label class="label" for={id}>
-		<span class="label-text"
+		<span class="label-text font-bold"
 			>{label}{#if required}*{/if}</span
 		>
 	</label>
