@@ -13,7 +13,6 @@
 
 	isMobileStore.subscribe((value) => {
 		isMobile = value;
-		console.log(isMobile);
 	});
 
 	const onSubmit = async (event: Event) => {
@@ -41,7 +40,6 @@
 
 <section />
 <h1>{$t('signup.title')}</h1>
-{isMobile}
 <form on:submit|preventDefault={onSubmit}>
 	<div class="grid gap-6 mb-6 grid-cols-1 " class:md:grid-cols-3={!isMobile}>
 		<InputText
@@ -114,8 +112,8 @@
 			/>
 		</div>
 	</div>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
-		<div class="md:col-span-5" />
+	<div class="grid gap-6 mb-6 grid-cols-1 " class:md:grid-cols-6={!isMobile}>
+		<div class:md:grid-cols-5={!isMobile} />
 		<Button type="submit" text="Submit" />
 	</div>
 </form>
