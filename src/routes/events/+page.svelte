@@ -17,4 +17,8 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Events</title>
+	<meta name="description" content="A section to find or create events" />
+</svelte:head>
 <h1>Events</h1>
