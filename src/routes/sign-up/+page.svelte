@@ -70,7 +70,7 @@
 			value=""
 		/>
 	</div>
-	<div class="grid gap-6 mb-6 md:grid-cols-3">
+	<div class="grid gap-6 mb-6" class:md:grid-cols-6={!isMobile}>
 		<InputText
 			type="email"
 			label="Email"
