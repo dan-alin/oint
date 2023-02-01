@@ -4,9 +4,14 @@
 	import Select from '../../components/Select.svelte';
 	import { t } from '../../i18n/i18n';
 	import type { Option } from '../../models';
+	import { isMobileStore } from '../../stores/mobile';
 	import { apiCall } from '../../utils/api-call';
 
 	export let data: { phonePrefixes: Option[] };
+
+	let isMobile: boolean;
+
+	isMobileStore.subscribe((isMobile) => (isMobile = isMobile));
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
@@ -34,7 +39,7 @@
 <section />
 <h1>{$t('signup.title')}</h1>
 <form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3" class:grid-cols-1={isMobile}>
 		<InputText
 			type="text"
 			label="Name"
