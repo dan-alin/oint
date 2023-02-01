@@ -38,7 +38,8 @@
 <section />
 <h1>{$t('login.title')}</h1>
 <form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 grid-cols-1" class:md:grid-cols-3={!isMobile}>
+	<!-- <div class="grid gap-6 mb-6 grid-cols-1" class:md:grid-cols-3={!isMobile}> -->
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3">
 		<div class="col-span-1" />
 		<InputText
 			type="email"
