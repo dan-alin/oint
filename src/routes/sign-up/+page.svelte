@@ -39,7 +39,7 @@
 <section />
 <h1>{$t('signup.title')}</h1>
 <form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3" class:grid-cols-1={isMobile}>
+	<div class="grid gap-6 mb-6 grid-cols-1 " class:md:grid-cols-3={!isMobile}>
 		<InputText
 			type="text"
 			label="Name"

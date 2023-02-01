@@ -20,7 +20,6 @@
 			return regexs.some((b) => window.navigator.userAgent.match(b));
 		};
 		isMobileStore.update((isMobile) => isMobileDevice());
-		console.log('test');
 	});
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
