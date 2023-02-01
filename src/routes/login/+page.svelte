@@ -2,7 +2,14 @@
 	import Button from '../../components/Button.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
+	import { isMobileStore } from '../../stores/mobile';
 	import { apiCall } from '../../utils/api-call';
+
+	let isMobile: boolean;
+
+	isMobileStore.subscribe((value) => {
+		isMobile = value;
+	});
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
@@ -31,7 +38,7 @@
 <section />
 <h1>{$t('login.title')}</h1>
 <form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
+	<div class="grid gap-6 mb-6 grid-cols-1" class:md:grid-cols-3={!isMobile}>
 		<div class="col-span-1" />
 		<InputText
 			type="email"
@@ -43,7 +50,7 @@
 			value=""
 		/>
 	</div>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
+	<div class="grid gap-6 mb-6 grid-cols-1" class:md:grid-cols-3={!isMobile}>
 		<div class="col-span-1" />
 		<InputText
 			type="password"
@@ -56,7 +63,7 @@
 		/>
 	</div>
 
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
+	<div class="grid gap-6 mb-6 grid-cols-1 " class:md:grid-cols-3={!isMobile}>
 		<div class="col-span-1" />
 		<Button type="submit" text="Login" />
 	</div>
