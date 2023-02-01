@@ -11,7 +11,10 @@
 
 	let isMobile: boolean;
 
-	isMobileStore.subscribe((isMobile) => (isMobile = isMobile));
+	isMobileStore.subscribe((value) => {
+		isMobile = value;
+		console.log(isMobile);
+	});
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
