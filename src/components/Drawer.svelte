@@ -4,11 +4,8 @@
 
 <div class="drawer drawer-end custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content p-10">
+	<div class="drawer-content p-10 pb-20">
 		<slot />
-		<div class="fixed bottom-10 right-10">
-			<Button class="btn-square" text="+" />
-		</div>
 	</div>
 	<div class="drawer-side ">
 		<label for="my-drawer" class="drawer-overlay" />

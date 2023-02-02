@@ -6,5 +6,5 @@ export type Appointment = {
 	start_date: Date;
 	end_date: Date;
 	can_be_forwarded: boolean;
-	address: string;
+	image: string;
 };
