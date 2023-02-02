@@ -6,21 +6,21 @@
 	import Drawer from '../components/Drawer.svelte';
 	import { toggleSpinner } from '../stores/spinner';
 	import { Jumper } from 'svelte-loading-spinners';
-	import { isMobileStore } from '../stores/mobile';
+	// import { isMobileStore } from '../stores/mobile';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 
-	onMount(async () => {
-		pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
-		const isMobileDevice = (): boolean => {
-			const regexs = [/(Android)(.+)(Mobile)/i, /iPhone|iPod/i, /Opera Mini/i, /IEMobile/i];
-			return regexs.some((b) => window.navigator.userAgent.match(b));
-		};
-		isMobileStore.update((isMobile) => isMobileDevice());
-	});
+	// onMount(async () => {
+	// 	pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
+	// 	const isMobileDevice = (): boolean => {
+	// 		const regexs = [/(Android)(.+)(Mobile)/i, /iPhone|iPod/i, /Opera Mini/i, /IEMobile/i];
+	// 		return regexs.some((b) => window.navigator.userAgent.match(b));
+	// 	};
+	// 	isMobileStore.update((isMobile) => isMobileDevice());
+	// });
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
