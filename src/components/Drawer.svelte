@@ -1,6 +1,10 @@
+<script>
+	import Button from './Button.svelte';
+</script>
+
 <div class="drawer drawer-end custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content p-10">
+	<div class="drawer-content p-10 pb-20">
 		<slot />
 	</div>
 	<div class="drawer-side ">
@@ -15,6 +19,11 @@
 <style>
 	/* custom height calculated based on header size */
 	.custom-height {
-		height: calc(100vh - 64px);
+		height: calc(100vh - 128px);
+	}
+
+	::-webkit-scrollbar {
+		width: 0px;
+		background: transparent; /* make scrollbar transparent */
 	}
 </style>

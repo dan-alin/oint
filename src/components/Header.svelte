@@ -1,10 +1,10 @@
-<div class="navbar bg-base-300 sticky top-0 px-10 z-50 h-48 md:h-32">
+<div class="navbar bg-base-200 sticky top-0 px-6 z-50 h-32 ">
 	<div class="navbar-start" />
-	<div class="navbar-center">
+	<a href="/" class="navbar-center">
 		<div class="h-12">
 			<img src="favicon.svg" alt="" height="40px" width="40px" />
 		</div>
-	</div>
+	</a>
 	<div class="navbar-end">
 		<label for="my-drawer">
 			<div class="avatar online">
