@@ -10,4 +10,7 @@
 	<a href="/sign-up">
 		<Button class="btn btn-primary" text="sign-up" />
 	</a>
+	<a href="/add-friends">
+		<Button class="btn btn-primary" text="Add Friends" />
+	</a>
 </div>
