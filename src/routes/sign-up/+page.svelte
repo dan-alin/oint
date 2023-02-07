@@ -4,16 +4,10 @@
 	import Select from '../../components/Select.svelte';
 	import { t } from '../../i18n/i18n';
 	import type { Option } from '../../models';
-	import { isMobileStore } from '../../stores/mobile';
 	import { apiCall } from '../../utils/api-call';
+	import { showAlert } from '../../utils/show-alert';
 
 	export let data: { phonePrefixes: Option[] };
-
-	let isMobile: boolean;
-
-	isMobileStore.subscribe((value) => {
-		isMobile = value;
-	});
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
@@ -27,7 +21,9 @@
 				birthdate: formData.get('birthdate') as string
 			};
 			apiCall('/api/user', 'post', JSON.stringify(user));
+			showAlert({ show: true, message: 'Signup success', isSuccess: true });
 		} catch (error: unknown) {
+			showAlert({ show: true, message: error as string, isError: true });
 			console.log(error);
 		}
 	};
@@ -41,7 +37,7 @@
 <section />
 <h1>{$t('signup.title')}</h1>
 <form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 grid-cols-1 " class:md:grid-cols-3={!isMobile}>
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3">
 		<InputText
 			type="text"
 			label="Name"
@@ -70,7 +66,7 @@
 			value=""
 		/>
 	</div>
-	<div class="grid gap-6 mb-6" class:md:grid-cols-6={!isMobile}>
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
 		<InputText
 			type="email"
 			label="Email"
@@ -112,8 +108,8 @@
 			/>
 		</div>
 	</div>
-	<div class="grid gap-6 mb-6 grid-cols-1 " class:md:grid-cols-6={!isMobile}>
-		<div class:md:grid-cols-5={!isMobile} />
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
+		<div class="md:grid-cols-5" />
 		<Button type="submit" text="Submit" />
 	</div>
 </form>

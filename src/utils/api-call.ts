@@ -1,4 +1,5 @@
 import { toggleSpinner } from '../stores/spinner';
+import { showAlert } from './show-alert';
 
 export const apiCall = async <T>(
 	url: string,

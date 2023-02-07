@@ -4,6 +4,7 @@
 	import InputAction from '../../components/InputAction.svelte';
 	import type { User } from '../../models';
 	import { apiCall } from '../../utils/api-call';
+	import { showAlert } from '../../utils/show-alert';
 
 	let users: User[] = [];
 
@@ -30,7 +31,9 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			console.log(response);
+			showAlert({ show: true, message: 'Request sent', isSuccess: true });
 		} catch (error: unknown) {
+			showAlert({ show: true, message: error as string, isError: true });
 			console.log(error);
 		}
 	};
