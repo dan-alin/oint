@@ -31,6 +31,8 @@
 	const typeAction = (node: HTMLInputElement) => {
 		node.type = type;
 	};
+
+	const inputClasses = type !== 'file' ? 'input input-bordered' : 'file-input file-input-bordered';
 </script>
 
 <div class="form-control w-full">
@@ -40,7 +42,8 @@
 		>
 	</label>
 	<input
-		class="input input-bordered w-full "
+		class="{inputClasses} w-full "
+		class:pl-0={type === 'file'}
 		class:input-error={required && isDirty && !value}
 		use:typeAction
 		{placeholder}

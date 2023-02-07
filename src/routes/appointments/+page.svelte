@@ -2,16 +2,16 @@
 	import { onMount } from 'svelte';
 
 	import AppointmentCard from '../../components/AppointmentCard.svelte';
-	import Button from '../../components/Button.svelte';
+
 	import CreateAppointmentModal from '../../components/CreateAppointmentModal.svelte';
 	import type { Appointment } from '../../models';
 	import { apiCall } from '../../utils/api-call';
 
 	// export let data: { appointments: any };
-	let appointments: any;
+	let appointments: Appointment[];
 	onMount(async () => {
 		try {
-			const response: { access_token: string } = await apiCall(
+			const response: Appointment[] = await apiCall(
 				'/api/appointments',
 				'get',
 				undefined,
@@ -41,11 +41,11 @@
 </div>
 
 <div
-	class="flex justify-center items-center h-16  w-full fixed bottom-0 left-0 bg-base-200 rounded-t-2xl"
+	class="flex shadow-md justify-center items-center h-16  w-full fixed bottom-0 left-0 bg-base-200 rounded-t-2xl z-50"
 >
 	<label for="create-appointment-modal" class="btn btn-circle">+</label>
 </div>
-
+<!-- toggle close modal from card when appointment is created -->
 <input type="checkbox" id="create-appointment-modal" class="modal-toggle" />
 
 <CreateAppointmentModal />

@@ -30,6 +30,7 @@ export const apiCall = async <T>(
 				break;
 		}
 	} catch (err: unknown) {
+		console.log('err');
 		toggleSpinner.update((toggleSpinner) => false);
 	}
 
@@ -38,5 +39,6 @@ export const apiCall = async <T>(
 		return await response.json();
 	}
 	toggleSpinner.update((toggleSpinner) => false);
+
 	throw new Error(`${response?.statusText}`);
 };

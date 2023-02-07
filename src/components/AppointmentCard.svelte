@@ -17,8 +17,7 @@
 		<p class="text-xs text-ellipsis">{event.description}</p>
 		<p class="text-xs">{event.start_date}</p>
 		<p class="text-xs">{event.end_date}</p>
-		{#if event.can_be_forwarded}
-			<Button class="btn-primary btn-xs" text="dettaglio" />
-		{/if}
+
+		<Button class="btn-primary btn-xs" text="dettaglio" />
 	</div>
 </div>
