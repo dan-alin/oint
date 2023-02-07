@@ -11,7 +11,6 @@ export async function POST({ request }: RequestEvent) {
 			},
 			body: JSON.stringify(appointment)
 		});
-
 		const data = await response.json();
 		return new Response(JSON.stringify(data), {
 			status: data.statusCode

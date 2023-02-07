@@ -3,14 +3,8 @@
 	import Button from '../../components/Button.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
-	// import { isMobileStore } from '../../stores/mobile';
 	import { apiCall } from '../../utils/api-call';
-
-	// let isMobile: boolean;
-
-	// isMobileStore.subscribe((value) => {
-	// 	isMobile = value;
-	// });
+	import { showAlert } from '../../utils/show-alert';
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
@@ -25,9 +19,11 @@
 				JSON.stringify(user)
 			);
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
+			showAlert({ show: true, message: 'Login success', isSuccess: true });
 			goto('/appointments');
 		} catch (error: unknown) {
-			console.log(error);
+			showAlert({ show: true, message: error as string, isError: true });
+			console.error(error);
 		}
 	};
 </script>
