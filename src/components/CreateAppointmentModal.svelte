@@ -4,115 +4,175 @@
 	import Button from './Button.svelte';
 	import InputText from './InputText.svelte';
 
-	let forwardCheck = false;
+	let step = 1;
+
+	type Form = {
+		title: string;
+		description: string;
+		start_date: string;
+		end_date: string;
+		address: string;
+		image?: File;
+		can_be_forwarded: false;
+	};
+
+	let formData: Form = {
+		title: '',
+		description: '',
+		start_date: '',
+		end_date: '',
+		address: '',
+		image: undefined,
+		can_be_forwarded: false
+	};
 
 	const onSubmit = async (event: Event) => {
-		const formData = new FormData(event.target as HTMLFormElement);
-		const image = await fileToBase64(formData.get('image') as File);
+		// const formData = new FormData(event.target as HTMLFormElement);
+		if (step === 1) {
+			step = 2;
+		} else {
+			const image = formData.image && (await fileToBase64(formData.image));
 
-		try {
-			const newAppointment = {
-				title: formData.get('title') as string,
-				description: formData.get('description') as string,
-				start_date: formData.get('start_date') as string,
-				end_date: formData.get('end_date') as string,
-				image,
-				can_be_forwarded: forwardCheck,
-				address: formData.get('address') as string
-			};
+			try {
+				const newAppointment = {
+					title: formData.title,
+					description: formData.description,
+					start_date: formData.start_date,
+					end_date: formData.end_date,
+					image,
+					can_be_forwarded: formData.can_be_forwarded,
+					address: formData.address
+				};
 
-			const response: { access_token: string } = await apiCall(
-				'/api/create-appointment',
-				'post',
-				JSON.stringify(newAppointment),
-				sessionStorage.getItem('jwt_token') || ''
-			);
+				const response: { access_token: string } = await apiCall(
+					'/api/create-appointment',
+					'post',
+					JSON.stringify(newAppointment),
+					sessionStorage.getItem('jwt_token') || ''
+				);
 
-			console.log(response);
-		} catch (error: unknown) {
-			console.log(error);
+				console.log(response);
+				closeModal();
+			} catch (error: unknown) {
+				console.log(error);
+			}
 		}
+	};
+
+	const closeModal = () => {
+		const modal = document.getElementById('create-appointment-modal');
+		modal?.click();
 	};
 </script>
 
 <!-- TODO handle modal layout on desktop -->
 <div class="modal modal-bottom md:modal-middle  z-50 ">
-	<div class="modal-box  bg-base-200">
+	<div class="modal-box  bg-base-200 h-5/6 ">
 		<label for="create-appointment-modal" class="btn btn-sm btn-circle absolute right-2 top-2"
 			>✕</label
 		>
+
+		<span class=" absolute left-2 top-2 text-2xl" on:click={() => (step = 1)}>←</span>
 		<form on:submit|preventDefault={onSubmit}>
 			<!-- TODO extract classes in an @apply -->
-			<h2 class="text-center">CREA EVENTO</h2>
+
 			<div class="grid gap-6  grid-cols-1  ">
-				<InputText
-					type="text"
-					label="title"
-					id="title"
-					name="title"
-					placeholder="Insert the title"
-					required={true}
-					value=""
-				/><InputText
-					type="text"
-					label="description"
-					id="description"
-					name="description"
-					placeholder="Insert the descriptionn"
-					required={true}
-					value=""
-				/>
-				<InputText
-					type="text"
-					name="address"
-					value=""
-					id="address"
-					placeholder="Insert the address"
-					label="address"
-				/>
-				<div class="columns-2   gap-6">
+				<h2 class="text-center">CREA EVENTO</h2>
+				<ul class="steps">
+					<li class="step step-primary" />
+					<li class="step step-primary" class:step-primary={step === 2} />
+				</ul>
+				{#if step === 1}
 					<InputText
-						type="date"
-						label="start date"
-						id="start_date"
-						name="start_date"
-						placeholder="Insert the starting date"
+						type="text"
+						label="title"
+						id="title"
+						name="title"
+						placeholder="Insert the title"
 						required={true}
-						value=""
+						bind:value={formData.title}
+					/><InputText
+						type="text"
+						label="description"
+						id="description"
+						name="description"
+						placeholder="Insert the descriptionn"
+						required={true}
+						bind:value={formData.description}
 					/>
 					<InputText
-						type="date"
-						label="end date"
-						id="end_date"
-						name="end_date"
-						placeholder="Insert the ending date"
-						required={true}
-						value=""
+						type="text"
+						name="address"
+						bind:value={formData.address}
+						id="address"
+						placeholder="Insert the address"
+						label="address"
 					/>
-				</div>
-
-				<InputText
-					type="file"
-					name="image"
-					value=""
-					id="image"
-					placeholder="insert the event image"
-					label="image"
-				/>
-
-				<label class=" cursor-pointer label w-full ">
-					<span class="label-text font-bold">Forwardable</span>
-					<input
-						type="checkbox"
-						class="toggle toggle-primary"
-						bind:checked={forwardCheck}
-						id="forwardable"
+					<InputText
+						type="file"
+						name="image"
+						bind:value={formData.image}
+						id="image"
+						placeholder="insert the event image"
+						label="image"
 					/>
-				</label>
+				{:else if step === 2}
+					<div class="columns-2   gap-6">
+						<InputText
+							type="date"
+							label="start date"
+							id="start_date"
+							name="start_date"
+							placeholder="Insert the starting date"
+							required={true}
+							bind:value={formData.start_date}
+						/>
+						<InputText
+							type="date"
+							label="end date"
+							id="end_date"
+							name="end_date"
+							placeholder="Insert the ending date"
+							required={true}
+							bind:value={formData.end_date}
+						/>
+					</div>
 
-				<div class="grid gap-6  grid-cols-1 md:grid-cols-3">
-					<div class="span-1" />
-					<Button type="submit" text="Crea" />
+					<div class="columns-2   gap-6">
+						<InputText
+							type="date"
+							label="start date"
+							id="start_date"
+							name="start_date"
+							placeholder="Insert the starting date"
+							required={true}
+							bind:value={formData.start_date}
+						/>
+						<InputText
+							type="date"
+							label="end date"
+							id="end_date"
+							name="end_date"
+							placeholder="Insert the ending date"
+							required={true}
+							bind:value={formData.end_date}
+						/>
+					</div>
+
+					<label class=" cursor-pointer label w-full h-[84px] ">
+						<span class="label-text font-bold">Forwardable</span>
+						<input
+							type="checkbox"
+							class="toggle toggle-primary"
+							bind:checked={formData.can_be_forwarded}
+							id="forwardable"
+						/>
+					</label>
+				{/if}
+
+				<div class="grid  bottom-10 gap-6  grid-cols-1 md:grid-cols-3">
+					<div class="col-span-1" />
+					<Button type="submit" text={'crea'} />
 				</div>
 			</div>
 		</form>
