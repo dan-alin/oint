@@ -5,10 +5,11 @@
 
 	import CreateAppointmentModal from '../../components/CreateAppointmentModal.svelte';
 	import type { Appointment } from '../../models';
+	import { events } from '../../stores/appointments';
 	import { apiCall } from '../../utils/api-call';
 
 	// export let data: { appointments: any };
-	let appointments: Appointment[];
+
 	onMount(async () => {
 		try {
 			const response: Appointment[] = await apiCall(
@@ -18,7 +19,7 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			console.log(response);
-			appointments = response;
+			events.update((events) => response);
 		} catch (error: unknown) {
 			console.log(error);
 		}
@@ -31,13 +32,9 @@
 </svelte:head>
 
 <div class="grid gap-6 grid-cols-1 md:grid-cols-3 xl:grid-cols-5">
-	{#if appointments && appointments.length > 0}
-		{#each appointments as appointment}
-			<AppointmentCard event={appointment} handleClick={() => console.log('clicked')} />
-		{/each}
-	{:else}
-		<div>Nessun evento da visualizzare</div>
-	{/if}
+	{#each $events as appointment}
+		<AppointmentCard event={appointment} handleClick={() => console.log('clicked')} />
+	{/each}
 </div>
 
 <div

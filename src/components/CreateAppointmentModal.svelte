@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import type { Appointment } from '../models';
+	import { events } from '../stores/appointments';
 	import { apiCall } from '../utils/api-call';
 	import fileToBase64 from '../utils/to-base64';
 	import Button from './Button.svelte';
@@ -44,14 +47,15 @@
 					address: formData.address
 				};
 
-				const response: { access_token: string } = await apiCall(
+				const response: Appointment = await apiCall(
 					'/api/create-appointment',
 					'post',
 					JSON.stringify(newAppointment),
 					sessionStorage.getItem('jwt_token') || ''
 				);
 
-				console.log(response);
+				events.update((events) => [...events, response]);
+				//TODO save data in a store so they can be updated by api
 				closeModal();
 			} catch (error: unknown) {
 				console.log(error);
