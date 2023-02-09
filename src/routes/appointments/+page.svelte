@@ -33,7 +33,7 @@
 
 <div class="grid gap-6 grid-cols-1 md:grid-cols-3 xl:grid-cols-5">
 	{#each $events as appointment}
-		<AppointmentCard event={appointment} handleClick={() => console.log('clicked')} />
+		<AppointmentCard event={appointment} handleClick={() => console.log(appointment)} />
 	{/each}
 </div>
 

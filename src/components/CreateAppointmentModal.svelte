@@ -53,8 +53,9 @@
 					JSON.stringify(newAppointment),
 					sessionStorage.getItem('jwt_token') || ''
 				);
-
+				console.log(response);
 				events.update((events) => [...events, response]);
+
 				//TODO save data in a store so they can be updated by api
 				closeModal();
 			} catch (error: unknown) {

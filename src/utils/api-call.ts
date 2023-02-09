@@ -28,6 +28,13 @@ export const apiCall = async <T>(
 					body
 				});
 				break;
+			case 'delete':
+				response = await fetch(url, {
+					headers,
+					method: 'DELETE',
+					body
+				});
+				break;
 		}
 	} catch (err: unknown) {
 		console.log('err');
