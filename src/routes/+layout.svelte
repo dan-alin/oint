@@ -1,26 +1,20 @@
 <script lang="ts">
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import Header from '../components/Header.svelte';
 	import Drawer from '../components/Drawer.svelte';
+	import { fade } from 'svelte/transition';
 	import { toggleSpinner } from '../stores/spinner';
 	import { Jumper } from 'svelte-loading-spinners';
-	// import { isMobileStore } from '../stores/mobile';
+	import Alert from '../components/Alert.svelte';
+	import { toggleAlert, type AlertState } from '../stores/alert';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
+	let showAlert: AlertState;
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
-
-	// onMount(async () => {
-	// 	pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
-	// 	const isMobileDevice = (): boolean => {
-	// 		const regexs = [/(Android)(.+)(Mobile)/i, /iPhone|iPod/i, /Opera Mini/i, /IEMobile/i];
-	// 		return regexs.some((b) => window.navigator.userAgent.match(b));
-	// 	};
-	// 	isMobileStore.update((isMobile) => isMobileDevice());
-	// });
+	toggleAlert.subscribe((value) => (showAlert = value));
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 </script>
@@ -37,6 +31,15 @@
 	</div>
 {/if}
 <Header />
+{#if showAlert.show}
+	<div class="absolute top-15 w-full z-50" transition:fade>
+		<Alert
+			message={showAlert.message}
+			isError={showAlert.isError}
+			isSuccess={showAlert.isSuccess}
+		/>
+	</div>
+{/if}
 
 <Drawer>
 	<slot />
