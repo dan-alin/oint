@@ -15,7 +15,9 @@
 				JSON.stringify({ friendId }),
 				sessionStorage.getItem('jwt_token') || ''
 			);
-			received = received ? received.filter((friendRequest) => friendRequest.id !== friendId) : [];
+			received = Array.isArray(received)
+				? received.filter((friendRequest) => friendRequest.id !== friendId)
+				: [];
 		} catch (error: unknown) {}
 	};
 </script>
