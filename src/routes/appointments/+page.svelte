@@ -5,26 +5,67 @@
 
 	import CreateAppointmentModal from '../../components/CreateAppointmentModal.svelte';
 	import type { Appointment } from '../../models';
-	import { events } from '../../stores/appointments';
+	import type { AppointmentForm, DeletedAppointment } from '../../models/appointment';
 	import { apiCall } from '../../utils/api-call';
 
-	// export let data: { appointments: any };
+	export let data: { appointments: Appointment[] };
+	let { appointments } = data;
 
-	onMount(async () => {
+	// unique key for modal component
+	let unique = {};
+
+	const cancelAppointment = async (appointmentId: number) => {
 		try {
-			const response: Appointment[] = await apiCall(
-				'/api/appointments',
-				'get',
-				'',
-				undefined,
+			const response: DeletedAppointment = await apiCall(
+				'/api/delete-appointment',
+				'delete',
+				'Appuntamento eliminato',
+				JSON.stringify({
+					appointmentId
+				}),
+				sessionStorage.getItem('jwt_token') || ''
+			);
+			appointments = appointments.filter((event) => event.id !== response.deletedId);
+		} catch (error) {}
+	};
+
+	const createAppointment = async (formData: AppointmentForm) => {
+		try {
+			const newAppointment = {
+				title: formData.title,
+				description: formData.description,
+				start_date: formData.start_date,
+				end_date: formData.end_date,
+				image: '',
+				can_be_forwarded: formData.can_be_forwarded,
+				address: formData.address
+			};
+
+			const response: Appointment = await apiCall(
+				'/api/create-appointment',
+				'post',
+				'Appuntamento creato',
+				JSON.stringify(newAppointment),
+
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			console.log(response);
-			events.update((events) => response);
-		} catch (error: unknown) {
-			console.log(error);
-		}
-	});
+			appointments = [...appointments, response];
+
+			closeModal();
+		} catch (error) {}
+	};
+
+	const closeModal = () => {
+		const modal = document.getElementById('create-appointment-modal');
+		modal?.click();
+		restart();
+	};
+
+	// function to restart the component by setting a new unique key
+	const restart = () => {
+		unique = {};
+	};
 </script>
 
 <svelte:head>
@@ -33,8 +74,8 @@
 </svelte:head>
 
 <div class="grid gap-6 grid-cols-1 md:grid-cols-3 xl:grid-cols-5">
-	{#each $events as appointment}
-		<AppointmentCard event={appointment} handleClick={() => console.log(appointment)} />
+	{#each appointments as appointment}
+		<AppointmentCard event={appointment} action={cancelAppointment} />
 	{/each}
 </div>
 
@@ -46,4 +87,7 @@
 <!-- toggle close modal from card when appointment is created -->
 <input type="checkbox" id="create-appointment-modal" class="modal-toggle" />
 
-<CreateAppointmentModal />
+<!-- restart the component after closing it to clean form and steps -->
+{#key unique}
+	<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
+{/key}
