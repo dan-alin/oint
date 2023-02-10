@@ -8,7 +8,6 @@
 	let { received, sent } = data.requests;
 	console.log(data);
 	const acceptFriendRequest = async (friendId: number) => {
-		console.log(received);
 		try {
 			const response: any = await apiCall(
 				'/api/accept-friend-request',
