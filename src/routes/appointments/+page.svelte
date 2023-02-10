@@ -15,6 +15,7 @@
 			const response: Appointment[] = await apiCall(
 				'/api/appointments',
 				'get',
+				'',
 				undefined,
 				sessionStorage.getItem('jwt_token') || ''
 			);

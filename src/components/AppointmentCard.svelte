@@ -15,6 +15,7 @@
 			const response: DeletedAppointment = await apiCall(
 				'/api/delete-appointment',
 				'delete',
+				'Appuntamento eliminato',
 				JSON.stringify({
 					appointmentId: eventId
 				}),

@@ -4,6 +4,7 @@ import { showAlert } from './show-alert';
 export const apiCall = async <T>(
 	url: string,
 	method: 'get' | 'post' | 'put' | 'delete',
+	successMessage: string,
 	body?: string,
 	jwt = ''
 ): Promise<T> => {
@@ -44,10 +45,17 @@ export const apiCall = async <T>(
 
 	if (response?.status === 200) {
 		toggleSpinner.update((toggleSpinner) => false);
+		if (successMessage) {
+			showAlert({ show: true, message: successMessage, isSuccess: true });
+		}
 		return await response.json();
 	}
+	const data = await response?.json();
 	toggleSpinner.update((toggleSpinner) => false);
-	console.log(response);
-
+	showAlert({
+		show: true,
+		message: `${(data.message as string[]).reduce((acc, curr) => `${acc} ${curr}`, '')}` as string,
+		isError: true
+	});
 	throw new Error(`${response?.statusText}`);
 };

@@ -19,10 +19,8 @@
 				phone: `${formData.get('prefix') as string}${formData.get('phone') as string}`,
 				birthdate: formData.get('birthdate') as string
 			};
-			apiCall('/api/user', 'post', JSON.stringify(user));
-			showAlert({ show: true, message: 'Signup success', isSuccess: true });
+			apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
 		} catch (error: unknown) {
-			showAlert({ show: true, message: error as string, isError: true });
 			console.log(error);
 		}
 	};

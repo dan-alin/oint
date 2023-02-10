@@ -51,7 +51,9 @@
 				const response: Appointment = await apiCall(
 					'/api/create-appointment',
 					'post',
+					'Appuntamento creato',
 					JSON.stringify(newAppointment),
+
 					sessionStorage.getItem('jwt_token') || ''
 				);
 				console.log(response);
