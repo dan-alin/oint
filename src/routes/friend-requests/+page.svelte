@@ -6,7 +6,7 @@
 
 	export let data: { requests: FriendRequests };
 	let { received, sent } = data.requests;
-	console.log(received);
+	console.log(data);
 	const acceptFriendRequest = async (friendId: number) => {
 		console.log(received);
 		try {
