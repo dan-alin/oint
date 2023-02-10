@@ -1,17 +1,17 @@
 import type { Handle, HandleFetch } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const { cookies } = event;
+	let userid = event.cookies.get('userid');
+	const userToken = event.cookies.get('session');
 
-	const userToken = cookies.get('session');
-	console.log(userToken);
-	const response = await resolve(event);
-	return response;
-};
+	if (!userid) {
+		// if this is the first time the user has visited this app,
+		// set a cookie so that we recognise them when they return
+		userid = crypto.randomUUID();
+		event.cookies.set('userid', userid, { path: '/' });
+	}
 
-/** @type {import('@sveltejs/kit').HandleFetch} */
-export const handleFetch: HandleFetch = async ({ event, request, fetch }) => {
-	request.headers.set('cookie', event.request.headers.get('cookie') || '');
-	console.log(request);
-	return fetch(request);
+	event.locals.userid = userid;
+
+	return await resolve(event);
 };
