@@ -1,4 +1,5 @@
 import type { PageServerLoad } from './$types';
+
 export const load: PageServerLoad = async (event) => {
 	const { cookies } = event;
 	const userToken = cookies.get('session');
@@ -10,5 +11,5 @@ export const load: PageServerLoad = async (event) => {
 		}
 	});
 
-	return { requests: response.json() };
+	return { requests: { prova: userToken } };
 };
