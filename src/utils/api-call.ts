@@ -47,6 +47,7 @@ export const apiCall = async <T>(
 		return await response.json();
 	}
 	toggleSpinner.update((toggleSpinner) => false);
+	console.log(response);
 
 	throw new Error(`${response?.statusText}`);
 };

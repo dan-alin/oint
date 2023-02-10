@@ -8,3 +8,9 @@ export type Appointment = {
 	can_be_forwarded: boolean;
 	image: string;
 };
+
+export type DeletedAppointment = {
+	deletedId: number;
+	message: 'string';
+	status: number;
+};

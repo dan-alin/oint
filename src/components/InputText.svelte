@@ -3,9 +3,10 @@
 	export let name: string;
 	export let label: string;
 	export let placeholder: string;
-	export let value: string | number | Date | File | undefined = '';
+	export let value: string | number | Date | File[] | undefined = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
+
 	export let type:
 		| 'color'
 		| 'date'

@@ -12,6 +12,7 @@ export async function DELETE({ request }: RequestEvent) {
 			body: JSON.stringify(appointmentToDelete)
 		});
 		const data = await response.json();
+
 		return new Response(JSON.stringify(data), {
 			status: data.statusCode
 		});

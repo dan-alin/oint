@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Button from '../../components/Button.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import Select from '../../components/Select.svelte';
 	import { t } from '../../i18n/i18n';
@@ -110,6 +109,6 @@
 	</div>
 	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
 		<div class="md:grid-cols-5" />
-		<Button type="submit" text="Submit" />
+		<button class="btn" type="submit">Submit</button>
 	</div>
 </form>

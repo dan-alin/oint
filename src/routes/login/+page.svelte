@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Button from '../../components/Button.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
 	import { apiCall } from '../../utils/api-call';
@@ -65,6 +64,6 @@
 
 	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3">
 		<div class="col-span-1" />
-		<Button type="submit" text="Login" />
+		<button class="btn" type="submit">Login</button>
 	</div>
 </form>
