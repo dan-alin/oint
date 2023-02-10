@@ -2,7 +2,6 @@ import type { Handle, HandleFetch } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const { cookies } = event;
-	console.log(cookies);
 
 	const userToken = cookies.get('session');
 	console.log(userToken);
