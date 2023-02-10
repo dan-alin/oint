@@ -14,6 +14,7 @@
 			const response: { access_token: string } = await apiCall(
 				'/api/appointments',
 				'get',
+				'',
 				undefined,
 				sessionStorage.getItem('jwt_token') || ''
 			);
