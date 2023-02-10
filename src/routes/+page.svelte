@@ -13,4 +13,10 @@
 	<a href="/add-friends">
 		<Button class="btn btn-primary" text="Add Friends" />
 	</a>
+	<a
+		href="/friend-requests
+	"
+	>
+		<Button class="btn btn-primary" text="Friend requests" />
+	</a>
 </div>
