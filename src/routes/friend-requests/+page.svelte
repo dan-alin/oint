@@ -18,7 +18,7 @@
 			received = Array.isArray(received)
 				? received.filter((friendRequest) => friendRequest.id !== friendId)
 				: [];
-		} catch (error: unknown) {}
+		} catch (error) {}
 	};
 </script>
 
