@@ -6,7 +6,9 @@
 
 	export let data: { requests: FriendRequests };
 	let { received, sent } = data.requests;
+	console.log(received);
 	const acceptFriendRequest = async (friendId: number) => {
+		console.log(received);
 		try {
 			const response: any = await apiCall(
 				'/api/accept-friend-request',
@@ -15,21 +17,21 @@
 				JSON.stringify({ friendId }),
 				sessionStorage.getItem('jwt_token') || ''
 			);
-			received = Array.isArray(received)
-				? received.filter((friendRequest) => friendRequest.id !== friendId)
-				: [];
+			received = received.filter((friendRequest) => friendRequest.id !== friendId);
 		} catch (error) {}
 	};
 </script>
 
 <h1>Friend requests</h1>
-{#each received as request}
-	<Card>
-		<FriendCard
-			name={`${request.name} ${request.surname}`}
-			id={request.id || 0}
-			action={acceptFriendRequest}
-			isAcceptingMode
-		/>
-	</Card>
-{/each}
+{#if received}
+	{#each received as request}
+		<Card>
+			<FriendCard
+				name={`${request.name} ${request.surname}`}
+				id={request.id || 0}
+				action={acceptFriendRequest}
+				isAcceptingMode
+			/>
+		</Card>
+	{/each}
+{/if}
