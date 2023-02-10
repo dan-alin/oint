@@ -21,6 +21,7 @@
 			const response: { access_token: string } = await apiCall(
 				'/api/create-appointment',
 				'post',
+				'Appointment created',
 				JSON.stringify(newAppointment),
 				sessionStorage.getItem('jwt_token') || ''
 			);

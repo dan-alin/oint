@@ -3,20 +3,21 @@
 	import FriendCard from '../../components/FriendCard.svelte';
 	import InputAction from '../../components/InputAction.svelte';
 	import type { User } from '../../models';
+	import type { Friend } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
-	import { showAlert } from '../../utils/show-alert';
 
-	let users: User[] = [];
+	let friends: Friend[] = [];
 
 	const onSearch = async (searchText: string) => {
 		try {
-			const response: User[] = await apiCall(
+			const response: Friend[] = await apiCall(
 				'/api/search-users',
 				'post',
+				'',
 				JSON.stringify({ searchText }),
 				sessionStorage.getItem('jwt_token') || ''
 			);
-			users = response;
+			friends = response;
 		} catch (error: unknown) {
 			console.log(error);
 		}
@@ -27,13 +28,12 @@
 			const response: User[] = await apiCall(
 				'/api/add-friend',
 				'post',
+				'Request sent',
 				JSON.stringify({ friendId }),
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			console.log(response);
-			showAlert({ show: true, message: 'Request sent', isSuccess: true });
 		} catch (error: unknown) {
-			showAlert({ show: true, message: error as string, isError: true });
 			console.log(error);
 		}
 	};
@@ -54,9 +54,13 @@
 	/>
 </div>
 <div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-2">
-	{#each users as user}
+	{#each friends as friend}
 		<Card>
-			<FriendCard name={`${user.name} ${user.surname}`} id={user.id || 0} action={addFriend} />
+			<FriendCard
+				name={`${friend.user.name} ${friend.user.surname}`}
+				id={friend.user.id || 0}
+				action={addFriend}
+			/>
 		</Card>
 	{/each}
 </div>
