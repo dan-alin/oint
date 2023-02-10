@@ -10,5 +10,5 @@ export const load: PageServerLoad = async (event) => {
 		}
 	});
 
-	return { requests: response.json() };
+	return { requests: userToken };
 };
