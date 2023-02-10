@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-
+export const prerender = true;
 export const load: PageServerLoad = async (event) => {
 	const { cookies } = event;
 	const userToken = cookies.get('session');
