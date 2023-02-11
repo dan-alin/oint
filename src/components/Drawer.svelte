@@ -1,7 +1,3 @@
-<script>
-	import Button from './Button.svelte';
-</script>
-
 <div class="drawer drawer-end custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content p-10 pb-20">
