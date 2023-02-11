@@ -28,8 +28,6 @@
 	};
 </script>
 
-<!-- TODO handle modal layout on desktop -->
-
 <div class="modal modal-bottom md:modal-middle  z-50 ">
 	<div class="modal-box  bg-base-200 pb-10">
 		<button on:click={closeAction} class="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
@@ -49,19 +47,19 @@
 				>
 					<InputText
 						type="text"
-						label="title"
+						label="Nome evento"
 						id="title"
 						name="title"
 						placeholder="Insert the title"
-						required={true}
+						required
 						bind:value={formData.title}
 					/><InputText
 						type="text"
-						label="description"
+						label="Descrizione"
 						id="description"
 						name="description"
-						placeholder="Insert the descriptionn"
-						required={true}
+						required
+						placeholder="Insert the description"
 						bind:value={formData.description}
 					/>
 					<InputText
@@ -70,7 +68,7 @@
 						bind:value={formData.address}
 						id="address"
 						placeholder="Insert the address"
-						label="address"
+						label="Indirizzo"
 					/>
 				</form>
 			{:else if step === 2}
@@ -82,20 +80,20 @@
 					<div class="columns-2   gap-6">
 						<InputText
 							type="date"
-							label="start date"
+							label="Dal"
 							id="start_date"
 							name="start_date"
 							placeholder="Insert the starting date"
-							required={true}
+							required
 							bind:value={formData.start_date}
 						/>
 						<InputText
 							type="date"
-							label="end date"
+							label="Al"
 							id="end_date"
-							name="end_date"
+							name="end date"
+							required
 							placeholder="Insert the ending date"
-							required={true}
 							bind:value={formData.end_date}
 						/>
 					</div>
@@ -103,20 +101,20 @@
 					<div class="columns-2   gap-6">
 						<InputText
 							type="time"
-							label="start time"
+							label="Ora inizio"
 							id="start_time"
-							name="start_time"
+							name="start time"
 							placeholder="Insert the starting time"
-							required={true}
+							required
 							bind:value={formData.start_time}
 						/>
 						<InputText
 							type="time"
-							label="end time"
+							label="Ora fine"
 							id="end_time"
-							name="end_time"
+							name="end time"
+							required
 							placeholder="Insert the ending time"
-							required={true}
 							bind:value={formData.end_time}
 						/>
 					</div>
@@ -132,7 +130,7 @@
 					<InputFile
 						id="image"
 						name="image"
-						label="image"
+						label="Inserisci un'immagine"
 						accept={'.jpeg'}
 						bind:files={formData.image}
 					/>

@@ -31,15 +31,18 @@
 	};
 
 	const createAppointment = async (formData: AppointmentForm) => {
-		console.log(formData.image);
-		const image = await fileToBase64(formData.image?.[0] as File);
+		console.log(formData);
+		let image = '';
+		if (formData.image) {
+			image = await fileToBase64(formData.image?.[0] as File);
+		}
 
 		try {
 			const newAppointment = {
 				title: formData.title,
 				description: formData.description,
-				start_date: formData.start_date,
-				end_date: formData.end_date,
+				start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
+				end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
 				image,
 				can_be_forwarded: formData.can_be_forwarded,
 				address: formData.address
@@ -77,9 +80,9 @@
 	<meta name="description" content="A section to find or create events" />
 </svelte:head>
 
-<div class="grid gap-6 grid-cols-1 md:grid-cols-3 xl:grid-cols-5">
+<div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 pb-10">
 	{#each appointments as appointment}
-		<AppointmentCard event={appointment} action={cancelAppointment} />
+		<AppointmentCard {appointment} action={cancelAppointment} />
 	{/each}
 </div>
 
