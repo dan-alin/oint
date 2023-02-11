@@ -12,7 +12,6 @@
 		| 'date'
 		| 'datetime-local'
 		| 'email'
-		| 'file'
 		| 'hidden'
 		| 'image'
 		| 'month'
@@ -32,8 +31,6 @@
 	const typeAction = (node: HTMLInputElement) => {
 		node.type = type;
 	};
-
-	const inputClasses = type !== 'file' ? 'input input-bordered' : 'file-input file-input-bordered';
 </script>
 
 <div class="form-control w-full">
@@ -43,8 +40,7 @@
 		>
 	</label>
 	<input
-		class="{inputClasses} w-full "
-		class:pl-0={type === 'file'}
+		class="input input-bordered w-full "
 		class:input-error={required && isDirty && !value}
 		use:typeAction
 		{placeholder}

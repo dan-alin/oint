@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { AppointmentForm } from '../models/appointment';
+	import InputFile from './InputFile.svelte';
 
 	import InputText from './InputText.svelte';
 	export let action: (form: AppointmentForm) => void;
@@ -15,7 +16,7 @@
 		end_time: '',
 		address: '',
 		can_be_forwarded: false,
-		files: []
+		image: undefined
 	};
 
 	const nextStep = () => {
@@ -30,7 +31,7 @@
 <!-- TODO handle modal layout on desktop -->
 
 <div class="modal modal-bottom md:modal-middle  z-50 ">
-	<div class="modal-box  bg-base-200 h-5/6 ">
+	<div class="modal-box  bg-base-200 pb-10">
 		<button on:click={closeAction} class="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
 
 		<div class="grid gap-6  grid-cols-1  ">
@@ -41,7 +42,11 @@
 				<li class="step step-primary" class:step-primary={step === 3} />
 			</ul>
 			{#if step === 1}
-				<form id="1-part" on:submit|preventDefault={nextStep}>
+				<form
+					class="grid grid-cols-1 gap-6 grid-rows-3  "
+					id="1-part"
+					on:submit|preventDefault={nextStep}
+				>
 					<InputText
 						type="text"
 						label="title"
@@ -69,7 +74,11 @@
 					/>
 				</form>
 			{:else if step === 2}
-				<form id="2-part" on:submit|preventDefault={nextStep}>
+				<form
+					class="grid grid-cols-1 gap-6 grid-rows-3 "
+					id="2-part"
+					on:submit|preventDefault={nextStep}
+				>
 					<div class="columns-2   gap-6">
 						<InputText
 							type="date"
@@ -111,17 +120,25 @@
 							bind:value={formData.end_time}
 						/>
 					</div>
+					<div class="col-span-1" />
 				</form>
 			{:else if step === 3}
-				<form id="3-part" name="file-form" on:submit|preventDefault={() => action(formData)}>
-					<InputText
-						type="file"
-						name="image"
+				<form
+					class="grid grid-cols-1 grid-rows-3 gap-6  "
+					id="3-part"
+					name="file-form"
+					on:submit|preventDefault={() => action(formData)}
+				>
+					<InputFile
 						id="image"
-						placeholder="insert the event image"
+						name="image"
 						label="image"
+						accept={'.jpeg'}
+						bind:files={formData.image}
 					/>
-					<label class=" cursor-pointer label w-full h-[84px] ">
+					<div class="col-span-1" />
+
+					<label class=" cursor-pointer label w-full  ">
 						<span class="label-text font-bold">Forwardable</span>
 						<input
 							type="checkbox"

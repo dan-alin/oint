@@ -24,5 +24,5 @@ export type AppointmentForm = {
 	end_time: string;
 	address: string;
 	can_be_forwarded: false;
-	files: File[];
+	image: FileList | undefined;
 };

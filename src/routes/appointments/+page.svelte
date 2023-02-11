@@ -7,6 +7,7 @@
 	import type { Appointment } from '../../models';
 	import type { AppointmentForm, DeletedAppointment } from '../../models/appointment';
 	import { apiCall } from '../../utils/api-call';
+	import fileToBase64 from '../../utils/to-base64';
 
 	export let data: { appointments: Appointment[] };
 	let { appointments } = data;
@@ -30,13 +31,16 @@
 	};
 
 	const createAppointment = async (formData: AppointmentForm) => {
+		console.log(formData.image);
+		const image = await fileToBase64(formData.image?.[0] as File);
+
 		try {
 			const newAppointment = {
 				title: formData.title,
 				description: formData.description,
 				start_date: formData.start_date,
 				end_date: formData.end_date,
-				image: '',
+				image,
 				can_be_forwarded: formData.can_be_forwarded,
 				address: formData.address
 			};
