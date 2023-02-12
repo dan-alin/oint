@@ -1,6 +1,6 @@
 <div class="drawer drawer-end custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content md:p-10 pb-20">
+	<div class="drawer-content p-2 md:p-10 pb-20">
 		<slot />
 	</div>
 	<div class="drawer-side ">
