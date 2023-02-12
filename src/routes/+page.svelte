@@ -6,7 +6,7 @@
 	<a href="/sign-up">
 		<button class="btn btn-primary w-40">sign up</button>
 	</a>
-	<a href="/add-friends">
+	<a href="/search-friends">
 		<button class="btn btn-primary w-40">add friends</button>
 	</a>
 	<a href="/friend-requests">

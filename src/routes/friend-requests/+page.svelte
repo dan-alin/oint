@@ -23,14 +23,18 @@
 
 <h1>Friend requests</h1>
 {#if received}
-	{#each received as request}
-		<Card>
-			<FriendCard
-				name={`${request.name} ${request.surname}`}
-				id={request.id || 0}
-				action={acceptFriendRequest}
-				isAcceptingMode
-			/>
-		</Card>
-	{/each}
+	<div class="flex">
+		{#each received as request}
+			<div class="w-full md:max-w-md ">
+				<Card>
+					<FriendCard
+						name={`${request.name} ${request.surname}`}
+						id={request.id || 0}
+						action={acceptFriendRequest}
+						isAcceptingMode
+					/>
+				</Card>
+			</div>
+		{/each}
+	</div>
 {/if}
