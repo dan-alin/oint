@@ -1,3 +1,9 @@
+<script lang="ts">
+	import LinkSideMenu from './LinkSideMenu.svelte';
+
+	const closeSideMenu = () => document.getElementById('my-drawer')?.click();
+</script>
+
 <div class="drawer drawer-end custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
 	<div class="drawer-content p-2 md:p-10 pb-20">
@@ -7,14 +13,14 @@
 		<label for="my-drawer" class="drawer-overlay" />
 		<div class="menu bg-base-100 flex flex-col justify-between">
 			<ul class="menu p-4 w-80  text-base-content">
-				<li><a href="/appointments">Appointments</a></li>
-				<li><a href="/search-friends">Search friends</a></li>
-				<li><a href="/friend-requests">Friend requests</a></li>
+				<LinkSideMenu label="Appointments" href="/appointments" action={closeSideMenu} />
+				<LinkSideMenu label="Search friends" href="/search-friends" action={closeSideMenu} />
+				<LinkSideMenu label="Friend requests" href="/friend-requests" action={closeSideMenu} />
 			</ul>
 			<ul class="menu p-4 w-80  text-base-content">
-				<li><a href="/login">Login</a></li>
-				<li><a href="/sign-up">Signup</a></li>
-				<li><a href="/">Logout</a></li>
+				<LinkSideMenu label="Login" href="/login" action={closeSideMenu} />
+				<LinkSideMenu label="Signup" href="/sign-up" action={closeSideMenu} />
+				<LinkSideMenu label="Logout" href="/" action={closeSideMenu} />
 			</ul>
 		</div>
 	</div>
