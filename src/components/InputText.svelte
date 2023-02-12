@@ -38,6 +38,9 @@
 		<span class="label-text font-bold"
 			>{label}{#if required}*{/if}</span
 		>
+		{#if required && isDirty && !value}
+			<span class="label-text-alt text-red-600">The {name} is required</span>
+		{/if}
 	</label>
 	<input
 		class="input input-bordered w-full "
@@ -53,9 +56,4 @@
 			isDirty = true;
 		}}
 	/>
-	{#if required && isDirty && !value}
-		<span class="label">
-			<span class="label-text-alt text-red-600">The {name} is required</span>
-		</span>
-	{/if}
 </div>
