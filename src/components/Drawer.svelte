@@ -1,14 +1,22 @@
 <div class="drawer drawer-end custom-height ">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content p-10 pb-20">
+	<div class="drawer-content md:p-10 pb-20">
 		<slot />
 	</div>
 	<div class="drawer-side ">
 		<label for="my-drawer" class="drawer-overlay" />
-		<ul class="menu p-4 w-80 bg-base-100 text-base-content">
-			<li><a href="/">Sidebar Item 1</a></li>
-			<li><a href="/">Sidebar Item 2</a></li>
-		</ul>
+		<div class="menu bg-base-100 flex flex-col justify-between">
+			<ul class="menu p-4 w-80  text-base-content">
+				<li><a href="/appointments">Appointments</a></li>
+				<li><a href="/search-friends">Search friends</a></li>
+				<li><a href="/friend-requests">Friend requests</a></li>
+			</ul>
+			<ul class="menu p-4 w-80  text-base-content">
+				<li><a href="/login">Login</a></li>
+				<li><a href="/sign-up">Signup</a></li>
+				<li><a href="/">Logout</a></li>
+			</ul>
+		</div>
 	</div>
 </div>
 
