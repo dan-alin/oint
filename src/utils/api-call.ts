@@ -54,7 +54,11 @@ export const apiCall = async <T>(
 	toggleSpinner.update((toggleSpinner) => false);
 	showAlert({
 		show: true,
-		message: `${(data.message as string[]).reduce((acc, curr) => `${acc} ${curr}`, '')}` as string,
+		message: `${
+			typeof data.message === 'object'
+				? (data.message as string[]).reduce((acc, curr) => `${acc} ${curr}`, '')
+				: data.message
+		}` as string,
 		isError: true
 	});
 	throw new Error(`${response?.statusText}`);
