@@ -1,3 +1,4 @@
+import type { Appointment } from '../../models';
 import type { PageServerLoad } from './$types';
 
 export const prerender = false;
@@ -12,6 +13,7 @@ export const load: PageServerLoad = async (event) => {
 			Authorization: `Bearer ${userToken}`
 		}
 	});
+	const resp = (await response.json()) as Appointment[];
 
-	return { appointments: response.json() };
+	return { appointments: resp };
 };

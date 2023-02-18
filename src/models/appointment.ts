@@ -1,3 +1,5 @@
+import type { Location } from './locations';
+
 export type Appointment = {
 	id: number;
 	creator_id: number;
@@ -25,4 +27,5 @@ export type AppointmentForm = {
 	address: string;
 	can_be_forwarded: false;
 	image: FileList | undefined;
+	locations: Location[];
 };
