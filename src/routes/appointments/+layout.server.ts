@@ -1,9 +1,9 @@
 import type { Appointment } from '../../models';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from '../appointments/$types';
 
 export const prerender = false;
 
-export const load: PageServerLoad = async (event) => {
+export const load: LayoutServerLoad = async (event) => {
 	const { cookies } = event;
 	const userToken = cookies.get('session');
 	const response = await fetch('https://oint-ms.vercel.app/appointment/list', {

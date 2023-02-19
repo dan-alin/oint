@@ -11,6 +11,11 @@ h1 {
 }
 
 html,
+body {
+	position: fixed;
+}
+
+html,
 body,
 div,
 span,
@@ -82,6 +87,10 @@ td {
 }
 body {
 	line-height: 1;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	width: 100%;
 }
 ol,
 ul {
@@ -113,4 +122,9 @@ del {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent; /* make scrollbar transparent */
 }
