@@ -8,6 +8,8 @@
 	let { appointments } = data;
 
 	const cancelAppointment = async (appointmentId: number) => {
+		console.log('test');
+
 		try {
 			const response: DeletedAppointment = await apiCall(
 				'/api/delete-appointment',
