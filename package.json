@@ -41,7 +41,7 @@
 		"esbuild": "0.14.14"
 	},
 	"lint-staged": {
-		"**/*.{js,jsx,ts,tsx}": [
+		"**/*.{js,ts,svelte}": [
 			"npx prettier --write",
 			"npx eslint --fix"
 		]
