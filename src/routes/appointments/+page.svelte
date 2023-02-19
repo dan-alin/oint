@@ -88,7 +88,7 @@
 </div>
 
 <div
-	class="flex shadow-md justify-center items-center h-20  w-full fixed bottom-0 left-0 bg-base-200 rounded-t-2xl z-50"
+	class="flex shadow-md justify-center items-center h-24  w-full fixed bottom-0 left-0 bg-base-200 rounded-t-2xl z-50"
 >
 	<label for="create-appointment-modal" class="btn btn-circle">+</label>
 </div>
