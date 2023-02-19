@@ -39,11 +39,5 @@
 		"@sveltejs/kit": "^1.5.0",
 		"daisyui": "^2.47.0",
 		"esbuild": "0.14.14"
-	},
-	"lint-staged": {
-		"**/*.{js,ts,svelte}": [
-			"npx prettier --write",
-			"npx eslint --fix"
-		]
 	}
 }
