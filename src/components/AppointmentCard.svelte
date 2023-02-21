@@ -33,7 +33,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full">
 	<button
-		class="btn btn-sm btn-circle absolute right-2 top-2 z-50"
+		class="btn btn-sm btn-circle absolute right-2 top-2 z-30"
 		on:click={() => deleteAction(appointment.id)}
 	>
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

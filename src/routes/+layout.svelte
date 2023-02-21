@@ -30,21 +30,21 @@
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
 {/if}
-<Header />
-{#if showAlert.show}
-	<div class="absolute top-15 w-full z-50" transition:fade>
-		<Alert
-			message={showAlert.message}
-			isError={showAlert.isError}
-			isSuccess={showAlert.isSuccess}
-		/>
-	</div>
-{/if}
 
-<Drawer>
+<Drawer
+	><Header />
+	{#if showAlert.show}
+		<div class="absolute top-15 w-full z-50" transition:fade>
+			<Alert
+				message={showAlert.message}
+				isError={showAlert.isError}
+				isSuccess={showAlert.isSuccess}
+			/>
+		</div>
+	{/if}
+
 	<slot />
+	{#if ReloadPrompt}
+		<svelte:component this={ReloadPrompt} />
+	{/if}
 </Drawer>
-
-{#if ReloadPrompt}
-	<svelte:component this={ReloadPrompt} />
-{/if}

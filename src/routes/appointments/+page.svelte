@@ -76,14 +76,14 @@
 	};
 </script>
 
-<div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+<div class="flex flex-col gap-6  md:grid md:grid-cols-2 xl:grid-cols-3 pb-6 h-full ">
 	{#each appointments as appointment}
 		<AppointmentCard {appointment} deleteAction={cancelAppointment} action={goToDetail} />
 	{/each}
 </div>
 
 <div
-	class="flex shadow-md justify-center items-center h-24  w-full fixed  bottom-0 left-0 bg-base-200 rounded-t-2xl z-50"
+	class="flex shadow-md justify-center items-center h-24  w-screen sticky bottom-0 left-0  bg-base-200 rounded-t-2xl z-40"
 >
 	<label for="create-appointment-modal" class="btn btn-circle">+</label>
 </div>
