@@ -2,6 +2,7 @@
 	import type { Appointment } from '../models';
 
 	export let appointment: Appointment;
+	export let deleteAction: (appointmentId: number) => void;
 	export let action: (appointmentId: number) => void;
 
 	const startDate = new Date(appointment.start_date).toLocaleDateString('it-IT', {
@@ -29,10 +30,11 @@
 	});
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full">
 	<button
 		class="btn btn-sm btn-circle absolute right-2 top-2 z-50"
-		on:click={() => action(appointment.id)}
+		on:click={() => deleteAction(appointment.id)}
 	>
 		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -67,7 +69,7 @@
 		<figure><img src={appointment.image} alt="card" /></figure>
 	{/if}
 
-	<div class="card-body justify-end">
+	<div class="card-body justify-end" on:click={() => action(appointment.id)}>
 		<h2 class="card-title font-bold">{appointment.title.toUpperCase()}</h2>
 		<!-- to view in the detail page -->
 		<!-- <p class="text-xs text-ellipsis">{appointment.description}</p> -->
