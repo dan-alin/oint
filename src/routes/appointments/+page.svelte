@@ -72,7 +72,7 @@
 	};
 
 	const goToDetail = (id: number) => {
-		goto(`appointments/${id}`);
+		goto(`appointments/${id}`, { state: appointments.find((item) => item.id === id) });
 	};
 </script>
 

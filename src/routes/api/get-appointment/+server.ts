@@ -1,19 +1,15 @@
 import type { RequestEvent } from '@sveltejs/kit';
 
-export async function DELETE({ request }: RequestEvent) {
-	console.log('request', request);
-
-	const appointmentToDelete = await request.json();
-
+export async function GET({ request }: RequestEvent) {
 	try {
-		const response = await fetch('https://oint-ms.vercel.app/appointment/delete', {
-			method: 'DELETE',
+		const response = await fetch(`https://oint-ms.vercel.app/appointment/2411817`, {
+			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: request.headers.get('Authorization') || ''
-			},
-			body: JSON.stringify(appointmentToDelete)
+			}
 		});
+
 		const data = await response.json();
 
 		return new Response(JSON.stringify(data), {

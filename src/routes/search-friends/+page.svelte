@@ -32,7 +32,6 @@
 				JSON.stringify({ friendId }),
 				sessionStorage.getItem('jwt_token') || ''
 			);
-			console.log(response);
 		} catch (error: unknown) {
 			console.log(error);
 		}

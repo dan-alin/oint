@@ -19,9 +19,12 @@ export const apiCall = async <T>(
 		}
 		switch (method) {
 			case 'get':
+				console.log(url);
+
 				response = await fetch(url, {
 					headers
 				});
+
 				break;
 			case 'post':
 				response = await fetch(url, {
@@ -51,6 +54,7 @@ export const apiCall = async <T>(
 		return await response.json();
 	}
 	const data = await response?.json();
+
 	toggleSpinner.update((toggleSpinner) => false);
 	showAlert({
 		show: true,

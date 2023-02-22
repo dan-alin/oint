@@ -1,5 +1,5 @@
 <div
-	class="navbar bg-base-200 sticky w-screen  left-0 top-0 px-6  h-24 shadow-md mb-2 md:mb-10 z-50"
+	class="navbar bg-base-100 sticky w-screen  left-0 top-0 px-6  h-24 shadow-md mb-2 md:mb-10 z-50"
 >
 	<div class="navbar-start" />
 	<a href="/" class="navbar-center">
