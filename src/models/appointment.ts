@@ -9,6 +9,7 @@ export type Appointment = {
 	end_date: Date;
 	can_be_forwarded: boolean;
 	image: string;
+	locations: Location[];
 };
 
 export type DeletedAppointment = {
