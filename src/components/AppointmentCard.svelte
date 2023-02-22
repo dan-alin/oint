@@ -56,6 +56,13 @@
 				</p>
 			{/if}
 		</div>
+		{#if appointment.locations}
+			<ul>
+				{#each appointment.locations as loc}
+					<li class="text-xs">{`${loc.name} - ${loc.address}`}</li>
+				{/each}
+			</ul>
+		{/if}
 
 		<div>
 			<p class="text-xs">
