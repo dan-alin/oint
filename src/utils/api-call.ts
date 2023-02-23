@@ -6,9 +6,10 @@ export const apiCall = async <T>(
 	method: 'get' | 'post' | 'put' | 'delete',
 	successMessage: string,
 	body?: string,
-	jwt = ''
+	jwt = '',
+	showLoader = true
 ): Promise<T> => {
-	toggleSpinner.update((toggleSpinner) => true);
+	showLoader && toggleSpinner.update((toggleSpinner) => true);
 	let response;
 	try {
 		const headers: { 'Content-Type': string; Authorization?: string } = {
@@ -19,9 +20,12 @@ export const apiCall = async <T>(
 		}
 		switch (method) {
 			case 'get':
+				console.log(url);
+
 				response = await fetch(url, {
 					headers
 				});
+
 				break;
 			case 'post':
 				response = await fetch(url, {
@@ -51,6 +55,7 @@ export const apiCall = async <T>(
 		return await response.json();
 	}
 	const data = await response?.json();
+
 	toggleSpinner.update((toggleSpinner) => false);
 	showAlert({
 		show: true,

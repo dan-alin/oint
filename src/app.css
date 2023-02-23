@@ -2,8 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	touch-action: manipulation;
+}
+
 h1 {
 	@apply text-2xl;
+}
+
+html,
+body {
+	position: fixed;
 }
 
 html,
@@ -78,6 +87,7 @@ td {
 }
 body {
 	line-height: 1;
+	width: 100%;
 }
 ol,
 ul {
@@ -109,4 +119,9 @@ del {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+	background: transparent; /* make scrollbar transparent */
 }

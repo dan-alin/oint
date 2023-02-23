@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import AppointmentCard from '../../components/AppointmentCard.svelte';
-
 	import CreateAppointmentModal from '../../components/CreateAppointmentModal.svelte';
 	import type { Appointment } from '../../models';
 	import type { AppointmentForm, DeletedAppointment } from '../../models/appointment';
@@ -10,26 +10,9 @@
 	export let data: { appointments: Appointment[] };
 	let { appointments } = data;
 
-	// unique key for modal component
 	let unique = {};
 
-	const cancelAppointment = async (appointmentId: number) => {
-		try {
-			const response: DeletedAppointment = await apiCall(
-				'/api/delete-appointment',
-				'delete',
-				'Appuntamento eliminato',
-				JSON.stringify({
-					appointmentId
-				}),
-				sessionStorage.getItem('jwt_token') || ''
-			);
-			appointments = appointments.filter((event) => event.id !== response.deletedId);
-		} catch (error) {}
-	};
-
 	const createAppointment = async (formData: AppointmentForm) => {
-		console.log('eccomi');
 		console.log(formData);
 		let image = '';
 		if (formData.image) {
@@ -54,7 +37,8 @@
 				'Appuntamento creato',
 				JSON.stringify(newAppointment),
 
-				sessionStorage.getItem('jwt_token') || ''
+				sessionStorage.getItem('jwt_token') || '',
+				false
 			);
 			appointments = [...appointments, response];
 
@@ -72,26 +56,33 @@
 	const restart = () => {
 		unique = {};
 	};
+
+	const cancelAppointment = async (appointmentId: number) => {
+		try {
+			const response: DeletedAppointment = await apiCall(
+				'/api/delete-appointment',
+				'delete',
+				'Appuntamento eliminato',
+				JSON.stringify({
+					appointmentId
+				}),
+				sessionStorage.getItem('jwt_token') || '',
+				false
+			);
+			appointments = appointments.filter((event) => event.id !== response.appointmentId);
+		} catch (error) {}
+	};
+
+	const goToDetail = (id: number) => {
+		goto(`appointments/${id}`, { state: appointments.find((item) => item.id === id) });
+	};
 </script>
 
-<svelte:head>
-	<title>Appointments</title>
-	<meta name="description" content="A section to find or create events" />
-</svelte:head>
-
-<div class="grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 pb-10">
-	{#if appointments}
-		{#each appointments as appointment}
-			<AppointmentCard {appointment} action={cancelAppointment} />
-		{/each}
-	{/if}
+<!-- modal -->
+<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
+	<label for="create-appointment-modal" class="btn btn-primary ">nuovo appuntamento</label>
 </div>
 
-<div
-	class="flex shadow-md justify-center items-center h-20  w-full fixed bottom-0 left-0 bg-base-200 rounded-t-2xl z-50"
->
-	<label for="create-appointment-modal" class="btn btn-circle">+</label>
-</div>
 <!-- toggle close modal from card when appointment is created -->
 <input type="checkbox" id="create-appointment-modal" class="modal-toggle" />
 
@@ -99,3 +90,10 @@
 {#key unique}
 	<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
 {/key}
+
+<!-- cards -->
+<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10">
+	{#each appointments as appointment}
+		<AppointmentCard {appointment} deleteAction={cancelAppointment} action={goToDetail} />
+	{/each}
+</div>

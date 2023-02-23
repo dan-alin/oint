@@ -13,7 +13,7 @@ export type Appointment = {
 };
 
 export type DeletedAppointment = {
-	deletedId: number;
+	appointmentId: number;
 	message: 'string';
 	status: number;
 };

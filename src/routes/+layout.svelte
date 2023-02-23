@@ -30,7 +30,11 @@
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
 {/if}
-<Header />
+
+<Drawer>
+	<Header />
+	<slot />
+</Drawer>
 {#if showAlert.show}
 	<div class="absolute top-15 w-full z-50" transition:fade>
 		<Alert
@@ -40,11 +44,6 @@
 		/>
 	</div>
 {/if}
-
-<Drawer>
-	<slot />
-</Drawer>
-
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />
 {/if}
