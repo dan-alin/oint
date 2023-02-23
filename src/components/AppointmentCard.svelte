@@ -70,7 +70,7 @@
 		<figure><img src={appointment.image} alt="card" /></figure>
 	{/if}
 
-	<div class="card-body justify-end" on:click={() => action(appointment.id)}>
+	<div class="card-body justify-end p-6" on:click={() => action(appointment.id)}>
 		<h2 class="card-title font-bold">{appointment.title.toUpperCase()}</h2>
 		<!-- to view in the detail page -->
 		<!-- <p class="text-xs text-ellipsis">{appointment.description}</p> -->
@@ -116,6 +116,13 @@
 					{endTime}
 				{/if}
 			</p>
+			{#if appointment.locations}
+				<ul>
+					{#each appointment.locations as loc}
+						<li class="text-xs">{`${loc.name} - ${loc.address}`}</li>
+					{/each}
+				</ul>
+			{/if}
 		</div>
 	</div>
 </div>
