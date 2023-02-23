@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade, fly } from 'svelte/transition';
 	import type { Appointment } from '../models';
 
 	export let appointment: Appointment;
@@ -31,7 +32,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full">
+<div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full" in:fade>
 	<button
 		class="btn btn-sm btn-circle absolute right-2 top-2 z-30"
 		on:click={() => deleteAction(appointment.id)}

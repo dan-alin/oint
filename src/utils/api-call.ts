@@ -6,9 +6,10 @@ export const apiCall = async <T>(
 	method: 'get' | 'post' | 'put' | 'delete',
 	successMessage: string,
 	body?: string,
-	jwt = ''
+	jwt = '',
+	showLoader = true
 ): Promise<T> => {
-	toggleSpinner.update((toggleSpinner) => true);
+	showLoader && toggleSpinner.update((toggleSpinner) => true);
 	let response;
 	try {
 		const headers: { 'Content-Type': string; Authorization?: string } = {

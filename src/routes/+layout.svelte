@@ -33,20 +33,17 @@
 
 <Drawer>
 	<Header />
-	{#if showAlert.show}
-		<div class="absolute top-15 w-full z-50" transition:fade>
-			<Alert
-				message={showAlert.message}
-				isError={showAlert.isError}
-				isSuccess={showAlert.isSuccess}
-			/>
-		</div>
-	{/if}
-	<div class="p-2 md:p-10">
-		<slot />
-	</div>
-
-	{#if ReloadPrompt}
-		<svelte:component this={ReloadPrompt} />
-	{/if}
+	<slot />
 </Drawer>
+{#if showAlert.show}
+	<div class="absolute top-15 w-full z-50" transition:fade>
+		<Alert
+			message={showAlert.message}
+			isError={showAlert.isError}
+			isSuccess={showAlert.isSuccess}
+		/>
+	</div>
+{/if}
+{#if ReloadPrompt}
+	<svelte:component this={ReloadPrompt} />
+{/if}

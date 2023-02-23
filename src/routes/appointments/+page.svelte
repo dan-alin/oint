@@ -37,7 +37,8 @@
 				'Appuntamento creato',
 				JSON.stringify(newAppointment),
 
-				sessionStorage.getItem('jwt_token') || ''
+				sessionStorage.getItem('jwt_token') || '',
+				false
 			);
 			appointments = [...appointments, response];
 
@@ -65,7 +66,8 @@
 				JSON.stringify({
 					appointmentId
 				}),
-				sessionStorage.getItem('jwt_token') || ''
+				sessionStorage.getItem('jwt_token') || '',
+				false
 			);
 			appointments = appointments.filter((event) => event.id !== response.appointmentId);
 		} catch (error) {}
@@ -76,17 +78,11 @@
 	};
 </script>
 
-<div class="flex flex-col gap-6  md:grid md:grid-cols-2 xl:grid-cols-3 pb-6 h-full ">
-	{#each appointments as appointment}
-		<AppointmentCard {appointment} deleteAction={cancelAppointment} action={goToDetail} />
-	{/each}
+<!-- modal -->
+<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
+	<label for="create-appointment-modal" class="btn btn-primary ">nuovo appuntamento</label>
 </div>
 
-<div
-	class="flex shadow-md justify-center items-center h-24  w-screen fixed bottom-0 left-0  bg-base-200 rounded-t-2xl z-40"
->
-	<label for="create-appointment-modal" class="btn btn-circle">+</label>
-</div>
 <!-- toggle close modal from card when appointment is created -->
 <input type="checkbox" id="create-appointment-modal" class="modal-toggle" />
 
@@ -94,3 +90,10 @@
 {#key unique}
 	<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
 {/key}
+
+<!-- cards -->
+<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10">
+	{#each appointments as appointment}
+		<AppointmentCard {appointment} deleteAction={cancelAppointment} action={goToDetail} />
+	{/each}
+</div>

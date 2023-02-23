@@ -4,7 +4,6 @@
 	import { t } from '../../i18n/i18n';
 	import type { Option } from '../../models';
 	import { apiCall } from '../../utils/api-call';
-	import { showAlert } from '../../utils/show-alert';
 
 	export let data: { phonePrefixes: Option[] };
 
@@ -32,9 +31,9 @@
 </svelte:head>
 
 <section />
-<h1>{$t('signup.title')}</h1>
-<form on:submit|preventDefault={onSubmit}>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3">
+<h1 class="text-2xl font-bold uppercase flex justify-center">{$t('signup.title')}</h1>
+<form on:submit|preventDefault={onSubmit} class="px-2 py-10">
+	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
 		<InputText
 			type="text"
 			label="Name"

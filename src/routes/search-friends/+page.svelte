@@ -42,8 +42,9 @@
 	<title>Add frineds</title>
 	<meta name="description" content="A section to find and add friends" />
 </svelte:head>
-<h1>Add friends</h1>
-<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3">
+<h1 class="text-2xl font-bold uppercase flex justify-center">Add friends</h1>
+
+<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 mx-2 my-10">
 	<InputAction
 		name="friend"
 		id="friend"

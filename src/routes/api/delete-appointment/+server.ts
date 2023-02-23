@@ -1,10 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function DELETE({ request }: RequestEvent) {
-	console.log('request', request);
-
 	const appointmentToDelete = await request.json();
-
 	try {
 		const response = await fetch('https://oint-ms.vercel.app/appointment/delete', {
 			method: 'DELETE',
