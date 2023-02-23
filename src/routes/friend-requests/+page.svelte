@@ -21,9 +21,10 @@
 	};
 </script>
 
-<h1>Friend requests</h1>
+<h1 class="text-2xl font-bold uppercase flex justify-center">Friend requests</h1>
+
 {#if received}
-	<div class="flex">
+	<div class="flex py-10 px-2">
 		{#each received as request}
 			<div class="w-full md:max-w-md ">
 				<Card>

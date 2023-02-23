@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import Card from '../../components/Card.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
 	import { apiCall } from '../../utils/api-call';
@@ -31,8 +32,9 @@
 </svelte:head>
 
 <section />
-<h1>{$t('login.title')}</h1>
-<form on:submit|preventDefault={onSubmit}>
+
+<h1 class="text-2xl font-bold uppercase flex justify-center">{$t('login.title')}</h1>
+<form on:submit|preventDefault={onSubmit} class="px-2 py-10">
 	<!-- TODO extract classes in an @apply -->
 	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3">
 		<div class="col-span-1" />

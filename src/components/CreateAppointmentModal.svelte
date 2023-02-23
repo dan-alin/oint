@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import type { AppointmentForm } from '../models/appointment';
 	import type { Place } from '../models/place';
 	import { apiCall } from '../utils/api-call';
@@ -49,10 +50,10 @@
 </script>
 
 <div class="modal modal-bottom md:modal-middle  z-50 ">
-	<div class="modal-box  bg-base-200 pb-10">
+	<div class="modal-box  bg-base-200 pb-10 ">
 		<button on:click={closeAction} class="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
 
-		<div class="grid gap-6  grid-cols-1  ">
+		<div class="grid gap-6  grid-cols-1">
 			<h2 class="text-center">CREA EVENTO</h2>
 			<ul class="steps">
 				<li class="step step-primary" />
