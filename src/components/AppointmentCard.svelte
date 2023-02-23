@@ -108,6 +108,7 @@
 						<rect x="-58.854" y="-58.3806" width="141.441" height="141.441" fill="#373A42" />
 					</g>
 				</svg>
+
 				{startDate}
 				{'\u2022'}
 				{startTime} - {#if endTime}

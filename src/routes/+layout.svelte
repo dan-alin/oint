@@ -31,8 +31,8 @@
 	</div>
 {/if}
 
-<Drawer
-	><Header />
+<Drawer>
+	<Header />
 	{#if showAlert.show}
 		<div class="absolute top-15 w-full z-50" transition:fade>
 			<Alert
@@ -42,8 +42,10 @@
 			/>
 		</div>
 	{/if}
+	<div class="p-2 md:p-10">
+		<slot />
+	</div>
 
-	<slot />
 	{#if ReloadPrompt}
 		<svelte:component this={ReloadPrompt} />
 	{/if}
