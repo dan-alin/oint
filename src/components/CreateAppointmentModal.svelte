@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
 	import type { AppointmentForm } from '../models/appointment';
 	import type { Place } from '../models/place';
 	import { apiCall } from '../utils/api-call';
