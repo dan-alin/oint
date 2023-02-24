@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+	import { page } from '$app/stores';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import Header from '../components/Header.svelte';
 	import Drawer from '../components/Drawer.svelte';
@@ -30,13 +31,8 @@
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
 {/if}
-
-<Drawer>
-	<Header />
-	<slot />
-</Drawer>
 {#if showAlert.show}
-	<div class="absolute top-15 w-full z-50" transition:fade>
+	<div class="absolute top-24 w-full z-50" transition:fade>
 		<Alert
 			message={showAlert.message}
 			isError={showAlert.isError}
@@ -44,6 +40,12 @@
 		/>
 	</div>
 {/if}
+<Drawer>
+	<Header />
+
+	<slot />
+</Drawer>
+
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />
 {/if}
