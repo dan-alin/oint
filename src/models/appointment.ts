@@ -29,4 +29,5 @@ export type AppointmentForm = {
 	can_be_forwarded: false;
 	image: FileList | undefined;
 	locations: Location[];
+	location_selection_type: 'single' | 'multi';
 };
