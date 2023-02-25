@@ -8,7 +8,7 @@
 	import fileToBase64 from '../../utils/to-base64';
 
 	export let data: { appointments: Appointment[] };
-	let { appointments } = data;
+	let { appointments }: { appointments: Appointment[] } = data;
 
 	let unique = {};
 
