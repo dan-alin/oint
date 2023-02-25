@@ -1,8 +1,10 @@
 <script lang="ts">
+	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
 	import type { Appointment } from '../../../models';
+	import type { FriendData } from '../../../models/friend-requests';
 
-	export let data: { appointment: Appointment };
-	let { appointment } = data;
+	export let data: { appointment: Appointment; friends: FriendData[] };
+	let { appointment, friends } = data;
 
 	const startDate = new Date(appointment.start_date).toLocaleDateString('it-IT', {
 		weekday: 'long',
@@ -27,6 +29,23 @@
 		hour: '2-digit',
 		minute: '2-digit'
 	});
+
+	const addInvitees = () => {
+		console.log(`invitees`);
+	};
+
+	// let unique = {};
+
+	// const restart = () => {
+	// 	unique = {};
+	// };
+
+	// const closeModal = () => {
+	// 	const modal = document.getElementById('add-invitees-modal');
+	// 	modal?.click();
+	// 	restart();
+	// };
+	console.log(friends);
 </script>
 
 <!-- <pre>{JSON.stringify(appointment, null, 2)}</pre> -->
@@ -123,4 +142,14 @@
 	<div>
 		{endTime}
 	</div>
+
+	<!-- modal -->
+	<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
+		<label for="add-invitees-modal" class="btn btn-primary ">aggiungi invitati</label>
+	</div>
+
+	<!-- toggle close modal from card when invitees gets added-->
+	<input type="checkbox" id="add-invitees-modal" class="modal-toggle" />
+
+	<AddInveteesModal {friends} action={addInvitees} />
 </div>
