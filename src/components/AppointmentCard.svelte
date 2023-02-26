@@ -1,34 +1,17 @@
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition';
 	import type { Appointment } from '../models';
+	import { getDate, getTime } from '../utils/time';
 
 	export let appointment: Appointment;
 	export let deleteAction: (appointmentId: number) => void;
 	export let action: (appointmentId: number) => void;
 
-	const startDate = new Date(appointment.start_date).toLocaleDateString('it-IT', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
+	const startDate = getDate(appointment.start_date);
+	const endDate = getDate(appointment.end_date);
 
-	const endDate = new Date(appointment.end_date).toLocaleDateString('it-IT', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
-
-	const startTime = new Date(appointment.start_date).toLocaleTimeString('it-IT', {
-		hour: '2-digit',
-		minute: '2-digit'
-	});
-
-	const endTime = new Date(appointment.end_date).toLocaleTimeString('it-IT', {
-		hour: '2-digit',
-		minute: '2-digit'
-	});
+	const startTime = getTime(appointment.start_date);
+	const endTime = getTime(appointment.end_date);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

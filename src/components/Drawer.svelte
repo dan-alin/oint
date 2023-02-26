@@ -17,6 +17,7 @@
 				<LinkSideMenu label="Friend List" href="/friends-list" action={closeSideMenu} />
 				<LinkSideMenu label="Search friends" href="/search-friends" action={closeSideMenu} />
 				<LinkSideMenu label="Friend requests" href="/friend-requests" action={closeSideMenu} />
+				<LinkSideMenu label="Inviti" href="/invitations" action={closeSideMenu} />
 			</ul>
 			<ul class="menu p-4 w-80  text-base-content">
 				<LinkSideMenu label="Login" href="/login" action={closeSideMenu} />

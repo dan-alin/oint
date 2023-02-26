@@ -21,7 +21,9 @@
 				false
 			);
 			friendList = friendList.filter((friend) => friend.id !== response.id);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 </script>
 

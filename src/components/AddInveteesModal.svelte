@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { FriendData } from '../models/friend-requests';
 
-	export let action: () => void;
+	export let action: (id: number) => void;
 	export let friends: FriendData[];
 </script>
 
@@ -12,11 +12,13 @@
 		<div class="grid gap-6  grid-cols-1">
 			<ul>
 				{#each friends as friend}
-					<li>{friend.name}</li>
+					<li>
+						{friend.name}
+						<button class="btn btn-xs btn-primary" on:click={() => action(friend.id)}>add</button>
+					</li>
 				{/each}
 				<li />
 			</ul>
 		</div>
-		<button class="btn btn-primary" on:click={action}>save</button>
 	</div>
 </div>

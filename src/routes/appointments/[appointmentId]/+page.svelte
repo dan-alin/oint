@@ -2,50 +2,34 @@
 	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
 	import type { Appointment } from '../../../models';
 	import type { FriendData } from '../../../models/friend-requests';
+	import { apiCall } from '../../../utils/api-call';
+	import { getDate, getTime } from '../../../utils/time';
 
 	export let data: { appointment: Appointment; friends: FriendData[] };
 	let { appointment, friends } = data;
 
-	const startDate = new Date(appointment.start_date).toLocaleDateString('it-IT', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
+	const startDate = getDate(appointment.start_date);
+	const endDate = getDate(appointment.end_date);
 
-	const endDate = new Date(appointment.end_date).toLocaleDateString('it-IT', {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	});
+	const startTime = getTime(appointment.start_date);
+	const endTime = getTime(appointment.end_date);
 
-	const startTime = new Date(appointment.start_date).toLocaleTimeString('it-IT', {
-		hour: '2-digit',
-		minute: '2-digit'
-	});
-
-	const endTime = new Date(appointment.end_date).toLocaleTimeString('it-IT', {
-		hour: '2-digit',
-		minute: '2-digit'
-	});
-
-	const addInvitees = () => {
-		console.log(`invitees`);
+	const addInvitee = async (inviteeId: number) => {
+		try {
+			const response: any = await apiCall(
+				'/api/add-invitee',
+				'post',
+				'Invito mandato',
+				JSON.stringify({
+					appointmentId: appointment.id,
+					inviteeId
+				}),
+				sessionStorage.getItem('jwt_token') || ''
+			);
+		} catch (error) {
+			console.log(error);
+		}
 	};
-
-	// let unique = {};
-
-	// const restart = () => {
-	// 	unique = {};
-	// };
-
-	// const closeModal = () => {
-	// 	const modal = document.getElementById('add-invitees-modal');
-	// 	modal?.click();
-	// 	restart();
-	// };
-	console.log(friends);
 </script>
 
 <!-- <pre>{JSON.stringify(appointment, null, 2)}</pre> -->
@@ -151,5 +135,5 @@
 	<!-- toggle close modal from card when invitees gets added-->
 	<input type="checkbox" id="add-invitees-modal" class="modal-toggle" />
 
-	<AddInveteesModal {friends} action={addInvitees} />
+	<AddInveteesModal {friends} action={addInvitee} />
 </div>
