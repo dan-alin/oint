@@ -31,7 +31,8 @@
 		VITE_FIREBASE_STORAGE_BUCKET,
 		VITE_FIREBASE_MESSAGING_SENDER_ID,
 		VITE_FIREBASE_APP_ID,
-		VITE_FIREBASE_MEASUREMENT_ID
+		VITE_FIREBASE_MEASUREMENT_ID,
+		VITE_FIREBASE_VAPID_KEY
 	} = import.meta.env;
 
 	const firebaseConfig = {
@@ -51,8 +52,7 @@
 		const messaging = getMessaging(firebaseApp);
 		messagingProva = messaging;
 		getToken(messaging, {
-			vapidKey:
-				'BNZpAk2_gpV_TlH9d1D8vVrbluvk3eG0lZ6RD24fHoFiPTQyOOGFX7wysw3uZzdoVwpNsncCDRPRckg4t79hhTw'
+			vapidKey: VITE_FIREBASE_VAPID_KEY
 		})
 			.then((currentToken) => {
 				if (currentToken) {
