@@ -43,7 +43,7 @@ export const apiCall = async <T>(
 				break;
 		}
 	} catch (err: unknown) {
-		console.log('err');
+		console.log(err);
 		toggleSpinner.update((toggleSpinner) => false);
 	}
 
