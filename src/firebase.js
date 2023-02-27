@@ -27,7 +27,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const messaging = getMessaging(firebaseApp);
 
-export const getTokenFirebase = (setTokenFound) => {
+export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenFound) => {
 	getToken(messaging, {
 		vapidKey: VITE_FIREBASE_VAPID_KEY
 	})

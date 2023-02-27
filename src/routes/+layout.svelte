@@ -26,7 +26,7 @@
 	};
 
 	onMount(async () => {
-		const { getTokenFirebase } = await import('../../firebase');
+		const { getTokenFirebase } = await import('../firebase');
 
 		getTokenFirebase(setFirebaseToken);
 	});
