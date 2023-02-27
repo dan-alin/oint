@@ -16,4 +16,12 @@
 	<body>
 		%sveltekit.body%
 	</body>
+
+	<script>
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker
+				.register('/firebase-messaging-sw.js')
+				.then((reg) => console.debug('Service worker registered sucessfully'));
+		}
+	</script>
 </html>
