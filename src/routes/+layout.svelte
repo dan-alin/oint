@@ -9,15 +9,27 @@
 	import { Jumper } from 'svelte-loading-spinners';
 	import Alert from '../components/Alert.svelte';
 	import { toggleAlert, type AlertState } from '../stores/alert';
+	import { onMount } from 'svelte';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
 	let showAlert: AlertState;
+	let tokeFirebase = '';
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 	toggleAlert.subscribe((value) => (showAlert = value));
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+	let firebaseToken: string;
+	const setFirebaseToken = (token: string) => {
+		firebaseToken = token;
+	};
+
+	onMount(async () => {
+		const { getTokenFirebase } = await import('../../firebase');
+
+		getTokenFirebase(setFirebaseToken);
+	});
 </script>
 
 <svelte:head>
