@@ -21,6 +21,8 @@ firebase.initializeApp({
 // messages.
 const messaging = firebase.messaging();
 
+console.log('API', VITE_FIREBASE_API_KEY);
+
 messaging.onBackgroundMessage(function (payload) {
 	console.log('Received background message ', payload.notification);
 
