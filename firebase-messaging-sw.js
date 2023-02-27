@@ -8,6 +8,8 @@ const {
 	VITE_FIREBASE_APP_ID
 } = import.meta.env;
 
+console.log('API', VITE_FIREBASE_API_KEY);
+
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 firebase.initializeApp({
@@ -20,8 +22,6 @@ firebase.initializeApp({
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 const messaging = firebase.messaging();
-
-console.log('API', VITE_FIREBASE_API_KEY);
 
 messaging.onBackgroundMessage(function (payload) {
 	console.log('Received background message ', payload.notification);
