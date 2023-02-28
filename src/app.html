@@ -20,7 +20,7 @@
 	<script>
 		if ('serviceWorker' in navigator) {
 			navigator.serviceWorker
-				.register('/firebase-messaging-sw.js')
+				.register('/firebase-messaging-sw.mjs')
 				.then((reg) => console.debug('Service worker registered sucessfully'));
 		}
 	</script>
