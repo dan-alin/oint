@@ -39,7 +39,7 @@
 	onMount(async () => {
 		console.log(
 			'firebaseToken',
-			process,
+			'import.meta\u200b.env.MODE',
 			VITE_FIREBASE_API_KEY,
 			VITE_FIREBASE_APP_ID,
 			VITE_FIREBASE_AUTH_DOMAIN,
