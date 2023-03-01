@@ -26,8 +26,6 @@
 	let showSpinner = false;
 	let showAlert: AlertState;
 	let tokeFirebase = '';
-	export let data: { env: any };
-	console.log(data, 'DATA');
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 	toggleAlert.subscribe((value) => (showAlert = value));
