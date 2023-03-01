@@ -13,6 +13,8 @@ const {
 	VITE_FIREBASE_VAPID_KEY
 } = import.meta.env;
 
+console.log(import.meta.env);
+
 const firebaseConfig = {
 	apiKey: VITE_FIREBASE_API_KEY,
 	authDomain: VITE_FIREBASE_AUTH_DOMAIN,
