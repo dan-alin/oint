@@ -39,6 +39,7 @@
 	onMount(async () => {
 		console.log(
 			'firebaseToken',
+			process,
 			VITE_FIREBASE_API_KEY,
 			VITE_FIREBASE_APP_ID,
 			VITE_FIREBASE_AUTH_DOMAIN,
