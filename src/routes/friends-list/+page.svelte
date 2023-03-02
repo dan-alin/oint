@@ -30,7 +30,7 @@
 <h1 class="text-2xl font-bold uppercase flex justify-center">Friend list</h1>
 
 {#if friendList}
-	<div class="flex py-10 px-2">
+	<div class="flex flex-col gap-6 py-10 px-2">
 		{#each friendList as friend}
 			<div class="w-full md:max-w-md ">
 				<Card>
