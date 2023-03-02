@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* eslint-disable */
 	import { goto } from '$app/navigation';
 	import AppointmentCard from '../../components/AppointmentCard.svelte';
 	import CreateAppointmentModal from '../../components/CreateAppointmentModal.svelte';
@@ -8,7 +9,7 @@
 	import fileToBase64 from '../../utils/to-base64';
 
 	export let data: { appointments: Appointment[] };
-	let { appointments } = data;
+	let { appointments }: { appointments: Appointment[] } = data;
 
 	let unique = {};
 
@@ -34,7 +35,7 @@
 			const response: Appointment = await apiCall(
 				'/api/create-appointment',
 				'post',
-				'Appuntamento creato',
+				'',
 				JSON.stringify(newAppointment),
 
 				sessionStorage.getItem('jwt_token') || '',
@@ -62,7 +63,7 @@
 			const response: DeletedAppointment = await apiCall(
 				'/api/delete-appointment',
 				'delete',
-				'Appuntamento eliminato',
+				'',
 				JSON.stringify({
 					appointmentId
 				}),

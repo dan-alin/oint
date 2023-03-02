@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { toggleSpinner } from '../stores/spinner';
 import { showAlert } from './show-alert';
 
@@ -43,7 +44,7 @@ export const apiCall = async <T>(
 				break;
 		}
 	} catch (err: unknown) {
-		console.log('err');
+		console.log(err);
 		toggleSpinner.update((toggleSpinner) => false);
 	}
 

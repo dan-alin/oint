@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
 	import type { AppointmentForm } from '../models/appointment';
 	import type { Place } from '../models/place';
 	import { apiCall } from '../utils/api-call';
@@ -7,6 +6,7 @@
 	import InputFile from './InputFile.svelte';
 
 	import InputText from './InputText.svelte';
+	import Select from './Select.svelte';
 	export let action: (form: AppointmentForm) => void;
 	export let closeAction: () => void;
 	let step = 1;
@@ -23,6 +23,7 @@
 		address: '',
 		can_be_forwarded: false,
 		image: undefined,
+		location_selection_type: 'single',
 		locations: []
 	};
 
@@ -144,7 +145,7 @@
 				</form>
 			{:else if step === 3}
 				<form
-					class="grid grid-cols-1 grid-rows-3 gap-6  "
+					class="grid grid-cols-1 grid-rows-3 gap-6 "
 					id="3-part"
 					name="file-form"
 					on:submit|preventDefault={nextStep}
@@ -169,8 +170,11 @@
 					</label>
 				</form>
 			{:else if step === 4}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<form
+					class="grid grid-cols-1 grid-rows-3 gap-6  "
 					id="4-part"
+					on:click|stopPropagation={() => (places = [])}
 					on:submit|preventDefault={() => {
 						formData.locations = addedPlaces.map((place) => ({
 							name: place.address.amenity,
@@ -181,7 +185,17 @@
 						action(formData);
 					}}
 				>
-					<div class="mb-4">
+					<Select
+						id="select-location-type"
+						name="select-location-type"
+						label="Location type"
+						on:change={(event) => (formData.location_selection_type = event.detail.value)}
+						options={[
+							{ text: 'Single', value: 'single', selected: true },
+							{ text: 'Multi', value: 'multi' }
+						]}
+					/>
+					<div>
 						<InputAction
 							id="places"
 							name="places"
@@ -191,13 +205,23 @@
 						<div
 							class="dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md"
 						>
-							<ul class="menu menu-compact ">
+							<ul class="flex flex-col absolute bg-white overflow-scroll max-h-60">
 								{#if places}
 									{#each places as place, i}
-										<li tabIndex={i + 1} class="border border-solid border-slate-400  w-full">
+										<li
+											tabIndex={i + 1}
+											class="border border-solid rounded border-slate-400  w-full  p-2"
+										>
 											<button
 												type="button"
-												on:click={() => {
+												on:click|stopPropagation={() => {
+													if (
+														formData.location_selection_type === 'single' &&
+														addedPlaces.length === 1
+													) {
+														places = [];
+														return;
+													}
 													if (
 														!addedPlaces.some(
 															(addedPlace) => addedPlace.place_id === place.place_id
@@ -205,6 +229,7 @@
 													) {
 														addedPlaces = [...addedPlaces, place];
 													}
+													places = [];
 												}}
 												><span class="font-bold">{place.address.amenity}</span> - {place.address
 													.road}

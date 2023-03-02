@@ -1,15 +1,16 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	import type { Option } from '../models';
 
 	export let id: string;
 	export let name: string;
 	export let label: string;
-	export let selected: string = '';
 	export let options: Option[];
 	export let disabled = false;
 	export let required = false;
 
 	let isDirty = false;
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="form-control w-full">
@@ -20,21 +21,21 @@
 	</label>
 	<select
 		class="select select-bordered w-full max-w-xs"
-		class:input-error={required && isDirty && !selected}
+		class:input-error={required && isDirty}
 		{id}
 		{name}
 		{required}
 		{disabled}
-		bind:value={selected}
-		on:keydown={() => {
+		on:change={(e) => {
 			isDirty = true;
+			dispatch('change', { value: e.target && e.target.value });
 		}}
 	>
 		{#each options as option}
-			<option value={option.value}>{option.text}</option>
+			<option value={option.value} selected={option.selected}>{option.text}</option>
 		{/each}
 	</select>
-	{#if required && isDirty && !selected}
+	{#if required && isDirty}
 		<span class="label">
 			<span class="label-text-alt text-red-600">The {name} is required</span>
 		</span>

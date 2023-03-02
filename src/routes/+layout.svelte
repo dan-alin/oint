@@ -8,15 +8,27 @@
 	import { Jumper } from 'svelte-loading-spinners';
 	import Alert from '../components/Alert.svelte';
 	import { toggleAlert, type AlertState } from '../stores/alert';
+	import { onMount } from 'svelte';
 
-	let ReloadPrompt: any;
+	let ReloadPrompt: unknown;
 	let showSpinner = false;
 	let showAlert: AlertState;
+	console.log(process.env, 'vercel');
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 	toggleAlert.subscribe((value) => (showAlert = value));
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+	let firebaseToken: string;
+	const setFirebaseToken = (token: string) => {
+		firebaseToken = token;
+	};
+
+	onMount(async () => {
+		const { getTokenFirebase } = await import('../firebase');
+
+		getTokenFirebase(setFirebaseToken);
+	});
 </script>
 
 <svelte:head>
@@ -30,13 +42,8 @@
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
 {/if}
-
-<Drawer>
-	<Header />
-	<slot />
-</Drawer>
 {#if showAlert.show}
-	<div class="absolute top-15 w-full z-50" transition:fade>
+	<div class="absolute top-24 w-full z-50" transition:fade>
 		<Alert
 			message={showAlert.message}
 			isError={showAlert.isError}
@@ -44,6 +51,12 @@
 		/>
 	</div>
 {/if}
+<Drawer>
+	<Header />
+
+	<slot />
+</Drawer>
+
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />
 {/if}

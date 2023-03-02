@@ -5,9 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4d4735a-fdde-4582-8c71-8a34fae3b9e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/oint.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/firebase.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/firebase-messaging-sw.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppointmentCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppointmentCard.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CreateAppointmentModal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CreateAppointmentModal.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Select.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Select.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/appointment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/appointment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/option.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/option.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/appointments/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/appointments/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/api-call.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/api-call.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +91,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/alin.ioan.dan/Projects/oint/node_modules/prettier&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Applications/WebStorm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/alin.ioan.dan/Projects/oint/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -112,8 +129,7 @@
       <updated>1677689966295</updated>
       <workItem from="1677689967296" duration="18649000" />
       <workItem from="1677764989752" duration="6187000" />
-      <workItem from="1677779408057" duration="397000" />
-      <workItem from="1677779828859" duration="893000" />
+      <workItem from="1677779408057" duration="1006000" />
     </task>
     <servers />
   </component>
