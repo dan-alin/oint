@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let name: string;
 	export let id: number;
-	export let isViewMode: boolean = false;
-	export let isAcceptingMode: boolean = false;
+	export let isViewMode = false;
+	export let isAcceptingMode = false;
 	export let action: (friendId: number) => void;
 </script>
 

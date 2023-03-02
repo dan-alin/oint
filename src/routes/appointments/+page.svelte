@@ -42,7 +42,9 @@
 			appointments = [...appointments, response];
 
 			closeModal();
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const closeModal = () => {
@@ -69,7 +71,9 @@
 				false
 			);
 			appointments = appointments.filter((event) => event.id !== response.appointmentId);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const goToDetail = (id: number) => {

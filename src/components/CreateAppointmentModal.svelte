@@ -209,8 +209,8 @@
 														formData.location_selection_type === 'single' &&
 														addedPlaces.length === 1
 													) {
-														return;
 														places = [];
+														return;
 													}
 													if (
 														!addedPlaces.some(
