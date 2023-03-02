@@ -44,6 +44,6 @@
 	},
 	"simple-git-hooks": {
 		"pre-commit": "npx lint-staged",
-		"commit-msg": "echo 'ciao ciao'"
+		"commit-msg": "npx --no -- commitlint --verbose --edit ${1}"
 	}
 }
