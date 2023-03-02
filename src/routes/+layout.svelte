@@ -17,7 +17,6 @@
 	toggleAlert.subscribe((value) => (showAlert = value));
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
-	console.log(' ts')
 </script>
 
 <svelte:head>
