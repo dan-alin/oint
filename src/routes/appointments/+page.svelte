@@ -27,7 +27,6 @@
 				end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
 				image,
 				can_be_forwarded: formData.can_be_forwarded,
-				address: formData.address,
 				locations: formData.locations
 			};
 

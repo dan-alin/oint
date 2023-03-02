@@ -6,7 +6,7 @@
 
 	export let data: { requests: FriendRequests };
 	let { received, sent } = data.requests;
-	console.log(data);
+
 	const acceptFriendRequest = async (friendId: number) => {
 		try {
 			const response: any = await apiCall(
@@ -17,7 +17,9 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			received = received.filter((friendRequest) => friendRequest.id !== friendId);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 </script>
 

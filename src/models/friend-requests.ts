@@ -3,4 +3,4 @@ export type FriendRequests = {
 	sent: FriendData[];
 };
 
-type FriendData = { id: number; name: string; surname: string };
+export type FriendData = { id: number; name: string; surname: string };
