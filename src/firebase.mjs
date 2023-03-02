@@ -63,6 +63,9 @@ export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenF
 		const notification = new Notification('PRova', {
 			body: payload.notification?.body
 		});
+
+		self.registration.showNotification(notification);
+
 	});
 };
 
