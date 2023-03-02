@@ -26,7 +26,7 @@
 <h1 class="text-2xl font-bold uppercase flex justify-center">Friend requests</h1>
 
 {#if received}
-	<div class="flex py-10 px-2">
+	<div class="flex flex-col gap-6 py-10 px-2">
 		{#each received as request}
 			<div class="w-full md:max-w-md ">
 				<Card>
