@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import type { Appointment } from '../models';
 	import { getDate, getTime } from '../utils/time';
 
 	export let appointment: Appointment;
-	export let deleteAction: (appointmentId: number) => void;
-	export let action: (appointmentId: number) => void;
+	export let isAccepting = false;
+	export let deleteAction: (appointmentId: number) => void = () => null;
+	export let action: (appointmentId: number) => void = () => null;
+	export let confirmAction: (appointmentId: number) => void = () => null;
+	export let rejectAction: (appointmentId: number) => void = () => null;
 
 	const startDate = getDate(appointment.start_date);
 	const endDate = getDate(appointment.end_date);
@@ -16,13 +19,14 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full" in:fade>
-	<button
-		class="btn btn-sm btn-circle absolute right-2 top-2 z-30"
-		on:click={() => deleteAction(appointment.id)}
-	>
-		✕
-	</button>
-
+	{#if !isAccepting}
+		<button
+			class="btn btn-sm btn-circle absolute right-2 top-2 z-30"
+			on:click|stopPropagation={() => deleteAction(appointment.id)}
+		>
+			✕
+		</button>
+	{/if}
 	{#if appointment.image}
 		<figure><img src={appointment.image} alt="card" /></figure>
 	{/if}
@@ -31,6 +35,7 @@
 		<h2 class="card-title font-bold">{appointment.title.toUpperCase()}</h2>
 		<!-- to view in the detail page -->
 		<!-- <p class="text-xs text-ellipsis">{appointment.description}</p> -->
+
 		<div>
 			<p class="text-xs flex items-center gap-2">
 				<svg
@@ -79,6 +84,22 @@
 						<li class="text-xs">{`${loc.name} - ${loc.address}`}</li>
 					{/each}
 				</ul>
+			{/if}
+			{#if isAccepting}
+				<div class="flex w-full justify-between mt-10">
+					<button
+						class="btn btn-sm btn-primary z-30"
+						on:click|stopPropagation={() => confirmAction(appointment.id)}
+					>
+						accept
+					</button>
+					<button
+						class="btn btn-sm btn-secondary z-30"
+						on:click|stopPropagation={() => rejectAction(appointment.id)}
+					>
+						reject
+					</button>
+				</div>
 			{/if}
 		</div>
 	</div>

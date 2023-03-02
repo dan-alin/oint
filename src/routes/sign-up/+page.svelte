@@ -13,6 +13,7 @@
 			const user = {
 				name: formData.get('name') as string,
 				surname: formData.get('surname') as string,
+				nickname: formData.get('nickname') as string,
 				password: formData.get('password') as string,
 				email: formData.get('email') as string,
 				phone: `${formData.get('prefix') as string}${formData.get('phone') as string}`,
@@ -49,6 +50,15 @@
 			id="surname"
 			name="surname"
 			placeholder="Insert the surname"
+			required={true}
+			value=""
+		/>
+		<InputText
+			type="text"
+			label="nickname"
+			id="nickname"
+			name="nickname"
+			placeholder="Insert the nickname"
 			required={true}
 			value=""
 		/>

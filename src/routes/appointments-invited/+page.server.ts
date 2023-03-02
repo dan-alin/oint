@@ -13,9 +13,7 @@ export const load: PageServerLoad = async (event) => {
 			Authorization: `Bearer ${userToken}`
 		}
 	});
-
 	const resp = (await response.json()) as Appointment[];
-	console.log(resp);
 
-	return { invitationList: resp };
+	return { appointments: resp };
 };
