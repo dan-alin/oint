@@ -11,7 +11,7 @@
 			apiCall(
 				'/api/accept-invitation',
 				'post',
-				'',
+				'Accepted',
 				JSON.stringify({
 					appointmentId
 				}),
@@ -28,7 +28,7 @@
 			apiCall(
 				'/api/reject-invitation',
 				'post',
-				'',
+				'Refused',
 				JSON.stringify({
 					appointmentId
 				}),
