@@ -3,5 +3,5 @@
 		"prettier --write --plugin-search-dir=.",
 		"prettier --check --plugin-search-dir=."
 	],
-	"*.{js,ts}": "eslint"
+	"*.{js,ts,svelte}": "eslint"
 }

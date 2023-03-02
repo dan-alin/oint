@@ -40,6 +40,7 @@ export const apiCall = async <T>(
 					method: 'DELETE',
 					body
 				});
+
 				break;
 		}
 	} catch (err: unknown) {

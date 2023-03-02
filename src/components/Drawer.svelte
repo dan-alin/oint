@@ -14,6 +14,12 @@
 		<div class="menu bg-base-100 flex flex-col justify-between">
 			<ul class="menu p-4 w-80  text-base-content">
 				<LinkSideMenu label="Appointments" href="/appointments" action={closeSideMenu} />
+				<LinkSideMenu
+					label="Appointments invited"
+					href="/appointments-invited"
+					action={closeSideMenu}
+				/>
+				<LinkSideMenu label="Friend List" href="/friends-list" action={closeSideMenu} />
 				<LinkSideMenu label="Search friends" href="/search-friends" action={closeSideMenu} />
 				<LinkSideMenu label="Friend requests" href="/friend-requests" action={closeSideMenu} />
 			</ul>

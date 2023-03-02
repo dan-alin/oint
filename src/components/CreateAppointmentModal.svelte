@@ -20,7 +20,6 @@
 		end_date: '',
 		start_time: '',
 		end_time: '',
-		address: '',
 		can_be_forwarded: false,
 		image: undefined,
 		location_selection_type: 'single',
@@ -85,14 +84,6 @@
 						placeholder="Insert the description"
 						bind:value={formData.description}
 					/>
-					<InputText
-						type="text"
-						name="address"
-						bind:value={formData.address}
-						id="address"
-						placeholder="Insert the address"
-						label="Indirizzo"
-					/>
 				</form>
 			{:else if step === 2}
 				<form
@@ -115,7 +106,6 @@
 							label="Al"
 							id="end_date"
 							name="end date"
-							required
 							placeholder="Insert the ending date"
 							bind:value={formData.end_date}
 						/>
@@ -219,8 +209,8 @@
 														formData.location_selection_type === 'single' &&
 														addedPlaces.length === 1
 													) {
-														return;
 														places = [];
+														return;
 													}
 													if (
 														!addedPlaces.some(

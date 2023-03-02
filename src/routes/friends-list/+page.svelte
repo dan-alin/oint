@@ -1,0 +1,47 @@
+<script lang="ts">
+	import Card from '../../components/Card.svelte';
+	import FriendCard from '../../components/FriendCard.svelte';
+	import type { FriendData } from '../../models/friend-requests';
+	import { apiCall } from '../../utils/api-call';
+
+	export let data: { friendList: FriendData[] };
+	let { friendList } = data;
+
+	const removeFriend = async (friendId: number) => {
+		try {
+			//TODO type delete response
+			const response: any = await apiCall(
+				'/api/remove-friend',
+				'delete',
+				'',
+				JSON.stringify({
+					friendId
+				}),
+				sessionStorage.getItem('jwt_token') || '',
+				false
+			);
+			friendList = friendList.filter((friend) => friend.id !== response.id);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+</script>
+
+<h1 class="text-2xl font-bold uppercase flex justify-center">Friend list</h1>
+
+{#if friendList}
+	<div class="flex py-10 px-2">
+		{#each friendList as friend}
+			<div class="w-full md:max-w-md ">
+				<Card>
+					<FriendCard
+						name={`${friend.name} ${friend.surname}`}
+						id={friend.id || 0}
+						action={() => removeFriend(friend.id)}
+						isViewMode
+					/>
+				</Card>
+			</div>
+		{/each}
+	</div>
+{/if}

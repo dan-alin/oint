@@ -27,7 +27,6 @@
 				end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
 				image,
 				can_be_forwarded: formData.can_be_forwarded,
-				address: formData.address,
 				locations: formData.locations
 			};
 
@@ -43,7 +42,9 @@
 			appointments = [...appointments, response];
 
 			closeModal();
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const closeModal = () => {
@@ -70,7 +71,9 @@
 				false
 			);
 			appointments = appointments.filter((event) => event.id !== response.appointmentId);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const goToDetail = (id: number) => {
