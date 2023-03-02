@@ -13,7 +13,9 @@ const {
 	VITE_FIREBASE_VAPID_KEY
 } = import.meta.env;
 
-console.log(import.meta.env);
+
+
+
 
 const firebaseConfig = {
 	apiKey: VITE_FIREBASE_API_KEY,
@@ -26,14 +28,21 @@ const firebaseConfig = {
 	measurementId: VITE_FIREBASE_MEASUREMENT_ID
 };
 
+
 const firebaseApp = initializeApp(firebaseConfig);
+
 const messaging = getMessaging(firebaseApp);
 
+
+
 export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenFound) => {
+
+
 	getToken(messaging, {
-		vapidKey: VITE_FIREBASE_VAPID_KEY
+		vapidKey: VITE_FIREBASE_VAPID_KEY,
 	})
 		.then((currentToken) => {
+			console.log('CT',currentToken)
 			if (currentToken) {
 				console.log('current token for client: ', currentToken);
 				setTokenFound(currentToken);
@@ -56,3 +65,5 @@ export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenF
 		});
 	});
 };
+
+
