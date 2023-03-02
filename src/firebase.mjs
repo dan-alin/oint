@@ -35,7 +35,6 @@ export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenF
 		.then((currentToken) => {
 			console.log('CT', currentToken);
 			if (currentToken) {
-				console.log('current token for client: ', currentToken);
 				setTokenFound(currentToken);
 				// Track the token -> client mapping, by sending to backend server
 				// show on the UI that permission is secured
