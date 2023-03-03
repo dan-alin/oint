@@ -13,7 +13,6 @@
 	export let end_time: string;
 
 	const handleFormSubmit = (e: Event) => {
-		e.preventDefault();
 		onSubmit(start_date, end_date, start_time, end_time);
 	};
 </script>

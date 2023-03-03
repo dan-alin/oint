@@ -7,7 +7,6 @@
 	export let description: string;
 
 	const handleFormSubmit = (e: Event) => {
-		e.preventDefault();
 		onSubmit(name, description);
 	};
 </script>

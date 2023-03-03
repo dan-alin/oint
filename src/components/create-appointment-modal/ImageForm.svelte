@@ -7,7 +7,6 @@
 	export let can_be_forwarded: boolean;
 
 	const handleFormSubmit = (e: Event) => {
-		e.preventDefault();
 		onSubmit(image, can_be_forwarded);
 	};
 </script>
