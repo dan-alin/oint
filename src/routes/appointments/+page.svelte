@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import AppointmentCard from '../../components/AppointmentCard.svelte';
-	import CreateAppointmentModal from '../../components/CreateAppointmentModal.svelte';
+	import CreateAppointmentModal from '../../components/create-appointment-modal/CreateAppointmentModal.svelte';
 	import type { Appointment } from '../../models';
 	import type { AppointmentForm, DeletedAppointment } from '../../models/appointment';
 	import { apiCall } from '../../utils/api-call';

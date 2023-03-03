@@ -25,7 +25,7 @@ export type AppointmentForm = {
 	end_date: string;
 	start_time: string;
 	end_time: string;
-	can_be_forwarded: false;
+	can_be_forwarded: boolean;
 	image: FileList | undefined;
 	locations: Location[];
 	location_selection_type: 'single' | 'multi';
