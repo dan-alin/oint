@@ -3,5 +3,5 @@ export type Invitation = {
 	created_by: number;
 	id: number;
 	invitee_id: number;
-	status: 'accepted' | 'rejected';
+	status: 'accepted' | 'declined';
 };

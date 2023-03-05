@@ -1,11 +1,12 @@
 <script lang="ts">
 	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
-	import type { Appointment } from '../../../models';
+	import type { Occurrence } from '../../../models/appointment';
+
 	import type { FriendData } from '../../../models/friend-requests';
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
 
-	export let data: { appointment: Appointment; friends: FriendData[] };
+	export let data: { appointment: Occurrence; friends: FriendData[] };
 	let { appointment, friends } = data;
 
 	const startDate = getDate(appointment.start_date);

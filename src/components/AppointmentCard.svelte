@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { Appointment } from '../models';
+	import type { Occurrence } from '../models/appointment';
+
 	import { getDate, getTime } from '../utils/time';
 
-	export let appointment: Appointment;
-	export let isAccepting = false;
+	export let appointment: Occurrence;
+	export let inviteMode = false;
+	export let invitationStatus: 'declined' | 'accepted' | '' = '';
 	export let deleteAction: (appointmentId: number) => void = () => null;
 	export let action: (appointmentId: number) => void = () => null;
 	export let confirmAction: (appointmentId: number) => void = () => null;
-	export let rejectAction: (appointmentId: number) => void = () => null;
+	export let declineAction: (appointmentId: number) => void = () => null;
 
 	const startDate = getDate(appointment.start_date);
 	const endDate = getDate(appointment.end_date);
@@ -19,7 +21,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full" in:fade>
-	{#if !isAccepting}
+	{#if !inviteMode}
 		<button
 			class="btn btn-sm btn-circle absolute right-2 top-2 z-30"
 			on:click|stopPropagation={() => deleteAction(appointment.id)}
@@ -85,7 +87,8 @@
 					{/each}
 				</ul>
 			{/if}
-			{#if isAccepting}
+			{#if inviteMode}
+				<div>{invitationStatus}</div>
 				<div class="flex w-full justify-between mt-10">
 					<button
 						class="btn btn-sm btn-primary z-30"
@@ -95,9 +98,9 @@
 					</button>
 					<button
 						class="btn btn-sm btn-secondary z-30"
-						on:click|stopPropagation={() => rejectAction(appointment.id)}
+						on:click|stopPropagation={() => declineAction(appointment.id)}
 					>
-						reject
+						decline
 					</button>
 				</div>
 			{/if}
