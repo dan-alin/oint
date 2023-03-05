@@ -3,11 +3,11 @@
 	import type { Appointment } from '../models';
 	import {
 		isInvitedOccurrence,
-		type InvitedOccurrence,
+		type DeletedAppointment,
 		type Occurrence
 	} from '../models/appointment';
 	import type { Invitation } from '../models/invitation';
-	import { invitedAppointmentsStore } from '../stores/apointments';
+	import { invitedAppointmentsStore, myAppointmentsStore } from '../stores/apointments';
 	import { apiCall } from '../utils/api-call';
 
 	import AppointmentCard from './AppointmentCard.svelte';
@@ -19,6 +19,27 @@
 		if (isInvitedOccurrence(occurrence)) return occurrence.appointment;
 
 		return occurrence;
+	};
+
+	const cancelAppointment = async (appointmentId: number) => {
+		try {
+			const response: DeletedAppointment = await apiCall(
+				'/api/delete-appointment',
+				'delete',
+				'',
+				JSON.stringify({
+					appointmentId
+				}),
+				sessionStorage.getItem('jwt_token') || '',
+				false
+			);
+
+			myAppointmentsStore.update((appointments) =>
+				appointments.filter((event) => event.id !== response.appointmentId)
+			);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const acceptAppointment = async (appointmentId: number) => {
@@ -98,6 +119,7 @@
 			appointment={getCurrentAppointment(appointment)}
 			inviteMode={invited}
 			invitationStatus={getInvitationStatus(appointment)}
+			deleteAction={cancelAppointment}
 			declineAction={declineAppointment}
 			confirmAction={acceptAppointment}
 			action={goToDetail}

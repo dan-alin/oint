@@ -56,11 +56,19 @@
 <!-- toggle close modal from card when appointment is created -->
 
 <div class="navbar bg-base-200  w-screen  px-6  h-24  border-t-10  z-50">
-	<div class="navbar-start gap-6 text-xs justify-evenly">
-		<a class:text-primary={$page.url.pathname.startsWith('/appointments')} href="/appointments">
+	<div class="navbar-start  text-xs justify-evenly">
+		<a
+			class=" h-24 flex items-center justify-center w-16"
+			class:text-primary={$page.url.pathname.startsWith('/appointments')}
+			href="/appointments"
+		>
 			Eventi</a
 		>
-		<a class:text-primary={$page.url.pathname.startsWith('/friends-list')} href="/friends-list">
+		<a
+			class=" h-24 flex items-center justify-center w-16"
+			class:text-primary={$page.url.pathname.startsWith('/friends-list')}
+			href="/friends-list"
+		>
 			Amici</a
 		>
 	</div>
@@ -75,11 +83,16 @@
 		<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
 	{/key}
 
-	<div class="navbar-end gap-6 text-xs justify-evenly">
-		<a class:text-primary={$page.url.pathname.startsWith('/search-friends')} href="/search-friends">
+	<div class="navbar-end text-xs justify-evenly">
+		<a
+			class=" h-24 flex items-center justify-center w-16"
+			class:text-primary={$page.url.pathname.startsWith('/search-friends')}
+			href="/search-friends"
+		>
 			Aggiungi</a
 		>
 		<a
+			class=" h-24 flex items-center justify-center w-16"
 			class:text-primary={$page.url.pathname.startsWith('/friend-requests')}
 			href="/friend-requests"
 		>
