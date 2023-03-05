@@ -1,6 +1,8 @@
 import type { Location } from './locations';
 
-export type Appointment = {
+export type Appointment = Occurrence | InvitedOccurrence;
+
+export type Occurrence = {
 	id: number;
 	creator_id: number;
 	title: string;
@@ -12,11 +14,20 @@ export type Appointment = {
 	locations: Location[];
 };
 
+export type InvitedOccurrence = {
+	appointment: Occurrence;
+	invitationStatus?: 'declined' | 'accepted';
+};
+
 export type DeletedAppointment = {
 	appointmentId: number;
 	message: 'string';
 	status: number;
 };
+
+export function isInvitedOccurrence(appointment: Appointment): appointment is InvitedOccurrence {
+	return (appointment as InvitedOccurrence).appointment !== undefined;
+}
 
 export type AppointmentForm = {
 	title: string;

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import { page } from '$app/stores';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import Header from '../components/Header.svelte';
 	import Drawer from '../components/Drawer.svelte';
@@ -10,6 +9,7 @@
 	import Alert from '../components/Alert.svelte';
 	import { toggleAlert, type AlertState } from '../stores/alert';
 	import { onMount } from 'svelte';
+	import BottomNav from '../components/BottomNav.svelte';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -57,9 +57,19 @@
 <Drawer>
 	<Header />
 
-	<slot />
+	<div class="custom-h">
+		<slot />
+	</div>
+	<BottomNav />
 </Drawer>
 
 {#if ReloadPrompt}
 	<svelte:component this={ReloadPrompt} />
 {/if}
+
+<style>
+	.custom-h {
+		height: calc(100vh - 192px);
+		overflow: auto;
+	}
+</style>

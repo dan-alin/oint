@@ -1,102 +1,50 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import AppointmentCard from '../../components/AppointmentCard.svelte';
-	import CreateAppointmentModal from '../../components/create-appointment-modal/CreateAppointmentModal.svelte';
+	import { onMount } from 'svelte';
+	import AppointmentsList from '../../components/AppointmentsList.svelte';
 	import type { Appointment } from '../../models';
-	import type { AppointmentForm, DeletedAppointment } from '../../models/appointment';
-	import { apiCall } from '../../utils/api-call';
-	import fileToBase64 from '../../utils/to-base64';
+	import type { InvitedOccurrence, Occurrence } from '../../models/appointment';
+	import { myAppointmentsStore, invitedAppointmentsStore } from '../../stores/apointments';
 
-	export let data: { appointments: Appointment[] };
-	let { appointments }: { appointments: Appointment[] } = data;
+	export let data: { myAppointments: Occurrence[]; invitedAppointments: InvitedOccurrence[] };
+	let { myAppointments, invitedAppointments } = data;
 
-	let unique = {};
+	let invited = false;
 
-	const createAppointment = async (formData: AppointmentForm) => {
-		console.log(formData);
-		let image = '';
-		if (formData.image) {
-			image = await fileToBase64(formData.image?.[0] as File);
-		}
+	onMount(async () => {
+		myAppointmentsStore.update(() => myAppointments);
 
-		try {
-			const newAppointment = {
-				title: formData.title,
-				description: formData.description,
-				start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
-				end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
-				image,
-				can_be_forwarded: formData.can_be_forwarded,
-				locations: formData.locations
-			};
+		invitedAppointmentsStore.update(() => invitedAppointments);
+	});
 
-			const response: Appointment = await apiCall(
-				'/api/create-appointment',
-				'post',
-				'',
-				JSON.stringify(newAppointment),
+	console.log($invitedAppointmentsStore);
 
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
-			appointments = [...appointments, response];
-
-			closeModal();
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const closeModal = () => {
-		const modal = document.getElementById('create-appointment-modal');
-		modal?.click();
-		restart();
-	};
-
-	// function to restart the component by setting a new unique key
-	const restart = () => {
-		unique = {};
-	};
-
-	const cancelAppointment = async (appointmentId: number) => {
-		try {
-			const response: DeletedAppointment = await apiCall(
-				'/api/delete-appointment',
-				'delete',
-				'',
-				JSON.stringify({
-					appointmentId
-				}),
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
-			appointments = appointments.filter((event) => event.id !== response.appointmentId);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const goToDetail = (id: number) => {
-		goto(`appointments/${id}`, { state: appointments.find((item) => item.id === id) });
+	const handleChange = () => {
+		invited = !invited;
 	};
 </script>
 
-<!-- modal -->
-<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
-	<label for="create-appointment-modal" class="btn btn-primary ">nuovo appuntamento</label>
+<div class="sticky top-0 z-50 w-full bg-base-100 p-6">
+	<!-- <button class="btn btn-primary " on:click={handleChange}>{invited}</button> -->
+	<div class="btn-group w-full">
+		<input
+			type="radio"
+			name="options"
+			data-title="I miei appuntamenti"
+			class="btn w-1/2 text-xs"
+			on:change={handleChange}
+			checked={!invited}
+		/>
+		<input
+			type="radio"
+			name="options"
+			data-title="I miei inviti"
+			class="btn w-1/2 text-xs"
+			checked={invited}
+			on:change={handleChange}
+		/>
+	</div>
 </div>
-
-<!-- toggle close modal from card when appointment is created -->
-<input type="checkbox" id="create-appointment-modal" class="modal-toggle" />
-
-<!-- restart the component after closing it to clean form and steps -->
-{#key unique}
-	<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
-{/key}
-
-<!-- cards -->
-<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10">
-	{#each appointments as appointment}
-		<AppointmentCard {appointment} deleteAction={cancelAppointment} action={goToDetail} />
-	{/each}
-</div>
+<AppointmentsList
+	appointments={invited ? $invitedAppointmentsStore : $myAppointmentsStore}
+	{invited}
+/>
