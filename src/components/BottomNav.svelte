@@ -4,7 +4,7 @@
 	import { apiCall } from '../utils/api-call';
 	import fileToBase64 from '../utils/to-base64';
 	import CreateAppointmentModal from './create-appointment-modal/CreateAppointmentModal.svelte';
-
+	import { page } from '$app/stores';
 	let unique = {};
 
 	const createAppointment = async (formData: AppointmentForm) => {
@@ -57,8 +57,12 @@
 
 <div class="navbar bg-base-200  w-screen  px-6  h-24  border-t-10  z-50">
 	<div class="navbar-start gap-6 text-xs justify-evenly">
-		<a href="/appointments"> Eventi</a>
-		<a href="/friends-list"> Amici</a>
+		<a class:text-primary={$page.url.pathname.startsWith('/appointments')} href="/appointments">
+			Eventi</a
+		>
+		<a class:text-primary={$page.url.pathname.startsWith('/friends-list')} href="/friends-list">
+			Amici</a
+		>
 	</div>
 	<div class="navbar-center">
 		<!-- modal -->
@@ -72,7 +76,14 @@
 	{/key}
 
 	<div class="navbar-end gap-6 text-xs justify-evenly">
-		<a href="/search-friends"> Aggiungi</a>
-		<a href="/friend-requests"> Requests</a>
+		<a class:text-primary={$page.url.pathname.startsWith('/search-friends')} href="/search-friends">
+			Aggiungi</a
+		>
+		<a
+			class:text-primary={$page.url.pathname.startsWith('/friend-requests')}
+			href="/friend-requests"
+		>
+			Requests</a
+		>
 	</div>
 </div>
