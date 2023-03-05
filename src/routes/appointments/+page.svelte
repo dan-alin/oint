@@ -16,8 +16,6 @@
 		invitedAppointmentsStore.update(() => invitedAppointments);
 	});
 
-	console.log($invitedAppointmentsStore);
-
 	const handleChange = () => {
 		invited = !invited;
 	};
