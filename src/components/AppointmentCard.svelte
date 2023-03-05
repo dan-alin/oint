@@ -5,6 +5,7 @@
 	import { getDate, getTime } from '../utils/time';
 
 	export let appointment: Occurrence;
+	console.log(appointment);
 	export let inviteMode = false;
 	export let invitationStatus: 'declined' | 'accepted' | '' = '';
 	export let deleteAction: (appointmentId: number) => void = () => null;
@@ -20,7 +21,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full" in:fade>
+<div class="card w-80 bg-base-300 shadow-xl mx-auto h-64 image-full cursor-pointer" in:fade>
 	{#if !inviteMode}
 		<button
 			class="btn btn-sm btn-circle absolute right-2 top-2 z-30"
@@ -83,7 +84,10 @@
 			{#if appointment.locations}
 				<ul>
 					{#each appointment.locations as loc}
-						<li class="text-xs">{`${loc.name} - ${loc.address}`}</li>
+						<li class="text-xs">
+							{`${loc.name} - ${loc.address}`}
+							<span class="badge badge-xs">{`${loc.votes_count}`}</span>
+						</li>
 					{/each}
 				</ul>
 			{/if}

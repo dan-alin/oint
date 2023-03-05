@@ -21,7 +21,8 @@
 				end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
 				image,
 				can_be_forwarded: formData.can_be_forwarded,
-				locations: formData.locations
+				locations: formData.locations,
+				location_selection_type: formData.location_selection_type
 			};
 
 			const response: Occurrence = await apiCall(

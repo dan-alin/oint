@@ -1,9 +1,7 @@
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST({ request }: RequestEvent) {
-	console.log('re', request);
 	const searchText = await request.json();
-	console.log(searchText);
 
 	try {
 		const response = await fetch(

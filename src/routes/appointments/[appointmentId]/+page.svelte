@@ -1,13 +1,15 @@
 <script lang="ts">
 	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
+	import Checkbox from '../../../components/Checkbox.svelte';
 	import type { Occurrence } from '../../../models/appointment';
-
 	import type { FriendData } from '../../../models/friend-requests';
+	import type { Location } from '../../../models/locations';
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
 
 	export let data: { appointment: Occurrence; friends: FriendData[] };
 	let { appointment, friends } = data;
+	console.log(appointment);
 
 	const startDate = getDate(appointment.start_date);
 	const endDate = getDate(appointment.end_date);
@@ -16,19 +18,39 @@
 	const endTime = getTime(appointment.end_date);
 
 	const addInvitee = async (inviteeId: number) => {
-		try {
-			const response: any = await apiCall(
-				'/api/add-invitee',
-				'post',
-				'Invito mandato',
-				JSON.stringify({
-					appointmentId: appointment.id,
-					inviteeId
-				}),
-				sessionStorage.getItem('jwt_token') || ''
-			);
-		} catch (error) {
-			console.log(error);
+		const response: any = await apiCall(
+			'/api/add-invitee',
+			'post',
+			'Invito mandato',
+			JSON.stringify({
+				appointmentId: appointment.id,
+				inviteeId
+			}),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+	};
+
+	const vote = async (locId: number, vote: boolean) => {
+		console.log(appointment.id, locId);
+		const response: any = await apiCall(
+			vote ? '/api/vote' : '/api/unvote',
+			'post',
+			vote ? 'Vote sent' : 'Vote removed',
+			JSON.stringify({
+				appointmentId: appointment.id,
+				locationId: locId
+			}),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+	};
+
+	const onVote = (loc: Location, isVote: boolean) => {
+		vote(loc.id, isVote);
+
+		if (isVote) {
+			loc.votes_count++;
+		} else {
+			loc.votes_count--;
 		}
 	};
 </script>
@@ -126,6 +148,24 @@
 	<!-- end time -->
 	<div>
 		{endTime}
+	</div>
+	<!-- locations -->
+	<div>
+		{#if appointment.locations}
+			<ul>
+				{#each appointment.locations as loc}
+					<li class="text-xs flex items-center">
+						<Checkbox
+							checked={loc.i_voted_this_location}
+							label={`${loc.name} - ${loc.address}`}
+							onChange={(checked) => onVote(loc, checked)}
+						/>
+
+						<span class="badge badge-xs ml-4">{`${loc.votes_count}`}</span>
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
 
 	<!-- modal -->
