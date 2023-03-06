@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Card from '../../components/Card.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
 	import { apiCall } from '../../utils/api-call';

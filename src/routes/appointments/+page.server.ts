@@ -1,5 +1,4 @@
-import type { Appointment } from '../../models';
-
+import type { Appointment, InvitedAppointment } from '../../models';
 import type { PageServerLoad } from './$types';
 
 export const prerender = false;
@@ -14,8 +13,8 @@ export const load: PageServerLoad = async (event) => {
 			Authorization: `Bearer ${userToken}`
 		}
 	});
-	const myAppointments = (await myAppRes.json()) as Appointment[];
 
+	const myAppointments = (await myAppRes.json()) as Appointment[];
 	const invitedAppRes = await fetch('https://oint-ms.vercel.app/appointment/list/invitedMe', {
 		method: 'GET',
 		headers: {
@@ -23,7 +22,7 @@ export const load: PageServerLoad = async (event) => {
 			Authorization: `Bearer ${userToken}`
 		}
 	});
-	const invitedAppointments = (await invitedAppRes.json()) as Appointment[];
+	const invitedAppointments = (await invitedAppRes.json()) as InvitedAppointment[];
 
 	return { myAppointments, invitedAppointments };
 };

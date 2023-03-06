@@ -1,25 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type { Appointment } from '../models';
-	import {
-		isInvitedOccurrence,
-		type DeletedAppointment,
-		type Occurrence
-	} from '../models/appointment';
-	import type { Invitation } from '../models/invitation';
+
+	import type { DeletedAppointment, Invitation } from '../models';
 	import { invitedAppointmentsStore, myAppointmentsStore } from '../stores/apointments';
 	import { apiCall } from '../utils/api-call';
-
 	import AppointmentCard from './AppointmentCard.svelte';
 
-	export let appointments: Appointment[];
 	export let invited = false;
-
-	const getCurrentAppointment = (occurrence: Appointment): Occurrence => {
-		if (isInvitedOccurrence(occurrence)) return occurrence.appointment;
-
-		return occurrence;
-	};
 
 	const cancelAppointment = async (appointmentId: number) => {
 		try {
@@ -92,20 +79,6 @@
 		}
 
 		invitedAppointmentsStore.update(() => appointmentsToSet);
-
-		console.log($invitedAppointmentsStore);
-	};
-
-	const getInvitationStatus = (appointment: Appointment) => {
-		if (!invited) return '';
-
-		if (isInvitedOccurrence(appointment)) {
-			return (
-				$invitedAppointmentsStore.find(
-					(occurrence) => occurrence.appointment.id === appointment.appointment.id
-				)?.invitationStatus || ''
-			);
-		}
 	};
 
 	const goToDetail = (id: number) => {
@@ -114,15 +87,25 @@
 </script>
 
 <div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10">
-	{#each appointments as appointment}
-		<AppointmentCard
-			appointment={getCurrentAppointment(appointment)}
-			inviteMode={invited}
-			invitationStatus={getInvitationStatus(appointment)}
-			deleteAction={cancelAppointment}
-			declineAction={declineAppointment}
-			confirmAction={acceptAppointment}
-			action={goToDetail}
-		/>
-	{/each}
+	{#if invited}
+		{#each $invitedAppointmentsStore as invitedOccurrence}
+			<AppointmentCard
+				appointment={invitedOccurrence.appointment}
+				inviteMode={invited}
+				invitationStatus={invitedOccurrence.invitationStatus}
+				declineAction={declineAppointment}
+				confirmAction={acceptAppointment}
+				action={goToDetail}
+			/>
+		{/each}
+	{:else}
+		{#each $myAppointmentsStore as occurrence}
+			<AppointmentCard
+				appointment={occurrence}
+				inviteMode={invited}
+				deleteAction={cancelAppointment}
+				action={goToDetail}
+			/>
+		{/each}
+	{/if}
 </div>

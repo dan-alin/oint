@@ -2,7 +2,7 @@
 	<div class="navbar-start" />
 	<a href="/" class="navbar-center">
 		<div class="h-12">
-			<img src="favicon.svg" alt="" height="40px" width="40px" />
+			<!-- <img src="favicon.svg" alt="" height="40px" width="40px" /> -->
 		</div>
 	</a>
 	<div class="navbar-end">

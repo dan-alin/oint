@@ -1,12 +1,11 @@
 <script lang="ts">
 	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
-	import type { Occurrence } from '../../../models/appointment';
-
-	import type { FriendData } from '../../../models/friend-requests';
+	import Card from '../../../components/Card.svelte';
+	import type { Appointment, FriendData } from '../../../models';
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
 
-	export let data: { appointment: Occurrence; friends: FriendData[] };
+	export let data: { appointment: Appointment; friends: FriendData[] };
 	let { appointment, friends } = data;
 
 	const startDate = getDate(appointment.start_date);
@@ -127,10 +126,18 @@
 	<div>
 		{endTime}
 	</div>
+	<ul class="flex flex-col gap-2">
+		{#each appointment.invitations as invitation}
+			<li>{invitation.invitee.name} {invitation.invitee.surname}: {invitation.status}</li>
+		{/each}
+	</ul>
 
 	<!-- modal -->
 	<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
-		<label for="add-invitees-modal" class="btn btn-primary ">aggiungi invitati</label>
+		<!-- add check if i'm the creator to add other people -->
+		{#if appointment.can_be_forwarded}
+			<label for="add-invitees-modal" class="btn btn-primary ">aggiungi invitati</label>
+		{/if}
 	</div>
 
 	<!-- toggle close modal from card when invitees gets added-->

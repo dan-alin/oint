@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Card from '../../components/Card.svelte';
 	import FriendCard from '../../components/FriendCard.svelte';
-	import type { FriendData } from '../../models/friend-requests';
+	import type { FriendData } from '../../models';
+
 	import { apiCall } from '../../utils/api-call';
 
 	export let data: { friendList: FriendData[] };

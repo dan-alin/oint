@@ -2,8 +2,7 @@
 	import Card from '../../components/Card.svelte';
 	import FriendCard from '../../components/FriendCard.svelte';
 	import InputAction from '../../components/InputAction.svelte';
-	import type { User } from '../../models';
-	import type { Friend } from '../../models/friend';
+	import type { Friend, User } from '../../models';
 	import { apiCall } from '../../utils/api-call';
 
 	let friends: Friend[] = [];

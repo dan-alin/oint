@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import AppointmentsList from '../../components/AppointmentsList.svelte';
-	import type { Appointment } from '../../models';
-	import type { InvitedOccurrence, Occurrence } from '../../models/appointment';
+	import type { Appointment, InvitedAppointment } from '../../models';
 	import { myAppointmentsStore, invitedAppointmentsStore } from '../../stores/apointments';
 
-	export let data: { myAppointments: Occurrence[]; invitedAppointments: InvitedOccurrence[] };
+	export let data: { myAppointments: Appointment[]; invitedAppointments: InvitedAppointment[] };
 	let { myAppointments, invitedAppointments } = data;
 
 	let invited = false;
@@ -14,37 +13,33 @@
 		myAppointmentsStore.update(() => myAppointments);
 
 		invitedAppointmentsStore.update(() => invitedAppointments);
+
+		console.log($invitedAppointmentsStore);
 	});
 
-	console.log($invitedAppointmentsStore);
-
-	const handleChange = () => {
-		invited = !invited;
+	const handleChange = (e: MouseEvent) => {
+		if ((e.target as HTMLButtonElement).value === 'my-appointments') {
+			invited = false;
+		} else {
+			invited = true;
+		}
 	};
 </script>
 
 <div class="sticky top-0 z-50 w-full bg-base-100 p-6">
-	<!-- <button class="btn btn-primary " on:click={handleChange}>{invited}</button> -->
-	<div class="btn-group w-full">
-		<input
-			type="radio"
-			name="options"
-			data-title="I miei appuntamenti"
-			class="btn w-1/2 text-xs"
-			on:change={handleChange}
-			checked={!invited}
-		/>
-		<input
-			type="radio"
-			name="options"
-			data-title="I miei inviti"
-			class="btn w-1/2 text-xs"
-			checked={invited}
-			on:change={handleChange}
-		/>
+	<div class="tabs tabs-boxed w-full">
+		<button
+			value="my-appointments"
+			class="tab w-1/2"
+			on:click={handleChange}
+			class:tab-active={!invited}>1</button
+		>
+		<button
+			value="invited-appointments"
+			class="tab w-1/2"
+			on:click={handleChange}
+			class:tab-active={invited}>2</button
+		>
 	</div>
 </div>
-<AppointmentsList
-	appointments={invited ? $invitedAppointmentsStore : $myAppointmentsStore}
-	{invited}
-/>
+<AppointmentsList {invited} />
