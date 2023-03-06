@@ -72,7 +72,7 @@
 	};
 </script>
 
-<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10">
+<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10 overflow-scroll">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
 			<AppointmentCard

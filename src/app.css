@@ -9,13 +9,15 @@
 h1 {
 	@apply text-2xl;
 }
-
-html,
+/* test */
+/* html,
 body {
 	position: fixed;
 	overflow: hidden;
+} */
+html {
+	overscroll-behavior-y: contain;
 }
-
 html,
 body,
 div,
