@@ -32,13 +32,13 @@
 			value="my-appointments"
 			class="tab w-1/2"
 			on:click={handleChange}
-			class:tab-active={!invited}>1</button
+			class:tab-active={!invited}>I tuoi eventi</button
 		>
 		<button
 			value="invited-appointments"
 			class="tab w-1/2"
 			on:click={handleChange}
-			class:tab-active={invited}>2</button
+			class:tab-active={invited}>I tuoi inviti</button
 		>
 	</div>
 </div>

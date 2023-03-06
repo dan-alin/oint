@@ -59,11 +59,10 @@
 		<slot />
 	</div>
 	<BottomNav />
+	{#if ReloadPrompt}
+		<svelte:component this={ReloadPrompt} />
+	{/if}
 </Drawer>
-
-{#if ReloadPrompt}
-	<svelte:component this={ReloadPrompt} />
-{/if}
 
 <style>
 	.custom-h {
