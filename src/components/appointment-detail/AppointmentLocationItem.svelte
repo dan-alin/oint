@@ -5,6 +5,7 @@
 
 	export let location: Location;
 	export let appointmentId: number;
+	export let IsSingleEvent: boolean;
 
 	let votesCount = location.votes_count;
 
@@ -28,11 +29,14 @@
 </script>
 
 <li class="text-xs flex items-center">
-	<Checkbox
-		checked={location.i_voted_this_location}
-		label={`${location.name} - ${location.address}`}
-		onChange={(checked) => onVote(checked)}
-	/>
-
-	<span class="badge badge-xs ml-4">{votesCount}</span>
+	{#if !IsSingleEvent}
+		<Checkbox
+			checked={location.i_voted_this_location}
+			label={`${location.name} - ${location.address}`}
+			onChange={(checked) => onVote(checked)}
+		/>
+		<span class="badge badge-xs ml-4">{votesCount}</span>
+	{:else}
+		{location.name} - {location.address}
+	{/if}
 </li>

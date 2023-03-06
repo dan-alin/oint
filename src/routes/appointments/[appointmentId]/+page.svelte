@@ -132,7 +132,11 @@
 		{#if appointment.locations}
 			<ul>
 				{#each appointment.locations as loc}
-					<AppointmentLocationItem location={loc} appointmentId={appointment.id} />
+					<AppointmentLocationItem
+						location={loc}
+						appointmentId={appointment.id}
+						IsSingleEvent={appointment.locations.length === 1}
+					/>
 				{/each}
 			</ul>
 		{/if}

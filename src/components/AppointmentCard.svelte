@@ -85,7 +85,9 @@
 					{#each appointment.locations as loc}
 						<li class="text-xs">
 							{`${loc.name} - ${loc.address}`}
-							<span class="badge badge-xs">{`${loc.votes_count}`}</span>
+							{#if appointment.locations.length > 1}
+								<span class="badge badge-xs">{`${loc.votes_count}`}</span>
+							{/if}
 						</li>
 					{/each}
 				</ul>
