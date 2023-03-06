@@ -18,7 +18,6 @@
 				'Login success',
 				JSON.stringify(user)
 			);
-			console.log(response);
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			goto('/appointments');
 		} catch (error: unknown) {

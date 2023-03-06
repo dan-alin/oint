@@ -9,20 +9,16 @@
 
 	const onSubmit = async (event: Event) => {
 		const formData = new FormData(event.target as HTMLFormElement);
-		try {
-			const user = {
-				name: formData.get('name') as string,
-				surname: formData.get('surname') as string,
-				nickname: formData.get('nickname') as string,
-				password: formData.get('password') as string,
-				email: formData.get('email') as string,
-				phone: `${formData.get('prefix') as string}${formData.get('phone') as string}`,
-				birthdate: formData.get('birthdate') as string
-			};
-			apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
-		} catch (error: unknown) {
-			console.log(error);
-		}
+		const user = {
+			name: formData.get('name') as string,
+			surname: formData.get('surname') as string,
+			nickname: formData.get('nickname') as string,
+			password: formData.get('password') as string,
+			email: formData.get('email') as string,
+			phone: `${formData.get('prefix') as string}${formData.get('phone') as string}`,
+			birthdate: formData.get('birthdate') as string
+		};
+		apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
 	};
 </script>
 

@@ -22,62 +22,48 @@
 	};
 
 	const cancelAppointment = async (appointmentId: number) => {
-		try {
-			const response: DeletedAppointment = await apiCall(
-				'/api/delete-appointment',
-				'delete',
-				'',
-				JSON.stringify({
-					appointmentId
-				}),
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
+		const response: DeletedAppointment = await apiCall(
+			'/api/delete-appointment',
+			'delete',
+			'',
+			JSON.stringify({
+				appointmentId
+			}),
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
 
-			myAppointmentsStore.update((appointments) =>
-				appointments.filter((event) => event.id !== response.appointmentId)
-			);
-		} catch (error) {
-			console.log(error);
-		}
+		myAppointmentsStore.update((appointments) =>
+			appointments.filter((event) => event.id !== response.appointmentId)
+		);
 	};
 
 	const acceptAppointment = async (appointmentId: number) => {
-		try {
-			const acceptRes: Invitation = await apiCall(
-				'/api/accept-invitation',
-				'post',
-				'Accepted',
-				JSON.stringify({
-					appointmentId
-				}),
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
-
-			updateInvitationStatusStore(acceptRes);
-		} catch (error) {
-			console.log(error);
-		}
+		const acceptRes: Invitation = await apiCall(
+			'/api/accept-invitation',
+			'post',
+			'Accepted',
+			JSON.stringify({
+				appointmentId
+			}),
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		updateInvitationStatusStore(acceptRes);
 	};
 
 	const declineAppointment = async (appointmentId: number) => {
-		try {
-			const declineRes: Invitation = await apiCall(
-				'/api/reject-invitation',
-				'post',
-				'Refused',
-				JSON.stringify({
-					appointmentId
-				}),
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
-
-			updateInvitationStatusStore(declineRes);
-		} catch (error) {
-			console.log(error);
-		}
+		const declineRes: Invitation = await apiCall(
+			'/api/reject-invitation',
+			'post',
+			'Refused',
+			JSON.stringify({
+				appointmentId
+			}),
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		updateInvitationStatusStore(declineRes);
 	};
 
 	const updateInvitationStatusStore = (res: Invitation) => {

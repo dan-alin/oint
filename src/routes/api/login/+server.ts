@@ -1,9 +1,10 @@
 import type { RequestEvent } from '@sveltejs/kit';
+import { API_HOST } from '$env/static/private';
 
 export async function POST({ request, cookies }: RequestEvent) {
 	const user = await request.json();
 	try {
-		const response = await fetch('https://oint-ms.vercel.app/auth/login', {
+		const response = await fetch(`${API_HOST}auth/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -18,7 +19,6 @@ export async function POST({ request, cookies }: RequestEvent) {
 			secure: true,
 			maxAge: 60 * 60 * 24 * 30
 		});
-		console.log(data);
 		return new Response(JSON.stringify(data), {
 			status: data.statusCode
 		});

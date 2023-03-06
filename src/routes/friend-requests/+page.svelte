@@ -8,18 +8,14 @@
 	let { received, sent } = data.requests;
 
 	const acceptFriendRequest = async (friendId: number) => {
-		try {
-			const response: any = await apiCall(
-				'/api/accept-friend-request',
-				'post',
-				'Request accepted',
-				JSON.stringify({ friendId }),
-				sessionStorage.getItem('jwt_token') || ''
-			);
-			received = received.filter((friendRequest) => friendRequest.id !== friendId);
-		} catch (error) {
-			console.log(error);
-		}
+		const response: any = await apiCall(
+			'/api/accept-friend-request',
+			'post',
+			'Request accepted',
+			JSON.stringify({ friendId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+		received = received.filter((friendRequest) => friendRequest.id !== friendId);
 	};
 </script>
 

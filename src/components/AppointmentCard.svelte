@@ -5,7 +5,6 @@
 	import { getDate, getTime } from '../utils/time';
 
 	export let appointment: Occurrence;
-	console.log(appointment);
 	export let inviteMode = false;
 	export let invitationStatus: 'declined' | 'accepted' | '' = '';
 	export let deleteAction: (appointmentId: number) => void = () => null;

@@ -1,8 +1,9 @@
 import type { PhonePrefix } from '../../models';
 import type { PageServerLoad } from './$types';
+import { API_HOST } from '$env/static/private';
 
 export const load: PageServerLoad = async (event) => {
-	const response = await fetch('https://oint-ms.vercel.app/phone-prefix', {
+	const response = await fetch(`${API_HOST}phone-prefix`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json'

@@ -1,9 +1,10 @@
 import type { RequestEvent } from '@sveltejs/kit';
+import { API_HOST } from '$env/static/private';
 
 export async function POST({ request }: RequestEvent) {
 	const appointmentId = await request.json();
 	try {
-		const response = await fetch('https://oint-ms.vercel.app/appointment/invitation/accept', {
+		const response = await fetch(`${API_HOST}appointment/invitation/accept`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
