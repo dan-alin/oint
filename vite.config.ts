@@ -28,33 +28,33 @@ const config: UserConfig = {
 			filename: 'prompt-sw.ts',
 			scope: '/',
 			base: '/',
-			manifest: {
-				short_name: 'Oin',
-				name: 'Oin',
-				start_url: '/',
-				scope: '/',
-				display: 'standalone',
-				theme_color: '#ffffff',
-				background_color: '#ffffff',
-				icons: [
-					{
-						src: '/android-chrome-192x192.png',
-						sizes: '192x192',
-						type: 'image/png'
-					},
-					{
-						src: '/android-chrome-512x512.png',
-						sizes: '512x512',
-						type: 'image/png'
-					},
-					{
-						src: '/android-chrome-512x512.png',
-						sizes: '512x512',
-						type: 'image/png',
-						purpose: 'any maskable'
-					}
-				]
-			},
+			// manifest: {
+			// 	short_name: 'Oin',
+			// 	name: 'Oin',
+			// 	start_url: '/',
+			// 	scope: '/',
+			// 	display: 'standalone',
+			// 	theme_color: '#ffffff',
+			// 	background_color: '#ffffff',
+			// 	icons: [
+			// 		{
+			// 			src: '/android-chrome-192x192.png',
+			// 			sizes: '192x192',
+			// 			type: 'image/png'
+			// 		},
+			// 		{
+			// 			src: '/android-chrome-512x512.png',
+			// 			sizes: '512x512',
+			// 			type: 'image/png'
+			// 		},
+			// 		{
+			// 			src: '/android-chrome-512x512.png',
+			// 			sizes: '512x512',
+			// 			type: 'image/png',
+			// 			purpose: 'any maskable'
+			// 		}
+			// 	]
+			// },
 			injectManifest: {
 				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
 			},
