@@ -1,10 +1,11 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { API_HOST } from '$env/static/private';
 
 export async function POST({ request }: RequestEvent) {
+	const { VITE_API_HOST } = import.meta.env;
+
 	const user = await request.json();
 	try {
-		const response = await fetch(`${API_HOST}registration`, {
+		const response = await fetch(`${VITE_API_HOST}registration`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
