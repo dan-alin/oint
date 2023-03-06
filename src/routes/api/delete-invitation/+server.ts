@@ -1,11 +1,12 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { API_HOST } from '$env/static/private';
 
 export async function DELETE({ request }: RequestEvent) {
+	const { VITE_API_HOST } = import.meta.env;
+
 	const invitationToDelete = await request.json();
 
 	try {
-		const response = await fetch(`${API_HOST}appointment/invitation/delete`, {
+		const response = await fetch(`${VITE_API_HOST}appointment/invitation/delete`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',

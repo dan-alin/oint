@@ -1,10 +1,11 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { API_HOST } from '$env/static/private';
 
 export async function POST({ request }: RequestEvent) {
 	const friendId = await request.json();
+	const { VITE_API_HOST } = import.meta.env;
+
 	try {
-		const response = await fetch(`${API_HOST}friends/accept-friend-request`, {
+		const response = await fetch(`${VITE_API_HOST}friends/accept-friend-request`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

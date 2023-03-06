@@ -4,4 +4,12 @@ export type Invitation = {
 	id: number;
 	invitee_id: number;
 	status: 'accepted' | 'declined';
+	invitee: Invitee;
+};
+
+type Invitee = {
+	id: number;
+	name: string;
+	nickname: string;
+	surname: string;
 };

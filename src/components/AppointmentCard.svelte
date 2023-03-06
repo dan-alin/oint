@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { Occurrence } from '../models/appointment';
+	import type { Appointment } from '../models';
 
 	import { getDate, getTime } from '../utils/time';
 
-	export let appointment: Occurrence;
+	export let appointment: Appointment;
 	export let inviteMode = false;
 	export let invitationStatus: 'declined' | 'accepted' | '' = '';
 	export let deleteAction: (appointmentId: number) => void = () => null;
