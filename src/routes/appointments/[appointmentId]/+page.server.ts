@@ -1,14 +1,13 @@
 import type { Appointment, FriendData } from '../../../models';
 import type { PageServerLoad } from './$types';
-import { API_HOST } from '$env/static/private';
 
 export const prerender = false;
 
 export const load: PageServerLoad = async (event) => {
 	const { cookies, params } = event;
-
 	const userToken = cookies.get('session');
-	const appointmentRes = await fetch(`${API_HOST}appointment/${params.appointmentId}`, {
+	const { VITE_API_HOST } = import.meta.env;
+	const appointmentRes = await fetch(`${VITE_API_HOST}appointment/${params.appointmentId}`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -17,7 +16,7 @@ export const load: PageServerLoad = async (event) => {
 	});
 	const appointment = (await appointmentRes.json()) as Appointment;
 
-	const friendsRes = await fetch(`${API_HOST}friends/list`, {
+	const friendsRes = await fetch(`${VITE_API_HOST}friends/list`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',

@@ -1,9 +1,10 @@
 import type { RequestEvent } from '@sveltejs/kit';
-import { API_HOST } from '$env/static/private';
 
 export async function GET({ request }: RequestEvent) {
+	const { VITE_API_HOST } = import.meta.env;
+
 	try {
-		const response = await fetch(`${API_HOST}appointment/list/invitedMe`, {
+		const response = await fetch(`${VITE_API_HOST}appointment/list/invitedMe`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
