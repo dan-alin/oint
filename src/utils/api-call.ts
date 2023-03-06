@@ -20,8 +20,6 @@ export const apiCall = async <T>(
 		}
 		switch (method) {
 			case 'get':
-				console.log(url);
-
 				response = await fetch(url, {
 					headers
 				});

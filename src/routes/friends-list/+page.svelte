@@ -9,22 +9,18 @@
 	let { friendList } = data;
 
 	const removeFriend = async (friendId: number) => {
-		try {
-			//TODO type delete response
-			const response: any = await apiCall(
-				'/api/remove-friend',
-				'delete',
-				'',
-				JSON.stringify({
-					friendId
-				}),
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
-			friendList = friendList.filter((friend) => friend.id !== response.id);
-		} catch (error) {
-			console.log(error);
-		}
+		//TODO type delete response
+		const response: any = await apiCall(
+			'/api/remove-friend',
+			'delete',
+			'',
+			JSON.stringify({
+				friendId
+			}),
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		friendList = friendList.filter((friend) => friend.id !== response.id);
 	};
 </script>
 

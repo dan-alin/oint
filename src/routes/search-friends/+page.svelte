@@ -8,32 +8,24 @@
 	let friends: Friend[] = [];
 
 	const onSearch = async (searchText: string) => {
-		try {
-			const response: Friend[] = await apiCall(
-				'/api/search-users',
-				'post',
-				'',
-				JSON.stringify({ searchText }),
-				sessionStorage.getItem('jwt_token') || ''
-			);
-			friends = response;
-		} catch (error: unknown) {
-			console.log(error);
-		}
+		const response: Friend[] = await apiCall(
+			'/api/search-users',
+			'post',
+			'',
+			JSON.stringify({ searchText }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+		friends = response;
 	};
 
 	const addFriend = async (friendId: number) => {
-		try {
-			const response: User[] = await apiCall(
-				'/api/add-friend',
-				'post',
-				'Request sent',
-				JSON.stringify({ friendId }),
-				sessionStorage.getItem('jwt_token') || ''
-			);
-		} catch (error: unknown) {
-			console.log(error);
-		}
+		const response: User[] = await apiCall(
+			'/api/add-friend',
+			'post',
+			'Request sent',
+			JSON.stringify({ friendId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
 	};
 </script>
 

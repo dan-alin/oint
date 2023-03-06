@@ -1,6 +1,6 @@
 <script lang="ts">
 	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
-	import Card from '../../../components/Card.svelte';
+	import AppointmentLocationItem from '../../../components/appointment-detail/AppointmentLocationItem.svelte';
 	import type { Appointment, FriendData } from '../../../models';
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
@@ -15,20 +15,16 @@
 	const endTime = getTime(appointment.end_date);
 
 	const addInvitee = async (inviteeId: number) => {
-		try {
-			const response: any = await apiCall(
-				'/api/add-invitee',
-				'post',
-				'Invito mandato',
-				JSON.stringify({
-					appointmentId: appointment.id,
-					inviteeId
-				}),
-				sessionStorage.getItem('jwt_token') || ''
-			);
-		} catch (error) {
-			console.log(error);
-		}
+		const response: any = await apiCall(
+			'/api/add-invitee',
+			'post',
+			'Invito mandato',
+			JSON.stringify({
+				appointmentId: appointment.id,
+				inviteeId
+			}),
+			sessionStorage.getItem('jwt_token') || ''
+		);
 	};
 </script>
 
@@ -131,6 +127,16 @@
 			<li>{invitation.invitee.name} {invitation.invitee.surname}: {invitation.status}</li>
 		{/each}
 	</ul>
+	<!-- locations -->
+	<div>
+		{#if appointment.locations}
+			<ul>
+				{#each appointment.locations as loc}
+					<AppointmentLocationItem location={loc} appointmentId={appointment.id} />
+				{/each}
+			</ul>
+		{/if}
+	</div>
 
 	<!-- modal -->
 	<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">

@@ -1,10 +1,11 @@
 import type { RequestEvent } from '@sveltejs/kit';
+import { API_HOST } from '$env/static/private';
 
 export async function DELETE({ request }: RequestEvent) {
 	const friendToRemove = await request.json();
 
 	try {
-		const response = await fetch('https://oint-ms.vercel.app/friends/delete', {
+		const response = await fetch(`${API_HOST}friends/delete`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
