@@ -1,5 +1,6 @@
 <script lang="ts">
 	import AddInveteesModal from '../../../components/AddInveteesModal.svelte';
+	import AppointmentLocationItem from '../../../components/appointment-detail/AppointmentLocationItem.svelte';
 	import Checkbox from '../../../components/Checkbox.svelte';
 	import type { Occurrence } from '../../../models/appointment';
 	import type { FriendData } from '../../../models/friend-requests';
@@ -27,29 +28,6 @@
 			}),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-	};
-
-	const vote = async (locId: number, vote: boolean) => {
-		const response: any = await apiCall(
-			vote ? '/api/vote' : '/api/unvote',
-			'post',
-			vote ? 'Vote sent' : 'Vote removed',
-			JSON.stringify({
-				appointmentId: appointment.id,
-				locationId: locId
-			}),
-			sessionStorage.getItem('jwt_token') || ''
-		);
-	};
-
-	const onVote = (loc: Location, isVote: boolean) => {
-		vote(loc.id, isVote);
-
-		if (isVote) {
-			loc.votes_count++;
-		} else {
-			loc.votes_count--;
-		}
 	};
 </script>
 
@@ -152,15 +130,7 @@
 		{#if appointment.locations}
 			<ul>
 				{#each appointment.locations as loc}
-					<li class="text-xs flex items-center">
-						<Checkbox
-							checked={loc.i_voted_this_location}
-							label={`${loc.name} - ${loc.address}`}
-							onChange={(checked) => onVote(loc, checked)}
-						/>
-
-						<span class="badge badge-xs ml-4">{`${loc.votes_count}`}</span>
-					</li>
+					<AppointmentLocationItem location={loc} appointmentId={appointment.id} />
 				{/each}
 			</ul>
 		{/if}
