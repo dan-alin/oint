@@ -9,7 +9,6 @@
 
 	export let data: { appointment: Occurrence; friends: FriendData[] };
 	let { appointment, friends } = data;
-	console.log(appointment);
 
 	const startDate = getDate(appointment.start_date);
 	const endDate = getDate(appointment.end_date);
@@ -31,7 +30,6 @@
 	};
 
 	const vote = async (locId: number, vote: boolean) => {
-		console.log(appointment.id, locId);
 		const response: any = await apiCall(
 			vote ? '/api/vote' : '/api/unvote',
 			'post',

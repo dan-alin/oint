@@ -13,33 +13,28 @@
 			image = await fileToBase64(formData.image?.[0] as File);
 		}
 
-		try {
-			const newAppointment = {
-				title: formData.title,
-				description: formData.description,
-				start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
-				end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
-				image,
-				can_be_forwarded: formData.can_be_forwarded,
-				locations: formData.locations,
-				location_selection_type: formData.location_selection_type
-			};
+		const newAppointment = {
+			title: formData.title,
+			description: formData.description,
+			start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
+			end_date: new Date(`${formData.end_date} ${formData.end_time}`).toISOString(),
+			image,
+			can_be_forwarded: formData.can_be_forwarded,
+			locations: formData.locations,
+			location_selection_type: formData.location_selection_type
+		};
 
-			const response: Occurrence = await apiCall(
-				'/api/create-appointment',
-				'post',
-				'',
-				JSON.stringify(newAppointment),
+		const response: Occurrence = await apiCall(
+			'/api/create-appointment',
+			'post',
+			'',
+			JSON.stringify(newAppointment),
 
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			);
-			myAppointmentsStore.update((appointments) => [...appointments, response]);
-
-			closeModal();
-		} catch (error) {
-			console.log(error);
-		}
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		myAppointmentsStore.update((appointments) => [...appointments, response]);
+		closeModal();
 	};
 
 	const closeModal = () => {

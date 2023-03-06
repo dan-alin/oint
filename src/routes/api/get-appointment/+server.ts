@@ -1,8 +1,9 @@
 import type { RequestEvent } from '@sveltejs/kit';
+import { API_HOST } from '$env/static/private';
 
 export async function GET({ request }: RequestEvent) {
 	try {
-		const response = await fetch(`https://oint-ms.vercel.app/appointment/2411817`, {
+		const response = await fetch(`${API_HOST}appointment/2411817`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
