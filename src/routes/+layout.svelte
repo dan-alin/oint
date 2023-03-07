@@ -10,6 +10,8 @@
 	import { toggleAlert, type AlertState } from '../stores/alert';
 	import { onMount } from 'svelte';
 	import BottomNav from '../components/BottomNav.svelte';
+	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+	import { apiCall } from '../utils/api-call';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -21,8 +23,17 @@
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 	let firebaseToken: string;
-	const setFirebaseToken = (token: string) => {
+	const setFirebaseToken = async (token: string) => {
 		firebaseToken = token;
+		await apiCall(
+			'/api/add-token-device',
+			'post',
+			'Token added',
+			JSON.stringify({
+				token
+			}),
+			sessionStorage.getItem('jwt_token') || ''
+		);
 	};
 
 	onMount(async () => {
@@ -30,6 +41,7 @@
 
 		getTokenFirebase(setFirebaseToken);
 	});
+	const queryClient = new QueryClient();
 </script>
 
 <svelte:head>
@@ -52,17 +64,19 @@
 		/>
 	</div>
 {/if}
-<Drawer>
-	<Header />
+<QueryClientProvider client={queryClient}>
+	<Drawer>
+		<Header />
 
-	<div class="custom-h">
-		<slot />
-	</div>
-	<BottomNav />
-	{#if ReloadPrompt}
-		<svelte:component this={ReloadPrompt} />
-	{/if}
-</Drawer>
+		<div class="custom-h">
+			<slot />
+		</div>
+		<BottomNav />
+		{#if ReloadPrompt}
+			<svelte:component this={ReloadPrompt} />
+		{/if}
+	</Drawer>
+</QueryClientProvider>
 
 <style>
 	.custom-h {
