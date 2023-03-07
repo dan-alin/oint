@@ -4,6 +4,7 @@
 
 * {
 	touch-action: manipulation;
+	overscroll-behavior: none;
 }
 
 h1 {
