@@ -4,6 +4,7 @@
 	import type { Appointment, FriendData } from '../../../models';
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
+	import { userStore } from '../../../stores/user';
 
 	export let data: { appointment: Appointment; friends: FriendData[] };
 	let { appointment, friends } = data;
@@ -145,7 +146,7 @@
 	<!-- modal -->
 	<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
 		<!-- add check if i'm the creator to add other people -->
-		{#if appointment.can_be_forwarded}
+		{#if appointment.can_be_forwarded || appointment.creator_id === $userStore.id}
 			<label for="add-invitees-modal" class="btn btn-primary ">aggiungi invitati</label>
 		{/if}
 	</div>
