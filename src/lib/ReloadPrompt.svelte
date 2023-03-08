@@ -30,7 +30,7 @@
 
 {#if toast}
 	<div
-		class="alert alert-info flex items-center justify-between shadow-lg fixed   z-[99] p-4 h-24"
+		class="alert alert-info flex items-center justify-between shadow-lg fixed   z-[99] p-4 h-24 flex-row"
 		role="alert"
 	>
 		<div class="flex items-center">
