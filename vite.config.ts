@@ -29,35 +29,27 @@ const config: UserConfig = {
 			scope: '/',
 			base: '/',
 			// manifest: {
-			// 	short_name: 'Oin',
 			// 	name: 'Oin',
-			// 	start_url: '/',
-			// 	scope: '/',
-			// 	display: 'standalone',
-			// 	theme_color: '#ffffff',
-			// 	background_color: '#ffffff',
+			// 	short_name: 'Oin',
 			// 	icons: [
-			// 		{
-			// 			src: '/android-chrome-192x192.png',
-			// 			sizes: '192x192',
-			// 			type: 'image/png'
-			// 		},
-			// 		{
-			// 			src: '/android-chrome-512x512.png',
-			// 			sizes: '512x512',
-			// 			type: 'image/png'
-			// 		},
+			// 		{ src: '/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
 			// 		{
 			// 			src: '/android-chrome-512x512.png',
 			// 			sizes: '512x512',
 			// 			type: 'image/png',
-			// 			purpose: 'any maskable'
+			// 			purpose: 'maskable'
 			// 		}
-			// 	]
+			// 	],
+
+			// 	theme_color: '#ffffff',
+			// 	background_color: '#ffffff',
+			// 	display: 'fullscreen',
+			// 	scope: '/',
+			// 	start_url: '/'
 			// },
-			injectManifest: {
-				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
-			},
+			// injectManifest: {
+			// 	globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+			// },
 			devOptions: {
 				enabled: true,
 				type: 'module',

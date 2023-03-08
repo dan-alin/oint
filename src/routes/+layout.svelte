@@ -22,6 +22,7 @@
 	toggleAlert.subscribe((value) => (showAlert = value));
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
+
 	let firebaseToken: string;
 	const setFirebaseToken = async (token: string) => {
 		firebaseToken = token;
@@ -37,6 +38,8 @@
 	};
 
 	onMount(async () => {
+		//SW registration to check app updates
+		pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
 
 		getTokenFirebase(setFirebaseToken);

@@ -6,7 +6,7 @@
 
 <div class="drawer drawer-end">
 	<input id="my-drawer" type="checkbox" class="drawer-toggle" />
-	<div class="drawer-content grid ">
+	<div class="drawer-content grid">
 		<slot />
 	</div>
 	<div class="drawer-side ">
