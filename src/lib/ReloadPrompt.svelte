@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { useRegisterSW } from 'virtual:pwa-register/svelte';
-
 	// replaced dynamically
 	let buildDate = __DATE__;
 	let reloadSW = __RELOAD_SW__;
-
 	const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
 		onRegistered(r) {
 			if (reloadSW) {
@@ -17,10 +15,11 @@
 				console.log(`SW Registered: ${r}`);
 			}
 		},
-		onRegisterError(error: any) {
+		onRegisterError(error) {
 			console.log('SW registration error', error);
 		}
 	});
+
 	const close = () => {
 		offlineReady.set(false);
 		needRefresh.set(false);
@@ -30,18 +29,23 @@
 </script>
 
 {#if toast}
-	<div class="pwa-toast" role="alert">
-		<div class="message">
+	<div
+		class="alert alert-info flex items-center justify-between shadow-lg fixed   z-[99] p-4 h-24"
+		role="alert"
+	>
+		<div class="flex items-center">
 			{#if $offlineReady}
-				<span> App ready to work offline </span>
+				App ready to work offline
 			{:else}
-				<span> New content available, click on reload button to update. </span>
+				New content available, click on reload button to update.
 			{/if}
 		</div>
-		{#if $needRefresh}
-			<button on:click={() => updateServiceWorker(true)}> Reload </button>
-		{/if}
-		<button on:click={close}> Close </button>
+		<div class="flex items-center">
+			{#if $needRefresh}
+				<button class="btn" on:click={() => updateServiceWorker(true)}> Reload </button>
+			{/if}
+			<button class="btn " on:click={close}> Close </button>
+		</div>
 	</div>
 {/if}
 
@@ -52,28 +56,5 @@
 <style>
 	.pwa-date {
 		display: none;
-	}
-	.pwa-toast {
-		position: fixed;
-		right: 0;
-		bottom: 0;
-		margin: 16px;
-		padding: 12px;
-		border: 1px solid #8885;
-		border-radius: 4px;
-		z-index: 2;
-		text-align: left;
-		box-shadow: 3px 4px 5px 0 #8885;
-		background-color: white;
-	}
-	.pwa-toast .message {
-		margin-bottom: 8px;
-	}
-	.pwa-toast button {
-		border: 1px solid #8885;
-		outline: none;
-		margin-right: 5px;
-		border-radius: 2px;
-		padding: 3px 10px;
 	}
 </style>
