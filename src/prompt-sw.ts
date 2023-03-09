@@ -7,19 +7,19 @@ import { NavigationRoute, registerRoute } from 'workbox-routing';
 
 declare let self: ServiceWorkerGlobalScope;
 
-self.addEventListener('message', (event) => {
+self.addEventListener('message', (event: { data: { type: string } }) => {
 	if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
 // self.__WB_MANIFEST is default injection point
 precacheAndRoute(self.__WB_MANIFEST);
+console.log('web manifest', self.__WB_MANIFEST);
 
 // clean old assets
 cleanupOutdatedCaches();
 
+let allowlist: undefined | RegExp[];
+if (import.meta.env.DEV) allowlist = [/^\/$/];
+
 // to allow work offline
-
-console.log('ENV', import.meta.env.PROD);
-
-const precachedUrl = import.meta.env.DEV ? '/' : '/index.html';
-registerRoute(new NavigationRoute(createHandlerBoundToURL(precachedUrl)));
+registerRoute(new NavigationRoute(createHandlerBoundToURL('/'), { allowlist }));
