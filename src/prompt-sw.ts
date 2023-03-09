@@ -13,7 +13,6 @@ self.addEventListener('message', (event: { data: { type: string } }) => {
 
 // self.__WB_MANIFEST is default injection point
 precacheAndRoute(self.__WB_MANIFEST);
-console.log('web manifest', self.__WB_MANIFEST);
 
 // clean old assets
 cleanupOutdatedCaches();
