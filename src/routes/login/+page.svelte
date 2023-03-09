@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
+	import type { User } from '../../models';
+	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 
 	const onSubmit = async (event: Event) => {
@@ -11,13 +13,15 @@
 				email: formData.get('email') as string,
 				password: formData.get('password') as string
 			};
-			const response: { access_token: string } = await apiCall(
+			const response: { access_token: string; user: User } = await apiCall(
 				'/api/login',
 				'post',
 				'Login success',
 				JSON.stringify(user)
 			);
+
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
+			userStore.update(() => response.user);
 			goto('/appointments');
 		} catch (error: unknown) {
 			console.error(error);
