@@ -18,7 +18,8 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 // to allow work offline
-console.log('===>', process.env.NODE_ENV);
 
-const precachedUrl = process.env.NODE_ENV === 'development' ? '/' : '/index.html';
+console.log('ENV', import.meta.env.PROD);
+
+const precachedUrl = import.meta.env.DEV ? '/' : '/index.html';
 registerRoute(new NavigationRoute(createHandlerBoundToURL(precachedUrl)));
