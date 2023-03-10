@@ -39,7 +39,7 @@
 
 	onMount(async () => {
 		//SW registration to check app updates
-		pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
+		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
 
 		getTokenFirebase(setFirebaseToken);
@@ -75,9 +75,9 @@
 			<slot />
 		</div>
 		<BottomNav />
-		{#if ReloadPrompt}
+		<!-- {#if ReloadPrompt}
 			<svelte:component this={ReloadPrompt} />
-		{/if}
+		{/if} -->
 	</Drawer>
 </QueryClientProvider>
 
