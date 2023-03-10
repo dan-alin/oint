@@ -12,20 +12,14 @@ const config: UserConfig = {
 		__RELOAD_SW__: true,
 		'process.env': process.env
 	},
-	// WARN: this will not be necessary on your project
-	server: {
-		fs: {
-			// Allow serving files from hoisted root node_modules
-			allow: ['../..']
-		}
-	},
+
 	plugins: [
 		sveltekit(),
 		SvelteKitPWA({
 			srcDir: './src',
 			mode: 'development',
-			// strategies: 'injectManifest',
-			filename: 'service-worker.ts',
+			strategies: 'injectManifest',
+			filename: 'prompt-sw.ts',
 			scope: '/',
 			base: '/',
 			manifest: {
@@ -56,6 +50,39 @@ const config: UserConfig = {
 				type: 'module',
 				navigateFallback: '/'
 			},
+			// if you have shared info in svelte config file put in a separate module and use it also here
+			kit: {}
+		}),
+		SvelteKitPWA({
+			srcDir: './src',
+			mode: 'production',
+			strategies: 'injectManifest',
+			filename: 'prompt-sw.ts',
+			scope: '/',
+			base: '/',
+			manifest: {
+				name: 'Oin',
+				short_name: 'Oin',
+				icons: [
+					{ src: 'android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+					{
+						src: 'android-chrome-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'maskable'
+					}
+				],
+
+				theme_color: '#ffffff',
+				background_color: '#ffffff',
+				display: 'standalone',
+				scope: '/',
+				start_url: '/'
+			},
+			injectManifest: {
+				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+			},
+
 			// if you have shared info in svelte config file put in a separate module and use it also here
 			kit: {}
 		})
