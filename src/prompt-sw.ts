@@ -12,8 +12,6 @@ self.addEventListener('message', (event: { data: { type: string } }) => {
 });
 
 // self.__WB_MANIFEST is default injection point
-console.log(self.__WB_MANIFEST);
-
 precacheAndRoute(self.__WB_MANIFEST);
 
 // clean old assets
