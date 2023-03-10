@@ -28,6 +28,28 @@ const config: UserConfig = {
 			filename: 'prompt-sw.ts',
 			scope: '/',
 			base: '/',
+			manifest: {
+				name: 'Oin',
+				short_name: 'Oin',
+				icons: [
+					{ src: 'android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+					{
+						src: 'android-chrome-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'maskable'
+					}
+				],
+
+				theme_color: '#ffffff',
+				background_color: '#ffffff',
+				display: 'standalone',
+				scope: '/',
+				start_url: '/'
+			},
+			injectManifest: {
+				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+			},
 
 			devOptions: {
 				enabled: true,
