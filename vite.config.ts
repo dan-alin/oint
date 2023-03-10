@@ -24,7 +24,7 @@ const config: UserConfig = {
 		SvelteKitPWA({
 			srcDir: './src',
 			mode: 'development',
-			strategies: 'injectManifest',
+			// strategies: 'injectManifest',
 			filename: 'service-worker.ts',
 			scope: '/',
 			base: '/',
