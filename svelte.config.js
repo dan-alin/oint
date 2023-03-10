@@ -8,10 +8,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter(),
-		cache: {
-			pages: '/'
-		}
+		adapter: adapter()
 	}
 };
 
