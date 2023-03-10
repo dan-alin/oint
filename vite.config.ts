@@ -9,7 +9,7 @@ const config: UserConfig = {
 	},
 	define: {
 		__DATE__: `'${new Date().toISOString()}'`,
-		__RELOAD_SW__: false,
+		__RELOAD_SW__: true,
 		'process.env': process.env
 	},
 	// WARN: this will not be necessary on your project
@@ -25,7 +25,7 @@ const config: UserConfig = {
 			srcDir: './src',
 			mode: 'development',
 			strategies: 'injectManifest',
-			filename: 'prompt-sw.ts',
+			filename: 'service-worker.ts',
 			scope: '/',
 			base: '/',
 			manifest: {
