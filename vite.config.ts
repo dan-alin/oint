@@ -76,11 +76,11 @@ const config: UserConfig = {
 				theme_color: '#ffffff',
 				background_color: '#ffffff',
 				display: 'standalone',
-				scope: '/',
-				start_url: '/'
+				scope: 'https://oint-git-develop-haty-2ndb.vercel.app/',
+				start_url: 'https://oint-git-develop-haty-2ndb.vercel.app/'
 			},
 			injectManifest: {
-				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
+				globPatterns: ['client/**/*.{js,css,html,ico,png,svg,webp,woff,woff2}']
 			},
 
 			// if you have shared info in svelte config file put in a separate module and use it also here
