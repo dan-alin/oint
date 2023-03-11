@@ -57,7 +57,7 @@ const config: UserConfig = {
 			srcDir: './src',
 			mode: 'production',
 			strategies: 'injectManifest',
-			filename: 'prompt-sw.ts',
+			filename: 'prompt-sw.js',
 			scope: '/',
 			base: '/',
 			manifest: {
@@ -83,7 +83,6 @@ const config: UserConfig = {
 				globPatterns: ['client/**/*.{js,css,html,ico,png,svg,webp,woff,woff2}']
 			},
 
-			// if you have shared info in svelte config file put in a separate module and use it also here
 			kit: {}
 		})
 	]
