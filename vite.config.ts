@@ -57,7 +57,7 @@ const config: UserConfig = {
 			srcDir: './src',
 			mode: 'production',
 			strategies: 'injectManifest',
-			filename: 'prompt-sw.js',
+			filename: 'prompt-sw.ts',
 			scope: '/',
 			base: '/',
 			manifest: {
