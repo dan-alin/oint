@@ -44,6 +44,7 @@
 
 		getTokenFirebase(setFirebaseToken);
 	});
+
 	const queryClient = new QueryClient();
 </script>
 
