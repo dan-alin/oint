@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
 	import InputText from '../../components/InputText.svelte';
 	import { t } from '../../i18n/i18n';
 	import type { User } from '../../models';
@@ -27,6 +28,12 @@
 			console.error(error);
 		}
 	};
+
+	onMount(() => {
+		if (sessionStorage.getItem('jwt_token')) {
+			goto('/appointments');
+		}
+	});
 </script>
 
 <svelte:head>
