@@ -76,8 +76,8 @@ const config: UserConfig = {
 				theme_color: '#ffffff',
 				background_color: '#ffffff',
 				display: 'standalone',
-				scope: 'https://oint-git-develop-haty-2ndb.vercel.app/',
-				start_url: 'https://oint-git-develop-haty-2ndb.vercel.app/'
+				scope: 'https://oint.vercel.app/',
+				start_url: 'https://oint.vercel.app/'
 			},
 			injectManifest: {
 				globPatterns: ['client/**/*.{js,css,html,ico,png,svg,webp,woff,woff2}']
