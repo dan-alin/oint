@@ -1,8 +1,8 @@
 export const getDate = (date: Date) => {
 	return new Date(date).toLocaleDateString('it-IT', {
-		weekday: 'long',
+		weekday: 'short',
 		year: 'numeric',
-		month: 'long',
+		month: 'short',
 		day: 'numeric'
 	});
 };

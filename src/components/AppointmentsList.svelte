@@ -72,7 +72,7 @@
 	};
 </script>
 
-<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 pb-10 overflow-scroll">
+<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 px-6  pb-32 ">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
 			<AppointmentCard
@@ -81,17 +81,11 @@
 				invitationStatus={invitedOccurrence.invitationStatus}
 				declineAction={declineAppointment}
 				confirmAction={acceptAppointment}
-				action={goToDetail}
 			/>
 		{/each}
 	{:else}
 		{#each $myAppointmentsStore as occurrence}
-			<AppointmentCard
-				appointment={occurrence}
-				inviteMode={invited}
-				deleteAction={cancelAppointment}
-				action={goToDetail}
-			/>
+			<AppointmentCard appointment={occurrence} inviteMode={invited} />
 		{/each}
 	{/if}
 </div>
