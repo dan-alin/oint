@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { useQuery, useMutation, useQueryClient } from '@sveltestack/svelte-query';
 	import { onMount } from 'svelte';
 	import AppointmentsList from '../../components/AppointmentsList.svelte';
 	import Icon from '../../components/Icon.svelte';
@@ -6,17 +7,26 @@
 	import type { Appointment, InvitedAppointment } from '../../models';
 	import { myAppointmentsStore, invitedAppointmentsStore } from '../../stores/apointments';
 	import { userStore } from '../../stores/user';
+	import { apiCall } from '../../utils/api-call';
 
 	export let data: { myAppointments: Appointment[]; invitedAppointments: InvitedAppointment[] };
 	let { myAppointments, invitedAppointments } = data;
 
 	let invited = false;
-
-	onMount(async () => {
-		myAppointmentsStore.update(() => myAppointments);
-
-		invitedAppointmentsStore.update(() => invitedAppointments);
-	});
+	const queryClient = useQueryClient();
+	const queryResult = useQuery<Appointment[], Error>(
+		'/api/appointment-list',
+		async () =>
+			await apiCall(
+				'/api/appointment-list',
+				'get',
+				'',
+				undefined,
+				sessionStorage.getItem('jwt_token') || '',
+				false
+			),
+		{ initialData: myAppointments, refetchOnWindowFocus: true, refetchInterval: 20000 }
+	);
 
 	const handleChange = (e: MouseEvent) => {
 		if ((e.target as HTMLButtonElement).id === 'my-appointments') {
@@ -25,6 +35,16 @@
 			invited = true;
 		}
 	};
+
+	onMount(async () => {
+		myAppointmentsStore.update(() => myAppointments);
+
+		invitedAppointmentsStore.update(() => invitedAppointments);
+	});
+
+	$: if ($queryResult.data) {
+		myAppointmentsStore.update(() => $queryResult.data as Appointment[]);
+	}
 </script>
 
 <div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">

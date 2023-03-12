@@ -1,7 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import { pwaInfo } from 'virtual:pwa-info';
-	import Header from '../components/Header.svelte';
 	import { fade } from 'svelte/transition';
 	import { toggleSpinner } from '../stores/spinner';
 	import { Jumper } from 'svelte-loading-spinners';
