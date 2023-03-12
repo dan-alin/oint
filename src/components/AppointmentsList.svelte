@@ -72,7 +72,7 @@
 	};
 </script>
 
-<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 px-6 mb-32 pt-6">
+<div class=" gap-6 grid md:grid-cols-2 xl:grid-cols-3 px-6  pb-32 ">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
 			<AppointmentCard

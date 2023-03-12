@@ -27,7 +27,7 @@
 	};
 </script>
 
-<div class="sticky top-0 z-50 w-full bg-base-100 p-6">
+<div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
 	<div class="flex flex-col gap-8 ">
 		<div class="flex justify-between items-center">
 			<div>

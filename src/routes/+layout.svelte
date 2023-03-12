@@ -11,6 +11,7 @@
 	import BottomNav from '../components/bottom-nav/BottomNav.svelte';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import { apiCall } from '../utils/api-call';
+	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 
 	let ReloadPrompt: any;
@@ -44,7 +45,7 @@
 
 		getTokenFirebase(setFirebaseToken);
 
-		goto('/login');
+		// goto('/login');
 	});
 
 	const queryClient = new QueryClient();
@@ -73,10 +74,12 @@
 <QueryClientProvider client={queryClient}>
 	<!-- <Header /> -->
 
-	<div class="overflow-auto h-screen mb-24 ">
+	<div class="overflow-auto h-screen ">
 		<slot />
 	</div>
-	<BottomNav />
+	{#if $page.url.pathname !== '/login'}
+		<BottomNav />
+	{/if}
 	<!-- {#if ReloadPrompt}
 			<svelte:component this={ReloadPrompt} />
 		{/if} -->

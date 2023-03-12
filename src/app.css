@@ -7,10 +7,6 @@
 	overscroll-behavior: none;
 }
 
-h1 {
-	@apply text-2xl;
-}
-
 html,
 body {
 	position: fixed;

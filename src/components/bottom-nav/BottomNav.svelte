@@ -56,7 +56,7 @@
 <div class="h-28 fixed bottom-0 flex flex-col justify-end z-50">
 	<div class="navbar bg-white  w-screen  px-6 py-0 h-[90px] rounded-t-md z-50  shadow">
 		<div class="navbar-start  text-xs justify-evenly">
-			<NavItem path="/login" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Home" />
+			<NavItem path="/login" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Login" />
 
 			<NavItem
 				path="/appointments"
