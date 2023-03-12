@@ -7,14 +7,11 @@
 	overscroll-behavior: none;
 }
 
-h1 {
-	@apply text-2xl;
-}
-
 html,
 body {
 	position: fixed;
 	overflow: hidden;
+	color: #2e3a46;
 }
 
 html,
