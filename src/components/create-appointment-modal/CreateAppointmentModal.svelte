@@ -29,14 +29,14 @@
 	const prevStep = () => step--;
 </script>
 
-<div class="modal modal-bottom md:modal-middle  z-50 ">
+<div class="modal modal-bottom z-50  md:modal-middle ">
 	<div class="modal-box  bg-base-200 pb-10 ">
-		<button on:click={closeAction} class="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
+		<button on:click={closeAction} class="btn-sm btn-circle btn absolute right-2 top-2">✕</button>
 
-		<div class="grid gap-6  grid-cols-1">
+		<div class="grid grid-cols-1  gap-6">
 			<h2 class="text-center">CREA EVENTO</h2>
 			<ul class="steps">
-				<li class="step step-primary" />
+				<li class="step-primary step" />
 				<li class="step" class:step-primary={step >= 2} />
 				<li class="step" class:step-primary={step >= 3} />
 				<li class="step" class:step-primary={step === 4} />
@@ -86,7 +86,7 @@
 					}}
 				/>
 			{/if}
-			<div class="grid  bottom-10 gap-6  grid-cols-2">
+			<div class="bottom-10  grid grid-cols-2  gap-6">
 				<button class="btn" disabled={step === 1} on:click={prevStep}>{'<'}</button>
 
 				<button class="btn" type="submit" form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button>

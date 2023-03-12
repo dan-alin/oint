@@ -12,7 +12,7 @@
 </script>
 
 <form
-	class="grid grid-cols-1 gap-6 grid-rows-3  "
+	class="grid grid-cols-1 grid-rows-3 gap-6  "
 	id="1-part"
 	on:submit|preventDefault={handleFormSubmit}
 >

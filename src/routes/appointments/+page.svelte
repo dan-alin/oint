@@ -47,14 +47,19 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Eventi</title>
+	<meta name="description" content="An events list" />
+</svelte:head>
+
 <div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
 	<div class="flex flex-col gap-8 ">
-		<div class="flex justify-between items-center">
+		<div class="flex items-center justify-between">
 			<div>
-				<p class="text-xl text-gray-400">Bentornato</p>
-				<p class="font-bold text-2xl">{$userStore.name}!</p>
+				<p class="text-xl text-gray-400">Ciao</p>
+				<p class="text-2xl font-bold">{$userStore.name}!</p>
 			</div>
-			<div class="h-[50px] w-[50px] shadow-md rounded-full flex items-center justify-center">
+			<div class="flex h-[50px]  w-[50px] items-center justify-center rounded-full shadow-md">
 				<Icon icon={Icons.NOTIFICATION} />
 			</div>
 		</div>

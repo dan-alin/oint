@@ -20,7 +20,7 @@
 		>
 	</label>
 	<input
-		class="file-input file-input-bordered w-full"
+		class="file-input-bordered file-input w-full"
 		type="file"
 		{accept}
 		{name}

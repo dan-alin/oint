@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100  w-screen sticky left-0 top-0 px-6  h-24  border-b-4  z-50">
+<div class="navbar sticky  left-0 top-0 z-50 h-24 w-screen  border-b-4  bg-base-100  px-6">
 	<div class="navbar-start" />
 	<a href="/" class="navbar-center">
 		<div class="h-12">
@@ -7,7 +7,7 @@
 	</a>
 	<div class="navbar-end">
 		<label for="my-drawer">
-			<div class="avatar online">
+			<div class="online avatar">
 				<div class="w-10 rounded-full">
 					<img src="https://placeimg.com/192/192/people" alt="avatar" />
 				</div>

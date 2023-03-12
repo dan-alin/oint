@@ -28,7 +28,7 @@
 	};
 </script>
 
-<li class="text-xs flex items-center">
+<li class="flex items-center text-xs">
 	{#if !IsSingleEvent}
 		<Checkbox
 			checked={location.i_voted_this_location}

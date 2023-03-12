@@ -10,7 +10,7 @@
 </script>
 
 <a
-	class=" h-24 gap-1 flex flex-col items-center justify-center w-16"
+	class=" flex h-24 w-16 flex-col items-center justify-center gap-1"
 	class:font-bold={$page.url.pathname.startsWith(path)}
 	href={path}
 >

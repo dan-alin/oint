@@ -53,9 +53,9 @@
 </script>
 
 <!-- toggle close modal from card when appointment is created -->
-<div class="h-28 fixed bottom-0 flex flex-col justify-end z-50">
-	<div class="navbar bg-white  w-screen  px-6 py-0 h-[90px] rounded-t-md z-50  shadow">
-		<div class="navbar-start  text-xs justify-evenly">
+<div class="fixed bottom-0 z-50 flex h-28 flex-col justify-end">
+	<div class="navbar z-50  h-[90px]  w-screen rounded-t-md bg-white px-6 py-0  shadow">
+		<div class="navbar-start  justify-evenly text-xs">
 			<NavItem path="/login" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Login" />
 
 			<NavItem
@@ -67,7 +67,7 @@
 		</div>
 		<div class="navbar-center">
 			<!-- modal -->
-			<label for="create-appointment-modal" class="btn btn-primary btn-circle ratio-h-w  mb-16 "
+			<label for="create-appointment-modal" class="ratio-h-w btn-primary btn-circle btn  mb-16 "
 				>+</label
 			>
 		</div>
@@ -78,7 +78,7 @@
 			<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
 		{/key}
 
-		<div class="navbar-end text-xs justify-evenly">
+		<div class="navbar-end justify-evenly text-xs">
 			<NavItem
 				path="/friends-list"
 				icon={Icons.PROFILE_OUTLINE}

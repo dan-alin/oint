@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--color-primary: #2e46ff;
+	--color-secondary: #ff5580;
+	--color-accent: #ffd700;
+	--color-success: #4de088;
+	--color-warning: #ffc107;
+	--color-error: #ff5555;
+}
+
 * {
 	touch-action: manipulation;
 	overscroll-behavior: none;
