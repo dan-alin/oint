@@ -2,16 +2,17 @@
 	import '../app.css';
 	import { pwaInfo } from 'virtual:pwa-info';
 	import Header from '../components/Header.svelte';
-	import Drawer from '../components/Drawer.svelte';
 	import { fade } from 'svelte/transition';
 	import { toggleSpinner } from '../stores/spinner';
 	import { Jumper } from 'svelte-loading-spinners';
 	import Alert from '../components/Alert.svelte';
 	import { toggleAlert, type AlertState } from '../stores/alert';
 	import { onMount } from 'svelte';
-	import BottomNav from '../components/BottomNav.svelte';
+	import BottomNav from '../components/bottom-nav/BottomNav.svelte';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import { apiCall } from '../utils/api-call';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -43,6 +44,8 @@
 		const { getTokenFirebase } = await import('../firebase');
 
 		getTokenFirebase(setFirebaseToken);
+
+		// goto('/login');
 	});
 
 	const queryClient = new QueryClient();
@@ -69,22 +72,15 @@
 	</div>
 {/if}
 <QueryClientProvider client={queryClient}>
-	<Drawer>
-		<Header />
+	<!-- <Header /> -->
 
-		<div class="custom-h">
-			<slot />
-		</div>
+	<div class="overflow-auto h-screen ">
+		<slot />
+	</div>
+	{#if $page.url.pathname !== '/login'}
 		<BottomNav />
-		<!-- {#if ReloadPrompt}
+	{/if}
+	<!-- {#if ReloadPrompt}
 			<svelte:component this={ReloadPrompt} />
 		{/if} -->
-	</Drawer>
 </QueryClientProvider>
-
-<style>
-	.custom-h {
-		height: calc(100vh - 192px);
-		overflow: auto;
-	}
-</style>
