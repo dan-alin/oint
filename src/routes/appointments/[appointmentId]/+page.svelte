@@ -28,14 +28,13 @@
 		);
 	};
 
-	console.log('===>', $userStore);
 </script>
 
 <!-- <pre>{JSON.stringify(appointment, null, 2)}</pre> -->
 
 <div class="h-96 w-full bg-base-300  ">
 	<img
-		class="object-cover h-full w-full"
+		class="h-full w-full object-cover"
 		src={appointment.image ? appointment.image : '/wp.jpg'}
 		alt="event"
 	/>
@@ -146,10 +145,10 @@
 	</div>
 
 	<!-- modal -->
-	<div class="flex  justify-center items-center h-16 w-screen sticky top-24 bg-base-100  z-40">
+	<div class="sticky  top-24 z-40 flex h-16 w-screen items-center justify-center  bg-base-100">
 		<!-- add check if i'm the creator to add other people -->
 		{#if appointment.can_be_forwarded || appointment.creator_id === $userStore.id}
-			<label for="add-invitees-modal" class="btn btn-primary ">aggiungi invitati</label>
+			<label for="add-invitees-modal" class="btn-primary btn ">aggiungi invitati</label>
 		{/if}
 	</div>
 

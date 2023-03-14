@@ -5,9 +5,14 @@
 	export let checked: boolean;
 </script>
 
-<div class="form-control">
-	<label class="cursor-pointer label">
-		<input type="checkbox" class="checkbox mr-4" bind:checked on:change={() => onChange(checked)} />
+<div class="form-control ">
+	<label class="label flex cursor-pointer gap-2 text-xs">
+		<input
+			type="checkbox"
+			class="checkbox-secondary checkbox h-4 w-4  rounded-md"
+			bind:checked
+			on:change={() => onChange(checked)}
+		/>
 		<span class="label-text">{label}</span>
 	</label>
 </div>

@@ -6,25 +6,25 @@
 	export let action: (friendId: number) => void;
 </script>
 
-<div class="flex min-h-16 items-center gap-6">
-	<div class="avatar placeholder  h-14">
-		<div class="bg-neutral-focus text-neutral-content rounded-full ">
+<div class="min-h-16 flex items-center gap-6">
+	<div class="placeholder avatar  h-14">
+		<div class="rounded-full bg-neutral-focus text-neutral-content ">
 			<span class="text-3xl">{name.charAt(0)}</span>
 		</div>
 	</div>
 	<div class="w-full">
-		<div class="flex justify-between mb-2 w-full">
-			<span class="font-bold w-full align-middle self-center">{name}</span>
+		<div class="mb-2 flex w-full justify-between">
+			<span class="w-full self-center align-middle font-bold">{name}</span>
 			{#if !isAcceptingMode}
-				<button class="btn btn-sm btn-primary" on:click={() => action(id)}
+				<button class="btn-primary btn-sm btn" on:click={() => action(id)}
 					>{isViewMode ? 'remove' : 'Send'}</button
 				>
 			{/if}
 		</div>
 		{#if isAcceptingMode}
 			<div class="flex justify-center">
-				<button class="btn btn-xs btn-primary" on:click={() => action(id)}>Accept</button>
-				<button class="btn btn-xs btn-secondary ml-2" on:click={() => action(id)}>Decline</button>
+				<button class="btn-primary btn-xs btn" on:click={() => action(id)}>Accept</button>
+				<button class="btn-secondary btn-xs btn ml-2" on:click={() => action(id)}>Decline</button>
 			</div>
 		{/if}
 	</div>

@@ -26,11 +26,11 @@
 	/>
 	<div class="col-span-1" />
 
-	<label class=" cursor-pointer label w-full  ">
+	<label class=" label w-full cursor-pointer  ">
 		<span class="label-text font-bold">Forwardable</span>
 		<input
 			type="checkbox"
-			class="toggle toggle-primary"
+			class="toggle-primary toggle"
 			bind:checked={can_be_forwarded}
 			id="forwardable"
 		/>

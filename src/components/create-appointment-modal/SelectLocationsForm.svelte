@@ -55,11 +55,11 @@
 	/>
 	<div>
 		<InputAction id="places" name="places" placeholder="Search places" action={onSearchPlaces} />
-		<div class="dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md">
-			<ul class="flex flex-col absolute bg-white overflow-scroll max-h-60">
+		<div class="dropdown-content top-14 max-h-96 flex-col overflow-auto rounded-md bg-base-200">
+			<ul class="absolute flex max-h-60 flex-col overflow-scroll bg-white">
 				{#if places}
 					{#each places as place, i}
-						<li tabIndex={i + 1} class="border border-solid rounded border-slate-400  w-full  p-2">
+						<li tabIndex={i + 1} class="w-full rounded border border-solid  border-slate-400  p-2">
 							<button
 								type="button"
 								on:click|stopPropagation={() => {
@@ -87,7 +87,7 @@
 			<span class="font-bold">No Place added</span>
 		{:else}
 			{#each addedPlaces as addedPlace}
-				<div class="flex justify-between border border-solid rounded border-slate-400 p-2">
+				<div class="flex justify-between rounded border border-solid border-slate-400 p-2">
 					<span
 						><span class="font-bold">{addedPlace.address.amenity}</span> - {addedPlace.address.road}
 						{addedPlace.address.house_number || 'snc'}, {addedPlace.address.city}, {addedPlace

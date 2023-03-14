@@ -23,14 +23,14 @@
 </script>
 
 <svelte:head>
-	<title>Sign up</title>
+	<title>{$t('signup.title')}</title>
 	<meta name="description" content="A section to sign up" />
 </svelte:head>
 
 <section />
-<h1 class="text-2xl font-bold uppercase flex justify-center">{$t('signup.title')}</h1>
+<h1 class="flex justify-center text-2xl font-bold uppercase">{$t('signup.title')}</h1>
 <form on:submit|preventDefault={onSubmit} class="px-2 py-10">
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 ">
+	<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3 ">
 		<InputText
 			type="text"
 			label="Name"
@@ -68,7 +68,7 @@
 			value=""
 		/>
 	</div>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
+	<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-6">
 		<InputText
 			type="email"
 			label="Email"
@@ -88,7 +88,7 @@
 			value=""
 		/>
 	</div>
-	<div class="grid gap-6 mb-6 md:grid-cols-12">
+	<div class="mb-6 grid gap-6 md:grid-cols-12">
 		<div class="col-span-2">
 			<Select
 				id="prefix"
@@ -110,7 +110,7 @@
 			/>
 		</div>
 	</div>
-	<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-6">
+	<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-6">
 		<div class="md:grid-cols-5" />
 		<button class="btn" type="submit">Submit</button>
 	</div>

@@ -45,7 +45,7 @@
 		</label>
 	{/if}
 	<input
-		class="input input-bordered w-full h-10 "
+		class="input-bordered input h-10 w-full "
 		class:input-error={required && isDirty && !value}
 		use:typeAction
 		{placeholder}

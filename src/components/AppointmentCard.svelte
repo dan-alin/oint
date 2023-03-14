@@ -24,26 +24,26 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <a
 	href={`/appointments/${appointment.id}`}
-	class="card card-side w-full bg-white rounded shadow p-4 h-24 cursor-pointer"
+	class="card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow"
 	in:fade
 >
 	<img
-		class="object-cover w-16 h-16"
+		class="h-16 w-16 object-cover"
 		src={appointment.image ? appointment.image : '/wp.jpg'}
 		alt="Event"
 	/>
 	<div class="card-body gap-[2px] p-0 pl-4">
-		<div class="text-yellow-400 capitalize font-bold text-xs">{startDate} - {startTime}</div>
+		<div class="text-xs font-bold capitalize text-yellow-400">{startDate} - {startTime}</div>
 		<div class="font-bold">{appointment.title.toUpperCase()}</div>
-		<div class="text-xs text-ellipsis">{appointment.description}</div>
+		<div class="text-ellipsis text-xs">{appointment.description}</div>
 
 		<div>
 			{#if appointment.locations}
 				<ul>
 					{#each appointment.locations as loc}
-						<li class="text-xs flex gap-1 text-gray-400">
+						<li class="flex gap-1 text-xs text-gray-400">
 							<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
-							<p class="text-ellipsis whitespace-nowrap overflow-hidden">
+							<p class="overflow-hidden text-ellipsis whitespace-nowrap">
 								{`${loc.name} - ${loc.address}`}
 							</p>
 							{#if appointment.locations.length > 1}
@@ -62,13 +62,13 @@
 		<!-- <div>{invitationStatus}</div> -->
 		<div class="flex w-full justify-between gap-2 ">
 			<button
-				class="btn btn-sm  btn-primary btn-outline w-1/2 h-full"
+				class="btn-outline btn-primary  btn-sm btn h-full w-1/2"
 				on:click|stopPropagation={() => declineAction(appointment.id)}
 			>
 				Rifiuta
 			</button>
 			<button
-				class="btn btn-sm btn-primary w-1/2 h-full"
+				class="btn-primary btn-sm btn h-full w-1/2"
 				on:click|stopPropagation={() => confirmAction(appointment.id)}
 			>
 				Accetta

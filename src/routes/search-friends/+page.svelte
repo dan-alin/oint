@@ -33,9 +33,9 @@
 	<title>Add frineds</title>
 	<meta name="description" content="A section to find and add friends" />
 </svelte:head>
-<h1 class="text-2xl font-bold uppercase flex justify-center">Add friends</h1>
+<h1 class="flex justify-center text-2xl font-bold uppercase">Add friends</h1>
 
-<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-3 mx-2 my-10">
+<div class="mx-2 my-10 mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
 	<InputAction
 		name="friend"
 		id="friend"
@@ -44,7 +44,7 @@
 		action={onSearch}
 	/>
 </div>
-<div class="grid gap-6 mb-6 grid-cols-1 md:grid-cols-2">
+<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
 	{#each friends as friend}
 		<Card>
 			<FriendCard

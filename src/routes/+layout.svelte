@@ -10,8 +10,10 @@
 	import BottomNav from '../components/bottom-nav/BottomNav.svelte';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import { apiCall } from '../utils/api-call';
+	import { navigating } from '$app/stores';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { userStore } from '../stores/user';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -29,7 +31,7 @@
 		await apiCall(
 			'/api/add-token-device',
 			'post',
-			'Token added',
+			'',
 			JSON.stringify({
 				token
 			}),
@@ -37,15 +39,19 @@
 		);
 	};
 
+
 	onMount(async () => {
 		//SW registration to check app updates
 		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
-
+		if ($page.url.pathname !== '/login' && $page.url.pathname !== '/signup') {
+			//checkTokenExpired();
+		}
 		getTokenFirebase(setFirebaseToken);
 
-		// goto('/login');
 	});
+
+
 
 	const queryClient = new QueryClient();
 </script>
@@ -56,13 +62,13 @@
 
 {#if showSpinner}
 	<div
-		class="w-full h-full fixed  top-0 left-0 bg-white opacity-75 z-50 flex flex-col items-center justify-center"
+		class="fixed top-0 left-0  z-50 flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
 	>
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
 {/if}
 {#if showAlert.show}
-	<div class="absolute top-24 w-full z-50" transition:fade>
+	<div class="absolute  z-50 w-full" transition:fade>
 		<Alert
 			message={showAlert.message}
 			isError={showAlert.isError}
@@ -73,10 +79,10 @@
 <QueryClientProvider client={queryClient}>
 	<!-- <Header /> -->
 
-	<div class="overflow-auto h-screen ">
+	<div class="h-screen overflow-auto ">
 		<slot />
 	</div>
-	{#if $page.url.pathname !== '/login'}
+	{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up'}
 		<BottomNav />
 	{/if}
 	<!-- {#if ReloadPrompt}

@@ -20,7 +20,7 @@
 		>
 	</label>
 	<select
-		class="select select-bordered w-full max-w-xs"
+		class="select-bordered select w-full max-w-xs"
 		class:input-error={required && isDirty}
 		{id}
 		{name}
