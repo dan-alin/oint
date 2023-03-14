@@ -1,4 +1,5 @@
 import type { Appointment, InvitedAppointment } from '../../models';
+import type { Notification } from '../../models/notification';
 import type { PageServerLoad } from './$types';
 //
 
@@ -26,5 +27,14 @@ export const load: PageServerLoad = async (event) => {
 	});
 	const invitedAppointments = (await invitedAppRes.json()) as InvitedAppointment[];
 
-	return { myAppointments, invitedAppointments };
+	const noticationsUnreadRes = await fetch(`${VITE_API_HOST}notification/unread`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${userToken}`
+		}
+	});
+	const notificationsUnread = (await noticationsUnreadRes.json()) as Notification[];
+
+	return { myAppointments, invitedAppointments, notificationsUnread };
 };

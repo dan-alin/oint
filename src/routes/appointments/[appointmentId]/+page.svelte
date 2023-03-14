@@ -28,7 +28,6 @@
 		);
 	};
 
-	console.log('===>', $userStore);
 </script>
 
 <!-- <pre>{JSON.stringify(appointment, null, 2)}</pre> -->

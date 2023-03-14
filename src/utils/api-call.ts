@@ -1,3 +1,4 @@
+import { goto } from '$app/navigation';
 import { toggleSpinner } from '../stores/spinner';
 import { showAlert } from './show-alert';
 
@@ -52,6 +53,9 @@ export const apiCall = async <T>(
 			showAlert({ show: true, message: successMessage, isSuccess: true });
 		}
 		return await response.json();
+	}
+	if (response?.status === 401) { 
+		goto('/login');
 	}
 	const data = await response?.json();
 

@@ -10,8 +10,10 @@
 	import BottomNav from '../components/bottom-nav/BottomNav.svelte';
 	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import { apiCall } from '../utils/api-call';
+	import { navigating } from '$app/stores';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { userStore } from '../stores/user';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -29,7 +31,7 @@
 		await apiCall(
 			'/api/add-token-device',
 			'post',
-			'Token added',
+			'',
 			JSON.stringify({
 				token
 			}),
@@ -37,15 +39,19 @@
 		);
 	};
 
+
 	onMount(async () => {
 		//SW registration to check app updates
 		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
-
+		if ($page.url.pathname !== '/login' && $page.url.pathname !== '/signup') {
+			//checkTokenExpired();
+		}
 		getTokenFirebase(setFirebaseToken);
 
-		// goto('/login');
 	});
+
+
 
 	const queryClient = new QueryClient();
 </script>

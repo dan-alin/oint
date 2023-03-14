@@ -5,16 +5,18 @@
 	import Icon from '../../components/Icon.svelte';
 	import { Icons } from '../../enums';
 	import type { Appointment, InvitedAppointment } from '../../models';
+	import type { Notification } from '../../models/notification';
 	import { myAppointmentsStore, invitedAppointmentsStore } from '../../stores/apointments';
 	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 
-	export let data: { myAppointments: Appointment[]; invitedAppointments: InvitedAppointment[] };
-	let { myAppointments, invitedAppointments } = data;
+	export let data: { myAppointments: Appointment[]; invitedAppointments: InvitedAppointment[], notificationsUnread: Notification[] };
+	let { myAppointments, invitedAppointments, notificationsUnread } = data;
 
+	let notificationsUreadCount = notificationsUnread.length;
 	let invited = false;
 	const queryClient = useQueryClient();
-	const queryResult = useQuery<Appointment[], Error>(
+	const queryResultAppointments = useQuery<Appointment[], Error>(
 		'/api/appointment-list',
 		async () =>
 			await apiCall(
@@ -26,6 +28,20 @@
 				false
 			),
 		{ initialData: myAppointments, refetchOnWindowFocus: true, refetchInterval: 20000 }
+	);
+
+	const queryResultNotifications = useQuery<Notification[], Error>(
+		'/api/notification-uread',
+		async () =>
+			await apiCall(
+				'/api/notification-unread',
+				'get',
+				'',
+				undefined,
+				sessionStorage.getItem('jwt_token') || '',
+				false
+			),
+		{ initialData: notificationsUnread, refetchOnWindowFocus: true, refetchInterval: 20000 }
 	);
 
 	const handleChange = (e: MouseEvent) => {
@@ -42,8 +58,11 @@
 		invitedAppointmentsStore.update(() => invitedAppointments);
 	});
 
-	$: if ($queryResult.data) {
-		myAppointmentsStore.update(() => $queryResult.data as Appointment[]);
+	$: if ($queryResultAppointments.data) {
+		myAppointmentsStore.update(() => $queryResultAppointments.data as Appointment[]);
+	}
+	$: if ($queryResultNotifications.data) {
+		notificationsUreadCount = $queryResultNotifications.data.length;
 	}
 </script>
 
@@ -57,9 +76,14 @@
 		<div class="flex items-center justify-between">
 			<div>
 				<p class="text-xl text-gray-400">Ciao</p>
+				{#if $userStore}
 				<p class="text-2xl font-bold">{$userStore.name}!</p>
+				{/if}
 			</div>
-			<div class="flex h-[50px]  w-[50px] items-center justify-center rounded-full shadow-md">
+			<div class="flex h-[50px]  w-[50px] items-center justify-center rounded-full shadow-md relative">
+				{#if notificationsUreadCount > 0}
+					<div class="badge absolute top-0 left-8">{notificationsUreadCount}</div>
+				{/if}
 				<Icon icon={Icons.NOTIFICATION} />
 			</div>
 		</div>
