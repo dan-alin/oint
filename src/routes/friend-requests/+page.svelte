@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Card from '../../components/Card.svelte';
-	import FriendCard from '../../components/FriendCard.svelte';
+	import FriendCard from '../../components/friends-list/FriendCard.svelte';
 	import type { FriendRequests } from '../../models/friend-requests';
 	import { apiCall } from '../../utils/api-call';
 
@@ -30,7 +30,6 @@
 						name={`${request.name} ${request.surname}`}
 						id={request.id || 0}
 						action={acceptFriendRequest}
-						isAcceptingMode
 					/>
 				</Card>
 			</div>

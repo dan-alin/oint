@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import type { DeletedAppointment, Invitation } from '../models';
-	import { invitedAppointmentsStore, myAppointmentsStore } from '../stores/apointments';
-	import { apiCall } from '../utils/api-call';
+	import type { DeletedAppointment, Invitation } from '../../models';
+	import { invitedAppointmentsStore, myAppointmentsStore } from '../../stores/apointments';
+	import { apiCall } from '../../utils/api-call';
+	import AcceptReject from '../AcceptReject.svelte';
 	import AppointmentCard from './AppointmentCard.svelte';
 
 	export let invited = false;
@@ -66,26 +67,22 @@
 
 		invitedAppointmentsStore.update(() => appointmentsToSet);
 	};
-
-	const goToDetail = (id: number) => {
-		goto(`appointments/${id}`);
-	};
 </script>
 
 <div class=" grid gap-6 px-6 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
-			<AppointmentCard
-				appointment={invitedOccurrence.appointment}
-				inviteMode={invited}
-				invitationStatus={invitedOccurrence.invitationStatus}
+			<AppointmentCard appointment={invitedOccurrence.appointment} />
+			<AcceptReject
+				id={invitedOccurrence.appointment.id}
+				acceptAction={acceptAppointment}
 				declineAction={declineAppointment}
-				confirmAction={acceptAppointment}
 			/>
+			<div class="divider my-0" />
 		{/each}
 	{:else}
 		{#each $myAppointmentsStore as occurrence}
-			<AppointmentCard appointment={occurrence} inviteMode={invited} deleteAction={cancelAppointment}/>
+			<AppointmentCard appointment={occurrence} deleteAction={cancelAppointment} />
 		{/each}
 	{/if}
 </div>

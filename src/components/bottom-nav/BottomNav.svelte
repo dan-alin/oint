@@ -86,7 +86,7 @@
 				label="Profilo"
 			/>
 			<NavItem
-				path="/search-friends"
+				path="/friends"
 				icon={Icons.FRIENDS_OUTLINE}
 				activeIcon={Icons.FRIENDS_FULL}
 				label="Amici"
