@@ -21,7 +21,9 @@
 		can_be_forwarded: false,
 		image: undefined,
 		location_selection_type: 'single',
-		locations: []
+		locations: [],
+		location_selection_deadline_date: '',
+		location_selection_deadline_time: ''
 	};
 
 	const nextStep = () => step++;
@@ -79,9 +81,13 @@
 				<SelectLocationsForm
 					location_selection_type={formData.location_selection_type}
 					locations={formData.locations}
-					onSubmit={(locations, location_selection_type) => {
+					location_selection_deadline_date={formData.location_selection_deadline_date}
+					location_selection_deadline_time={formData.location_selection_deadline_time}
+					onSubmit={(locations, location_selection_type, location_selection_deadline_date, location_selection_deadline_time) => {
 						formData.location_selection_type = location_selection_type;
 						formData.locations = locations;
+						formData.location_selection_deadline_date = location_selection_deadline_date;
+						formData.location_selection_deadline_time = location_selection_deadline_time;
 						action(formData);
 					}}
 				/>

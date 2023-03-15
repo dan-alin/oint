@@ -12,6 +12,7 @@ export type Appointment = {
 	image: string;
 	locations: Location[];
 	invitations: Invitation[];
+	location_selection_deadline: Date;
 };
 
 export type InvitedAppointment = {
@@ -36,4 +37,6 @@ export type AppointmentForm = {
 	image: FileList | undefined;
 	locations: Location[];
 	location_selection_type: 'single' | 'multi';
+	location_selection_deadline_date: string;
+	location_selection_deadline_time: string
 };

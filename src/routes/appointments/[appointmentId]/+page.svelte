@@ -15,6 +15,13 @@
 	const startTime = getTime(appointment.start_date);
 	const endTime = getTime(appointment.end_date);
 
+	const dataFineVoting = appointment.location_selection_deadline;
+	let fineVoting = false;
+	if (appointment.locations.length > 0) {
+		if (parseInt((new Date(dataFineVoting).getTime() / 1000).toFixed(0)) < parseInt((new Date().getTime() / 1000).toFixed(0))) {
+			fineVoting = true;
+		}
+	}
 	const addInvitee = async (inviteeId: number) => {
 		const response: any = await apiCall(
 			'/api/add-invitee',
@@ -139,6 +146,7 @@
 						location={loc}
 						appointmentId={appointment.id}
 						IsSingleEvent={appointment.locations.length === 1}
+						fineVoting={fineVoting}
 					/>
 				{/each}
 			</ul>
