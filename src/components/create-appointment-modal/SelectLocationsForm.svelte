@@ -11,7 +11,15 @@
 	export let location_selection_type: 'single' | 'multi';
 	export let location_selection_deadline_date: string;
 	export let location_selection_deadline_time: string
-
+	export let startDate:string;
+	export let startTime:string;
+	export let isValid = true;
+	$:if(location_selection_deadline_date && location_selection_deadline_time) {
+		const _deadline =new Date(`${location_selection_deadline_date} ${location_selection_deadline_time}`);
+		const _startDate = new Date(`${startDate} ${startTime}`);
+		isValid = !(parseInt((_deadline.getTime() / 1000).toFixed(0)) < parseInt((new Date().getTime() / 1000).toFixed(0)) ||
+				parseInt((_deadline.getTime() / 1000).toFixed(0)) > parseInt((_startDate.getTime() / 1000).toFixed(0)));
+	}
 	let addedPlaces: Place[] = [];
 	let places: Place[];
 

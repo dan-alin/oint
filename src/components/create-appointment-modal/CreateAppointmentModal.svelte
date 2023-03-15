@@ -29,6 +29,8 @@
 	const nextStep = () => step++;
 
 	const prevStep = () => step--;
+
+	let isValidLocationForm = true;
 </script>
 
 <div class="modal modal-bottom md:modal-middle  z-50 ">
@@ -83,6 +85,9 @@
 					locations={formData.locations}
 					location_selection_deadline_date={formData.location_selection_deadline_date}
 					location_selection_deadline_time={formData.location_selection_deadline_time}
+					startDate= {formData.start_date}
+					startTime= {formData.start_time}
+					bind:isValid = {isValidLocationForm}
 					onSubmit={(locations, location_selection_type, location_selection_deadline_date, location_selection_deadline_time) => {
 						formData.location_selection_type = location_selection_type;
 						formData.locations = locations;
@@ -95,7 +100,7 @@
 			<div class="grid  bottom-10 gap-6  grid-cols-2">
 				<button class="btn" disabled={step === 1} on:click={prevStep}>{'<'}</button>
 
-				<button class="btn" type="submit" form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button>
+				<button disabled={step === 4 && !isValidLocationForm} class="btn" type="submit" form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button>
 			</div>
 		</div>
 	</div>

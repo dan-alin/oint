@@ -6,7 +6,7 @@
 	export let value: string | number | Date | File[] | undefined = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-
+	export let onChange = () => {};
 	export let type:
 		| 'color'
 		| 'date'
@@ -55,5 +55,6 @@
 		on:keydown={() => {
 			isDirty = true;
 		}}
+		on:change = {onChange}
 	/>
 </div>

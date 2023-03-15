@@ -13,7 +13,7 @@
 			image = await fileToBase64(formData.image?.[0] as File);
 		}
 
-		let newAppointment: unknown = {
+		let newAppointment: Appointment = {
 			title: formData.title,
 			description: formData.description,
 			start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
