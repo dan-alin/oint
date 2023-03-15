@@ -7,7 +7,7 @@
 
 	export let appointment: Appointment;
 	// export let invitationStatus: 'declined' | 'accepted' | '' = '';
-	// export let deleteAction: (appointmentId: number) => void = () => null;
+	export let deleteAction: (appointmentId: number) => void = () => null;
 
 	const startDate = getDate(appointment.start_date);
 	const endDate = getDate(appointment.end_date);
@@ -15,6 +15,9 @@
 	const startTime = getTime(appointment.start_date);
 	const endTime = getTime(appointment.end_date);
 </script>
+
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- <span  on:click={() => deleteAction(appointment.id)}>X</span>-->
 
 <a
 	href={`/appointments/${appointment.id}`}

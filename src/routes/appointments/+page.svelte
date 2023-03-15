@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { useQuery, useMutation, useQueryClient } from '@sveltestack/svelte-query';
 	import { onMount } from 'svelte';
 	import AppointmentsList from '../../components/appointments/AppointmentsList.svelte';
 	import Icon from '../../components/Icon.svelte';
@@ -10,7 +9,6 @@
 	import type { Notification } from '../../models/notification';
 	import { myAppointmentsStore, invitedAppointmentsStore } from '../../stores/apointments';
 	import { userStore } from '../../stores/user';
-	import { apiCall } from '../../utils/api-call';
 
 	export let data: {
 		myAppointments: Appointment[];
@@ -20,7 +18,6 @@
 	let { myAppointments, invitedAppointments, notificationsUnread } = data;
 
 	let notificationsUreadCount = notificationsUnread.length;
-	let invited = false;
 	let activeTab: string;
 
 	let tabs = [
@@ -33,51 +30,12 @@
 			label: 'I tuoi inviti'
 		}
 	];
-	const queryClient = useQueryClient();
-	const queryResultAppointments = useQuery<Appointment[], Error>(
-		'/api/appointment-list',
-		async () =>
-			await apiCall(
-				'/api/appointment-list',
-				'get',
-				'',
-				undefined,
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			),
-		{ initialData: myAppointments, refetchOnWindowFocus: true, refetchInterval: 20000 }
-	);
-
-	const queryResultNotifications = useQuery<Notification[], Error>(
-		'/api/notification-uread',
-		async () =>
-			await apiCall(
-				'/api/notification-unread',
-				'get',
-				'',
-				undefined,
-				sessionStorage.getItem('jwt_token') || '',
-				false
-			),
-		{ initialData: notificationsUnread, refetchOnWindowFocus: true, refetchInterval: 20000 }
-	);
-
-	const handleChange = (e: Event) => {
-		activeTab = (e.target as HTMLButtonElement).id;
-	};
 
 	onMount(async () => {
 		myAppointmentsStore.update(() => myAppointments);
 
 		invitedAppointmentsStore.update(() => invitedAppointments);
 	});
-
-	$: if ($queryResultAppointments.data) {
-		myAppointmentsStore.update(() => $queryResultAppointments.data as Appointment[]);
-	}
-	$: if ($queryResultNotifications.data) {
-		notificationsUreadCount = $queryResultNotifications.data.length;
-	}
 </script>
 
 <svelte:head>

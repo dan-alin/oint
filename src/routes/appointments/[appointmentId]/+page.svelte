@@ -147,8 +147,10 @@
 	<!-- modal -->
 	<div class="sticky  top-24 z-40 flex h-16 w-screen items-center justify-center  bg-base-100">
 		<!-- add check if i'm the creator to add other people -->
-		{#if appointment.can_be_forwarded || appointment.creator_id === $userStore.id}
-			<label for="add-invitees-modal" class="btn-primary btn ">aggiungi invitati</label>
+		{#if $userStore}
+			{#if appointment.can_be_forwarded || appointment.creator_id === $userStore.id}
+				<label for="add-invitees-modal" class="btn-primary btn ">aggiungi invitati</label>
+			{/if}
 		{/if}
 	</div>
 
