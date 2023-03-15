@@ -8,6 +8,7 @@
 	import { Icons } from '../../enums';
 	import type { FriendRequests } from '../../models';
 	import type { Friend, FriendData } from '../../models/friend';
+	import { apiCall } from '../../utils/api-call';
 
 	export let data: {
 		myFriends: FriendData[];
@@ -45,6 +46,24 @@
 	let activeTab = 'my-friends';
 
 	let searchValue = '';
+
+	const removeFriend = async (friendId: number) => {
+		//TODO type delete response
+		const response: any = await apiCall(
+			'/api/remove-friend',
+			'delete',
+			'',
+			JSON.stringify({
+				friendId
+			}),
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		console.log(response);
+
+		myFriends = myFriends.filter((friend) => friend.id !== response.id);
+		filteredFriends = [...myFriends];
+	};
 
 	const onSearch = (friends: FriendData[]) => {
 		switch (activeTab) {
@@ -97,13 +116,13 @@
 	</div>
 </div>
 {#if activeTab === 'my-friends'}
-	<FriendsList friends={filteredFriends} />
+	<FriendsList friends={filteredFriends} removeAction={removeFriend} />
 {/if}
 
 {#if activeTab === 'friend-requests'}
 	<FriendsList friends={filteredRequests} mode="accept" />
 {/if}
 
-{#if activeTab === 'friends-request'}
-	Coming Soon
+{#if activeTab === 'friend-reccomendations'}
+	<div class="flex w-full justify-center text-2xl text-gray-400">COMING SOON</div>
 {/if}

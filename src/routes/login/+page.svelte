@@ -43,7 +43,7 @@
 </svelte:head>
 
 <!-- <h1 class="text-2xl font-bold capitalize flex justify-center">{$t('login.title')}</h1> -->
-<div class="h-2/5" />
+<div class="bg-image h-2/5 " />
 <form on:submit|preventDefault={onSubmit} class="flex flex-col gap-6 px-8">
 	<div class="flex flex-col gap-1">
 		<h2 class="text-2xl">Rieccoti!</h2>
@@ -86,3 +86,11 @@
 	<span>Non hai ancora un account?</span>
 	<a class="text-secondary underline" href="/sign-up">Registrati</a>
 </div>
+
+<style>
+	.bg-image {
+		background-image: url('images/Login_1.svg');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+</style>

@@ -1,5 +1,7 @@
 <script lang="ts">
+	import { Icons } from '../../enums';
 	import AcceptReject from '../AcceptReject.svelte';
+	import Icon from '../Icon.svelte';
 
 	export let name: string;
 	export let id: number;
@@ -7,6 +9,7 @@
 	export let mode: 'view' | 'accept' | 'send' = 'view';
 
 	export let action: (friendId: number) => void = () => null;
+	export let removeAction: (friendId: number) => void = () => null;
 </script>
 
 <div class="flex flex-col gap-4">
@@ -22,8 +25,16 @@
 				<p>X amici in comune</p>
 			</div>
 		</div>
-
-		<div />
+		{#if mode === 'view'}
+			<div class="dropdown">
+				<button><Icon icon={Icons.MEETBALL} /></button>
+				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
+					<li class="text-xs">
+						<button on:click={() => removeAction(id)}> Rimuovi </button>
+					</li>
+				</ul>
+			</div>
+		{/if}
 	</div>
 	{#if mode === 'accept'}
 		<AcceptReject acceptAction={action} declineAction={action} {id} />
