@@ -12,3 +12,4 @@ export type {
 	DeletedAppointment,
 	InvitedAppointment
 } from './appointment';
+export type { Tab } from './tabs';

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.ellipsis {
+	@apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
 :root {
 	--color-primary: #2e46ff;
 	--color-secondary: #ff5580;

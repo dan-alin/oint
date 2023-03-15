@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { useQuery, useMutation, useQueryClient } from '@sveltestack/svelte-query';
 	import { onMount } from 'svelte';
-	import AppointmentsList from '../../components/AppointmentsList.svelte';
+	import AppointmentsList from '../../components/appointments/AppointmentsList.svelte';
 	import Icon from '../../components/Icon.svelte';
+	import PageHead from '../../components/PageHead.svelte';
+	import Tabs from '../../components/Tabs.svelte';
 	import { Icons } from '../../enums';
 	import type { Appointment, InvitedAppointment } from '../../models';
 	import type { Notification } from '../../models/notification';
@@ -10,11 +12,27 @@
 	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 
-	export let data: { myAppointments: Appointment[]; invitedAppointments: InvitedAppointment[], notificationsUnread: Notification[] };
+	export let data: {
+		myAppointments: Appointment[];
+		invitedAppointments: InvitedAppointment[];
+		notificationsUnread: Notification[];
+	};
 	let { myAppointments, invitedAppointments, notificationsUnread } = data;
 
 	let notificationsUreadCount = notificationsUnread.length;
 	let invited = false;
+	let activeTab: string;
+
+	let tabs = [
+		{
+			id: 'my-appointments',
+			label: 'I tuoi eventi'
+		},
+		{
+			id: 'invited-appointments',
+			label: 'I tuoi inviti'
+		}
+	];
 	const queryClient = useQueryClient();
 	const queryResultAppointments = useQuery<Appointment[], Error>(
 		'/api/appointment-list',
@@ -44,12 +62,8 @@
 		{ initialData: notificationsUnread, refetchOnWindowFocus: true, refetchInterval: 20000 }
 	);
 
-	const handleChange = (e: MouseEvent) => {
-		if ((e.target as HTMLButtonElement).id === 'my-appointments') {
-			invited = false;
-		} else {
-			invited = true;
-		}
+	const handleChange = (e: Event) => {
+		activeTab = (e.target as HTMLButtonElement).id;
 	};
 
 	onMount(async () => {
@@ -73,55 +87,12 @@
 
 <div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
 	<div class="flex flex-col gap-8 ">
-		<div class="flex items-center justify-between">
-			<div>
-				<p class="text-xl text-gray-400">Ciao</p>
-				{#if $userStore}
-				<p class="text-2xl font-bold">{$userStore.name}!</p>
-				{/if}
-			</div>
-			<div class="flex h-[50px]  w-[50px] items-center justify-center rounded-full shadow-md relative">
-				{#if notificationsUreadCount > 0}
-					<div class="badge absolute top-0 left-8">{notificationsUreadCount}</div>
-				{/if}
-				<Icon icon={Icons.NOTIFICATION} />
-			</div>
-		</div>
+		<PageHead firstRow="Ciao" secondRow={$userStore.name} {notificationsUreadCount} />
 		<p class="text-sm">
 			Dai tornei di calcetto alle mostre d'arte, dalla degustazione di vini ai corsi di cucina...
 			Vediamo cosa è in programma questa settimana
 		</p>
-
-		<div class="tabs w-full font-bold ">
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div
-				id="my-appointments"
-				class="tab tab-bordered w-1/2"
-				on:click={handleChange}
-				class:tab-active={!invited}
-				class:text-primary={!invited}
-				class:border-primary={!invited}
-			>
-				I tuoi eventi
-			</div>
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div
-				id="invited-appointments"
-				class="tab tab-bordered w-1/2 "
-				on:click={handleChange}
-				class:tab-active={invited}
-				class:text-primary={invited}
-				class:border-primary={invited}
-			>
-				I tuoi inviti
-			</div>
-		</div>
+		<Tabs {tabs} bind:active={activeTab} />
 	</div>
 </div>
-<AppointmentsList {invited} />
-
-<style>
-	.border-primary {
-		border-bottom: 3px #2e46ff solid;
-	}
-</style>
+<AppointmentsList invited={activeTab === 'invited-appointments'} />

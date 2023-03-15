@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Card from '../../components/Card.svelte';
-	import FriendCard from '../../components/FriendCard.svelte';
+	import FriendCard from '../../components/friends-list/FriendCard.svelte';
 	import InputAction from '../../components/InputAction.svelte';
 	import type { Friend, User } from '../../models';
 	import { apiCall } from '../../utils/api-call';
@@ -45,7 +45,7 @@
 	/>
 </div>
 <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
-	{#each friends as friend}
+	<!-- {#each friends as friend}
 		<Card>
 			<FriendCard
 				name={`${friend.user.name} ${friend.user.surname}`}
@@ -53,5 +53,5 @@
 				action={addFriend}
 			/>
 		</Card>
-	{/each}
+	{/each} -->
 </div>

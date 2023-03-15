@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Card from '../../components/Card.svelte';
-	import FriendCard from '../../components/FriendCard.svelte';
+	import FriendCard from '../../components/friends-list/FriendCard.svelte';
 	import type { FriendData } from '../../models';
 
 	import { apiCall } from '../../utils/api-call';
@@ -35,7 +35,6 @@
 						name={`${friend.name} ${friend.surname}`}
 						id={friend.id || 0}
 						action={() => removeFriend(friend.id)}
-						isViewMode
 					/>
 				</Card>
 			</div>
