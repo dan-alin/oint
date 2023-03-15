@@ -85,7 +85,7 @@
 		{/each}
 	{:else}
 		{#each $myAppointmentsStore as occurrence}
-			<AppointmentCard appointment={occurrence} inviteMode={invited} />
+			<AppointmentCard appointment={occurrence} inviteMode={invited} deleteAction={cancelAppointment}/>
 		{/each}
 	{/if}
 </div>
