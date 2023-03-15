@@ -14,8 +14,8 @@
 
 <div class="flex flex-col gap-4">
 	<div class="min-h-12 flex items-center gap-4 text-xs">
-		<div class="placeholder avatar h-12 ">
-			<div class="rounded-full bg-neutral-focus text-neutral-content shadow ">
+		<div class="placeholder avatar h-12 w-12 ">
+			<div class="h-12 w-12 rounded-full bg-gray-400 text-neutral-content shadow ">
 				<span class="text-3xl">{name.charAt(0)}</span>
 			</div>
 		</div>
@@ -26,8 +26,10 @@
 			</div>
 		</div>
 		{#if mode === 'view'}
-			<div class="dropdown">
-				<button><Icon icon={Icons.MEETBALL} /></button>
+			<div class="dropdown h-full w-12 ">
+				<button class="flex h-full w-12 items-center justify-end"
+					><Icon icon={Icons.MEETBALL} /></button
+				>
 				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
 					<li class="text-xs">
 						<button on:click={() => removeAction(id)}> Rimuovi </button>

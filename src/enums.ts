@@ -40,3 +40,7 @@ export enum Icons {
 	UPLOAD = 'icons/upload.svg',
 	WHATSAPP = 'icons/whatsapp.svg'
 }
+
+export enum Backgrounds {
+	LOGIN = 'backgrounds/login.svg'
+}
