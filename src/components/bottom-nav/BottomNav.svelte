@@ -16,7 +16,7 @@
 			image = await fileToBase64(formData.image?.[0] as File);
 		}
 
-		const newAppointment = {
+		const newAppointment: Appointment = {
 			title: formData.title,
 			description: formData.description,
 			start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
@@ -26,6 +26,14 @@
 			locations: formData.locations,
 			location_selection_type: formData.location_selection_type
 		};
+
+		if (newAppointment.location_selection_type === 'multi') {
+			if (formData.location_selection_deadline_date && formData.location_selection_deadline_time) {
+				newAppointment.location_selection_deadline = new Date(`${formData.location_selection_deadline_date} ${formData.location_selection_deadline_time}`).toISOString();
+			} else if (formData.location_selection_deadline_date) {
+				newAppointment.location_selection_deadline = new Date(`${formData.location_selection_deadline_date}`).toISOString();
+			}
+		}
 
 		const response: Appointment = await apiCall(
 			'/api/create-appointment',

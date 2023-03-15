@@ -3,8 +3,6 @@
 
 	export let tabs: Tab[];
 	export let active = tabs[0].id;
-
-	let size = `w-1/${tabs.length}`;
 </script>
 
 <div class="tabs flex w-full">
@@ -12,11 +10,13 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			id={tab.id}
-			class={`${size} tab tab-bordered`}
+			class={' tab tab-bordered'}
 			on:click={() => (active = tab.id)}
 			class:tab-active={active === tab.id}
 			class:text-primary={active === tab.id}
 			class:border-primary={active === tab.id}
+			class:tab-2={tabs.length === 2}
+			class:tab-3={tabs.length === 3}
 		>
 			{tab.label}
 		</div>

@@ -21,12 +21,16 @@
 		can_be_forwarded: false,
 		image: undefined,
 		location_selection_type: 'single',
-		locations: []
+		locations: [],
+		location_selection_deadline_date: '',
+		location_selection_deadline_time: ''
 	};
 
 	const nextStep = () => step++;
 
 	const prevStep = () => step--;
+
+	let isValidLocationForm = true;
 </script>
 
 <div class="modal modal-bottom z-50  md:modal-middle ">
@@ -79,9 +83,16 @@
 				<SelectLocationsForm
 					location_selection_type={formData.location_selection_type}
 					locations={formData.locations}
-					onSubmit={(locations, location_selection_type) => {
+					location_selection_deadline_date={formData.location_selection_deadline_date}
+					location_selection_deadline_time={formData.location_selection_deadline_time}
+					startDate= {formData.start_date}
+					startTime= {formData.start_time}
+					bind:isValid = {isValidLocationForm}
+					onSubmit={(locations, location_selection_type, location_selection_deadline_date, location_selection_deadline_time) => {
 						formData.location_selection_type = location_selection_type;
 						formData.locations = locations;
+						formData.location_selection_deadline_date = location_selection_deadline_date;
+						formData.location_selection_deadline_time = location_selection_deadline_time;
 						action(formData);
 					}}
 				/>
@@ -89,7 +100,7 @@
 			<div class="bottom-10  grid grid-cols-2  gap-6">
 				<button class="btn" disabled={step === 1} on:click={prevStep}>{'<'}</button>
 
-				<button class="btn" type="submit" form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button>
+				<button disabled={step === 4 && !isValidLocationForm} class="btn" type="submit" form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button>
 			</div>
 		</div>
 	</div>

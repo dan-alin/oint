@@ -89,7 +89,7 @@
 
 <style>
 	.bg-image {
-		background-image: url('images/Login_1.svg');
+		background-image: url('backgrounds/login.svg');
 		background-repeat: no-repeat;
 		background-size: cover;
 	}

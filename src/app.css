@@ -6,6 +6,14 @@
 	@apply overflow-hidden text-ellipsis whitespace-nowrap;
 }
 
+.tab-2 {
+	@apply w-1/2;
+}
+
+.tab-3 {
+	@apply w-1/3;
+}
+
 :root {
 	--color-primary: #2e46ff;
 	--color-secondary: #ff5580;

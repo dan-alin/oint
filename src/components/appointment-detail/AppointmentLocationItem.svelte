@@ -6,7 +6,7 @@
 	export let location: Location;
 	export let appointmentId: number;
 	export let IsSingleEvent: boolean;
-
+	export let fineVoting: boolean;
 	let votesCount = location.votes_count;
 
 	const onVote = async (isVote: boolean) => {
@@ -34,6 +34,7 @@
 			checked={location.i_voted_this_location}
 			label={`${location.name} - ${location.address}`}
 			onChange={(checked) => onVote(checked)}
+			disabled={fineVoting}
 		/>
 		<span class="badge badge-xs ml-4">{votesCount}</span>
 	{:else}

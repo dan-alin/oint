@@ -1,26 +1,37 @@
 <script lang="ts">
-	import type { Location } from '../../models/locations';
-	import type { Place } from '../../models/place';
-	import { apiCall } from '../../utils/api-call';
+	import type {Location} from '../../models/locations';
+	import type {Place} from '../../models/place';
+	import {apiCall} from '../../utils/api-call';
 	import InputAction from '../InputAction.svelte';
 	import Select from '../Select.svelte';
+	import InputText from "../InputText.svelte";
 
-	export let onSubmit: (locations: Location[], location_selection_type: 'single' | 'multi') => void;
+	export let onSubmit: (locations: Location[], location_selection_type: 'single' | 'multi', location_selection_deadline_date: string,location_selection_deadline_time: string) => void;
 	export let locations: Location[];
 	export let location_selection_type: 'single' | 'multi';
-
+	export let location_selection_deadline_date: string;
+	export let location_selection_deadline_time: string
+	export let startDate:string;
+	export let startTime:string;
+	export let isValid = true;
+	$:if(location_selection_deadline_date && location_selection_deadline_time) {
+		const _deadline =new Date(`${location_selection_deadline_date} ${location_selection_deadline_time}`);
+		const _startDate = new Date(`${startDate} ${startTime}`);
+		isValid = !(parseInt((_deadline.getTime() / 1000).toFixed(0)) < parseInt((new Date().getTime() / 1000).toFixed(0)) ||
+				parseInt((_deadline.getTime() / 1000).toFixed(0)) > parseInt((_startDate.getTime() / 1000).toFixed(0)));
+	}
 	let addedPlaces: Place[] = [];
 	let places: Place[];
 
 	const onSearchPlaces = async (text: string) => {
 		const response: Place[] = await apiCall(
-			'/api/places',
-			'post',
-			'',
-			JSON.stringify({
-				search: text
-			}),
-			sessionStorage.getItem('jwt_token') || ''
+				'/api/places',
+				'post',
+				'',
+				JSON.stringify({
+					search: text
+				}),
+				sessionStorage.getItem('jwt_token') || ''
 		);
 		places = response;
 	};
@@ -29,11 +40,12 @@
 		locations = addedPlaces.map((place) => ({
 			name: place.address.amenity,
 			address: `${place.address.house_number || 'snc'}, ${place.address.city}, ${
-				place.address.postcode
+					place.address.postcode
 			}`
 		}));
-		onSubmit(locations, location_selection_type);
+		onSubmit(locations, location_selection_type, location_selection_deadline_date, location_selection_deadline_time);
 	};
+
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -53,6 +65,28 @@
 			{ text: 'Multi', value: 'multi' }
 		]}
 	/>
+	{#if location_selection_type === 'multi'}
+		<div class="columns-2 gap-6">
+			<InputText
+					type="date"
+					label="Select deadline for voting"
+					id="dead_line"
+					name="dead_line"
+					placeholder="Insert the deadline for voting"
+					bind:value={location_selection_deadline_date}
+					required= {location_selection_type === 'multi'}
+			/>
+			<InputText
+					type="time"
+					label="Select last allowed time for voting"
+					id="dead_line_time"
+					name="dead_line_time"
+					placeholder="Select last allowd time for voting"
+					required={location_selection_deadline_date && location_selection_deadline_date !== ''}
+					bind:value={location_selection_deadline_time}
+			/>
+		</div>
+	{/if}
 	<div>
 		<InputAction id="places" name="places" placeholder="Search places" action={onSearchPlaces} />
 		<div class="dropdown-content top-14 max-h-96 flex-col overflow-auto rounded-md bg-base-200">

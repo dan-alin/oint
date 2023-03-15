@@ -2,16 +2,18 @@ import type { Invitation } from './invitation';
 import type { Location } from './locations';
 
 export type Appointment = {
-	id: number;
-	creator_id: number;
+	id?: number;
+	creator_id?: number;
 	title: string;
 	description: string;
-	start_date: Date;
-	end_date: Date;
+	start_date: Date | string;
+	end_date: Date | string;
 	can_be_forwarded: boolean;
 	image: string;
 	locations: Location[];
-	invitations: Invitation[];
+	invitations?: Invitation[];
+	location_selection_deadline?: Date | string;
+	location_selection_type?: string
 };
 
 export type InvitedAppointment = {
@@ -36,4 +38,6 @@ export type AppointmentForm = {
 	image: FileList | undefined;
 	locations: Location[];
 	location_selection_type: 'single' | 'multi';
+	location_selection_deadline_date: string;
+	location_selection_deadline_time: string
 };
