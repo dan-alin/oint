@@ -43,7 +43,8 @@
 </svelte:head>
 
 <!-- <h1 class="text-2xl font-bold capitalize flex justify-center">{$t('login.title')}</h1> -->
-<div class="bg-image h-2/5 " />
+<img class="mb-6 w-full" src="/backgrounds/login.svg" alt="a door and keys" />
+
 <form on:submit|preventDefault={onSubmit} class="flex flex-col gap-6 px-8">
 	<div class="flex flex-col gap-1">
 		<h2 class="text-2xl">Rieccoti!</h2>
@@ -91,6 +92,6 @@
 	.bg-image {
 		background-image: url('/backgrounds/login.svg');
 		background-repeat: no-repeat;
-		background-size: cover;
+		background-size: contain;
 	}
 </style>
