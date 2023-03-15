@@ -13,6 +13,7 @@
 
 	export let confirmAction: (appointmentId: number) => void = () => null;
 	export let declineAction: (appointmentId: number) => void = () => null;
+	export let deleteAction: (appointmentId: number) => void = () => null;
 
 	const startDate = getDate(appointment.start_date);
 	const endDate = getDate(appointment.end_date);
@@ -22,11 +23,13 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- <span  on:click={() => deleteAction(appointment.id)}>X</span>-->
 <a
 	href={`/appointments/${appointment.id}`}
-	class="card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow"
+	class="card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow rellative"
 	in:fade
 >
+
 	<img
 		class="h-16 w-16 object-cover"
 		src={appointment.image ? appointment.image : '/wp.jpg'}

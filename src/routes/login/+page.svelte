@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { Input } from 'postcss';
-	import { onMount } from 'svelte';
 	import Checkbox from '../../components/Checkbox.svelte';
 	import InputText from '../../components/InputText.svelte';
-	import { t } from '../../i18n/i18n';
 	import type { User } from '../../models';
 	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';

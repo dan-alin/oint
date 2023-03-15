@@ -8,12 +8,12 @@
 	import { toggleAlert, type AlertState } from '../stores/alert';
 	import { onMount } from 'svelte';
 	import BottomNav from '../components/bottom-nav/BottomNav.svelte';
-	import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 	import { apiCall } from '../utils/api-call';
 	import { navigating } from '$app/stores';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { userStore } from '../stores/user';
+	import type { User } from '../models';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -45,15 +45,19 @@
 		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
 		if ($page.url.pathname !== '/login' && $page.url.pathname !== '/signup') {
-			//checkTokenExpired();
+			const user: User = await apiCall(
+			'/api/auth-profile',
+			'get',
+			'',
+			undefined,
+			sessionStorage.getItem('jwt_token') || ''
+			);
+			userStore.update(() => user);
 		}
 		getTokenFirebase(setFirebaseToken);
 
 	});
 
-
-
-	const queryClient = new QueryClient();
 </script>
 
 <svelte:head>
@@ -76,7 +80,6 @@
 		/>
 	</div>
 {/if}
-<QueryClientProvider client={queryClient}>
 	<!-- <Header /> -->
 
 	<div class="h-screen overflow-auto ">
@@ -88,4 +91,3 @@
 	<!-- {#if ReloadPrompt}
 			<svelte:component this={ReloadPrompt} />
 		{/if} -->
-</QueryClientProvider>
