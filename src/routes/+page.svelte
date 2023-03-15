@@ -27,9 +27,9 @@
 	<a href="/appointments">
 		<button class="btn-primary btn w-40">appointments</button>
 	</a>
-	<div class="radial-progress bg-secondary" style={`--value:${countdown};`}>
+	<!-- <div class="radial-progress bg-secondary" style={`--value:${countdown};`}>
 		<span class="countdown font-mono ">
 			<span class="text-white transition" style={`--value:${countdown};`} />
 		</span>
-	</div>
+	</div> -->
 </div>

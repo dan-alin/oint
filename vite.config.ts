@@ -77,7 +77,7 @@ const config: UserConfig = {
 				background_color: '#ffffff',
 				display: 'standalone',
 				scope: 'https://oint.vercel.app/',
-				start_url: 'https://oint.vercel.app/'
+				start_url: 'https://oint.vercel.app/login'
 			},
 			injectManifest: {
 				globPatterns: ['client/**/*.{js,css,html,ico,png,svg,webp,woff,woff2}']
