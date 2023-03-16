@@ -9,9 +9,7 @@
 	import { onMount } from 'svelte';
 	import BottomNav from '../components/bottom-nav/BottomNav.svelte';
 	import { apiCall } from '../utils/api-call';
-	import { navigating } from '$app/stores';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { userStore } from '../stores/user';
 	import type { User } from '../models';
 

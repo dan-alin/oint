@@ -9,16 +9,16 @@
 	export let data: { appointment: Appointment; friends: FriendData[] };
 	let { appointment, friends } = data;
 
-	const startDate = getDate(appointment.start_date);
-	const endDate = getDate(appointment.end_date);
+	const startDate = getDate(appointment.start_date as Date);
+	const endDate = getDate(appointment.end_date as Date);
 
-	const startTime = getTime(appointment.start_date);
-	const endTime = getTime(appointment.end_date);
+	const startTime = getTime(appointment.start_date as Date);
+	const endTime = getTime(appointment.end_date as Date);
 
 	const dataFineVoting = appointment.location_selection_deadline;
 	let fineVoting = false;
 	if (appointment.locations.length > 0) {
-		if (parseInt((new Date(dataFineVoting).getTime() / 1000).toFixed(0)) < parseInt((new Date().getTime() / 1000).toFixed(0))) {
+		if (parseInt((new Date(dataFineVoting as string).getTime() / 1000).toFixed(0)) < parseInt((new Date().getTime() / 1000).toFixed(0))) {
 			fineVoting = true;
 		}
 	}
