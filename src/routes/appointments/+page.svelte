@@ -45,7 +45,9 @@
 
 <div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
 	<div class="flex flex-col gap-8 ">
+		{#if $userStore}
 		<PageHead firstRow="Ciao" secondRow={$userStore.name} {notificationsUreadCount} />
+		{/if}
 		<p class="text-sm">
 			Dai tornei di calcetto alle mostre d'arte, dalla degustazione di vini ai corsi di cucina...
 			Vediamo cosa è in programma questa settimana
