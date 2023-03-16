@@ -9,11 +9,11 @@
 	// export let invitationStatus: 'declined' | 'accepted' | '' = '';
 	export let deleteAction: (appointmentId: number) => void = () => null;
 
-	const startDate = getDate(appointment.start_date);
-	const endDate = getDate(appointment.end_date);
+	const startDate = getDate(appointment.start_date as Date);
+	const endDate = getDate(appointment.end_date as Date);
 
-	const startTime = getTime(appointment.start_date);
-	const endTime = getTime(appointment.end_date);
+	const startTime = getTime(appointment.start_date as Date);
+	const endTime = getTime(appointment.end_date as Date);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -31,7 +31,7 @@
 	/>
 	<div class="card-body w-32 gap-[2px] p-0 pl-4">
 		<p class="ellipsis text-xs font-bold capitalize text-yellow-400 ">
-			{startDate} - {startTime}
+			{startDate} - {startTime} 
 		</p>
 		<p class="ellipsis  font-bold">
 			{appointment.title.toUpperCase()}

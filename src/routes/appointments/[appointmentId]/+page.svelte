@@ -143,7 +143,7 @@
 				{#each appointment.locations as loc}
 					<AppointmentLocationItem
 						location={loc}
-						appointmentId={appointment.id}
+						appointmentId={appointment.id  || 0}
 						IsSingleEvent={appointment.locations.length === 1}
 						fineVoting={fineVoting}
 					/>
