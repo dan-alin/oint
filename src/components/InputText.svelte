@@ -57,6 +57,6 @@
 		on:keydown={() => {
 			isDirty = true;
 		}}
-		on:change = {onChange}
+		on:change={onChange}
 	/>
 </div>

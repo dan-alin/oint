@@ -15,11 +15,11 @@
 	export let declineAction: (appointmentId: number) => void = () => null;
 	export let deleteAction: (appointmentId: number) => void = () => null;
 
-	const startDate = getDate(appointment.start_date);
-	const endDate = getDate(appointment.end_date);
+	const startDate = getDate(appointment.start_date as Date);
+	const endDate = getDate(appointment.end_date as Date);
 
-	const startTime = getTime(appointment.start_date);
-	const endTime = getTime(appointment.end_date);
+	const startTime = getTime(appointment.start_date as Date);
+	const endTime = getTime(appointment.end_date as Date);
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

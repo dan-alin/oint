@@ -65,6 +65,30 @@
 		filteredFriends = [...myFriends];
 	};
 
+	const acceptFriendRequest = async (friendId: number) => {
+		const response: any = await apiCall(
+			'/api/accept-friend-request',
+			'post',
+			'Request accepted',
+			JSON.stringify({ friendId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+		requests = requests.filter((friend) => friend.id !== response.id);
+		filteredRequests = [...requests];
+	};
+
+	const declineFriendRequest = async (friendId: number) => {
+		const response: any = await apiCall(
+			'/api/decline-friend-request',
+			'post',
+			'Request declined',
+			JSON.stringify({ friendId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+		requests = requests.filter((friend) => friend.id !== response.id);
+		filteredRequests = [...requests];
+	};
+
 	const onSearch = (friends: FriendData[]) => {
 		switch (activeTab) {
 			case 'my-friends':
@@ -97,13 +121,7 @@
 		<PageHead firstRow="I tuoi" secondRow="Amici" {notificationsUreadCount} />
 		<p class="text-lg font-bold">{myFriends.length} amici</p>
 		<Tabs {tabs} bind:active={activeTab} />
-		<!-- <InputAction
-			name="friend"
-			id="friend"
-			value=""
-			placeholder="Cerca"
-			action={() => console.log(activeTab)}
-		/> -->
+
 		<input
 			class="input-bordered input h-10 w-full "
 			id="search-friend"
@@ -120,7 +138,12 @@
 {/if}
 
 {#if activeTab === 'friend-requests'}
-	<FriendsList friends={filteredRequests} mode="accept" />
+	<FriendsList
+		friends={filteredRequests}
+		mode="accept"
+		acceptAction={acceptFriendRequest}
+		declineAction={declineFriendRequest}
+	/>
 {/if}
 
 {#if activeTab === 'friend-reccomendations'}

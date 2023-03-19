@@ -2,20 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-.ellipsis {
-	@apply overflow-hidden text-ellipsis whitespace-nowrap;
+@layer base {
+	.bg-container {
+		@apply flex h-full flex-col justify-end bg-cover bg-center bg-no-repeat;
+	}
 }
 
-.tab-2 {
-	@apply w-1/2;
+@layer components {
+	.tab-act {
+		@apply border-b-2 border-primary text-primary !important;
+	}
 }
 
-.tab-3 {
-	@apply w-1/3;
-}
+@layer utilities {
+	.ellipsis {
+		@apply overflow-hidden text-ellipsis whitespace-nowrap;
+	}
+	.tab-2 {
+		@apply w-1/2;
+	}
 
-.bg-container {
-	@apply flex h-full flex-col justify-end bg-cover bg-center bg-no-repeat pb-24;
+	.tab-3 {
+		@apply w-1/3;
+	}
 }
 
 :root {

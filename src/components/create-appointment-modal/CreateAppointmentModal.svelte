@@ -47,52 +47,34 @@
 			</ul>
 			{#if step === 1}
 				<NameDescriptionForm
-					onSubmit={(title, description) => {
-						formData.title = title;
-						formData.description = description;
-						nextStep();
-					}}
-					name={formData.title}
-					description={formData.description}
+					onSubmit={nextStep}
+					bind:name={formData.title}
+					bind:description={formData.description}
 				/>
 			{:else if step === 2}
 				<DateAndHoursForm
-					start_date={formData.start_date}
-					end_date={formData.end_date}
-					start_time={formData.start_time}
-					end_time={formData.end_time}
-					onSubmit={(start_date, end_date, start_time, end_time) => {
-						formData.start_date = start_date;
-						formData.end_date = end_date;
-						formData.start_time = start_time;
-						formData.end_time = end_time;
-						nextStep();
-					}}
+					bind:start_date={formData.start_date}
+					bind:end_date={formData.end_date}
+					bind:start_time={formData.start_time}
+					bind:end_time={formData.end_time}
+					onSubmit={nextStep}
 				/>
 			{:else if step === 3}
 				<ImageForm
-					image={formData.image}
-					can_be_forwarded={formData.can_be_forwarded}
-					onSubmit={(image, can_be_forwarded) => {
-						formData.image = image;
-						formData.can_be_forwarded = can_be_forwarded;
-						nextStep();
-					}}
+					bind:image={formData.image}
+					bind:can_be_forwarded={formData.can_be_forwarded}
+					onSubmit={nextStep}
 				/>
 			{:else if step === 4}
 				<SelectLocationsForm
-					location_selection_type={formData.location_selection_type}
-					locations={formData.locations}
-					location_selection_deadline_date={formData.location_selection_deadline_date}
-					location_selection_deadline_time={formData.location_selection_deadline_time}
-					startDate= {formData.start_date}
-					startTime= {formData.start_time}
-					bind:isValid = {isValidLocationForm}
-					onSubmit={(locations, location_selection_type, location_selection_deadline_date, location_selection_deadline_time) => {
-						formData.location_selection_type = location_selection_type;
-						formData.locations = locations;
-						formData.location_selection_deadline_date = location_selection_deadline_date;
-						formData.location_selection_deadline_time = location_selection_deadline_time;
+					bind:location_selection_type={formData.location_selection_type}
+					bind:locations={formData.locations}
+					bind:location_selection_deadline_date={formData.location_selection_deadline_date}
+					bind:location_selection_deadline_time={formData.location_selection_deadline_time}
+					bind:startDate={formData.start_date}
+					bind:startTime={formData.start_time}
+					bind:isValid={isValidLocationForm}
+					onSubmit={() => {
 						action(formData);
 					}}
 				/>
@@ -100,7 +82,12 @@
 			<div class="bottom-10  grid grid-cols-2  gap-6">
 				<button class="btn" disabled={step === 1} on:click={prevStep}>{'<'}</button>
 
-				<button disabled={step === 4 && !isValidLocationForm} class="btn" type="submit" form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button>
+				<button
+					disabled={step === 4 && !isValidLocationForm}
+					class="btn"
+					type="submit"
+					form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button
+				>
 			</div>
 		</div>
 	</div>

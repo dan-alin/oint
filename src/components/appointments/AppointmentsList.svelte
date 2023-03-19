@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-
 	import type { DeletedAppointment, Invitation } from '../../models';
 	import { invitedAppointmentsStore, myAppointmentsStore } from '../../stores/apointments';
 	import { apiCall } from '../../utils/api-call';
@@ -74,7 +72,7 @@
 		{#each $invitedAppointmentsStore as invitedOccurrence}
 			<AppointmentCard appointment={invitedOccurrence.appointment} />
 			<AcceptReject
-				id={invitedOccurrence.appointment.id}
+				id={invitedOccurrence.appointment.id || -1}
 				acceptAction={acceptAppointment}
 				declineAction={declineAppointment}
 			/>
