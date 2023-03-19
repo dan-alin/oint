@@ -1,27 +1,14 @@
 <script lang="ts">
 	import InputText from '../InputText.svelte';
 
-	export let onSubmit: (
-		start_date: string,
-		end_date: string,
-		start_time: string,
-		end_time: string
-	) => void;
+	export let onSubmit: () => void;
 	export let start_date: string;
 	export let end_date: string;
 	export let start_time: string;
 	export let end_time: string;
-
-	const handleFormSubmit = (e: Event) => {
-		onSubmit(start_date, end_date, start_time, end_time);
-	};
 </script>
 
-<form
-	class="grid grid-cols-1 grid-rows-3 gap-6 "
-	id="2-part"
-	on:submit|preventDefault={handleFormSubmit}
->
+<form class="grid grid-cols-1 grid-rows-3 gap-6 " id="2-part" on:submit|preventDefault={onSubmit}>
 	<div class="columns-2   gap-6">
 		<InputText
 			type="date"

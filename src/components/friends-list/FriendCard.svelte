@@ -10,6 +10,8 @@
 
 	export let action: (friendId: number) => void = () => null;
 	export let removeAction: (friendId: number) => void = () => null;
+	export let acceptAction: (friendId: number) => void = () => null;
+	export let declineAction: (friendId: number) => void = () => null;
 </script>
 
 <div class="flex flex-col gap-4">
@@ -39,7 +41,7 @@
 		{/if}
 	</div>
 	{#if mode === 'accept'}
-		<AcceptReject acceptAction={action} declineAction={action} {id} />
+		<AcceptReject {acceptAction} {declineAction} {id} />
 	{/if}
 
 	{#if mode === 'send'}

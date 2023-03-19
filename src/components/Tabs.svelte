@@ -10,21 +10,12 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
 			id={tab.id}
-			class={' tab tab-bordered'}
+			class={`tab tab-bordered w-1/${tabs.length}`}
 			on:click={() => (active = tab.id)}
 			class:tab-active={active === tab.id}
-			class:text-primary={active === tab.id}
-			class:border-primary={active === tab.id}
-			class:tab-2={tabs.length === 2}
-			class:tab-3={tabs.length === 3}
+			class:tab-act={active === tab.id}
 		>
 			{tab.label}
 		</div>
 	{/each}
 </div>
-
-<style>
-	.border-primary {
-		border-bottom: 3px var(--color-primary) solid;
-	}
-</style>
