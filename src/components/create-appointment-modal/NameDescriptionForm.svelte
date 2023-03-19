@@ -1,21 +1,13 @@
 <script lang="ts">
 	import InputText from '../InputText.svelte';
 
-	export let onSubmit: (name: string, description: string) => void;
+	export let onSubmit: () => void;
 
 	export let name: string;
 	export let description: string;
-
-	const handleFormSubmit = (e: Event) => {
-		onSubmit(name, description);
-	};
 </script>
 
-<form
-	class="grid grid-cols-1 grid-rows-3 gap-6  "
-	id="1-part"
-	on:submit|preventDefault={handleFormSubmit}
->
+<form class="grid grid-cols-1 grid-rows-3 gap-6  " id="1-part" on:submit|preventDefault={onSubmit}>
 	<InputText
 		type="text"
 		label="Nome evento"
