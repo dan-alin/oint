@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import Checkbox from '../../components/Checkbox.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import type { User } from '../../models';
@@ -30,7 +30,7 @@
 
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
-			goto('/appointments');
+			goto('/');
 		} catch (error: unknown) {
 			console.error(error);
 		}
