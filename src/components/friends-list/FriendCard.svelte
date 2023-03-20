@@ -4,6 +4,7 @@
 	import Icon from '../Icon.svelte';
 
 	export let name: string;
+	export let avatar: string = '';
 	export let id: number;
 	// export let isViewMode = false;
 	export let mode: 'view' | 'accept' | 'send' = 'view';
@@ -16,9 +17,13 @@
 
 <div class="flex flex-col gap-4">
 	<div class="min-h-12 flex items-center gap-4 text-xs">
-		<div class="placeholder avatar h-12 w-12 ">
-			<div class="h-12 w-12 rounded-full bg-gray-400 text-neutral-content shadow ">
-				<span class="text-3xl">{name.charAt(0)}</span>
+		<div class="avatar">
+			<div class="w-12 rounded-full">
+				{#if avatar}
+					<img src={avatar} alt="avatar" />
+				{:else}
+					<Icon icon={Icons.PROFILE_FULL} />
+				{/if}
 			</div>
 		</div>
 		<div class="w-full">
