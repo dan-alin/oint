@@ -1,5 +1,5 @@
-import type { Appointment, InvitedAppointment } from '../../models';
-import type { Notification } from '../../models/notification';
+import type { Appointment, InvitedAppointment } from '../models';
+import type { Notification } from '../models/notification';
 import type { PageServerLoad } from './$types';
 //
 
