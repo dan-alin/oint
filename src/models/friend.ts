@@ -1,7 +1,7 @@
 export type Friend = {
 	isFriend: boolean;
 	isPending: boolean;
-	user: FriendData[];
+	user: FriendData;
 };
 
 export type FriendData = {
