@@ -29,9 +29,13 @@
 
 		if (newAppointment.location_selection_type === 'multi') {
 			if (formData.location_selection_deadline_date && formData.location_selection_deadline_time) {
-				newAppointment.location_selection_deadline = new Date(`${formData.location_selection_deadline_date} ${formData.location_selection_deadline_time}`).toISOString();
+				newAppointment.location_selection_deadline = new Date(
+					`${formData.location_selection_deadline_date} ${formData.location_selection_deadline_time}`
+				).toISOString();
 			} else if (formData.location_selection_deadline_date) {
-				newAppointment.location_selection_deadline = new Date(`${formData.location_selection_deadline_date}`).toISOString();
+				newAppointment.location_selection_deadline = new Date(
+					`${formData.location_selection_deadline_date}`
+				).toISOString();
 			}
 		}
 
@@ -88,7 +92,7 @@
 
 		<div class="navbar-end justify-evenly text-xs">
 			<NavItem
-				path="/friends-list"
+				path="/search-friends"
 				icon={Icons.PROFILE_OUTLINE}
 				activeIcon={Icons.PROFILE_FULL}
 				label="Profilo"
