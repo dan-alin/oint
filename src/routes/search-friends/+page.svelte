@@ -44,14 +44,13 @@
 		action={onSearch}
 	/>
 </div>
-<div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+<div class="mx-4 mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
 	{#each friends as friend}
-		<Card>
-			<FriendCard
-				name={`${friend.user.name} ${friend.user.surname}`}
-				id={friend.user.id || 0}
-				action={addFriend}
-			/>
-		</Card>
+		<FriendCard
+			name={`${friend.user.name} ${friend.user.surname}`}
+			id={friend.user.id || 0}
+			action={addFriend}
+			mode="send"
+		/>
 	{/each}
 </div>
