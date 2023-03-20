@@ -4,7 +4,8 @@
 
 	export let firstRow: string;
 	export let secondRow: string;
-	export let notificationsUreadCount: number;
+	export let notificationsUreadCount = 0;
+	export let showNotification = false;
 </script>
 
 <div class="flex items-center justify-between">
@@ -13,12 +14,14 @@
 
 		<p class="text-2xl font-bold">{secondRow}</p>
 	</div>
-	<div class="relative flex  h-[50px] w-[50px] items-center justify-center rounded-full shadow-md">
-		{#if notificationsUreadCount > 0}
-			<div class="badge absolute top-0 left-8 text-[10px]">
-				{notificationsUreadCount >= 100 ? '99+' : notificationsUreadCount}
-			</div>
-		{/if}
-		<Icon icon={Icons.NOTIFICATION} />
-	</div>
+	{#if showNotification}
+		<a class="relative flex  h-[50px] w-[50px] items-center justify-center rounded-full shadow-md" href={`/notifications`}>
+				{#if notificationsUreadCount > 0}
+					<div class="badge absolute top-0 left-8 text-[10px]">
+						{notificationsUreadCount >= 100 ? '99+' : notificationsUreadCount}
+					</div>
+				{/if}
+			<Icon icon={Icons.NOTIFICATION} />
+		</a>
+	{/if}
 </div>
