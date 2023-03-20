@@ -8,4 +8,5 @@ export type FriendData = {
 	id: number;
 	name: string;
 	surname: string;
+	image?: string;
 };
