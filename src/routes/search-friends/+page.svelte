@@ -47,6 +47,7 @@
 <div class="mx-4 mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
 	{#each friends as friend}
 		<FriendCard
+			avatar={friend.user.image}
 			name={`${friend.user.name} ${friend.user.surname}`}
 			id={friend.user.id || 0}
 			action={addFriend}
