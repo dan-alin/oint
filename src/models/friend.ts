@@ -4,9 +4,4 @@ export type Friend = {
 	user: FriendData[];
 };
 
-export type FriendData = {
-	id: number;
-	name: string;
-	surname: string;
-	image?: string;
-};
+export type FriendData = { friendRequestId: number, user: {id: number; name: string; surname: string, image: string }};

@@ -1,4 +1,4 @@
-import type { FriendData } from '../../models/friend-requests';
+import type { FriendData } from '../../models';
 import type { PageServerLoad } from './$types';
 
 export const prerender = false;

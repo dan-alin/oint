@@ -14,6 +14,7 @@ export const load: PageServerLoad = async (event) => {
 			Authorization: `Bearer ${userToken}`
 		}
 	});
+	console.log(userToken)
 	const myFriends = (await friendsRes.json()) as FriendData[];
 
 	const friendRequestRes = await fetch(`${VITE_API_HOST}friends/pending-list`, {
@@ -25,6 +26,8 @@ export const load: PageServerLoad = async (event) => {
 	});
 
 	const friendRequest = (await friendRequestRes.json()) as FriendRequests[];
+
+	console.log(friendRequest)
 
 	const noticationsUnreadRes = await fetch(`${VITE_API_HOST}notification/unread`, {
 		method: 'GET',

@@ -1,13 +1,9 @@
 <script lang="ts">
 	import FriendsList from '../../components/friends-list/FriendsList.svelte';
-	import Icon from '../../components/Icon.svelte';
-	import InputAction from '../../components/InputAction.svelte';
-	import InputText from '../../components/InputText.svelte';
 	import PageHead from '../../components/PageHead.svelte';
 	import Tabs from '../../components/Tabs.svelte';
-	import { Icons } from '../../enums';
 	import type { FriendRequests } from '../../models';
-	import type { Friend, FriendData } from '../../models/friend';
+	import type { FriendData } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
 
 	export let data: {
@@ -17,15 +13,8 @@
 	};
 	let { myFriends, friendRequest, notificationsUnread } = data;
 
-	let requests: FriendData[] = friendRequest.received.map((request) => ({
-		id: request.id,
-		name: request.name,
-		surname: request.surname
-		// avatar: request.avatar,
-	}));
-
 	let filteredFriends: FriendData[] = myFriends;
-	let filteredRequests: FriendData[] = requests;
+	let filteredRequests: FriendData[] = friendRequest.received;
 
 	let notificationsUreadCount = notificationsUnread.length;
 
@@ -61,32 +50,30 @@
 		);
 		console.log(response);
 
-		myFriends = myFriends.filter((friend) => friend.id !== response.id);
+		myFriends = myFriends.filter((friend) => friend.user.id !== response.id);
 		filteredFriends = [...myFriends];
 	};
 
-	const acceptFriendRequest = async (friendId: number) => {
+	const acceptFriendRequest = async (friendRequestId: number) => {
 		const response: any = await apiCall(
 			'/api/accept-friend-request',
 			'post',
 			'Request accepted',
-			JSON.stringify({ friendId }),
+			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-		requests = requests.filter((friend) => friend.id !== response.id);
-		filteredRequests = [...requests];
+		filteredRequests = [...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)];
 	};
 
-	const declineFriendRequest = async (friendId: number) => {
+	const declineFriendRequest = async (friendRequestId: number) => {
 		const response: any = await apiCall(
 			'/api/decline-friend-request',
 			'post',
 			'Request declined',
-			JSON.stringify({ friendId }),
+			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-		requests = requests.filter((friend) => friend.id !== response.id);
-		filteredRequests = [...requests];
+		filteredRequests = [...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)];
 	};
 
 	const onSearch = (friends: FriendData[]) => {
@@ -94,15 +81,15 @@
 			case 'my-friends':
 				filteredFriends = friends.filter(
 					(friend) =>
-						friend.name.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-						friend.surname.toLowerCase().includes(searchValue.toLocaleLowerCase())
+						friend.user.name.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+						friend.user.surname.toLowerCase().includes(searchValue.toLocaleLowerCase())
 				);
 				break;
 			case 'friend-requests':
-				filteredRequests = requests.filter(
+				filteredRequests = friendRequest.received.filter(
 					(friend) =>
-						friend.name.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-						friend.surname.toLowerCase().includes(searchValue.toLocaleLowerCase())
+						friend.user.name.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
+						friend.user.surname.toLowerCase().includes(searchValue.toLocaleLowerCase())
 				);
 				break;
 			case 'friend-reccomendations':
