@@ -20,7 +20,7 @@
 			sessionStorage.getItem('jwt_token') || '',
 			false
 		);
-		friendList = friendList.filter((friend) => friend.id !== response.id);
+		friendList = friendList.filter((friend) => friend.user.id !== response.id);
 	};
 </script>
 
@@ -32,9 +32,8 @@
 			<div class="w-full md:max-w-md ">
 				<Card>
 					<FriendCard
-						name={`${friend.name} ${friend.surname}`}
-						id={friend.id || 0}
-						action={() => removeFriend(friend.id)}
+						{friend}
+						action={() => removeFriend(friend.user.id)}
 					/>
 				</Card>
 			</div>

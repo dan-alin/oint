@@ -1,10 +1,46 @@
 <script lang="ts">
 	import type { Notification } from "../../models/notification";
-	import { getNotificationMessage } from "../../utils/notification-messages";
+	import { apiCall } from "../../utils/api-call";
+	import { EnumNotificationType, getNotificationMessage } from "../../utils/notification-messages";
 	import { notificationTimeString } from "../../utils/notification-time";
+	import AcceptReject from "../AcceptReject.svelte";
 
 
 	export let notification: Notification;
+
+	let acceptAction: (id: number) => void;
+	let declineAction: (id: number) => void;
+	let actionId: number;
+
+	const acceptFriendRequest = async (friendRequestId: number) => {
+		const response: any = await apiCall(
+			'/api/accept-friend-request',
+			'post',
+			'Request accepted',
+			JSON.stringify({ friendRequestId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+	};
+
+	const declineFriendRequest = async (friendRequestId: number) => {
+		const response: any = await apiCall(
+			'/api/decline-friend-request',
+			'post',
+			'Request declined',
+			JSON.stringify({ friendRequestId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+	};
+
+	switch(notification.type) {
+		case EnumNotificationType.FRIEND_REQ:
+			acceptAction = acceptFriendRequest;
+			declineAction = declineFriendRequest;
+			console.log(notification.message)
+			actionId = notification.message.friendRequestId;
+			break;
+	}
+
 </script>
 
 <div class="flex flex-col gap-4">
@@ -14,11 +50,23 @@
 				<span class="text-3xl">{notification.message.user.name.charAt(0)}</span>
 			</div>
 		</div>
-        <div class="w-full">
-            <div class="mb-2  w-full ">
-                <p class=" w-full self-center align-middle font-bold">{getNotificationMessage(notification.type, `${notification.message.user.name} ${notification.message.user.surname}`)}</p>
-            </div>
-        </div>
+		<div class="flex flex-col w-full">
+			<div class="w-full">
+				<div class="mb-2  w-full ">
+					{#if notification.type === EnumNotificationType.FRIEND_REQ || notification.type === EnumNotificationType.FRIEND_ACC || notification.type === EnumNotificationType.FRIEND_REJ}
+						<p class=" w-full self-center align-middle font-bold">{getNotificationMessage(notification.type, `${notification.message.user.name} ${notification.message.user.surname}`)}</p>
+					{:else if notification.type === EnumNotificationType.INVITATION_REQ}
+						<p class=" w-full self-center align-middle font-bold">{@html getNotificationMessage(notification.type, `${notification.message.user.name} ${notification.message.user.surname}`, `${notification.message.invitation?.appointment.title}`)}</p>
+					{/if}
+				</div>
+			</div>
+			{#if notification.type === EnumNotificationType.FRIEND_REQ || notification.type === EnumNotificationType.INVITATION_REQ}
+				<div class="mb-4">
+					<AcceptReject {acceptAction} {declineAction} id={actionId}/>
+				</div>
+			{/if}
+			
+		</div>
     </div>
 </div>
 <div class="flex justify-end text-xs text-gray-400">{notificationTimeString(new Date(notification.created_at))}</div>

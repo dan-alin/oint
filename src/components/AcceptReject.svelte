@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let acceptAction: (appointmentId: number) => void = () => null;
-	export let declineAction: (appointmentId: number) => void = () => null;
+	export let acceptAction: (id: number) => void = () => null;
+	export let declineAction: (id: number) => void = () => null;
 	export let id: number;
 </script>
 

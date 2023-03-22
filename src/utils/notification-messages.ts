@@ -1,11 +1,13 @@
-export const getNotificationMessage = (notificationType: EnumNotificationType, prefix: string) => {
+export const getNotificationMessage = (notificationType: EnumNotificationType, prefix: string, suffix?: string) => {
     switch(notificationType) {
-        case('FRIEND_REQ'):
+        case(EnumNotificationType.FRIEND_REQ):
          return `${prefix} ti ha inviato una richiesta di amicizia`;
-        case('FRIEND_ACC'):
+        case(EnumNotificationType.FRIEND_ACC):
             return `${prefix} è ora tra i tuoi amici`;
-        case('FRIEND_REJ'):
+        case(EnumNotificationType.FRIEND_REJ):
             return `Ops, sembra che ${prefix} non voglia far parte dei tuoi amici`;
+        case(EnumNotificationType.INVITATION_REQ):
+            return `${prefix} ti ha invitato a <b><u>${suffix}</u></b>`;
 
     }
 }
