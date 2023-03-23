@@ -27,7 +27,9 @@
 		</div>
 		<div class="w-full">
 			<div class="mb-2  w-full ">
-				<p class="ellipsis w-full self-center align-middle font-bold">{`${friend.user.name} ${friend.user.surname}`}</p>
+				<p class="ellipsis w-full self-center align-middle font-bold">
+					{`${friend.user.name} ${friend.user.surname}`}
+				</p>
 				<p>X amici in comune</p>
 			</div>
 		</div>
@@ -38,7 +40,7 @@
 				>
 				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
 					<li class="text-xs">
-						<button on:click={() => removeAction(friend.user.id)}> Rimuovi </button>
+						<button on:click={() => removeAction(friend.friendRequestId)}> Rimuovi </button>
 					</li>
 				</ul>
 			</div>

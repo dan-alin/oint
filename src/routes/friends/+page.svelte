@@ -36,21 +36,20 @@
 
 	let searchValue = '';
 
-	const removeFriend = async (friendId: number) => {
+	const removeFriend = async (friendRequestId: number) => {
 		//TODO type delete response
 		const response: any = await apiCall(
 			'/api/remove-friend',
 			'delete',
 			'',
 			JSON.stringify({
-				friendId
+				friendRequestId
 			}),
 			sessionStorage.getItem('jwt_token') || '',
 			false
 		);
-		console.log(response);
 
-		myFriends = myFriends.filter((friend) => friend.user.id !== response.id);
+		myFriends = myFriends.filter((friend) => friend.user.id !== response.user.id);
 		filteredFriends = [...myFriends];
 	};
 
@@ -62,7 +61,9 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-		filteredRequests = [...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)];
+		filteredRequests = [
+			...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)
+		];
 	};
 
 	const declineFriendRequest = async (friendRequestId: number) => {
@@ -73,7 +74,9 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-		filteredRequests = [...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)];
+		filteredRequests = [
+			...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)
+		];
 	};
 
 	const onSearch = (friends: FriendData[]) => {
