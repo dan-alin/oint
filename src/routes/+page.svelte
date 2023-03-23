@@ -1,35 +1,57 @@
-<!-- TODO page layout-->
-<script>
-	let countdown = 60;
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import AppointmentsList from '../components/appointments/AppointmentsList.svelte';
+	import PageHead from '../components/PageHead.svelte';
+	import Tabs from '../components/Tabs.svelte';
+	import type { Appointment, InvitedAppointment } from '../models';
+	import type { Notification } from '../models/notification';
+	import { myAppointmentsStore, invitedAppointmentsStore } from '../stores/apointments';
+	import { userStore } from '../stores/user';
 
-	const interval = setInterval(() => {
-		countdown = countdown - 1;
-		if (countdown === 0) {
-			clearInterval(interval);
+	export let data: {
+		myAppointments: Appointment[];
+		invitedAppointments: InvitedAppointment[];
+		notificationsUnread: Notification[];
+	};
+	let { myAppointments, invitedAppointments, notificationsUnread } = data;
+	console.log(notificationsUnread)
+
+	let notificationsUreadCount = notificationsUnread.length;
+	let activeTab: string;
+
+	let tabs = [
+		{
+			id: 'my-appointments',
+			label: 'I tuoi eventi'
+		},
+		{
+			id: 'invited-appointments',
+			label: 'I tuoi inviti'
 		}
-	}, 1000);
+	];
+
+	onMount(async () => {
+		myAppointmentsStore.update(() => myAppointments);
+
+		invitedAppointmentsStore.update(() => invitedAppointments);
+	});
 </script>
 
-<div class="flex w-full flex-col items-center justify-center gap-6">
-	<a href="/login">
-		<button class="btn-primary btn w-40">login</button>
-	</a>
-	<a href="/sign-up">
-		<button class="btn-primary btn w-40">sign up</button>
-	</a>
-	<a href="/search-friends">
-		<button class="btn-primary btn w-40">add friends</button>
-	</a>
-	<a href="/friend-requests">
-		<button class="btn-primary btn w-40">friendd request</button>
-	</a>
+<svelte:head>
+	<title>Eventi</title>
+	<meta name="description" content="An events list" />
+</svelte:head>
 
-	<a href="/appointments">
-		<button class="btn-primary btn w-40">appointments</button>
-	</a>
-	<!-- <div class="radial-progress bg-secondary" style={`--value:${countdown};`}>
-		<span class="countdown font-mono ">
-			<span class="text-white transition" style={`--value:${countdown};`} />
-		</span>
-	</div> -->
+<div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
+	<div class="flex flex-col gap-8 ">
+		{#if $userStore}
+		<PageHead firstRow="Ciao" secondRow={$userStore.name} {notificationsUreadCount} showNotification={true}/>
+		{/if}
+		<p class="text-sm">
+			Dai tornei di calcetto alle mostre d'arte, dalla degustazione di vini ai corsi di cucina...
+			Vediamo cosa è in programma questa settimana
+		</p>
+		<Tabs {tabs} bind:active={activeTab} />
+	</div>
 </div>
+<AppointmentsList invited={activeTab === 'invited-appointments'} />

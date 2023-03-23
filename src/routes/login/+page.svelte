@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { fade, fly } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import Checkbox from '../../components/Checkbox.svelte';
 	import InputText from '../../components/InputText.svelte';
 	import type { User } from '../../models';
@@ -30,7 +30,7 @@
 
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
-			goto('/appointments');
+			goto('/');
 		} catch (error: unknown) {
 			console.error(error);
 		}
@@ -101,7 +101,7 @@
 					onChange={() => (keepAccess = !keepAccess)}
 					checked={keepAccess}
 				/>
-				<a class=" text-xs text-secondary underline " href="/">Password dimenticata?</a>
+				<a class=" text-xs text-secondary underline " href="/resetpassword">Password dimenticata?</a>
 			</div>
 
 			<div class="grid grid-cols-1  gap-6 md:grid-cols-3">

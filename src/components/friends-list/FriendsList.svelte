@@ -9,15 +9,12 @@
 	export let acceptAction: (id: number) => void = () => null;
 	export let declineAction: (id: number) => void = () => null;
 
-	console.log(friends);
 </script>
 
 <div class=" grid gap-6 px-6 pb-28 md:grid-cols-2  xl:grid-cols-3 ">
 	{#each friends as friend}
 		<FriendCard
-			avatar={friend.image}
-			name={`${friend.name} ${friend.surname}`}
-			id={friend.id}
+			{friend}
 			{mode}
 			{removeAction}
 			{acceptAction}

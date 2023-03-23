@@ -71,7 +71,7 @@
 			<NavItem path="/login" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Login" />
 
 			<NavItem
-				path="/appointments"
+				path="/"
 				icon={Icons.CALENDAR_OUTLINE}
 				activeIcon={Icons.CALENDAR_FULL}
 				label="Eventi"
