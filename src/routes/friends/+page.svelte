@@ -1,9 +1,10 @@
 <script lang="ts">
-	import FriendsList from '../../components/friends-list/FriendsList.svelte';
+	import AddFriendList from '../../components/friends/AddFriendList.svelte';
+	import FriendsList from '../../components/friends/FriendsList.svelte';
 	import PageHead from '../../components/PageHead.svelte';
 	import Tabs from '../../components/Tabs.svelte';
-	import type { FriendRequests } from '../../models';
-	import type { FriendData } from '../../models/friend';
+	import type { FriendRequests, User } from '../../models';
+	import type { Friend, FriendData } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
 
 	export let data: {
@@ -12,29 +13,41 @@
 		notificationsUnread: Notification[];
 	};
 	let { myFriends, friendRequest, notificationsUnread } = data;
+	console.log(friendRequest);
 
 	let filteredFriends: FriendData[] = myFriends;
 	let filteredRequests: FriendData[] = friendRequest.received;
-
+	let filteredSent: FriendData[] = friendRequest.sent;
+	let foundFriends: Friend[] = [];
 	let notificationsUreadCount = notificationsUnread.length;
 
 	let tabs = [
 		{
 			id: 'my-friends',
-			label: 'I tuoi amici'
+			label: 'I tuoi amici',
+			firstRow: 'I tuoi',
+			secondRow: 'Amici'
 		},
 		{
 			id: 'friend-requests',
-			label: 'Richieste'
+			label: 'Richieste',
+			firstRow: 'Richieste di',
+			secondRow: 'Amicizia'
 		},
 		{
-			id: 'friend-reccomendations',
-			label: 'Suggerimenti'
+			id: 'search-friends',
+			label: 'Cerca amici',
+			firstRow: 'Cerca nuovi',
+			secondRow: 'Amici'
 		}
+		// 	{
+		// 		id: 'friend-reccomendations',
+		// 		label: 'Suggerimenti'
+		// 	}
 	];
 	let activeTab = 'my-friends';
 
-	let searchValue = '';
+	let searchText = '';
 
 	const removeFriend = async (friendRequestId: number) => {
 		//TODO type delete response
@@ -61,9 +74,12 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
+		console.log(response);
+
 		filteredRequests = [
 			...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)
 		];
+		filteredFriends = [...filteredFriends, response.friend];
 	};
 
 	const declineFriendRequest = async (friendRequestId: number) => {
@@ -74,9 +90,20 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
+
 		filteredRequests = [
 			...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)
 		];
+	};
+
+	const addFriend = async (friendId: number) => {
+		const response: User[] = await apiCall(
+			'/api/add-friend',
+			'post',
+			'Request sent',
+			JSON.stringify({ friendId }),
+			sessionStorage.getItem('jwt_token') || ''
+		);
 	};
 
 	const onSearch = (friends: FriendData[]) => {
@@ -84,21 +111,43 @@
 			case 'my-friends':
 				filteredFriends = friends.filter(
 					(friend) =>
-						friend.user.name.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-						friend.user.surname.toLowerCase().includes(searchValue.toLocaleLowerCase())
+						friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
+						friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
 				);
 				break;
 			case 'friend-requests':
 				filteredRequests = friendRequest.received.filter(
 					(friend) =>
-						friend.user.name.toLowerCase().includes(searchValue.toLocaleLowerCase()) ||
-						friend.user.surname.toLowerCase().includes(searchValue.toLocaleLowerCase())
+						friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
+						friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
 				);
 				break;
-			case 'friend-reccomendations':
+			default:
 				break;
 		}
 	};
+
+	const handleLiveSearch = () => {
+		if (searchText.length > 2) {
+			searchFriends();
+		} else {
+			foundFriends = [];
+		}
+	};
+
+	const searchFriends = async () => {
+		const response: Friend[] = await apiCall(
+			'/api/search-users',
+			'post',
+			'',
+			JSON.stringify({ searchText }),
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		foundFriends = response;
+	};
+
+	console.log(filteredFriends);
 </script>
 
 <svelte:head>
@@ -108,7 +157,11 @@
 
 <div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
 	<div class="flex flex-col gap-8 ">
-		<PageHead firstRow="I tuoi" secondRow="Amici" {notificationsUreadCount} />
+		<PageHead
+			firstRow={tabs.find((tab) => tab.id === activeTab)?.firstRow || ''}
+			secondRow={tabs.find((tab) => tab.id === activeTab)?.secondRow || ''}
+			{notificationsUreadCount}
+		/>
 		<p class="text-lg font-bold">{myFriends.length} amici</p>
 		<Tabs {tabs} bind:active={activeTab} />
 
@@ -118,8 +171,10 @@
 			name="search-friend"
 			placeholder="cerca"
 			type="search"
-			bind:value={searchValue}
-			on:input={() => onSearch(myFriends)}
+			bind:value={searchText}
+			on:input={activeTab === 'search-friends'
+				? () => handleLiveSearch()
+				: () => onSearch(myFriends)}
 		/>
 	</div>
 </div>
@@ -128,14 +183,25 @@
 {/if}
 
 {#if activeTab === 'friend-requests'}
-	<FriendsList
-		friends={filteredRequests}
-		mode="accept"
-		acceptAction={acceptFriendRequest}
-		declineAction={declineFriendRequest}
-	/>
+	{#if filteredRequests.length}
+		recived:
+		<FriendsList
+			friends={filteredRequests}
+			mode="request"
+			acceptAction={acceptFriendRequest}
+			declineAction={declineFriendRequest}
+		/>
+	{/if}
+
+	{#if filteredSent.length && filteredRequests.length}
+		<div class="divider my-0 mx-6 " />
+	{/if}
+
+	{#if filteredSent.length}
+		<FriendsList friends={filteredSent} mode="sent" declineAction={removeFriend} />
+	{/if}
 {/if}
 
-{#if activeTab === 'friend-reccomendations'}
-	<div class="flex w-full justify-center text-2xl text-gray-400">COMING SOON</div>
+{#if activeTab === 'search-friends'}
+	<AddFriendList friends={foundFriends} action={addFriend} />
 {/if}

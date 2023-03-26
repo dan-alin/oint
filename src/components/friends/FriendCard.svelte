@@ -5,10 +5,9 @@
 	import Icon from '../Icon.svelte';
 
 	export let friend: FriendData;
-	// export let isViewMode = false;
-	export let mode: 'view' | 'accept' | 'send' = 'view';
 
-	export let action: (friendId: number) => void = () => null;
+	export let mode: 'view' | 'request' | 'sent' = 'view';
+
 	export let removeAction: (friendId: number) => void = () => null;
 	export let acceptAction: (friendId: number) => void = () => null;
 	export let declineAction: (friendId: number) => void = () => null;
@@ -30,7 +29,7 @@
 				<p class="ellipsis w-full self-center align-middle font-bold">
 					{`${friend.user.name} ${friend.user.surname}`}
 				</p>
-				<p>X amici in comune</p>
+				<!-- <p>X amici in comune</p> -->
 			</div>
 		</div>
 		{#if mode === 'view'}
@@ -46,14 +45,13 @@
 			</div>
 		{/if}
 	</div>
-	{#if mode === 'accept'}
+	{#if mode === 'request'}
 		<AcceptReject {acceptAction} {declineAction} id={friend.friendRequestId} />
-	{/if}
-
-	{#if mode === 'send'}
-		<button on:click={() => action(friend.user.id)} class="btn-primary btn-sm btn rounded-md ">
-			Richiedi amicizia
-		</button>
+	{:else if mode === 'sent'}
+		<button
+			class=" btn-primary btn-sm btn rounded-md"
+			on:click={() => declineAction(friend.friendRequestId)}>Annulla</button
+		>
 	{/if}
 
 	<div class="divider my-0" />
