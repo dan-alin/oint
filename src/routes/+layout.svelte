@@ -42,7 +42,8 @@
 		//SW registration to check app updates
 		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
-		if ($page.url.pathname !== '/login' && $page.url.pathname !== '/signup') {
+		if ($page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up') {
+			alert('dd')
 			const user: User = await apiCall(
 			'/api/auth-profile',
 			'get',
