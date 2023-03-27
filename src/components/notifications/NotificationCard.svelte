@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Notification } from "../../models/notification";
+	import { invitationService } from "../../services/invitation.service";
 	import { apiCall } from "../../utils/api-call";
 	import { EnumNotificationType, getNotificationMessage } from "../../utils/notification-messages";
 	import { notificationTimeString } from "../../utils/notification-time";
@@ -32,13 +33,25 @@
 		);
 	};
 
+		const acceptAppointment = async (appointmentId: number) => {
+		invitationService.acceptAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '')
+	};
+
+	const declineAppointment = async (appointmentId: number) => {
+		invitationService.declineAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '')
+	};
+
 	switch(notification.type) {
 		case EnumNotificationType.FRIEND_REQ:
 			acceptAction = acceptFriendRequest;
 			declineAction = declineFriendRequest;
-			console.log(notification.message)
 			actionId = notification.message.friendRequestId;
 			break;
+		case EnumNotificationType.INVITATION_REQ:
+			acceptAction = acceptAppointment
+			declineAction = declineAppointment
+			actionId = notification.message.invitation?.appointment_id || 0
+;
 	}
 
 </script>
