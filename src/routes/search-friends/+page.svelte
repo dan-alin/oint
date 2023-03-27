@@ -3,12 +3,13 @@
 	import FriendCard from '../../components/friends-list/FriendCard.svelte';
 	import InputAction from '../../components/InputAction.svelte';
 	import type { Friend, User } from '../../models';
+	import type { FriendData } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
 
-	let friends: Friend[] = [];
+	let friends: FriendData[] = [];
 
 	const onSearch = async (searchText: string) => {
-		const response: Friend[] = await apiCall(
+		const response: FriendData[] = await apiCall(
 			'/api/search-users',
 			'post',
 			'',
@@ -47,9 +48,7 @@
 <div class="mx-4 mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
 	{#each friends as friend}
 		<FriendCard
-			avatar={friend.user.image}
-			name={`${friend.user.name} ${friend.user.surname}`}
-			id={friend.user.id || 0}
+			{friend}
 			action={addFriend}
 			mode="send"
 		/>
