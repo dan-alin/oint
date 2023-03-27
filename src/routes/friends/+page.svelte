@@ -67,19 +67,20 @@
 	};
 
 	const acceptFriendRequest = async (friendRequestId: number) => {
-		const response: any = await apiCall(
+		const request: any = await apiCall(
 			'/api/accept-friend-request',
 			'post',
 			'Request accepted',
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-		console.log(response);
 
 		filteredRequests = [
-			...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)
+			...friendRequest.received.filter((friend) => friend.user.id !== request.response.user.id)
 		];
-		filteredFriends = [...filteredFriends, response.friend];
+		filteredFriends = [...filteredFriends, request.response];
+
+		console.log(filteredFriends);
 	};
 
 	const declineFriendRequest = async (friendRequestId: number) => {
