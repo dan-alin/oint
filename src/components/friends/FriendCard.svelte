@@ -10,7 +10,7 @@
 
 	export let removeAction: (friendId: number) => void = () => null;
 	export let acceptAction: (friendId: number) => void = () => null;
-	export let declineAction: (friendId: number) => void = () => null;
+	export let declineAction: (friendId: number, isRequest?: boolean) => void = () => null;
 </script>
 
 <div class="flex flex-col gap-4">
@@ -50,7 +50,7 @@
 	{:else if mode === 'sent'}
 		<button
 			class=" btn-primary btn-sm btn rounded-md"
-			on:click={() => declineAction(friend.friendRequestId)}>Annulla</button
+			on:click={() => declineAction(friend.friendRequestId, true)}>Annulla</button
 		>
 	{/if}
 

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import AddFriendList from '../../components/friends/AddFriendList.svelte';
 	import FriendsList from '../../components/friends/FriendsList.svelte';
+	import ModalRadio from '../../components/ModalRadio.svelte';
 	import PageHead from '../../components/PageHead.svelte';
 	import Tabs from '../../components/Tabs.svelte';
-	import type { FriendRequests, User } from '../../models';
+	import type { FriendRequests, RadioItem, User } from '../../models';
 	import type { Friend, FriendData } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
 
@@ -13,7 +14,6 @@
 		notificationsUnread: Notification[];
 	};
 	let { myFriends, friendRequest, notificationsUnread } = data;
-	console.log(friendRequest);
 
 	let filteredFriends: FriendData[] = myFriends;
 	let filteredRequests: FriendData[] = friendRequest.received;
@@ -21,7 +21,7 @@
 	let foundFriends: Friend[] = [];
 	let notificationsUreadCount = notificationsUnread.length;
 
-	let tabs = [
+	const tabs = [
 		{
 			id: 'my-friends',
 			label: 'I tuoi amici',
@@ -45,11 +45,24 @@
 		// 		label: 'Suggerimenti'
 		// 	}
 	];
-	let activeTab = 'my-friends';
 
+	const requestOptions = [
+		{ label: 'Ricevute', value: 'recived' },
+		{ label: 'Inviate', value: 'sent' }
+	];
+
+	const friendListOptions = [
+		{ label: 'Predefinito', value: 'default' },
+		{ label: 'Ordine alfabetico', value: 'alphabeth' },
+		{ label: 'Recenti', value: 'recent' }
+	];
+
+	let activeTab = 'my-friends';
+	let requestActive: RadioItem = requestOptions[0];
+	let friendListActive: RadioItem = friendListOptions[0];
 	let searchText = '';
 
-	const removeFriend = async (friendRequestId: number) => {
+	const removeFriend = async (friendRequestId: number, isRequest: boolean = false) => {
 		//TODO type delete response
 		const response: any = await apiCall(
 			'/api/remove-friend',
@@ -62,8 +75,15 @@
 			false
 		);
 
-		myFriends = myFriends.filter((friend) => friend.user.id !== response.user.id);
-		filteredFriends = [...myFriends];
+		if (isRequest) {
+			filteredSent = [
+				...friendRequest.sent.filter((friend) => friend.user.id !== response.user.id)
+			];
+		} else {
+			filteredFriends = [...myFriends.filter((friend) => friend.user.id !== response.user.id)];
+		}
+		// myFriends = myFriends.filter((friend) => friend.user.id !== response.user.id);
+		// filteredFriends = [...myFriends];
 	};
 
 	const acceptFriendRequest = async (friendRequestId: number) => {
@@ -148,7 +168,45 @@
 		foundFriends = response;
 	};
 
-	console.log(filteredFriends);
+	const changeFilter = (active: RadioItem) => {
+		requestActive = active;
+	};
+
+	const changeOrder = (active: RadioItem) => {
+		friendListActive = active;
+		switch (active.value) {
+			case 'alphabeth':
+				filteredFriends = [...filteredFriends].sort((a, b) => {
+					if (a.user.name < b.user.name) {
+						return -1;
+					}
+					if (a.user.name > b.user.name) {
+						return 1;
+					}
+					return 0;
+				});
+				break;
+			case 'recent':
+				filteredFriends = [...filteredFriends].sort((a, b) => {
+					if (a.user.id < b.user.id) {
+						return 1;
+					}
+					if (a.user.id > b.user.id) {
+						return -1;
+					}
+					return 0;
+				});
+				break;
+			default:
+				filteredFriends = [...myFriends];
+				break;
+		}
+	};
+
+	//Reset searchbar when tab changes
+	$: {
+		if (activeTab !== null) searchText = '';
+	}
 </script>
 
 <svelte:head>
@@ -163,7 +221,6 @@
 			secondRow={tabs.find((tab) => tab.id === activeTab)?.secondRow || ''}
 			{notificationsUreadCount}
 		/>
-		<p class="text-lg font-bold">{myFriends.length} amici</p>
 		<Tabs {tabs} bind:active={activeTab} />
 
 		<input
@@ -180,12 +237,32 @@
 	</div>
 </div>
 {#if activeTab === 'my-friends'}
+	<div class="mx-6 mb-6 flex items-center justify-between">
+		<p class=" text-lg ">{myFriends.length} amici</p>
+		<div class="flex flex-col items-end text-xs">
+			<p class=" font-bold text-primary">Ordina per:</p>
+			<label for="friend-list" class="capitalize">{friendListActive.label} </label>
+		</div>
+	</div>
+
 	<FriendsList friends={filteredFriends} removeAction={removeFriend} />
+	<ModalRadio
+		title="Ordina per"
+		id="friend-list"
+		options={friendListOptions}
+		active={friendListActive}
+		action={changeOrder}
+	/>
 {/if}
 
 {#if activeTab === 'friend-requests'}
-	{#if filteredRequests.length}
-		recived:
+	<div class="mx-6 flex items-center justify-end ">
+		<div class="flex flex-col items-end text-xs">
+			<p class=" font-bold text-primary">Filtra per:</p>
+			<label for="friend-request" class="capitalize">{requestActive.label} </label>
+		</div>
+	</div>
+	{#if filteredRequests.length && requestActive.value === 'recived'}
 		<FriendsList
 			friends={filteredRequests}
 			mode="request"
@@ -194,13 +271,16 @@
 		/>
 	{/if}
 
-	{#if filteredSent.length && filteredRequests.length}
-		<div class="divider my-0 mx-6 " />
-	{/if}
-
-	{#if filteredSent.length}
+	{#if filteredSent.length && requestActive.value === 'sent'}
 		<FriendsList friends={filteredSent} mode="sent" declineAction={removeFriend} />
 	{/if}
+	<ModalRadio
+		title="Filtra per"
+		id="friend-request"
+		options={requestOptions}
+		active={requestActive}
+		action={changeFilter}
+	/>
 {/if}
 
 {#if activeTab === 'search-friends'}
