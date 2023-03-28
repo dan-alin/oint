@@ -17,7 +17,7 @@
 		}
 	}
 
-	const checkValidity = () => {
+	const validate = () => {
 		let input = document.getElementById('confirm-password') as HTMLInputElement;
 		if (password !== passwordConfirmation) {
 			input.setCustomValidity('Le password non coincidono');
@@ -58,6 +58,6 @@
 		required
 		bind:value={passwordConfirmation}
 		customValidation={passwordValidation}
-		revalidate={checkValidity}
+		{validate}
 	/>
 </form>

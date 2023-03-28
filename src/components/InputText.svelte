@@ -8,7 +8,7 @@
 	export let disabled: boolean = false;
 	export let onChange = () => {};
 	export let customValidation: boolean = true;
-	export let revalidate: () => void = () => null;
+	export let validate: () => void = () => null;
 	export let type:
 		| 'color'
 		| 'date'
@@ -60,6 +60,6 @@
 			isDirty = true;
 		}}
 		on:change={onChange}
-		on:blur={revalidate}
+		on:blur={validate}
 	/>
 </div>
