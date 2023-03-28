@@ -66,13 +66,13 @@
 		<div class="flex w-full justify-between gap-2 ">
 			<button
 				class="btn-outline btn-primary  btn-sm btn h-full w-1/2"
-				on:click|stopPropagation={() => declineAction(appointment.id)}
+				on:click|stopPropagation={() => declineAction(appointment.id || 0)}
 			>
 				Rifiuta
 			</button>
 			<button
 				class="btn-primary btn-sm btn h-full w-1/2"
-				on:click|stopPropagation={() => confirmAction(appointment.id)}
+				on:click|stopPropagation={() => confirmAction(appointment.id || 0)}
 			>
 				Accetta
 			</button>
