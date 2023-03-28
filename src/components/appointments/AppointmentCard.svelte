@@ -14,6 +14,12 @@
 
 	const startTime = getTime(appointment.start_date as Date);
 	const endTime = getTime(appointment.end_date as Date);
+
+	const locationSelectionDeadlineDate =  getDate(appointment.location_selection_deadline as Date);
+	const locationSelectionDeadlineTime =  getTime(appointment.location_selection_deadline as Date);
+
+	const isVotingOpen = () =>  getDate(new Date()) < locationSelectionDeadlineDate && getTime(new Date()) < locationSelectionDeadlineTime;
+	const getMostRatedLocation = () => appointment.locations.length > 1 ? appointment.locations.reduce((acc, curr) => acc.votes || 0 > (curr?.votes_count || 0) ? acc : curr ,appointment.locations[0]) : appointment.locations[0]
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -41,21 +47,18 @@
 		</p>
 
 		<div>
-			{#if appointment.locations}
-				<ul>
-					{#each appointment.locations as loc}
+			{#if !isVotingOpen()}
 						<li class="flex gap-1 text-xs text-gray-400">
 							<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
 							<p class="ellipsis">
-								{`${loc.name} - ${loc.address}`}
+								{`${getMostRatedLocation().name} - ${getMostRatedLocation().address}`}
 							</p>
-							{#if appointment.locations.length > 1}
-								<span class="badge badge-xs">{`${loc.votes_count}`}</span>
-							{/if}
+							
 						</li>
-					{/each}
-				</ul>
+			{:else}
+				Work in progress
 			{/if}
+
 		</div>
 	</div>
 </a>
