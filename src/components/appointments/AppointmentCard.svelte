@@ -19,7 +19,7 @@
 	const locationSelectionDeadlineTime =  getTime(appointment.location_selection_deadline as Date);
 
 	const isVotingOpen = () =>  getDate(new Date()) < locationSelectionDeadlineDate && getTime(new Date()) < locationSelectionDeadlineTime;
-	const getMostRatedLocation = () => appointment.locations.length > 1 ? appointment.locations.reduce((acc, curr) => acc.votes || 0 > (curr?.votes_count || 0) ? acc : curr ,appointment.locations[0]) : appointment.locations[0]
+	const getMostRatedLocation =  appointment.locations.length > 1 ? appointment.locations.reduce((acc, curr) => acc.votes || 0 > (curr?.votes_count || 0) ? acc : curr ,appointment.locations[0]) : appointment.locations[0]
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -51,7 +51,7 @@
 						<li class="flex gap-1 text-xs text-gray-400">
 							<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
 							<p class="ellipsis">
-								{`${getMostRatedLocation().name} - ${getMostRatedLocation().address}`}
+								{`${getMostRatedLocation.name} - ${getMostRatedLocation.address}`}
 							</p>
 							
 						</li>
