@@ -3,12 +3,13 @@
 	import InputText from '../../components/InputText.svelte';
 	import AccountForm from '../../components/registration/AccountForm.svelte';
 	import RegistryForm from '../../components/registration/RegistryForm.svelte';
-	import Select from '../../components/Select.svelte';
+
 	import { t } from '../../i18n/i18n';
-	import type { Option } from '../../models';
+
 	import { apiCall } from '../../utils/api-call';
 
 	// export let data: { phonePrefixes: Option[] };
+
 	let step = 1;
 	let formData: any = {
 		name: '',
@@ -32,7 +33,6 @@
 			phone: `${formData.prefix}${formData.phone}`,
 			birthdate: formData.birthdate
 		};
-		console.log(user);
 
 		apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
 	};
@@ -73,8 +73,16 @@
 					bind:passwordConfirmation={formData.passwordConfirmation}
 				/>
 			{/if}
-			<button class="btn-primary btn-sm btn h-10 capitalize" type="submit" form={`${step}-register`}
-				>Iniziamo!</button
+			<button
+				class="btn-primary btn-sm btn h-10 capitalize"
+				type="submit"
+				disabled={step === 1
+					? !formData.name || !formData.surname || !formData.nickname || !formData.birthdate
+					: !formData.phone ||
+					  !formData.email ||
+					  !formData.password ||
+					  !formData.passwordConfirmation}
+				form={`${step}-register`}>Iniziamo!</button
 			>
 		</div>
 		<div class="flex justify-center text-xs">

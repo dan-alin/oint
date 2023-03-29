@@ -37,25 +37,26 @@
 		);
 	};
 
-
 	onMount(async () => {
 		//SW registration to check app updates
 		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
 		const { getTokenFirebase } = await import('../firebase');
-		if ($page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up' && $page.url.pathname !== '/change-password') {
+		if (
+			$page.url.pathname !== '/login' &&
+			$page.url.pathname !== '/sign-up' &&
+			$page.url.pathname !== '/change-password'
+		) {
 			const user: User = await apiCall(
-			'/api/auth-profile',
-			'get',
-			'',
-			undefined,
-			sessionStorage.getItem('jwt_token') || ''
+				'/api/auth-profile',
+				'get',
+				'',
+				undefined,
+				sessionStorage.getItem('jwt_token') || ''
 			);
 			userStore.update(() => user);
 		}
 		getTokenFirebase(setFirebaseToken);
-
 	});
-
 </script>
 
 <svelte:head>
@@ -78,14 +79,14 @@
 		/>
 	</div>
 {/if}
-	<!-- <Header /> -->
+<!-- <Header /> -->
 
-	<div class="h-screen overflow-auto ">
-		<slot />
-	</div>
-	{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up'}
-		<BottomNav />
-	{/if}
-	<!-- {#if ReloadPrompt}
+<div class="h-screen overflow-auto ">
+	<slot />
+</div>
+{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up'}
+	<BottomNav />
+{/if}
+<!-- {#if ReloadPrompt}
 			<svelte:component this={ReloadPrompt} />
 		{/if} -->

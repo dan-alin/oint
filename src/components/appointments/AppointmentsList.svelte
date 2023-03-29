@@ -25,29 +25,26 @@
 		);
 	};
 
-	
-
 	const acceptAppointment = async (appointmentId: number) => {
-		invitationService.acceptAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '')
+		invitationService.acceptAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '');
 	};
 
 	const declineAppointment = async (appointmentId: number) => {
-		invitationService.declineAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '')
+		invitationService.declineAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '');
 	};
-
 </script>
 
 <div class=" grid gap-6 px-6 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
-		{#if invitedOccurrence.invitationStatus !== 'accepted'}
-			<AppointmentCard appointment={invitedOccurrence.appointment} />
-			<AcceptReject
-				id={invitedOccurrence.appointment.id || -1}
-				acceptAction={acceptAppointment}
-				declineAction={declineAppointment}
-			/>
-			<div class="divider my-0" />
+			{#if invitedOccurrence.invitationStatus !== 'accepted'}
+				<AppointmentCard appointment={invitedOccurrence.appointment} />
+				<AcceptReject
+					id={invitedOccurrence.appointment.id || -1}
+					acceptAction={acceptAppointment}
+					declineAction={declineAppointment}
+				/>
+				<div class="divider my-0" />
 			{/if}
 		{/each}
 	{:else}

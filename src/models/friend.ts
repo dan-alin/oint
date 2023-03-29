@@ -1,7 +1,17 @@
 export type Friend = {
 	isFriend: boolean;
 	isPending: boolean;
-	user: FriendData[];
+	user: FriendUser;
 };
 
-export type FriendData = { friendRequestId: number, user: {id: number; name: string; surname: string, image: string }};
+export type FriendData = {
+	friendRequestId: number;
+	user: FriendUser;
+};
+
+export type FriendUser = {
+	id: number;
+	name: string;
+	surname: string;
+	image: string;
+};

@@ -5,13 +5,12 @@
 	import Icon from '../Icon.svelte';
 
 	export let friend: FriendData;
-	// export let isViewMode = false;
-	export let mode: 'view' | 'accept' | 'send' = 'view';
 
-	export let action: (friendId: number) => void = () => null;
+	export let mode: 'view' | 'request' | 'sent' = 'view';
+
 	export let removeAction: (friendId: number) => void = () => null;
 	export let acceptAction: (friendId: number) => void = () => null;
-	export let declineAction: (friendId: number) => void = () => null;
+	export let declineAction: (friendId: number, isRequest?: boolean) => void = () => null;
 </script>
 
 <div class="flex flex-col gap-4">
@@ -27,8 +26,10 @@
 		</div>
 		<div class="w-full">
 			<div class="mb-2  w-full ">
-				<p class="ellipsis w-full self-center align-middle font-bold">{`${friend.user.name} ${friend.user.surname}`}</p>
-				<p>X amici in comune</p>
+				<p class="ellipsis w-full self-center align-middle font-bold">
+					{`${friend.user.name} ${friend.user.surname}`}
+				</p>
+				<!-- <p>X amici in comune</p> -->
 			</div>
 		</div>
 		{#if mode === 'view'}
@@ -38,20 +39,19 @@
 				>
 				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
 					<li class="text-xs">
-						<button on:click={() => removeAction(friend.user.id)}> Rimuovi </button>
+						<button on:click={() => removeAction(friend.friendRequestId)}> Rimuovi </button>
 					</li>
 				</ul>
 			</div>
 		{/if}
 	</div>
-	{#if mode === 'accept'}
+	{#if mode === 'request'}
 		<AcceptReject {acceptAction} {declineAction} id={friend.friendRequestId} />
-	{/if}
-
-	{#if mode === 'send'}
-		<button on:click={() => action(friend.user.id)} class="btn-primary btn-sm btn rounded-md ">
-			Richiedi amicizia
-		</button>
+	{:else if mode === 'sent'}
+		<button
+			class=" btn-primary btn-sm btn rounded-md"
+			on:click={() => declineAction(friend.friendRequestId, true)}>Annulla</button
+		>
 	{/if}
 
 	<div class="divider my-0" />
