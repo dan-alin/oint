@@ -5,7 +5,7 @@
 	import PageHead from '../../components/PageHead.svelte';
 	import Tabs from '../../components/Tabs.svelte';
 	import type { FriendRequests, RadioItem, User } from '../../models';
-	import type { Friend, FriendData } from '../../models/friend';
+	import type { Friend, FriendData, FriendUser } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
 
 	export let data: {
@@ -62,8 +62,13 @@
 	let friendListActive: RadioItem = friendListOptions[0];
 	let searchText = '';
 
-	const removeFriend = async (friendRequestId: number, isRequest: boolean = false) => {
+	const removeFriend = async (friendRequestId: number, isRequest = false) => {
 		//TODO type delete response
+		type DeleteResponse = {
+			message: string;
+			status: number;
+			user: FriendUser;
+		};
 		const response: any = await apiCall(
 			'/api/remove-friend',
 			'delete',
@@ -99,13 +104,11 @@
 			...friendRequest.received.filter((friend) => friend.user.id !== request.response.user.id)
 		];
 		filteredFriends = [...filteredFriends, request.response];
-
-		console.log(filteredFriends);
 	};
 
 	const declineFriendRequest = async (friendRequestId: number) => {
-		const response: any = await apiCall(
-			'/api/decline-friend-request',
+		const request: any = await apiCall(
+			'/api/reject-friend-request',
 			'post',
 			'Request declined',
 			JSON.stringify({ friendRequestId }),
@@ -113,18 +116,20 @@
 		);
 
 		filteredRequests = [
-			...friendRequest.received.filter((friend) => friend.user.id !== response.friend.id)
+			...friendRequest.received.filter((friend) => friend.user.id !== request.response.user.id)
 		];
 	};
 
 	const addFriend = async (friendId: number) => {
-		const response: User[] = await apiCall(
+		const friend: any = await apiCall(
 			'/api/add-friend',
 			'post',
 			'Request sent',
 			JSON.stringify({ friendId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
+
+		filteredSent = [...filteredSent, friend.response];
 	};
 
 	const onSearch = (friends: FriendData[]) => {
