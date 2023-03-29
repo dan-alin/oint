@@ -13,19 +13,23 @@
 	export let location_selection_deadline_time: string;
 	export let startDate: string;
 	export let startTime: string;
-	export let isValid = true;
+	export let isValid = false;
+	export let isDatesValid = false;
 	$: if (location_selection_deadline_date && location_selection_deadline_time) {
 		const _deadline = new Date(
 			`${location_selection_deadline_date} ${location_selection_deadline_time}`
 		);
 		const _startDate = new Date(`${startDate} ${startTime}`);
-		isValid = !(
+		isDatesValid = !(
 			parseInt((_deadline.getTime() / 1000).toFixed(0)) <
 				parseInt((new Date().getTime() / 1000).toFixed(0)) ||
 			parseInt((_deadline.getTime() / 1000).toFixed(0)) >
 				parseInt((_startDate.getTime() / 1000).toFixed(0))
 		);
 	}
+
+	$: isValid = addedPlaces.length > 0 && (location_selection_type === 'single' || isDatesValid);
+
 	let addedPlaces: Place[] = [];
 	let places: Place[];
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { fade, fly } from 'svelte/transition';
-	import InputText from '../../components/InputText.svelte';
+	import { goto } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 	import AccountForm from '../../components/registration/AccountForm.svelte';
 	import RegistryForm from '../../components/registration/RegistryForm.svelte';
 
@@ -33,8 +33,12 @@
 			phone: `${formData.prefix}${formData.phone}`,
 			birthdate: formData.birthdate
 		};
-
-		apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
+		try {
+			await apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
+			goto('/login');
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const nextStep = () => {
