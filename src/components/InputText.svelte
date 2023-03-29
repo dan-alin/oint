@@ -7,6 +7,8 @@
 	export let required: boolean = false;
 	export let disabled: boolean = false;
 	export let onChange = () => {};
+	export let customValidation: boolean = true;
+	export let validate: () => void = () => null;
 	export let type:
 		| 'color'
 		| 'date'
@@ -46,7 +48,7 @@
 	{/if}
 	<input
 		class="input-bordered input h-10 w-full"
-		class:input-error={required && isDirty && !value}
+		class:input-error={(required && isDirty && !value) || !customValidation}
 		use:typeAction
 		{placeholder}
 		{name}
@@ -58,5 +60,6 @@
 			isDirty = true;
 		}}
 		on:change={onChange}
+		on:blur={validate}
 	/>
 </div>

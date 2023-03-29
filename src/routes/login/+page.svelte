@@ -105,7 +105,7 @@
 			</div>
 
 			<div class="grid grid-cols-1  gap-6 md:grid-cols-3">
-				<button class="btn-primary btn-sm btn capitalize" type="submit">Accedi</button>
+				<button class="btn-primary btn-sm btn h-10 capitalize" type="submit">Accedi</button>
 			</div>
 		</form>
 		<div class="divider px-6" />

@@ -7,6 +7,25 @@
 	export let email: string;
 	export let password: string;
 	export let passwordConfirmation: string;
+	let passwordValidation = true;
+
+	$: if (password === passwordConfirmation) {
+		let input = document.getElementById('confirm-password') as HTMLInputElement;
+		if (input) {
+			input.setCustomValidity('');
+			passwordValidation = input.validity.valid;
+		}
+	}
+
+	const validate = () => {
+		let input = document.getElementById('confirm-password') as HTMLInputElement;
+		if (password !== passwordConfirmation) {
+			input.setCustomValidity('Le password non coincidono');
+		} else {
+			input.setCustomValidity('');
+		}
+		passwordValidation = input.validity.valid;
+	};
 </script>
 
 <form
@@ -33,10 +52,12 @@
 	/>
 	<InputText
 		type="password"
-		id="confrm-password"
+		id="confirm-password"
 		name="confirm password"
 		placeholder="Conferma password"
 		required
 		bind:value={passwordConfirmation}
+		customValidation={passwordValidation}
+		{validate}
 	/>
 </form>
