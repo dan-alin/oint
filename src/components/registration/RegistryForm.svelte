@@ -27,7 +27,7 @@
 		type="text"
 		id="nickname"
 		name="nickname"
-		placeholder="Nickename"
+		placeholder="Nickname"
 		required
 		bind:value={nickname}
 	/>
