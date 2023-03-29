@@ -46,13 +46,13 @@
 
 		<div>
 			{#if !isVotingOpen()}
-						<li class="flex gap-1 text-xs text-gray-400">
-							<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
-							<p class="ellipsis">
-								{`${getMostRatedLocation.name} - ${getMostRatedLocation.address}`}
-							</p>
-							
-						</li>
+			<li class="flex gap-1 text-xs text-gray-400">
+				<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
+				<p class="ellipsis">
+					{`${getMostRatedLocation.name} - ${getMostRatedLocation.address}`}
+				</p>
+				
+			</li>
 			{:else}
 			<p class="flex">
 				<Icon icon={Icons.LOCATION_FULL} width="12" height="12" />
