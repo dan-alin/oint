@@ -4,6 +4,10 @@ module.exports = {
 	safelist: [{ pattern: /w-1\/\d*/ }],
 	theme: {
 		extend: {
+			brightness: {
+        		40: '.40',
+        		175: '1.75',
+      		},
 			colors: {
 				primary: 'var(--color-primary)',
 				secondary: 'var(--color-secondary)',

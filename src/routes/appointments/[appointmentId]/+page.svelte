@@ -5,6 +5,8 @@
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
 	import { userStore } from '../../../stores/user';
+	import FriendsBadge from '../../../components/appointment-detail/FriendsBadge.svelte';
+	import PageHead from '../../../components/PageHead.svelte';
 
 	export let data: { appointment: Appointment; friends: FriendData[] };
 	let { appointment, friends } = data;
@@ -39,17 +41,22 @@
 
 <!-- <pre>{JSON.stringify(appointment, null, 2)}</pre> -->
 
-<div class="h-96 w-full bg-base-300  ">
+<div class="h-52 w-full bg-base-300 relative">
+	<div class="absolute top-10 z-50 p-6">
+		<p class="text-xl text-white">Dettaglio</p>
+
+		<p class="text-2xl font-bold text-white">{appointment.title}</p>
+	</div>
 	<img
-		class="h-full w-full object-cover"
+		class="h-full w-full object-cover brightness-40"
 		src={appointment.image ? appointment.image : '/wp.jpg'}
 		alt="event"
 	/>
+	<div class="absolute -bottom-10 w-full ">
+		<FriendsBadge {friends}/>
+	</div>
 </div>
-<div class="p-2">
-	<h2 class="text-2xl font-bold">
-		{appointment.title}
-	</h2>
+<div class="p-2 mt-10">
 	<div class="text-xs">{appointment.description}</div>
 	<!-- start date -->
 	<div class="flex items-center ">
