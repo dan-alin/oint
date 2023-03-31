@@ -5,7 +5,6 @@
 	import Icon from '../Icon.svelte';
 
 	export let friend: Friend;
-
 	export let action: (friendId: number) => void = () => null;
 </script>
 
