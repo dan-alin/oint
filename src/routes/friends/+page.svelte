@@ -4,46 +4,35 @@
 	import ModalRadio from '../../components/ModalRadio.svelte';
 	import PageHead from '../../components/PageHead.svelte';
 	import Tabs from '../../components/Tabs.svelte';
-	import type { FriendRequests, RadioItem, User } from '../../models';
-	import type { Friend, FriendData, FriendUser } from '../../models/friend';
+	import type { FriendRequests, RadioItem } from '../../models';
+	import type { Friend, FriendData } from '../../models/friend';
 	import { apiCall } from '../../utils/api-call';
 
-	export let data: {
-		myFriends: FriendData[];
-		friendRequest: FriendRequests;
-		notificationsUnread: Notification[];
-	};
-	let { myFriends, friendRequest, notificationsUnread } = data;
-
-	let filteredFriends: FriendData[] = myFriends;
-	let filteredRequests: FriendData[] = friendRequest.received;
-	let filteredSent: FriendData[] = friendRequest.sent;
-	let foundFriends: Friend[] = [];
-	let notificationsUreadCount = notificationsUnread.length;
+	enum FriendTabsEnum {
+		MY_FRIENDS = 'my-friends',
+		FRIEND_REQUESTS = 'friend-requests',
+		SEARCH_FRIENDS = 'search-friends'
+	}
 
 	const tabs = [
 		{
-			id: 'my-friends',
+			id: FriendTabsEnum.MY_FRIENDS,
 			label: 'I tuoi amici',
 			firstRow: 'I tuoi',
 			secondRow: 'Amici'
 		},
 		{
-			id: 'friend-requests',
+			id: FriendTabsEnum.FRIEND_REQUESTS,
 			label: 'Richieste',
 			firstRow: 'Richieste di',
 			secondRow: 'Amicizia'
 		},
 		{
-			id: 'search-friends',
+			id: FriendTabsEnum.SEARCH_FRIENDS,
 			label: 'Cerca amici',
 			firstRow: 'Cerca nuovi',
 			secondRow: 'Amici'
 		}
-		// 	{
-		// 		id: 'friend-reccomendations',
-		// 		label: 'Suggerimenti'
-		// 	}
 	];
 
 	const requestOptions = [
@@ -57,18 +46,26 @@
 		{ label: 'Recenti', value: 'recent' }
 	];
 
-	let activeTab = 'my-friends';
+	export let data: {
+		myFriends: FriendData[];
+		friendRequest: FriendRequests;
+		notificationsUnread: Notification[];
+	};
+	let { myFriends, friendRequest, notificationsUnread } = data;
+
+	console.log(myFriends)
+
+	let filteredFriends: FriendData[] = [];
+	let filteredRequests: FriendData[] = [];
+	let filteredSent: FriendData[] = friendRequest.sent;
+	let foundFriends: Friend[] = [];
+	let notificationsUreadCount = notificationsUnread.length;
+	let activeTab = FriendTabsEnum.MY_FRIENDS;
 	let requestActive: RadioItem = requestOptions[0];
 	let friendListActive: RadioItem = friendListOptions[0];
 	let searchText = '';
 
 	const removeFriend = async (friendRequestId: number, isRequest = false) => {
-		//TODO type delete response
-		type DeleteResponse = {
-			message: string;
-			status: number;
-			user: FriendUser;
-		};
 		const response: any = await apiCall(
 			'/api/remove-friend',
 			'delete',
@@ -85,10 +82,9 @@
 				...friendRequest.sent.filter((friend) => friend.user.id !== response.user.id)
 			];
 		} else {
-			filteredFriends = [...myFriends.filter((friend) => friend.user.id !== response.user.id)];
+			debugger
+			myFriends = [...myFriends.filter((friend) => friend.user.id !== response.user.id)];
 		}
-		// myFriends = myFriends.filter((friend) => friend.user.id !== response.user.id);
-		// filteredFriends = [...myFriends];
 	};
 
 	const acceptFriendRequest = async (friendRequestId: number) => {
@@ -100,10 +96,10 @@
 			sessionStorage.getItem('jwt_token') || ''
 		);
 
-		filteredRequests = [
+		friendRequest.received = [
 			...friendRequest.received.filter((friend) => friend.user.id !== request.response.user.id)
 		];
-		filteredFriends = [...filteredFriends, request.response];
+		myFriends = [...myFriends, request.response];
 	};
 
 	const declineFriendRequest = async (friendRequestId: number) => {
@@ -114,8 +110,7 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
-
-		filteredRequests = [
+		friendRequest.received = [
 			...friendRequest.received.filter((friend) => friend.user.id !== request.response.user.id)
 		];
 	};
@@ -134,19 +129,30 @@
 
 	const onSearch = (friends: FriendData[]) => {
 		switch (activeTab) {
-			case 'my-friends':
-				filteredFriends = friends.filter(
+			case FriendTabsEnum.MY_FRIENDS:
+				if (!searchText) { 
+					filteredFriends = [];
+					changeOrder(friendListActive)
+				} else {
+					filteredFriends = friends.filter(
 					(friend) =>
 						friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
 						friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
-				);
+					);
+				}
 				break;
-			case 'friend-requests':
-				filteredRequests = friendRequest.received.filter(
+			case FriendTabsEnum.FRIEND_REQUESTS:
+				debugger
+				if (!searchText) {
+					filteredRequests = [];
+					changeOrder(requestActive)
+				} else {
+					filteredRequests = friendRequest.received.filter(
 					(friend) =>
 						friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
 						friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
-				);
+					);
+				}
 				break;
 			default:
 				break;
@@ -178,10 +184,11 @@
 	};
 
 	const changeOrder = (active: RadioItem) => {
+		let orderedArray = filteredFriends.length ? filteredFriends : myFriends;
 		friendListActive = active;
 		switch (active.value) {
 			case 'alphabeth':
-				filteredFriends = [...filteredFriends].sort((a, b) => {
+				orderedArray = [...orderedArray].sort((a, b) => {
 					if (a.user.name < b.user.name) {
 						return -1;
 					}
@@ -192,7 +199,7 @@
 				});
 				break;
 			case 'recent':
-				filteredFriends = [...filteredFriends].sort((a, b) => {
+				orderedArray = [...orderedArray].sort((a, b) => {
 					if (a.user.id < b.user.id) {
 						return 1;
 					}
@@ -203,8 +210,13 @@
 				});
 				break;
 			default:
-				filteredFriends = [...myFriends];
+				orderedArray = [...orderedArray];
 				break;
+		}
+		if (filteredFriends.length) {
+			filteredFriends = orderedArray;
+		} else {
+			myFriends = orderedArray;
 		}
 	};
 
@@ -241,7 +253,7 @@
 		/>
 	</div>
 </div>
-{#if activeTab === 'my-friends'}
+{#if activeTab === FriendTabsEnum.MY_FRIENDS}
 	<div class="mx-6 mb-6 flex items-center justify-between">
 		<p class=" text-lg ">{myFriends.length} amici</p>
 		<div class="flex flex-col items-end text-xs">
@@ -250,7 +262,7 @@
 		</div>
 	</div>
 
-	<FriendsList friends={filteredFriends} removeAction={removeFriend} />
+	<FriendsList friends={filteredFriends.length > 0 ? filteredFriends :  myFriends} removeAction={removeFriend} />
 	<ModalRadio
 		title="Ordina per"
 		id="friend-list"
@@ -260,16 +272,17 @@
 	/>
 {/if}
 
-{#if activeTab === 'friend-requests'}
+{#if activeTab === FriendTabsEnum.FRIEND_REQUESTS}
 	<div class="mx-6 flex items-center justify-end ">
 		<div class="flex flex-col items-end text-xs">
 			<p class=" font-bold text-primary">Filtra per:</p>
 			<label for="friend-request" class="capitalize">{requestActive.label} </label>
 		</div>
 	</div>
-	{#if filteredRequests.length && requestActive.value === 'recived'}
+	{#if (filteredRequests.length || friendRequest.received.length) && requestActive.value === 'recived'}
+	{friendRequest.received.length}
 		<FriendsList
-			friends={filteredRequests}
+			friends={filteredRequests.length > 0 ? filteredRequests :  friendRequest.received}
 			mode="request"
 			acceptAction={acceptFriendRequest}
 			declineAction={declineFriendRequest}
@@ -277,6 +290,7 @@
 	{/if}
 
 	{#if filteredSent.length && requestActive.value === 'sent'}
+	dsd
 		<FriendsList friends={filteredSent} mode="sent" declineAction={removeFriend} />
 	{/if}
 	<ModalRadio
