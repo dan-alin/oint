@@ -55,7 +55,7 @@
 			</li>
 			{:else}
 			<p class="flex">
-				<Icon icon={Icons.LOCATION_FULL} width="12" height="12" />
+				<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
 				<span class="ellipsis ml-1 font-bold text-xs text-secondary">Work in progressssssss</span>
 				</p>
 			{/if}
