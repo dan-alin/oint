@@ -11,9 +11,9 @@
 
 <a
 	class=" flex h-24 w-16 flex-col items-center justify-center gap-1"
-	class:font-bold={$page.url.pathname.startsWith(path)}
+	class:font-bold={$page.url.pathname.endsWith(path)}
 	href={path}
 >
-	<Icon icon={$page.url.pathname.startsWith(path) ? activeIcon : icon} width="24" height="24" />
+	<Icon icon={$page.url.pathname.endsWith(path) ? activeIcon : icon} width="24" height="24" />
 	{label}
 </a>
