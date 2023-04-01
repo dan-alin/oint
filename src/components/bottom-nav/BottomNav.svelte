@@ -1,12 +1,10 @@
 <script lang="ts">
+	import { Icons } from '../../enums';
+	import type { Appointment, AppointmentForm } from '../../models';
+	import { myAppointmentsStore } from '../../stores/apointments';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
 	import CreateAppointmentModal from '../create-appointment-modal/CreateAppointmentModal.svelte';
-	import { page } from '$app/stores';
-	import type { Appointment, AppointmentForm } from '../../models';
-	import Icon from '../Icon.svelte';
-	import { Icons } from '../../enums';
-	import { myAppointmentsStore } from '../../stores/apointments';
 	import NavItem from './NavItem.svelte';
 	let unique = {};
 
@@ -92,7 +90,7 @@
 
 		<div class="navbar-end justify-evenly text-xs">
 			<NavItem
-				path="/search-friends"
+				path="/profile"
 				icon={Icons.PROFILE_OUTLINE}
 				activeIcon={Icons.PROFILE_FULL}
 				label="Profilo"
