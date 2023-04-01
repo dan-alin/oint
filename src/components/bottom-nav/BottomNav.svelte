@@ -103,8 +103,8 @@
 
 			<NavItem
 				path="/notifications"
-				icon={Icons.NOTIFICATION}
-				activeIcon={Icons.NOTIFICATION}
+				icon={Icons.NOTIFICATION_OUTLINE}
+				activeIcon={Icons.NOTIFICATION_FULL}
 				label="Notifiche"
 			/>
 		</div>
