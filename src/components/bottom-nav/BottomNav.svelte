@@ -66,13 +66,19 @@
 <div class="fixed bottom-0 z-50 flex h-28 flex-col justify-end">
 	<div class="navbar z-50  h-[90px]  w-screen rounded-t-md bg-white px-6 py-0  shadow">
 		<div class="navbar-start  justify-evenly text-xs">
-			<NavItem path="/login" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Login" />
+			<NavItem path="/" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Home" />
 
-			<NavItem
+			<!-- <NavItem
 				path="/"
 				icon={Icons.CALENDAR_OUTLINE}
 				activeIcon={Icons.CALENDAR_FULL}
 				label="Eventi"
+			/> -->
+			<NavItem
+				path="/profile"
+				icon={Icons.PROFILE_OUTLINE}
+				activeIcon={Icons.PROFILE_FULL}
+				label="Profilo"
 			/>
 		</div>
 		<div class="navbar-center">
@@ -90,16 +96,17 @@
 
 		<div class="navbar-end justify-evenly text-xs">
 			<NavItem
-				path="/profile"
-				icon={Icons.PROFILE_OUTLINE}
-				activeIcon={Icons.PROFILE_FULL}
-				label="Profilo"
-			/>
-			<NavItem
 				path="/friends"
 				icon={Icons.FRIENDS_OUTLINE}
 				activeIcon={Icons.FRIENDS_FULL}
 				label="Amici"
+			/>
+
+			<NavItem
+				path="/notifications"
+				icon={Icons.NOTIFICATION}
+				activeIcon={Icons.NOTIFICATION}
+				label="Notifiche"
 			/>
 		</div>
 	</div>
