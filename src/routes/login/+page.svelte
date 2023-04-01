@@ -30,7 +30,7 @@
 
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
-			goto('/');
+			goto('/appointments');
 		} catch (error: unknown) {
 			console.error(error);
 		}
@@ -101,7 +101,8 @@
 					onChange={() => (keepAccess = !keepAccess)}
 					checked={keepAccess}
 				/>
-				<a class=" text-xs text-secondary underline " href="/resetpassword">Password dimenticata?</a>
+				<a class=" text-xs text-secondary underline " href="/resetpassword">Password dimenticata?</a
+				>
 			</div>
 
 			<div class="grid grid-cols-1  gap-6 md:grid-cols-3">

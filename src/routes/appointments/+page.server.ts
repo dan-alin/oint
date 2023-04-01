@@ -1,5 +1,7 @@
-import type { Appointment, InvitedAppointment } from '../models';
-import type { Notification } from '../models/notification';
+import type {
+	Appointment,
+	InvitedAppointment
+} from '../../../../../../../Users/danal/Projects/oint/src/models';
 import type { PageServerLoad } from './$types';
 //
 
