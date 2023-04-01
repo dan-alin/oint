@@ -84,7 +84,7 @@
 <div class="h-screen overflow-auto ">
 	<slot />
 </div>
-{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up'}
+{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up' && $page.url.pathname !== '/'}
 	<BottomNav />
 {/if}
 <!-- {#if ReloadPrompt}
