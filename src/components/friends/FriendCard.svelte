@@ -34,7 +34,7 @@
 		</div>
 		{#if mode === 'view'}
 			<div class="dropdown h-full w-12 ">
-				<button class="flex h-full w-12 items-center justify-end"
+				<button class="btn flex h-full w-12 items-center justify-end"
 					><Icon icon={Icons.MEETBALL} /></button
 				>
 				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
