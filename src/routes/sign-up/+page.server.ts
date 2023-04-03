@@ -1,6 +1,6 @@
 import type { PhonePrefix } from '../../models';
 import type { PageServerLoad } from './$types';
-
+export const prerender = false;
 export const load: PageServerLoad = async (event) => {
 	const { VITE_API_HOST } = import.meta.env;
 	const response = await fetch(`${VITE_API_HOST}phone-prefix`, {

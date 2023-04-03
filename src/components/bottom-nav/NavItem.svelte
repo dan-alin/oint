@@ -7,6 +7,8 @@
 	export let icon: Icons;
 	export let activeIcon: Icons;
 	export let label: string;
+
+	console.log($page.url.pathname);
 </script>
 
 <a

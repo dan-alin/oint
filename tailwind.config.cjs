@@ -5,16 +5,17 @@ module.exports = {
 	theme: {
 		extend: {
 			brightness: {
-        		40: '.40',
-        		175: '1.75',
-      		},
+				40: '.40',
+				175: '1.75'
+			},
 			colors: {
 				primary: 'var(--color-primary)',
 				secondary: 'var(--color-secondary)',
 				accent: 'var(--color-accent)',
 				success: 'var(--color-success)',
 				warning: 'var(--color-warning)',
-				error: 'var(--color-error)'
+				error: 'var(--color-error)',
+				disabled: 'var(--color-disabled)'
 			}
 		}
 	},

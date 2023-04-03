@@ -1,12 +1,10 @@
 <script lang="ts">
+	import { Icons } from '../../enums';
+	import type { Appointment, AppointmentForm } from '../../models';
+	import { myAppointmentsStore } from '../../stores/apointments';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
 	import CreateAppointmentModal from '../create-appointment-modal/CreateAppointmentModal.svelte';
-	import { page } from '$app/stores';
-	import type { Appointment, AppointmentForm } from '../../models';
-	import Icon from '../Icon.svelte';
-	import { Icons } from '../../enums';
-	import { myAppointmentsStore } from '../../stores/apointments';
 	import NavItem from './NavItem.svelte';
 	let unique = {};
 
@@ -68,13 +66,18 @@
 <div class="fixed bottom-0 z-50 flex h-28 flex-col justify-end">
 	<div class="navbar z-50  h-[90px]  w-screen rounded-t-md bg-white px-6 py-0  shadow">
 		<div class="navbar-start  justify-evenly text-xs">
-			<NavItem path="/login" icon={Icons.HOME_OUTLINE} activeIcon={Icons.HOME_FULL} label="Login" />
+			<NavItem
+				path="/appointments"
+				icon={Icons.HOME_OUTLINE}
+				activeIcon={Icons.HOME_FULL}
+				label="Home"
+			/>
 
 			<NavItem
-				path="/"
-				icon={Icons.CALENDAR_OUTLINE}
-				activeIcon={Icons.CALENDAR_FULL}
-				label="Eventi"
+				path="/profile"
+				icon={Icons.PROFILE_OUTLINE}
+				activeIcon={Icons.PROFILE_FULL}
+				label="Profilo"
 			/>
 		</div>
 		<div class="navbar-center">
@@ -92,16 +95,17 @@
 
 		<div class="navbar-end justify-evenly text-xs">
 			<NavItem
-				path="/search-friends"
-				icon={Icons.PROFILE_OUTLINE}
-				activeIcon={Icons.PROFILE_FULL}
-				label="Profilo"
-			/>
-			<NavItem
 				path="/friends"
 				icon={Icons.FRIENDS_OUTLINE}
 				activeIcon={Icons.FRIENDS_FULL}
 				label="Amici"
+			/>
+
+			<NavItem
+				path="/notifications"
+				icon={Icons.NOTIFICATION_OUTLINE}
+				activeIcon={Icons.NOTIFICATION_FULL}
+				label="Notifiche"
 			/>
 		</div>
 	</div>

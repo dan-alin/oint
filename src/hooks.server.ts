@@ -1,6 +1,12 @@
-import type { Handle, HandleFetch } from '@sveltejs/kit';
+import type { Handle } from '@sveltejs/kit';
 
-const protectedPages = ['/events', '/appointments', '/friend-requests', '/search-friends'];
+const protectedPages = [
+	'/profile',
+	'/appointments',
+	'/friends',
+	'change-password',
+	'/notifications'
+];
 
 export const handle: Handle = async ({ event, resolve }) => {
 	let userid = event.cookies.get('userid');
