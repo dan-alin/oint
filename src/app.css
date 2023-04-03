@@ -34,6 +34,7 @@
 	--color-success: #4de088;
 	--color-warning: #ffc107;
 	--color-error: #ff5555;
+	--color-disabled: #989a9e;
 }
 
 * {
