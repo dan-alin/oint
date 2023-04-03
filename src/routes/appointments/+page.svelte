@@ -13,7 +13,6 @@
 		notificationsUnread: Notification[];
 	};
 	let { myAppointments, invitedAppointments, notificationsUnread } = data;
-	console.log(notificationsUnread);
 
 	let notificationsUreadCount = notificationsUnread.length;
 	let activeTab: string;

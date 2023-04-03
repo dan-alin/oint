@@ -53,7 +53,7 @@
 	};
 	let { myFriends, friendRequest, notificationsUnread } = data;
 
-	console.log(myFriends)
+	console.log(myFriends);
 
 	let filteredFriends: FriendData[] = [];
 	let filteredRequests: FriendData[] = [];
@@ -82,7 +82,6 @@
 				...friendRequest.sent.filter((friend) => friend.user.id !== response.user.id)
 			];
 		} else {
-			debugger
 			myFriends = [...myFriends.filter((friend) => friend.user.id !== response.user.id)];
 		}
 	};
@@ -130,27 +129,26 @@
 	const onSearch = (friends: FriendData[]) => {
 		switch (activeTab) {
 			case FriendTabsEnum.MY_FRIENDS:
-				if (!searchText) { 
+				if (!searchText) {
 					filteredFriends = [];
-					changeOrder(friendListActive)
+					changeOrder(friendListActive);
 				} else {
 					filteredFriends = friends.filter(
-					(friend) =>
-						friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
-						friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
+						(friend) =>
+							friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
+							friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
 					);
 				}
 				break;
 			case FriendTabsEnum.FRIEND_REQUESTS:
-				debugger
 				if (!searchText) {
 					filteredRequests = [];
-					changeOrder(requestActive)
+					changeOrder(requestActive);
 				} else {
 					filteredRequests = friendRequest.received.filter(
-					(friend) =>
-						friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
-						friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
+						(friend) =>
+							friend.user.name.toLowerCase().includes(searchText.toLocaleLowerCase()) ||
+							friend.user.surname.toLowerCase().includes(searchText.toLocaleLowerCase())
 					);
 				}
 				break;
@@ -262,7 +260,10 @@
 		</div>
 	</div>
 
-	<FriendsList friends={filteredFriends.length > 0 ? filteredFriends :  myFriends} removeAction={removeFriend} />
+	<FriendsList
+		friends={filteredFriends.length > 0 ? filteredFriends : myFriends}
+		removeAction={removeFriend}
+	/>
 	<ModalRadio
 		title="Ordina per"
 		id="friend-list"
@@ -280,9 +281,9 @@
 		</div>
 	</div>
 	{#if (filteredRequests.length || friendRequest.received.length) && requestActive.value === 'recived'}
-	{friendRequest.received.length}
+		{friendRequest.received.length}
 		<FriendsList
-			friends={filteredRequests.length > 0 ? filteredRequests :  friendRequest.received}
+			friends={filteredRequests.length > 0 ? filteredRequests : friendRequest.received}
 			mode="request"
 			acceptAction={acceptFriendRequest}
 			declineAction={declineFriendRequest}
@@ -290,7 +291,7 @@
 	{/if}
 
 	{#if filteredSent.length && requestActive.value === 'sent'}
-	dsd
+		dsd
 		<FriendsList friends={filteredSent} mode="sent" declineAction={removeFriend} />
 	{/if}
 	<ModalRadio

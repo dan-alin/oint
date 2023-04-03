@@ -5,10 +5,10 @@ import type { User } from './user';
 export type Notification = {
 	created_at: string;
 	id: number;
+	read: boolean;
 	message: {
 		friendRequestId: number;
 		user: User;
-		read: boolean;
 		invitation?: { appointment: Appointment; appointment_id: number };
 	};
 	type: EnumNotificationType;
