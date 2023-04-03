@@ -291,7 +291,6 @@
 	{/if}
 
 	{#if filteredSent.length && requestActive.value === 'sent'}
-		dsd
 		<FriendsList friends={filteredSent} mode="sent" declineAction={removeFriend} />
 	{/if}
 	<ModalRadio
