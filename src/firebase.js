@@ -34,13 +34,11 @@ export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenF
 		vapidKey: VITE_FIREBASE_VAPID_KEY
 	})
 		.then((currentToken) => {
-			console.log('CT', currentToken);
 			if (currentToken) {
 				setTokenFound(currentToken);
 				// Track the token -> client mapping, by sending to backend server
 				// show on the UI that permission is secured
 			} else {
-				console.log('No registration token available. Request permission to generate one.');
 				// shows on the UI that permission is required
 			}
 		})
@@ -49,8 +47,6 @@ export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenF
 			// catch error while creating client token
 		});
 	onMessage(messaging, (payload) => {
-		console.log(payload);
-		console.log(Notification.permission);
 		navigator.serviceWorker.getRegistrations().then((registration) => {
 			registration[0].showNotification(payload.notification.title);
 		});

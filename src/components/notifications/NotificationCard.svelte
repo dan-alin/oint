@@ -7,6 +7,7 @@
 	import AcceptReject from '../AcceptReject.svelte';
 
 	export let notification: Notification;
+	export let action = (notificationId: number) => {};
 
 	let acceptAction: (id: number) => void;
 	let declineAction: (id: number) => void;
@@ -20,6 +21,7 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
+		action(notification.id);
 	};
 
 	const declineFriendRequest = async (friendRequestId: number) => {
@@ -30,14 +32,17 @@
 			JSON.stringify({ friendRequestId }),
 			sessionStorage.getItem('jwt_token') || ''
 		);
+		action(notification.id);
 	};
 
 	const acceptAppointment = async (appointmentId: number) => {
 		invitationService.acceptAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '');
+		action(notification.id);
 	};
 
 	const declineAppointment = async (appointmentId: number) => {
 		invitationService.declineAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '');
+		action(notification.id);
 	};
 
 	switch (notification.type) {
