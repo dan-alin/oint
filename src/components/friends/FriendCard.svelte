@@ -37,7 +37,7 @@
 				<label tabindex="0" class="flex h-full w-12 items-center justify-end"
 					><Icon icon={Icons.MEETBALL} /></label
 				>
-				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
+				<ul tabindex="0" class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
 					<li class="text-xs">
 						<button on:click|stopPropagation={() => removeAction(friend.friendRequestId)}>
 							Rimuovi
