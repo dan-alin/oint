@@ -8,11 +8,9 @@
 			if (reloadSW) {
 				r &&
 					setInterval(() => {
-						console.log('Checking for sw update');
 						r.update();
 					}, 20000 /* 20s for testing purposes */);
 			} else {
-				console.log(`SW Registered: ${r}`);
 			}
 		},
 		onRegisterError(error) {
