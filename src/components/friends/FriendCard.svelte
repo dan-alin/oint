@@ -39,7 +39,9 @@
 				>
 				<ul class="dropdown-content menu right-0  rounded-sm bg-white  p-4 shadow">
 					<li class="text-xs">
-						<button on:click={() => removeAction(friend.friendRequestId)}> Rimuovi </button>
+						<button on:click|stopPropagation={() => removeAction(friend.friendRequestId)}>
+							Rimuovi
+						</button>
 					</li>
 				</ul>
 			</div>
