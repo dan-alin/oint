@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { Icons } from '../enums';
 
-	export let width: string = '24';
-	export let height: string = '24';
+	export let size: '24';
 	export let icon: Icons;
+	export let color = '';
 </script>
 
-<img src={icon} alt="" {width} {height} />
+<span class={icon} style="font-size:{size}px; color: {color}" />

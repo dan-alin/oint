@@ -16,6 +16,9 @@ module.exports = {
 				warning: 'var(--color-warning)',
 				error: 'var(--color-error)',
 				disabled: 'var(--color-disabled)'
+			},
+			fontFamily: {
+				raleway: ['Raleway', 'sans-serif']
 			}
 		}
 	},
