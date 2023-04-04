@@ -38,8 +38,8 @@ const config: UserConfig = {
 				theme_color: '#ffffff',
 				background_color: '#ffffff',
 				display: 'standalone',
-				scope: 'https://oint-develop.vercel.app/',
-				start_url: 'https://oint-develop.vercel.app/'
+				scope: '/',
+				start_url: '/'
 			},
 			injectManifest: {
 				globPatterns: ['client/**/*.{js,css,ico,png,svg,webp,woff,woff2}']
