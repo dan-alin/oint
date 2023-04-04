@@ -30,23 +30,13 @@ jobs:
     needs: format-and-lint
 
     steps:
-      - name: Checkout repository
+      - name: Check out
         uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          token: '${{ secrets.GITHUB_TOKEN }}'
+          fetch-depth: 0
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: generate CHANGELOG.md
-        run: npm run generate-changelog
-
-      - name: Commit CHANGELOG.md
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Create bump and changelog
+        uses: commitizen-tools/commitizen-action@master
         with:
-          branch: cz
-          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
-          file_pattern: CHANGELOG.md
+          github_token: ${{ secrets.GITHUB_TOKEN }}

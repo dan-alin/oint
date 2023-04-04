@@ -1,0 +1,176 @@
+## Unreleased
+
+### Feat
+
+- **.github**: cI
+- **husky**: made hooks executables
+- **packages**: add commitizen cz-conventional-changelog
+- fake splash page
+- login redirects to appointments route
+- navbar refactor
+- implements WorkInProgress component
+- add banner in request sent
+- init dettaglio refactor
+- reject friend request
+- password validation
+- work in progress
+- merge dev
+- wip friend
+- wip refactoor friend section
+- use request id to handle friend removal
+- init notifications
+- move appointments in home
+- test
+- login image
+- friends page with filters & refactor components
+- restore delete, remove svelte query
+- 401 redirect and notification count
+- appointments sveltequery implementation
+- navbar and appointments refactor
+- reload prompt sw
+- reload prompt
+- test reload prompt
+- production env
+- precache index
+- update user store after login
+- removed prerender in layout
+- add invitees if th user is the creator of the appointment
+- reload prompt
+- test splash screen
+- save token
+- use import.meta.env for vvariables
+- detail invitations
+- add vote
+- bottom nav color for current path
+- bottom navigation wip
+- accept/reject message
+- merge with dev
+- invited appointments
+- comment
+- notifications
+- register sw
+- test
+- firebase sw in static dir
+- log apikey
+- push notifications
+- invitations accept/reject
+- friend list, delete & start addInvitees
+- add location select type
+- evvent detail
+- add places in location card
+- svelte layout appointments
+- add calendar icon for card component
+- add locations to creation form
+- close sidemenu on click
+- drawer & guard & card refactor
+- update appointment card
+- layout modal create appointment
+- ssr appointments
+- add friend request page
+- add firend request
+- multi step event creation, event delete, remove button component
+- add delete appointment
+- add store for events
+- toast messagges
+- view and create appoitments
+- add login and sign up navigation buttons
+- authorization & login & events-init
+- add prefix & finish form validation
+- button props
+- sign up page & i18n & spinner
+- add text-input
+
+### Fix
+
+- **changelog.yml**: text toTag
+- **changelog.yml**: removed tag
+- **changelog**: changelog action
+- hotfix to invite friends to appointment
+- remove stoppropagation
+- add tabinde to ul
+- add stop propagation
+- menu remove friends
+- dropdown
+- delete console.log
+- remove console.log
+- filter notifications
+- **resetpassword & sign-up**: set prerender to false
+- prerender profile page
+- prerender profile page
+- remove unused manifest and update protected routes
+- **NavItem**: fixes activeIcon bug
+- amici
+- formatting
+- appointment card
+- nickename
+- add locations validation
+- remove function on most rated locations
+- centralize accept appointment and fix searc user
+- add change-password to exluded routes
+- sign-up guard
+- Friend typing
+- another test
+- test
+- refactor
+- userstore name in appointments
+- cast date
+- bg login image
+- bg image
+- img path
+- manifest prod
+- vite config
+- sw
+- display pwa
+- favicon
+- add dependencies
+- rever css scroll
+- handle votes show logic
+- favicons
+- externalize location in appointment detail
+- remove log, try catch and centralize host
+- cancel appointment
+- format
+- refactor createAppointmentsModal
+- friend list pagination
+- friend list pagination
+- prova ntifica
+- error
+- last resort
+- test
+- fdsfsfd
+- rename firebase import
+- externalize firebase
+- remove unused imports
+- vapidkey
+- toast
+- layout and appointments detail
+- delete appointment
+- temp removed svelte extension from lintstaged
+- prerender search-friends
+- guard search-friends
+- prerender events
+- moved input error label to avvoid layout shifting & fix navbar z index
+- token in build
+- test token
+- test token alternativo
+- prova hook
+- test log hook
+- debug
+- test
+- test ssr
+- test preload
+- add prerender
+- remove console.log
+- guard received array
+- friend requests array
+- length friend-requests
+- upgrade svelte
+- esbuild packagelock
+- packa.lock
+- img src in appointment card
+- add types to input-text
+
+### Refactor
+
+- web manifest
+- events
