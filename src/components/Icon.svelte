@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Icons } from '../enums';
 
-	export let size: '24';
+	export let size = '24';
 	export let icon: Icons;
 	export let color = '';
 </script>
