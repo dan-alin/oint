@@ -52,5 +52,10 @@
 		"commitizen": {
 			"path": "cz-conventional-changelog"
 		}
+	},
+	"release": {
+		"branches": [
+			"main"
+		]
 	}
 }
