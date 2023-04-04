@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - cz
+permissions:
+  contents: write
+  pull-requests: write
 
 env:
   NODE_VERSION: 16
@@ -17,7 +20,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        if: matrix.language == 'javascript'
         uses: actions/setup-node@v2
         with:
           node-version: ${{ env.NODE_VERSION }}
@@ -25,18 +27,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-  generate-changelog:
-    runs-on: ubuntu-latest
-    needs: format-and-lint
+release:
+  runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out
-        uses: actions/checkout@v2
-        with:
-          token: '${{ secrets.GITHUB_TOKEN }}'
-          fetch-depth: 0
-
-      - name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+  steps:
+    - uses: google-github-actions/release-please-action@v3
+      with:
+        release-type: node
+        package-name: release-please-action
