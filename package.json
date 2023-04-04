@@ -11,8 +11,7 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"prepare": "husky install",
-		"cz": "cz",
-		"generate-changelog": "cz ch"
+		"cz": "cz"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.4.4",

@@ -3,7 +3,7 @@ name: Generate changelog
 on:
   push:
     branches:
-      - cz
+      - main
 permissions:
   contents: write
   pull-requests: write
