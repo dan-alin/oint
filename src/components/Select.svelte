@@ -28,6 +28,7 @@
 		{disabled}
 		on:change={(e) => {
 			isDirty = true;
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			//@ts-ignore
 			dispatch('change', { value: e.target && e.target.value });
 		}}

@@ -18,7 +18,8 @@ module.exports = {
 	},
 	globals: {
 		__DATE__: true,
-		__RELOAD_SW__: true
+		__RELOAD_SW__: true,
+		NodeJS: true
 	},
 	env: {
 		browser: true,
