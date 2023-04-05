@@ -28,10 +28,10 @@ jobs:
 
       - name: Auto-merge pull request
         uses: octokit/request-action@v2.x
+        env:
+          GITHUB_SECRET: ${{ secrets.MERGE_SECRET }}
         with:
           route: PUT /repos/${{ github.repository }}/pulls/${{ steps.create_release.outputs.pr.number }}/merge
-          headers: |
-            Authorization: Bearer ${{ secrets.MERGE_SECRET }}
           body: |
             {
               "commit_title": "Auto-merge pull request",
