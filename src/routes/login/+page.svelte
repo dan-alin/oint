@@ -101,8 +101,8 @@
 					onChange={() => (keepAccess = !keepAccess)}
 					checked={keepAccess}
 				/>
-				<a class=" text-xs text-secondary underline " href="/resetpassword">Password dimenticata?</a
-				>
+
+				<a class="text-xs text-secondary underline " href="/resetpassword">Password dimenticata?</a>
 			</div>
 
 			<div class="grid grid-cols-1  gap-6 md:grid-cols-3">

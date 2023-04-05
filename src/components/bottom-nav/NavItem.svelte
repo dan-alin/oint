@@ -14,6 +14,6 @@
 	class:font-bold={$page.url.pathname.startsWith(path)}
 	href={path}
 >
-	<Icon icon={$page.url.pathname.startsWith(path) ? activeIcon : icon} width="24" height="24" />
+	<Icon icon={$page.url.pathname.startsWith(path) ? activeIcon : icon} />
 	{label}
 </a>
