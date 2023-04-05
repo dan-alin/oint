@@ -195,6 +195,29 @@
 	.bg-container {
 		@apply flex h-full flex-col justify-end bg-cover bg-center bg-no-repeat;
 	}
+
+	:root {
+		--color-primary: #2e46ff;
+		--color-secondary: #ff5580;
+		--color-accent: #ffd700;
+		--color-success: #4de088;
+		--color-warning: #ffc107;
+		--color-error: #ff5555;
+		--color-disabled: #989a9e;
+		--color-light-gray: #dedede;
+	}
+
+	.dark {
+		/* TODO: modificare colori per dark mode */
+		--color-primary: #2e46ff;
+		--color-secondary: #ff5580;
+		--color-accent: #ffd700;
+		--color-success: #4de088;
+		--color-warning: #ffc107;
+		--color-error: #ff5555;
+		--color-disabled: #989a9e;
+		--color-light-gray: #dedede;
+	}
 }
 
 @layer components {
@@ -207,16 +230,6 @@
 	.ellipsis {
 		@apply overflow-hidden text-ellipsis whitespace-nowrap;
 	}
-}
-
-:root {
-	--color-primary: #2e46ff;
-	--color-secondary: #ff5580;
-	--color-accent: #ffd700;
-	--color-success: #4de088;
-	--color-warning: #ffc107;
-	--color-error: #ff5555;
-	--color-disabled: #989a9e;
 }
 
 * {
