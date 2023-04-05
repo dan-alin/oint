@@ -140,7 +140,7 @@ jobs:
             <summary>Format Check Output</summary>
             
             ```
-            ${{ 'FORMAT_OUTPUT' }}
+            ${{ FORMAT_OUTPUT }}
             ```
             
             </details>
@@ -149,7 +149,7 @@ jobs:
             <summary>Lint Check Output</summary>
             
             ```
-            ${{ '$LINT_OUTPUT' }}
+            ${{ LINT_OUTPUT }}
             ```
             
             </details>
@@ -158,7 +158,7 @@ jobs:
             <summary>Type-Check Output</summary>
             
             ```
-            ${{ '$TYPE_CHECK_OUTPUT' }}
+            ${{ TYPE_CHECK_OUTPUT }}
             ```
             
             </details>
