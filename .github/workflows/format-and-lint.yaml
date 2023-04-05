@@ -21,7 +21,6 @@ jobs:
       lint_output: ${{ steps.lint.outputs.output }}
       type_check: ${{ steps.type_check.outputs.status }}
       type_check_output: ${{ steps.type_check.outputs.output }}
-      tests: ${{ steps.tests.outputs.status }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -40,8 +39,7 @@ jobs:
         run: |
           RESULT=$(npm run ci:format 2>&1 || echo "job_status:failed")
           
-          echo "$RESULT"
-          echo "output=$RESULT" >> "$GITHUB_OUTPUT"
+          echo "$RESULT" > format_output.txt
           
           if echo "$RESULT" | grep -q "job_status:failed"; then
             echo 'status=failure' >> "$GITHUB_OUTPUT"
@@ -56,8 +54,7 @@ jobs:
         run: |
           RESULT=$(npm run ci:lint 2>&1 || echo "job_status:failed")
           
-          echo "$RESULT"
-          echo "output=$RESULT" >> "$GITHUB_OUTPUT"
+          echo "$RESULT" > lint_output.txt
           
           if echo "$RESULT" | grep -q "job_status:failed"; then
             echo 'status=failure' >> "$GITHUB_OUTPUT"
@@ -72,8 +69,7 @@ jobs:
         run: |
           RESULT=$(npm run ci:type-check 2>&1 || echo "job_status:failed")
           
-          echo "$RESULT"
-          echo "output=$RESULT" >> "$GITHUB_OUTPUT"
+          echo "$RESULT" > type_check_output.txt
           
           if echo "$RESULT" | grep -q "job_status:failed"; then
             echo 'status=failure' >> "$GITHUB_OUTPUT"
@@ -81,7 +77,27 @@ jobs:
           else
             echo 'status=success' >> "$GITHUB_OUTPUT"
           fi
-  
+
+      - name: Upload format output
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: format_output
+          path: format_output.txt
+
+      - name: Upload lint output
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: lint_output
+          path: lint_output.txt
+
+      - name: Upload type-check output
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: type_check_output
+          path: type_check_output.txt
 
   test:
     runs-on: ubuntu-latest
@@ -106,17 +122,18 @@ jobs:
     needs: [ checks, test ]
     if: github.event_name == 'pull_request'
     steps:
+      - name: Download outputs
+        id: download
+        uses: actions/download-artifact@v2
+        with:
+          path: outputs
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         env:
           FORMAT: ${{ needs.checks.outputs.format }}
-          FORMAT_OUTPUT: ${{ needs.checks.outputs.format_output }}
           LINT: ${{ needs.checks.outputs.lint }}
-          LINT_OUTPUT: ${{ needs.checks.outputs.lint_output }}
           TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
-          TYPE_CHECK_OUT: ${{ needs.checks.outputs.type_check_output }}
-          TEST: ${{ needs.test.result }}
-
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
@@ -132,7 +149,7 @@ jobs:
             | Format Check | ${{ '$FORMAT' == 'success' && '✅' || '❌' }} |
             | Lint Check | ${{ '$LINT' == 'success' && '✅' || '❌' }} |
             | Type-Check | ${{ '$TYPE_CHECK' == 'success' && '✅' || '❌' }} |
-            | Test | ${{ '$TEST' == 'success' && '✅' || '❌' }} |
+            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
             
             ## Details
             
@@ -140,7 +157,7 @@ jobs:
             <summary>Format Check Output</summary>
             
             ```
-            ${{ '$FORMAT_OUTPUT' }}
+            ${{ steps.download.outputs.outputs.format_output }}
             ```
             
             </details>
@@ -149,7 +166,7 @@ jobs:
             <summary>Lint Check Output</summary>
             
             ```
-            ${{ '$LINT_OUTPUT' }}
+            ${{ steps.download.outputs.outputs.lint_output }}
             ```
             
             </details>
@@ -158,7 +175,7 @@ jobs:
             <summary>Type-Check Output</summary>
             
             ```
-            ${{ '$TYPE_CHECK_OUTPUT' }}
+            ${{ steps.download.outputs.outputs.type_check_output }}
             ```
             
             </details>
