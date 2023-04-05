@@ -6,8 +6,8 @@ module.exports = {
 	ignorePatterns: ['*.cjs'],
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	rules: {
-		"no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-		"@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+		'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+		'@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
 	},
 	settings: {
 		'svelte3/typescript': () => require('typescript')
