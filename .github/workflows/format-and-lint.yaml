@@ -125,10 +125,10 @@ jobs:
             
             | Job Name | Status |
             | --- | --- |
-            | Format Check | ${{ "$FORMAT" == "success" && "✅" || "❌" }} |
-            | Lint Check | ${{ "$LINT" == "success" && "✅" || "❌" }} |
-            | Type-Check | ${{ "$TYPE_CHECK" == "success" && "✅" || "❌" }} |
-            | Test | ${{ "$TEST" == "success" && "✅" || "❌" }} |
+            | Format Check | ${{ '$FORMAT' == "success" && "✅" || "❌" }} |
+            | Lint Check | ${{ '$LINT' == "success" && "✅" || "❌" }} |
+            | Type-Check | ${{ '$TYPE_CHECK' == "success" && "✅" || "❌" }} |
+            | Test | ${{ '$TEST' == "success" && "✅" || "❌" }} |
             
             ## Details
             
