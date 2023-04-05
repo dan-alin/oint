@@ -26,6 +26,11 @@ jobs:
           release-type: node
           package-name: release-please-action
 
+      - name: Print Output
+        run: |
+          echo ${{ steps.create_release.outputs.pr }}
+          echo ${{ steps.create_release.outputs.prs }}
+
       - name: Auto-merge pull request
         uses: octokit/request-action@v2.x
         env:
