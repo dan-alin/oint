@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   release:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true && github.event.pull_request.user.type != 'Bot'
     runs-on: ubuntu-latest
     steps:
       - uses: google-github-actions/release-please-action@v3
@@ -59,4 +59,5 @@ jobs:
           type: now
           from_branch: main
           target_branch: develop
+          message: 'merge(release): merge main into develop'
           github_token: ${{ secrets.MERGE_SECRET }}
