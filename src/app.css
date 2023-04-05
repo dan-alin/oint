@@ -5,16 +5,16 @@
 @layer base {
 	@font-face {
 		font-family: 'Raleway';
-		src: url('fonts/Raleway/Raleway-Regular.ttf') format('truetype');
+		src: url('/fonts/Raleway/Raleway-Regular.ttf') format('truetype');
 	}
 
 	@font-face {
 		font-family: 'icomoon';
-		src: url('fonts/icomoon.eot?v2w29e');
-		src: url('fonts/icomoon.eot?v2w29e#iefix') format('embedded-opentype'),
-			url('fonts/icomoon.ttf?v2w29e') format('truetype'),
-			url('fonts/icomoon.woff?v2w29e') format('woff'),
-			url('fonts/icomoon.svg?v2w29e#icomoon') format('svg');
+		src: url('/fonts/icomoon.eot?v2w29e');
+		src: url('/fonts/icomoon.eot?v2w29e#iefix') format('embedded-opentype'),
+			url('/fonts/icomoon.ttf?v2w29e') format('truetype'),
+			url('/fonts/icomoon.woff?v2w29e') format('woff'),
+			url('/fonts/icomoon.svg?v2w29e#icomoon') format('svg');
 		font-weight: normal;
 		font-style: normal;
 		font-display: block;
