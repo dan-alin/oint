@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4d4735a-fdde-4582-8c71-8a34fae3b9e5" name="Changes" comment="" />
+    <list default="true" id="f4d4735a-fdde-4582-8c71-8a34fae3b9e5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/notifications/NotificationCard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/notifications/NotificationCard.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/ReloadPrompt.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/ReloadPrompt.svelte" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +83,7 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/alin.ioan.dan/Projects/oint/node_modules/prettier",
     "settings.editor.selected.configurable": "settings.typescriptcompiler",
-    "ts.external.directory.path": "/Users/alin.ioan.dan/Projects/oint/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/alessio.marchi/github-repos/oint/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
