@@ -110,11 +110,8 @@ jobs:
             ## Last commit:
             [${{ env.COMMIT_HASH }}](${{ env.COMMIT_URL }})
 
-            ## Job Link:
-            [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
             ## Summary
 
-            | Format Check | Lint Check | Type Check | Test | Vercel Deploy Link |
-            | --- | --- | --- | --- | --- |
-            | ${{ env.FORMAT == 'success' && '✅' || '❌' }} | ${{ env.LINT == 'success' && '✅' || '❌' }} | ${{ env.TYPE_CHECK == 'success' && '✅' || '❌' }} | ${{ env.TEST == 'success' && '✅' || '❌' }} | [🚀 URL](${{ steps.vercel_url.outputs.url }}) |
+            | Format Check | Lint Check | Type Check | Test | Job Link | 🚀 Vercel Deploy Link |
+            | :---: | :---: | :---: | :---: | :---: |
+            | ${{ env.FORMAT == 'success' && '✅' || '❌' }} | ${{ env.LINT == 'success' && '✅' || '❌' }} | ${{ env.TYPE_CHECK == 'success' && '✅' || '❌' }} | ${{ env.TEST == 'success' && '✅' || '❌' }} | [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | [URL](${{ steps.vercel_url.outputs.url }}) |
