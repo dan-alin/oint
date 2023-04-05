@@ -17,10 +17,13 @@ jobs:
     strategy:
       fail-fast: false
     outputs:
-      format: ${{ steps.format.outputs.test }}
-      lint: ${{ steps.lint.outputs.test }}
-      type_check: ${{ steps.type_check.outputs.test }}
-      tests: ${{ steps.tests.outputs.test }}
+      format: ${{ steps.format.outputs.status }}
+      format_output: ${{ steps.format.outputs.output }}
+      lint: ${{ steps.lint.outputs.status }}
+      lint_output: ${{ steps.lint.outputs.output }}
+      type_check: ${{ steps.type_check.outputs.status }}
+      type_check_output: ${{ steps.type_check.outputs.output }}
+      tests: ${{ steps.tests.outputs.status }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,14 +41,15 @@ jobs:
         continue-on-error: true
         run: |
           RESULT=$(npm run ci:format 2>&1 || echo "failed")
+          
           echo "$RESULT"
+          echo "output=$RESULT" >> "$GITHUB_OUTPUT"
+          
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=format_output::$RESULT"
-            echo '❌' >> "$GITHUB_OUTPUT"
+            echo 'status=❌' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "::set-output name=format_output::$RESULT"
-            echo '✅' >> "$GITHUB_OUTPUT"
+            echo 'status=✅' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:lint
@@ -53,30 +57,31 @@ jobs:
         continue-on-error: true
         run: |
           RESULT=$(npm run ci:lint 2>&1 || echo "failed")
+          
           echo "$RESULT"
+          echo "output=$RESULT" >> "$GITHUB_OUTPUT"
+          
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=lint_output::$RESULT"
-            echo '❌' >> "$GITHUB_OUTPUT"
+            echo 'status=❌' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "::set-output name=lint_output::$RESULT"
-            echo '✅' >> "$GITHUB_OUTPUT"
+            echo 'status=✅' >> "$GITHUB_OUTPUT"
           fi
-      
 
       - name: Run ci:type-check
         id: type_check
         continue-on-error: true
         run: |
           RESULT=$(npm run ci:type-check 2>&1 || echo "failed")
+          
           echo "$RESULT"
+          echo "output=$RESULT" >> "$GITHUB_OUTPUT"
+          
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=type_check_output::$RESULT"
-            echo '❌' >> "$GITHUB_OUTPUT"
+            echo 'status=❌' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "::set-output name=type_check_output::$RESULT"
-            echo '✅' >> "$GITHUB_OUTPUT"
+            echo 'status=✅' >> "$GITHUB_OUTPUT"
           fi
   
 
@@ -107,7 +112,7 @@ jobs:
         id: check-failures
         run: |
           FAILURES=false
-          if [ "${{ needs.checks.outputs.format_result }}" == "failure" ]; then
+          if [ "${{ needs.checks.outputs.status }}" == "failure" ]; then
             echo "Format check failed"
             FAILURES=true
           fi
