@@ -5,6 +5,7 @@
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
 	import CreateAppointmentModal from '../create-appointment-modal/CreateAppointmentModal.svelte';
+	import Icon from '../Icon.svelte';
 	import NavItem from './NavItem.svelte';
 	let unique = {};
 
@@ -83,7 +84,7 @@
 		<div class="navbar-center">
 			<!-- modal -->
 			<label for="create-appointment-modal" class="ratio-h-w btn-primary btn-circle btn  mb-16 "
-				>+</label
+				><Icon icon={Icons.ADD} size="26" /></label
 			>
 		</div>
 		<input type="checkbox" id="create-appointment-modal" class="modal-toggle" />

@@ -28,19 +28,18 @@
 			</div>
 		</div>
 	</div>
-	
+
 	{#if friend.isPending}
-		<BannerRequestSent label="Richiesta inviata"/>
+		<BannerRequestSent label="Richiesta inviata" />
 	{/if}
 	{#if friend.isFriend}
-		<BannerRequestSent label="Amici"/>
+		<BannerRequestSent label="Amici" />
 	{/if}
 	{#if !friend.isFriend && !friend.isPending}
 		<button on:click={() => action(friend.user.id)} class=" btn-primary btn-sm btn rounded-md">
 			Richiedi amicizia
 		</button>
 	{/if}
-
 
 	<div class="divider my-0" />
 </div>
