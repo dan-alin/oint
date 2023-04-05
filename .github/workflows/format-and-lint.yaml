@@ -94,6 +94,13 @@ jobs:
           echo ${{ env.TEST }}
           echo ${{ env.TEST == 'success' && '✅' || '❌' }}
 
+      - name: Set Vercel URL
+        id: set_vercel_url
+        run: |
+          if [ -n "${{ steps.vercel_url.outputs.url }}" ]; then
+            echo "::set-output name=url::[URL](${{ steps.vercel_url.outputs.url }})"
+          fi
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         env:
@@ -101,6 +108,7 @@ jobs:
           LINT: ${{ needs.checks.outputs.lint }}
           TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
           TEST: ${{ needs.test.result }}
+          VERCEL_URL: ${{ steps.vercel_url.outputs.url }}
           COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
           COMMIT_URL: ${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }}
         with:
@@ -115,4 +123,4 @@ jobs:
 
             | Format Check | Lint Check | Type Check | Test | Job Link | 🚀 Vercel Deploy Link |
             | :---: | :---: | :---: | :---: | :---: | :---: |
-            | ${{ env.FORMAT == 'success' && '✅' || '❌' }} | ${{ env.LINT == 'success' && '✅' || '❌' }} | ${{ env.TYPE_CHECK == 'success' && '✅' || '❌' }} | ${{ env.TEST == 'success' && '✅' || '❌' }} | [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ steps.vercel_url.outputs.url != '' && steps.vercel_url.outputs.url != null ? '[URL](' + steps.vercel_url.outputs.url + ')' : '❌' }} |
+            | ${{ env.FORMAT == 'success' && '✅' || '❌' }} | ${{ env.LINT == 'success' && '✅' || '❌' }} | ${{ env.TYPE_CHECK == 'success' && '✅' || '❌' }} | ${{ env.TEST == 'success' && '✅' || '❌' }} | [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) | ${{ env.VERCEL_URL || '❌' }} |
