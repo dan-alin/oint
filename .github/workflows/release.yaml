@@ -20,3 +20,15 @@ jobs:
         with:
           release-type: node
           package-name: release-please-action
+
+  merge:
+    if: github.event.pull_request.merged == true
+    needs: release
+    runs-on: ubuntu-latest
+    run: echo "Merged release!"
+
+  pull:
+    if: github.event.pull_request.merged == false
+    needs: release
+    runs-on: ubuntu-latest
+    run: echo "Pull main inside develop"
