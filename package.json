@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
+		"ci:format": "prettier --check .",
+		"ci:lint": "eslint --no-fix .",
+		"ci:type-check": "tsc --noEmit",
+		"ci:test": "echo \"Ci pensa Malagisi\"",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",

@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+  workflow_run:
+    workflows: ['format-and-lint']
+    types:
+      - completed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        if: github.event.pull_request.merged == true
+        id: create_release
+        with:
+          release-type: node
+          package-name: release-please-action
+
+      - name: Auto-merge pull request
+        uses: octokit/request-action@v2.x
+        with:
+          route: PUT /repos/${{ github.repository }}/pulls/${{ steps.create_release.outputs.pr.number }}/merge
+          headers: |
+            Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            {
+              "commit_title": "Auto-merge pull request",
+              "commit_message": "Auto-merged pull request #${{ steps.create_release.outputs.pr.number }}",
+              "merge_method": "squash"
+            }
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Merge main into develop
+        run: |
+          git checkout develop
+          git pull
+          git pull origin main
+          git push origin develop
