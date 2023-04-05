@@ -38,48 +38,48 @@ jobs:
         id: format
         continue-on-error: true
         run: |
-          RESULT=$(npm run ci:format 2>&1 || echo "status=failed")
+          RESULT=$(npm run ci:format 2>&1 || echo "job_status:failed")
           
           echo "$RESULT"
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
-          if echo "$RESULT" | grep -q "status=failed"; then
-            echo 'status=:x:' >> "$GITHUB_OUTPUT"
+          if echo "$RESULT" | grep -q "job_status:failed"; then
+            echo 'status=false' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=:white_check_mark:' >> "$GITHUB_OUTPUT"
+            echo 'status=true' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:lint
         id: lint
         continue-on-error: true
         run: |
-          RESULT=$(npm run ci:lint 2>&1 || echo "status=failed")
+          RESULT=$(npm run ci:lint 2>&1 || echo "job_status:failed")
           
           echo "$RESULT"
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
-          if echo "$RESULT" | grep -q "status=failed"; then
-            echo 'status=:x:' >> "$GITHUB_OUTPUT"
+          if echo "$RESULT" | grep -q "job_status:failed"; then
+            echo 'status=false'
             exit 1
           else
-            echo 'status=:white_check_mark:' >> "$GITHUB_OUTPUT"
+            echo 'status=true'
           fi
 
       - name: Run ci:type-check
         id: type_check
         continue-on-error: true
         run: |
-          RESULT=$(npm run ci:type-check 2>&1 || echo "status=failed")
+          RESULT=$(npm run ci:type-check 2>&1 || echo "job_status:failed")
           
           echo "$RESULT"
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
-          if echo "$RESULT" | grep -q "status=failed"; then
-            echo 'status=:x:' >> "$GITHUB_OUTPUT"
+          if echo "$RESULT" | grep -q "job_status:failed"; then
+            echo 'status=false' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=:white_check_mark:' >> "$GITHUB_OUTPUT"
+            echo 'status=true' >> "$GITHUB_OUTPUT"
           fi
   
 
@@ -106,27 +106,6 @@ jobs:
     needs: [ checks, test ]
     if: github.event_name == 'pull_request'
     steps:
-      - name: Check for failures
-        id: check-failures
-        run: |
-          FAILURES=false
-          if [ "${{ needs.checks.outputs.status }}" == "failure" ]; then
-            echo "Format check failed"
-            FAILURES=true
-          fi
-          if [ "${{ needs.checks.outputs.lint_result }}" == "failure" ]; then
-            echo "Lint check failed"
-            FAILURES=true
-          fi
-          if [ "${{ needs.checks.outputs.type_check_result }}" == "failure" ]; then
-            echo "Type-check failed"
-            FAILURES=true
-          fi
-          if [ "$FAILURES" == "true" ]; then
-            echo "One or more checks failed"
-            exit 1
-          fi
-
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         with:
@@ -141,13 +120,12 @@ jobs:
             
             | Job Name | Status |
             | --- | --- |
-            | Format Check | ${{ needs.checks.outputs.format }} |
-            | Lint Check | ${{ needs.checks.outputs.lint }} |
-            | Type-Check | ${{ needs.checks.outputs.type_check }} |
-            | Test | ${{ needs.test.result == 'success' && ':white_check_mark:' || ':x:' }} |
+            | Format Check | ${{ needs.checks.outputs.format == "true" && '✅' || '❌' }} |
+            | Lint Check | ${{ needs.checks.outputs.lint == "true" && '✅' || '❌' }} |
+            | Type-Check | ${{ needs.checks.outputs.type_check == "true" && '✅' || '❌' }} |
+            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
 
-
-            ## Details
+          ## Details
             
             <details>
             <summary>Format Check Output</summary>
@@ -175,3 +153,19 @@ jobs:
             ```
 
             </details>
+
+      - name: Check for failures
+        id: check-failures
+        run: |
+          if [ "${{ needs.checks.outputs.status }}" == "false" ]; then
+            echo "Format check failed"
+            exit 1
+          fi
+          if [ "${{ needs.checks.outputs.lint }}" == "false" ]; then
+            echo "Lint check failed"
+            exit 1
+          fi
+          if [ "${{ needs.checks.outputs.type_check }}" == "false" ]; then
+            echo "Type-check failed"
+            exit 1
+          fi
