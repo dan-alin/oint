@@ -16,6 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+    outputs:
+      format: ${{ steps.format.outputs.test }}
+      lint: ${{ steps.lint.outputs.test }}
+      type_check: ${{ steps.type_check.outputs.test }}
+      tests: ${{ steps.tests.outputs.test }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -35,10 +40,12 @@ jobs:
           RESULT=$(npm run ci:format 2>&1 || echo "failed")
           echo "$RESULT"
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=format_result::failure"
+            echo "::set-output name=format_output::$RESULT"
+            echo '❌' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "::set-output name=format_result::success"
+            echo "::set-output name=format_output::$RESULT"
+            echo '✅' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:lint
@@ -48,24 +55,30 @@ jobs:
           RESULT=$(npm run ci:lint 2>&1 || echo "failed")
           echo "$RESULT"
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=lint_result::failure"
+            echo "::set-output name=lint_output::$RESULT"
+            echo '❌' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "::set-output name=lint_result::success"
+            echo "::set-output name=lint_output::$RESULT"
+            echo '✅' >> "$GITHUB_OUTPUT"
           fi
+      
 
       - name: Run ci:type-check
-        id: type-check
+        id: type_check
         continue-on-error: true
         run: |
           RESULT=$(npm run ci:type-check 2>&1 || echo "failed")
           echo "$RESULT"
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=type_check_result::failure"
+            echo "::set-output name=type_check_output::$RESULT"
+            echo '❌' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo "::set-output name=type_check_result::success"
+            echo "::set-output name=type_check_output::$RESULT"
+            echo '✅' >> "$GITHUB_OUTPUT"
           fi
+  
 
   test:
     runs-on: ubuntu-latest
@@ -117,13 +130,45 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             # Summary of Format, Lint, Type-Check, and Test Results
-            | Job Name | Status | Link logs |
-            | --- | --- | --- |
-            | Format Check | ${{ needs.checks.outputs.format_result == 'success' && '✅' || '❌' }} | [Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-            | Lint Check | ${{ needs.checks.outputs.lint_result == 'success' && '✅' || '❌' }} | [Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-            | Type-Check | ${{ needs.checks.outputs.type_check_result == 'success' && '✅' || '❌' }} | [Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
-            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} | [Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) |
+            
+            ## Job Link:
+            [Run Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            ## Summary
+            
+            | Job Name | Status |
+            | --- | --- |
+            | Format Check | ${{ needs.checks.outputs.format }} |
+            | Lint Check | ${{ needs.checks.outputs.lint }} |
+            | Type-Check | ${{ needs.checks.outputs.type_check }} |
+            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
 
-      - name: Fail if there are failures
-        if: steps.check-failures.outputs.return-code == '1'
-        run: exit 1
+
+            ## Details
+            
+            <details>
+            <summary>Format Check Output</summary>
+
+            ```
+            ${{ needs.checks.outputs.format_output }}
+            ```
+
+            </details>
+
+            <details>
+            <summary>Lint Check Output</summary>
+
+            ```
+            ${{ needs.checks.outputs.lint_output }}
+            ```
+
+            </details>
+
+            <details>
+            <summary>Type-Check Output</summary>
+
+            ```
+            ${{ needs.checks.outputs.type_check_output }}
+            ```
+
+            </details>
