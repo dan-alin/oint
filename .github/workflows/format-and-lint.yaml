@@ -77,13 +77,13 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            # Summary of Format, Lint, Type-Check, Test, and Deploy Results
+            # Status of [${{ github.event.pull_request.head.sha }}](${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }})
             
             ## Job Link:
             [Run Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             
             ## Summary
             
-            | Format Check | Lint Check | Type Check | Test | Deploy URL |
+            | Format Check | Lint Check | Type Check | Test | Vercel Deploy Link |
             | --- | --- | --- | --- | --- |
-            | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.test.result == 'success' && '✅' || '❌' }} | [🚀 Deploy URL](${{ steps.vercel_url.outputs.url }}) |
+            | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.test.result == 'success' && '✅' || '❌' }} | [🚀 - Deploy URL](${{ steps.vercel_url.outputs.url }}) |
