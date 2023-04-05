@@ -2,6 +2,7 @@ name: Format, Lint, Type-Check, and Test
 
 on:
   pull_request:
+
 permissions:
   contents: write
   pull-requests: write
@@ -14,13 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-    outputs:
-      format: ${{ steps.format.outputs.status }}
-      format_output: ${{ steps.format.outputs.output }}
-      lint: ${{ steps.lint.outputs.status }}
-      lint_output: ${{ steps.lint.outputs.output }}
-      type_check: ${{ steps.type_check.outputs.status }}
-      type_check_output: ${{ steps.type_check.outputs.output }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -34,70 +28,13 @@ jobs:
         run: npm install
 
       - name: Run ci:format
-        id: format
-        continue-on-error: true
-        run: |
-          RESULT=$(npm run ci:format 2>&1 || echo "job_status:failed")
-          
-          echo "$RESULT" > format_output.txt
-          
-          if echo "$RESULT" | grep -q "job_status:failed"; then
-            echo 'status=failure' >> "$GITHUB_OUTPUT"
-            exit 1
-          else
-            echo 'status=success' >> "$GITHUB_OUTPUT"
-          fi
+        run: npm run ci:format
 
       - name: Run ci:lint
-        id: lint
-        continue-on-error: true
-        run: |
-          RESULT=$(npm run ci:lint 2>&1 || echo "job_status:failed")
-          
-          echo "$RESULT" > lint_output.txt
-          
-          if echo "$RESULT" | grep -q "job_status:failed"; then
-            echo 'status=failure' >> "$GITHUB_OUTPUT"
-            exit 1
-          else
-            echo 'status=success' >> "$GITHUB_OUTPUT"
-          fi
+        run: npm run ci:lint
 
       - name: Run ci:type-check
-        id: type_check
-        continue-on-error: true
-        run: |
-          RESULT=$(npm run ci:type-check 2>&1 || echo "job_status:failed")
-          
-          echo "$RESULT" > type_check_output.txt
-          
-          if echo "$RESULT" | grep -q "job_status:failed"; then
-            echo 'status=failure' >> "$GITHUB_OUTPUT"
-            exit 1
-          else
-            echo 'status=success' >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Upload format output
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: format_output
-          path: format_output.txt
-
-      - name: Upload lint output
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: lint_output
-          path: lint_output.txt
-
-      - name: Upload type-check output
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: type_check_output
-          path: type_check_output.txt
+        run: npm run ci:type-check
 
   test:
     runs-on: ubuntu-latest
@@ -120,27 +57,17 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     needs: [ checks, test ]
-    if: github.event_name == 'pull_request'
     steps:
-      - name: Download outputs
-        id: download
-        uses: actions/download-artifact@v2
+      - name: Waiting for 200 from the Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        id: waitFor200
         with:
-          path: outputs
-
-      - name: Read downloaded output files
-        id: read-files
-        run: |
-          echo "FORMAT_OUTPUT=$(cat outputs/format_output.txt)" >> $GITHUB_ENV
-          echo "LINT_OUTPUT=$(cat outputs/lint_output.txt)" >> $GITHUB_ENV
-          echo "TYPE_CHECK_OUTPUT=$(cat outputs/type_check_output.txt)" >> $GITHUB_ENV
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 60
+      - run: echo ${{steps.waitFor200.outputs.url}}
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
-        env:
-          FORMAT: ${{ needs.checks.outputs.format }}
-          LINT: ${{ needs.checks.outputs.lint }}
-          TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
@@ -153,53 +80,7 @@ jobs:
             
             | Job Name | Status |
             | --- | --- |
-            | Format Check | ${{ '$FORMAT' == 'success' && '✅' || '❌' }} |
-            | Lint Check | ${{ '$LINT' == 'success' && '✅' || '❌' }} |
-            | Type-Check | ${{ '$TYPE_CHECK' == 'success' && '✅' || '❌' }} |
+            | Format Check | ${{ needs.checks.result == 'success' && '✅' || '❌' }} |
+            | Lint Check | ${{ needs.checks.result == 'success' && '✅' || '❌' }} |
+            | Type-Check | ${{ needs.checks.result == 'success' && '✅' || '❌' }} |
             | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
-            
-            ## Details
-            
-            <details>
-            <summary>Format Check Output</summary>
-            
-            ```
-            ${{ env.FORMAT_OUTPUT }}
-            ```
-            
-            </details>
-            
-            <details>
-            <summary>Lint Check Output</summary>
-            
-            ```
-            ${{ env.LINT_OUTPUT }}
-            ```
-            
-            </details>
-            
-            <details>
-            <summary>Type-Check Output</summary>
-            
-            ```
-            ${{ env.TYPE_CHECK_OUTPUT }}
-            ```
-            
-            </details>
-
-      - name: Check for failures
-        id: check-failures
-        run: |
-          if [ "${{ needs.checks.outputs.format }}" == "failure" ]; then
-            echo "Format check failed"
-            exit 1
-          fi
-          if [ "${{ needs.checks.outputs.lint }}" == "failure" ]; then
-            echo "Lint check failed"
-            exit 1
-          fi
-          if [ "${{ needs.checks.outputs.type_check }}" == "failure" ]; then
-            echo "Type-check failed"
-            exit 1
-          fi
-
