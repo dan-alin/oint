@@ -26,16 +26,14 @@ jobs:
           release-type: node
           package-name: release-please-action
 
-      - name: Install jq
-        run: sudo apt-get install -y jq
-
       - name: Get Output
         id: get_output
         run: |
           echo ${{ steps.create_release.outputs.pr }}
-          PR_JSON_STRING="${{ steps.create_release.outputs.pr }}"
-          PR_NUMBER=$(echo $PR_JSON_STRING | jq '.number')
-          echo "::set-output name=pr_number::$PR_NUMBER"
+          echo ${{ steps.create_release.outputs.pr.number }}
+          echo ${{ toJSON(steps.release.outputs.pr) }} >> pr.json
+          echo "pr_number=$(jq -r '.number' pr.json)" >> $GITHUB_OUTPUT
+          echo "PR NUMBER"
 
       - name: Auto-merge pull request
         uses: octokit/request-action@v2.x
@@ -46,7 +44,7 @@ jobs:
           body: |
             {
               "commit_title": "Auto-merge pull request",
-              "commit_message": "Auto-merged pull request #${{ steps.get_output.outputs.pr.number }}",
+              "commit_message": "Auto-merged pull request #${{ steps.get_output.outputs.pr_number }}",
               "merge_method": "squash"
             }
 
