@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.2.1](https://github.com/dan-alin/oint/compare/v1.2.0...v1.2.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* **ci:** add merge message ([259c6e1](https://github.com/dan-alin/oint/commit/259c6e173fb714c7887e3938af9d64546fbc88dc))
+* **ci:** error if vercel deploy is null ([1730707](https://github.com/dan-alin/oint/commit/17307070a1f1cdfbf062b7cb61ffc37cb1208e29))
+* **ci:** vercel url ([c9ea07d](https://github.com/dan-alin/oint/commit/c9ea07d56ab23f58eda0881e44eb3f78c356578b))
+* handle release only if is not made by bot ([b009928](https://github.com/dan-alin/oint/commit/b009928e8d9dfbefa450ed86a5c3536217d79ac3))
+
 ## [1.2.0](https://github.com/dan-alin/oint/compare/v1.1.0...v1.2.0) (2023-04-05)
 
 
