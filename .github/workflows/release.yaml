@@ -29,7 +29,7 @@ jobs:
       - name: Auto-merge pull request
         uses: octokit/request-action@v2.x
         env:
-          GITHUB_SECRET: ${{ secrets.MERGE_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.MERGE_SECRET }}
         with:
           route: PUT /repos/${{ github.repository }}/pulls/${{ steps.create_release.outputs.pr.number }}/merge
           body: |
