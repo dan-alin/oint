@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.1.0](https://github.com/dan-alin/oint/compare/v1.0.0...v1.1.0) (2023-04-05)
+
+
+### Features
+
+* add change profile image ([ba90cc8](https://github.com/dan-alin/oint/commit/ba90cc846661bd847f1bf654962afd3248d3df8b))
+* **ci:** add release-please prints ([d74f53a](https://github.com/dan-alin/oint/commit/d74f53a50841e55cc05503e6f838259646e147fc))
+* **ci:** add secret ([ed15279](https://github.com/dan-alin/oint/commit/ed15279394802dba6b0e83d0da4fed29574ccd09))
+* **ci:** versioning and perf ([#158](https://github.com/dan-alin/oint/issues/158)) ([07a67b7](https://github.com/dan-alin/oint/commit/07a67b77f27a3aed6e648eab13f7285f9f8fddae))
+* profile section ([e395a33](https://github.com/dan-alin/oint/commit/e395a3361307bb0a8aa5173fbea9451daf7050c7))
+
+
+### Bug Fixes
+
+* **app.css:** changed path for icons ([bc1acce](https://github.com/dan-alin/oint/commit/bc1acce6d603803e3002426c95d66dc8665809b1))
+* **app.css:** font path) ([5edad86](https://github.com/dan-alin/oint/commit/5edad8607ee0e5ba211af6c6b5d235a4584986e3))
+* **ci:** add echo ([89bfd7b](https://github.com/dan-alin/oint/commit/89bfd7b9d8b92fa339502412f38b258fceadae15))
+* **ci:** parse output ([00e4ce9](https://github.com/dan-alin/oint/commit/00e4ce922e45f3d855b0701b829f577810ce8e87))
+* **ci:** remove jq ([68684bf](https://github.com/dan-alin/oint/commit/68684bf0ad295330ec69bc5eb9d97ce8e36ce02a))
+* **ci:** rename GITHUB_SECRET into GITHUB_TOKEN ([9477f32](https://github.com/dan-alin/oint/commit/9477f321f1f8086d9c8104443e13ef6513ac1f16))
+* **ci:** rename step ([25e1219](https://github.com/dan-alin/oint/commit/25e12199be8af61117b7246d3965fe7c949e6650))
+* **ci:** update github secret ([b0fe72a](https://github.com/dan-alin/oint/commit/b0fe72a61202d3f3b762c78e59353a078e8b20e5))
+* font arrow right ([d0e1aaf](https://github.com/dan-alin/oint/commit/d0e1aaf78ab8be70c3896f7bf77323d054b006ad))
+* **layout:** set prerender to false ([bbda5a6](https://github.com/dan-alin/oint/commit/bbda5a692015cf111f84da94ecd427add4b75a5d))
+* **prettierrc & icon:** add tabWidth to prrettierrc and fixed type in Icon comp ([135fe6e](https://github.com/dan-alin/oint/commit/135fe6e53c6bc2d957467723b63021389b5ef34f))
+* size icon ([ad940ec](https://github.com/dan-alin/oint/commit/ad940ec22371c89050a2382836220be1531d9e9b))
+* **svelte.comnfig:** edit base path and start url ([63e0352](https://github.com/dan-alin/oint/commit/63e035255f0ff0792b0145bcef6f3d3af87bb101))
+* **vite.config:** rollback scope in dev ([bc6ced0](https://github.com/dan-alin/oint/commit/bc6ced0fb4253e5683cd00dfd08d5409ed50e2b1))
+
 ## 1.0.0 (2023-04-04)
 
 ### Features
