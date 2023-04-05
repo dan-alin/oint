@@ -81,12 +81,12 @@ jobs:
           LINT: ${{ needs.checks.steps.lint.outcome }}
           TYPE_CHECK: ${{ needs.checks.steps.type_check.outcome }}
           TEST: ${{ needs.test.result }}
-          COMMIT_HASH: ${{ github.event.pull_request.head.sha | truncate(7) }}
+          COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
           COMMIT_URL: ${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }}
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            # Status of: ${{ github.event.pull_request.title }} - [${{ env.COMMIT_HASH }}](${{ env.COMMIT_URL }})
+            # Status of: ${{ github.event.pull_request.title }} - [${{ env.COMMIT_HASH | truncate(7) }}](${{ env.COMMIT_URL }})
             
             ## Job Link:
             [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
