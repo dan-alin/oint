@@ -13,7 +13,7 @@ export type Appointment = {
 	locations: Location[];
 	invitations?: Invitation[];
 	location_selection_deadline?: Date | string;
-	location_selection_type?: string;
+	location_selection_type?: string
 };
 
 export type InvitedAppointment = {
@@ -39,5 +39,5 @@ export type AppointmentForm = {
 	locations: Location[];
 	location_selection_type: 'single' | 'multi';
 	location_selection_deadline_date: string;
-	location_selection_deadline_time: string;
+	location_selection_deadline_time: string
 };

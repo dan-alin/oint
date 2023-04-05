@@ -12,7 +12,7 @@
 			class="checkbox-secondary checkbox h-4 w-4  rounded-md"
 			bind:checked
 			on:change={() => onChange(checked)}
-			{disabled}
+			disabled={disabled}
 		/>
 		<span class="label-text">{label}</span>
 	</label>

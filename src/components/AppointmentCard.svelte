@@ -26,9 +26,10 @@
 <!-- <span  on:click={() => deleteAction(appointment.id)}>X</span>-->
 <a
 	href={`/appointments/${appointment.id}`}
-	class="rellative card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow"
+	class="card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow rellative"
 	in:fade
 >
+
 	<img
 		class="h-16 w-16 object-cover"
 		src={appointment.image ? appointment.image : '/wp.jpg'}
