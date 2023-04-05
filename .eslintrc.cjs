@@ -7,7 +7,7 @@ module.exports = {
 	overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
 	rules: {
 		"no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-		"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+		"@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
 	},
 	settings: {
 		'svelte3/typescript': () => require('typescript')

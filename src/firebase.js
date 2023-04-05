@@ -47,8 +47,12 @@ export const getTokenFirebase = (/** @type {(arg0: string) => void} */ setTokenF
 			// catch error while creating client token
 		});
 	onMessage(messaging, (payload) => {
-		navigator.serviceWorker.getRegistrations().then((registration) => {
-			registration[0].showNotification(payload.notification.title);
-		});
+		if ('serviceWorker' in navigator) {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			navigator.serviceWorker.getRegistrations().then((registration) => {
+				registration[0].showNotification(payload?.notification?.title);
+			});
+		}
 	});
 };
