@@ -173,7 +173,7 @@ jobs:
             <summary>Lint Check Output</summary>
             
             ```
-           ${{ env.LINT_OUTPUT }}
+            ${{ env.LINT_OUTPUT }}
             ```
             
             </details>
