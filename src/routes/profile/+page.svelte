@@ -47,7 +47,7 @@
 				<p class=" align-middl w-full self-center font-bold hover:text-warning">
 					{section.title}
 				</p>
-				<a href={section.link}><Icon icon={Icons.RIGHT_ARROW} size="16" /></a>
+				<a href={section.link}><Icon icon={Icons.ARROW_RIGHT} size="18" /></a>
 			</div>
 		</div>
 		<div class="divider my-0" />
