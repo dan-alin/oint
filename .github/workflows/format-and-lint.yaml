@@ -66,27 +66,24 @@ jobs:
     steps:
       - name: Waiting for 200 from the Vercel Preview
         uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
-        id: waitFor200
+        id: vercel_url
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 60
-      - run: echo ${{steps.waitFor200.outputs.url}}
+      - run: echo ${{steps.vercel_url.outputs.url}}
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            # Summary of Format, Lint, Type-Check, and Test Results
+            # Summary of Format, Lint, Type-Check, Test, and Deploy Results
             
             ## Job Link:
             [Run Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             
             ## Summary
             
-            | Job Name | Status |
-            | --- | --- |
-            | Format Check | ${{ needs.checks.result == 'success' && '✅' || '❌' }} |
-            | Lint Check | ${{ needs.checks.result == 'success' && '✅' || '❌' }} |
-            | Type-Check | ${{ needs.checks.result == 'success' && '✅' || '❌' }} |
-            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
+            | Format Check | Lint Check | Type Check | Test | Deploy URL |
+            | --- | --- | --- | --- | --- |
+            | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.test.result == 'success' && '✅' || '❌' }} | [🚀 Deploy URL](${{ steps.vercel_url.outputs.url }}) |
