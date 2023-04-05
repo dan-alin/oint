@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/dan-alin/oint/compare/v1.1.0...v1.2.0) (2023-04-05)
+
+
+### Features
+
+* update action ([eaa45a0](https://github.com/dan-alin/oint/commit/eaa45a0250b7c9d05d89bb9463596502283412d9))
+
+
+### Bug Fixes
+
+* **lint-staged:** add md rule ([e6cf12b](https://github.com/dan-alin/oint/commit/e6cf12bc5176f193a9cb9547e730157281c84859))
+* **prettier:** remove changelog from prettier listed files ([be3d8ca](https://github.com/dan-alin/oint/commit/be3d8ca9968a4324697449a2ff131624cf7cb6b1))
+
 ## [1.1.0](https://github.com/dan-alin/oint/compare/v1.0.0...v1.1.0) (2023-04-05)
 
 
