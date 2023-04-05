@@ -207,10 +207,10 @@
 		--color-light-gray: #dedede;
 	}
 
-	.dark {
+	[data-theme='dark'] {
 		/* TODO: modificare colori per dark mode */
-		--color-primary: #2e46ff;
-		--color-secondary: #ff5580;
+		--color-primary: #ff5580;
+		--color-secondary: #2e46ff;
 		--color-accent: #ffd700;
 		--color-success: #4de088;
 		--color-warning: #ffc107;
