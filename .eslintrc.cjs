@@ -16,6 +16,10 @@ module.exports = {
 		sourceType: 'module',
 		ecmaVersion: 2020
 	},
+	globals: {
+		__DATE__: true,
+		__RELOAD_SW__: true
+	},
 	env: {
 		browser: true,
 		es2017: true,
