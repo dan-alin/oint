@@ -7,7 +7,9 @@
 	import AcceptReject from '../AcceptReject.svelte';
 
 	export let notification: Notification;
-	export let action = (notificationId: number) => {};
+	export let action = (notificationId: number) => {
+		//TODO: check what to do here
+	};
 
 	let acceptAction: (id: number) => void;
 	let declineAction: (id: number) => void;

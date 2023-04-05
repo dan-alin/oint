@@ -4,8 +4,8 @@
 	export let accept: string;
 	export let name: string;
 	export let files: FileList | undefined;
-	export let required: boolean = false;
-	export let disabled: boolean = false;
+	export let required = false;
+	export let disabled = false;
 
 	const handleFileChange = (event: Event) => {
 		const target = event.target as HTMLInputElement;
