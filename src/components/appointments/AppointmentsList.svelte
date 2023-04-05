@@ -51,8 +51,7 @@
 		{:else}
 			<NoAppointments
 				icon={Icons.INVITE}
-				width="50"
-				height="45"
+				size="50"
 				heading="Non hai inviti per questa settimana"
 				subHeading="...ma magari i tuoi amici staranno già pensando a qualcosa!"
 			/>
@@ -63,8 +62,7 @@
 		{:else}
 			<NoAppointments
 				icon={Icons.DATE}
-				width="45"
-				height="47"
+				size="50"
 				heading="Non hai eventi in programma questa settimana"
 				subHeading="Ma quella partita di bowling che cerchi di organizzare da tempo immemore?"
 			/>
