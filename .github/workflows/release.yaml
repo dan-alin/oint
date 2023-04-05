@@ -31,7 +31,7 @@ jobs:
         with:
           route: PUT /repos/${{ github.repository }}/pulls/${{ steps.create_release.outputs.pr.number }}/merge
           headers: |
-            Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}
+            Authorization: Bearer ${{ secrets.MERGE_SECRET }}
           body: |
             {
               "commit_title": "Auto-merge pull request",
