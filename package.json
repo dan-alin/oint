@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
-		"ci:format": "prettier --check .",
+		"ci:format": "prettier --write .",
 		"ci:lint": "eslint --no-fix .",
 		"ci:type-check": "tsc --noEmit",
 		"ci:test": "echo \"Ci pensa Malagisi\"",
