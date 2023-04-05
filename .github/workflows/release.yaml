@@ -31,7 +31,7 @@ jobs:
         run: |
           echo ${{ steps.create_release.outputs.pr }}
           echo ${{ steps.create_release.outputs.pr.number }}
-          echo ${{ toJSON(steps.release.outputs.pr) }} >> pr.json
+          echo ${{ toJSON(steps.create_release.outputs.pr) }} >> pr.json
           echo "pr_number=$(jq -r '.number' pr.json)" >> $GITHUB_OUTPUT
           echo "PR NUMBER"
 
