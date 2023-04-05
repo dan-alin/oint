@@ -24,7 +24,6 @@ jobs:
           - task: 'ci:type-check'
             output_name: 'type_check_result'
       fail-fast: false
-    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -39,10 +38,16 @@ jobs:
 
       - name: Run ${{ matrix.task }}
         id: run-task
+        continue-on-error: true
         run: |
           RESULT=$(npm run ${{ matrix.task }} 2>&1 || echo "failed")
           echo "$RESULT"
-          echo "::set-output name=${{ matrix.output_name }}::$RESULT"
+          if [ "$RESULT" = "failed" ]; then
+            echo "::set-output name=${{ matrix.output_name }}::failure"
+            exit 1
+          else
+            echo "::set-output name=${{ matrix.output_name }}::success"
+          fi
 
   test:
     runs-on: ubuntu-latest
