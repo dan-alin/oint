@@ -112,46 +112,46 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             # Summary of Format, Lint, Type-Check, and Test Results
-            
+
             ## Job Link:
             [Run Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            
+
             ## Summary
-            
+
             | Job Name | Status |
             | --- | --- |
-            | Format Check | ${{ needs.checks.outputs.format == "true" && '✅' || '❌' }} |
-            | Lint Check | ${{ needs.checks.outputs.lint == "true" && '✅' || '❌' }} |
-            | Type-Check | ${{ needs.checks.outputs.type_check == "true" && '✅' || '❌' }} |
+            | Format Check | ${{ (needs.checks.outputs.format | grep -q "true") && '✅' || '❌' }} |
+            | Lint Check | ${{ (needs.checks.outputs.lint | grep -q "true") && '✅' || '❌' }} |
+            | Type-Check | ${{ (needs.checks.outputs.type_check | grep -q "true") && '✅' || '❌' }} |
             | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
-            
+
             ## Details
-            
+
             <details>
-            <summary>Format Check Output</summary>
-            
-            ```
-            ${{ needs.checks.outputs.format_output }}
-            ```
-            
+              <summary>Format Check Output</summary>
+  
+              ```
+              ${{ needs.checks.outputs.format_output }}
+              ```
+
             </details>
-            
+
             <details>
             <summary>Lint Check Output</summary>
-            
+
             ```
             ${{ needs.checks.outputs.lint_output }}
             ```
-            
+
             </details>
-            
+
             <details>
             <summary>Type-Check Output</summary>
-            
+
             ```
             ${{ needs.checks.outputs.type_check_output }}
             ```
-            
+
             </details>
 
       - name: Check for failures
