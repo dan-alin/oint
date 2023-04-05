@@ -108,6 +108,11 @@ jobs:
     steps:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
+        env:
+          FORMAT: ${{ needs.checks.outputs.format }}
+          LINT: ${{ needs.checks.outputs.lint }}
+          TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
+          TEST: ${{ needs.test.result }}
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
@@ -120,10 +125,10 @@ jobs:
             
             | Job Name | Status |
             | --- | --- |
-            | Format Check | ${{ needs.checks.outputs.format == "success" && '✅' || '❌' }} |
-            | Lint Check | ${{ needs.checks.outputs.lint == "success" && '✅' || '❌' }} |
-            | Type-Check | ${{ needs.checks.outputs.type_check == "success" && '✅' || '❌' }} |
-            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
+            | Format Check | ${{ FORMAT == 'success' && '✅' || '❌' }} |
+            | Lint Check | ${{ LINT == "success" && '✅' || '❌' }} |
+            | Type-Check | ${{ TYPE_CHECK == "success" && '✅' || '❌' }} |
+            | Test | ${{ TEST == 'success' && '✅' || '❌' }} |
             
             ## Details
             
