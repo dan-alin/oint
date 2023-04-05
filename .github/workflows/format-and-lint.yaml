@@ -2,8 +2,6 @@ name: Format, Lint, Type-Check, and Test
 
 on:
   pull_request:
-  push:
-
 permissions:
   contents: write
   pull-requests: write
@@ -40,48 +38,48 @@ jobs:
         id: format
         continue-on-error: true
         run: |
-          RESULT=$(npm run ci:format 2>&1 || echo "failed")
+          RESULT=$(npm run ci:format 2>&1 || echo "status=failed")
           
           echo "$RESULT"
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
-          if [ "$RESULT" = "failed" ]; then
-            echo 'status=❌' >> "$GITHUB_OUTPUT"
+          if echo "$RESULT" | grep -q "status=failed"; then
+            echo 'status=:x:' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=✅' >> "$GITHUB_OUTPUT"
+            echo 'status=:white_check_mark:' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:lint
         id: lint
         continue-on-error: true
         run: |
-          RESULT=$(npm run ci:lint 2>&1 || echo "failed")
+          RESULT=$(npm run ci:lint 2>&1 || echo "status=failed")
           
           echo "$RESULT"
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
-          if [ "$RESULT" = "failed" ]; then
-            echo 'status=❌' >> "$GITHUB_OUTPUT"
+          if echo "$RESULT" | grep -q "status=failed"; then
+            echo 'status=:x:' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=✅' >> "$GITHUB_OUTPUT"
+            echo 'status=:white_check_mark:' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:type-check
         id: type_check
         continue-on-error: true
         run: |
-          RESULT=$(npm run ci:type-check 2>&1 || echo "failed")
+          RESULT=$(npm run ci:type-check 2>&1 || echo "status=failed")
           
           echo "$RESULT"
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
-          if [ "$RESULT" = "failed" ]; then
-            echo 'status=❌' >> "$GITHUB_OUTPUT"
+          if echo "$RESULT" | grep -q "status=failed"; then
+            echo 'status=:x:' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=✅' >> "$GITHUB_OUTPUT"
+            echo 'status=:white_check_mark:' >> "$GITHUB_OUTPUT"
           fi
   
 
@@ -146,7 +144,7 @@ jobs:
             | Format Check | ${{ needs.checks.outputs.format }} |
             | Lint Check | ${{ needs.checks.outputs.lint }} |
             | Type-Check | ${{ needs.checks.outputs.type_check }} |
-            | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
+            | Test | ${{ needs.test.result == 'success' && ':white_check_mark:' || ':x:' }} |
 
 
             ## Details

@@ -1,4 +1,2 @@
-RESULT=$(npm run ci:format 2>&1 || echo "failed")
+RESULT=$(npm run ci:format 2>&1 || echo "pipeline_status=failed")
 
-echo "xd"
-echo "$RESULT"
