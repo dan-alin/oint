@@ -86,7 +86,10 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            # Status of: ${{ github.event.pull_request.title }} - [${{ env.COMMIT_HASH | truncate(7) }}](${{ env.COMMIT_URL }})
+            # Status of: ${{ github.event.pull_request.title }}
+            
+            ## Last commit:
+            [${{ env.COMMIT_HASH | truncate(7) }}](${{ env.COMMIT_URL }})
             
             ## Job Link:
             [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
