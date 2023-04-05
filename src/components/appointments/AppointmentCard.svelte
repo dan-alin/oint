@@ -14,10 +14,25 @@
 
 	const startTime = getTime(appointment.start_date as Date);
 	const endTime = getTime(appointment.end_date as Date);
-	console.log(appointment)
-	const locationSelectionDeadline =  parseInt((new Date(`${getDate(appointment.location_selection_deadline as Date)} ${getTime(appointment.location_selection_deadline as Date)}`).getTime() / 1000).toFixed(0));
-	const isVotingOpen = () =>  parseInt((new Date().getTime() / 1000).toFixed(0)) < locationSelectionDeadline;
-	const getMostRatedLocation =  appointment.locations.length > 1 ? appointment.locations.reduce((acc, curr) => acc.votes || 0 > (curr?.votes_count || 0) ? acc : curr ,appointment.locations[0]) : appointment.locations[0]
+	console.log(appointment);
+	const locationSelectionDeadline = parseInt(
+		(
+			new Date(
+				`${getDate(appointment.location_selection_deadline as Date)} ${getTime(
+					appointment.location_selection_deadline as Date
+				)}`
+			).getTime() / 1000
+		).toFixed(0)
+	);
+	const isVotingOpen = () =>
+		parseInt((new Date().getTime() / 1000).toFixed(0)) < locationSelectionDeadline;
+	const getMostRatedLocation =
+		appointment.locations.length > 1
+			? appointment.locations.reduce(
+					(acc, curr) => (acc.votes || 0 > (curr?.votes_count || 0) ? acc : curr),
+					appointment.locations[0]
+			  )
+			: appointment.locations[0];
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -25,7 +40,7 @@
 
 <a
 	href={`/appointments/${appointment.id}`}
-	class="card card-side w-full h-24 cursor-pointer rounded bg-white p-4 shadow"
+	class="card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow"
 	in:fade
 >
 	<img
@@ -35,7 +50,7 @@
 	/>
 	<div class="card-body w-32 gap-[2px] p-0 pl-4">
 		<p class="ellipsis text-xs font-bold capitalize text-yellow-400 ">
-			{startDate} - {startTime} 
+			{startDate} - {startTime}
 		</p>
 		<p class="ellipsis  font-bold">
 			{appointment.title.toUpperCase()}
@@ -46,20 +61,18 @@
 
 		<div>
 			{#if !isVotingOpen()}
-			<li class="flex gap-1 text-xs text-gray-400">
-				<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
-				<p class="ellipsis">
-					{`${getMostRatedLocation.name} - ${getMostRatedLocation.address}`}
-				</p>
-				
-			</li>
+				<li class="flex gap-1 text-xs text-gray-400">
+					<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
+					<p class="ellipsis">
+						{`${getMostRatedLocation.name} - ${getMostRatedLocation.address}`}
+					</p>
+				</li>
 			{:else}
-			<p class="flex">
-				<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
-				<span class="ellipsis ml-1 font-bold text-xs text-secondary">Work in progressssssss</span>
+				<p class="flex">
+					<Icon icon={Icons.LOCATION_FULL} width="9" height="9" />
+					<span class="ellipsis ml-1 text-xs font-bold text-secondary">Work in progressssssss</span>
 				</p>
 			{/if}
-
 		</div>
 	</div>
 </a>

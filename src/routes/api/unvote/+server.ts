@@ -4,7 +4,6 @@ export async function POST({ request }: RequestEvent) {
 	const vote = await request.json();
 	const { VITE_API_HOST } = import.meta.env;
 
-
 	try {
 		const response = await fetch(`${VITE_API_HOST}appointments/votes`, {
 			method: 'DELETE',

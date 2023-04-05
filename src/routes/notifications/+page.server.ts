@@ -16,6 +16,5 @@ export const load: PageServerLoad = async (event) => {
 	});
 	const myNotifications = (await myAppRes.json()) as Notification[];
 
-
 	return { myNotifications };
 };
