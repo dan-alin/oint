@@ -15,14 +15,6 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        include:
-          - task: 'ci:format'
-            output_name: 'format_result'
-          - task: 'ci:lint'
-            output_name: 'lint_result'
-          - task: 'ci:type-check'
-            output_name: 'type_check_result'
       fail-fast: false
     steps:
       - name: Checkout repository
@@ -36,17 +28,43 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ${{ matrix.task }}
-        id: run-task
+      - name: Run ci:format
+        id: format
         continue-on-error: true
         run: |
-          RESULT=$(npm run ${{ matrix.task }} 2>&1 || echo "failed")
+          RESULT=$(npm run ci:format 2>&1 || echo "failed")
           echo "$RESULT"
           if [ "$RESULT" = "failed" ]; then
-            echo "::set-output name=${{ matrix.output_name }}::failure"
+            echo "::set-output name=format_result::failure"
             exit 1
           else
-            echo "::set-output name=${{ matrix.output_name }}::success"
+            echo "::set-output name=format_result::success"
+          fi
+
+      - name: Run ci:lint
+        id: lint
+        continue-on-error: true
+        run: |
+          RESULT=$(npm run ci:lint 2>&1 || echo "failed")
+          echo "$RESULT"
+          if [ "$RESULT" = "failed" ]; then
+            echo "::set-output name=lint_result::failure"
+            exit 1
+          else
+            echo "::set-output name=lint_result::success"
+          fi
+
+      - name: Run ci:type-check
+        id: type-check
+        continue-on-error: true
+        run: |
+          RESULT=$(npm run ci:type-check 2>&1 || echo "failed")
+          echo "$RESULT"
+          if [ "$RESULT" = "failed" ]; then
+            echo "::set-output name=type_check_result::failure"
+            exit 1
+          else
+            echo "::set-output name=type_check_result::success"
           fi
 
   test:
