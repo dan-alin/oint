@@ -89,7 +89,7 @@ jobs:
             # Status of: ${{ github.event.pull_request.title }}
             
             ## Last commit:
-            [${{ env.COMMIT_HASH | truncate(7) }}](${{ env.COMMIT_URL }})
+            [${{ env.COMMIT_HASH }}](${{ env.COMMIT_URL }})
             
             ## Job Link:
             [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
