@@ -59,4 +59,5 @@ jobs:
           type: now
           from_branch: main
           target_branch: develop
+          message: 'merge(release): merge main into develop'
           github_token: ${{ secrets.MERGE_SECRET }}
