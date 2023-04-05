@@ -39,7 +39,9 @@ export enum Icons {
 	SONDAGGIO = 'icon-sondaggio',
 	TRASH = 'icon-trash',
 	UPLOAD = 'icon-upload',
-	WHATSAPP = 'icon-whatsapp'
+	WHATSAPP = 'icon-whatsapp',
+	EDIT = 'icon-edit',
+	ARROW_RIGHT = 'icon-arrow-right'
 }
 
 export enum Backgrounds {
