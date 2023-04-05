@@ -29,19 +29,23 @@ jobs:
 
       - name: Run ci:format
         if: always()
+        id: format
         run: npm run ci:format
 
       - name: Run ci:lint
         if: always()
+        id: lint
         run: npm run ci:lint
 
       - name: Run ci:type-check
         if: always()
+        id: type_check
         run: npm run ci:type-check
 
   test:
     runs-on: ubuntu-latest
     needs: checks
+    id: test
     if: always()
     steps:
       - name: Checkout repository
@@ -74,16 +78,23 @@ jobs:
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
+        env:
+          FORMAT: ${{ needs.checks.steps.format.result }}
+          LINT: ${{ needs.checks.steps.lint.result }}
+          TYPE_CHECK: ${{ needs.checks.steps.type_check.result }}
+          TEST: ${{ needs.test.result }}
+          COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
+          COMMIT_URL: ${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }}
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            # Status of [${{ github.event.pull_request.head.sha }}](${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }})
+            # Status of: ${{ github.event.pull_request.title }} - [${{ env.COMMIT_HASH }}](${{ env.COMMIT_URL }})
             
             ## Job Link:
-            [Run Logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            [Job Status](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             
             ## Summary
             
             | Format Check | Lint Check | Type Check | Test | Vercel Deploy Link |
             | --- | --- | --- | --- | --- |
-            | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.checks.result == 'success' && '✅' || '❌' }} | ${{ needs.test.result == 'success' && '✅' || '❌' }} | [🚀 - Deploy URL](${{ steps.vercel_url.outputs.url }}) |
+            | ${{ '$FORMAT' == 'success' && '✅' || '❌' }} | ${{ '$LINT' == 'success' && '✅' || '❌' }} | ${{ '$TYPE_CHECK' == 'success' && '✅' || '❌' }} | ${{ '$TEST' == 'success' && '✅' || '❌' }} | [🚀 URL](${{ steps.vercel_url.outputs.url }}) |
