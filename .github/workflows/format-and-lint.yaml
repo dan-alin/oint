@@ -2,6 +2,7 @@ name: Format, Lint, Type-Check, and Test
 
 on:
   pull_request:
+  push:
 
 permissions:
   contents: write
