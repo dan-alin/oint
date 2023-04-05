@@ -10,6 +10,10 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     if: github.event.pull_request.merged == true
@@ -17,18 +21,32 @@ jobs:
     steps:
       - uses: google-github-actions/release-please-action@v3
         if: github.event.pull_request.merged == true
+        id: create_release
         with:
           release-type: node
           package-name: release-please-action
 
-  merge:
-    if: github.event.pull_request.merged == true
-    needs: release
-    runs-on: ubuntu-latest
-    run: echo "Merged release!"
+      - name: Auto-merge pull request
+        uses: octokit/request-action@v2.x
+        with:
+          route: PUT /repos/${{ github.repository }}/pulls/${{ steps.create_release.outputs.pr.number }}/merge
+          headers: |
+            Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}
+          body: |
+            {
+              "commit_title": "Auto-merge pull request",
+              "commit_message": "Auto-merged pull request #${{ steps.create_release.outputs.pr.number }}",
+              "merge_method": "squash"
+            }
 
-  pull:
-    if: github.event.pull_request.merged == false
-    needs: release
-    runs-on: ubuntu-latest
-    run: echo "Pull main inside develop"
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Merge main into develop
+        run: |
+          git checkout develop
+          git pull
+          git pull origin main
+          git push origin develop
