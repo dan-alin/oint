@@ -110,9 +110,13 @@ jobs:
         uses: peter-evans/create-or-update-comment@v2
         env:
           FORMAT: ${{ needs.checks.outputs.format }}
+          FORMAT_OUTPUT: ${{ needs.checks.outputs.format_output }}
           LINT: ${{ needs.checks.outputs.lint }}
+          LINT_OUTPUT: ${{ needs.checks.outputs.lint_output }}
           TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
+          TYPE_CHECK_OUT: ${{ needs.checks.outputs.type_check_output }}
           TEST: ${{ needs.test.result }}
+
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
@@ -136,7 +140,7 @@ jobs:
             <summary>Format Check Output</summary>
             
             ```
-            ${{ needs.checks.outputs.format_output }}
+            ${{ 'FORMAT_OUTPUT' }}
             ```
             
             </details>
@@ -145,7 +149,7 @@ jobs:
             <summary>Lint Check Output</summary>
             
             ```
-            ${{ needs.checks.outputs.lint_output }}
+            ${{ '$LINT_OUTPUT' }}
             ```
             
             </details>
@@ -154,7 +158,7 @@ jobs:
             <summary>Type-Check Output</summary>
             
             ```
-            ${{ needs.checks.outputs.type_check_output }}
+            ${{ '$TYPE_CHECK_OUTPUT' }}
             ```
             
             </details>
