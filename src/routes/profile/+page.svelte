@@ -25,8 +25,8 @@
 						<Icon icon={Icons.PROFILE_FULL} />
 					{/if}
 				</div>
-				<button class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 bg-white p-1">
-					<Icon icon={Icons.EDIT} />
+				<button class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 bg-white">
+					<Icon icon={Icons.EDIT} size="16" />
 				</button>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 				<p class=" align-middl w-full self-center font-bold hover:text-warning">
 					{section.title}
 				</p>
-				<a href={section.link}><Icon icon={Icons.RIGHT_ARROW} width="9" height="9" /></a>
+				<a href={section.link}><Icon icon={Icons.RIGHT_ARROW} size="16" /></a>
 			</div>
 		</div>
 		<div class="divider my-0" />
