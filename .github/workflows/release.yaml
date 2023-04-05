@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+  workflow_run:
+    workflows: ["format-and-lint"]
+    types:
+      - completed
+
+jobs:
+  release:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        if: github.event.pull_request.merged == true
+        with:
+          release-type: node
+          package-name: release-please-action

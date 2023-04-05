@@ -1,0 +1,64 @@
+name: Format, Lint, Type-Check, and Test
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  NODE_VERSION: 16
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - task: 'ci:format'
+            output_name: 'format_result'
+          - task: 'ci:lint'
+            output_name: 'lint_result'
+          - task: 'ci:type-check'
+            output_name: 'type_check_result'
+      fail-fast: false
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ${{ matrix.task }}
+        id: run-task
+        run: |
+          RESULT=$(npm run ${{ matrix.task }} 2>&1 || echo "failed")
+          echo "$RESULT"
+          echo "::set-output name=${{ matrix.output_name }}::$RESULT"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: checks
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Tests
+        run: npm run ci:test
+
