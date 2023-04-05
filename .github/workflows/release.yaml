@@ -49,13 +49,14 @@ jobs:
             }
 
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: main
 
-      - name: Merge main into develop
-        run: |
-          git checkout develop
-          git pull
-          git pull origin main
-          git push origin develop
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: main
+          target_branch: develop
+          github_token: ${{ secrets.MERGE_SECRET }}
