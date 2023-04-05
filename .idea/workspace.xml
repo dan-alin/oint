@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4d4735a-fdde-4582-8c71-8a34fae3b9e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.cjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/format-and-lint.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/format-and-lint.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InputAction.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InputAction.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InputFile.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InputFile.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InputText.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InputText.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Select.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Select.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/change-password/+page.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/change-password/+page.server.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

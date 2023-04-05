@@ -74,6 +74,22 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           max_timeout: 60
 
+      - name: Print variables
+        env:
+          FORMAT: ${{ needs.checks.steps.format.outcome }}
+          LINT: ${{ needs.checks.steps.lint.outcome }}
+          TYPE_CHECK: ${{ needs.checks.steps.type_check.outcome }}
+          TEST: ${{ needs.test.result }}
+          COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
+          COMMIT_URL: ${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }}
+        run: |
+          echo ${{ needs.checks.steps.format.outcome }}
+          echo ${{ env.FORMAT }}
+          echo ${{ env.FORMAT == 'success' && '✅' || '❌' }}
+          echo ${{ needs.test.result }}
+          echo ${{ env.TEST }}
+          echo ${{ env.TEST == 'success' && '✅' || '❌' }}
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         env:
