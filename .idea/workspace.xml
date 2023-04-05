@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4d4735a-fdde-4582-8c71-8a34fae3b9e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.cjs" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.cjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/firebase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/firebase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/appointments/+page.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/appointments/+page.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/change-password/+page.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/change-password/+page.server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/confirm-registration/+page.server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/confirm-registration/+page.server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.lintstagedrc" beforeDir="false" afterPath="$PROJECT_DIR$/.lintstagedrc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
