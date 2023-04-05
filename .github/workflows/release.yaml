@@ -6,7 +6,7 @@ on:
       - main
     types: [closed]
   workflow_run:
-    workflows: ["format-and-lint"]
+    workflows: ['format-and-lint']
     types:
       - completed
 

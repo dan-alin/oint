@@ -20,7 +20,10 @@
 	const dataFineVoting = appointment.location_selection_deadline;
 	let fineVoting = false;
 	if (appointment.locations.length > 0) {
-		if (parseInt((new Date(dataFineVoting as string).getTime() / 1000).toFixed(0)) < parseInt((new Date().getTime() / 1000).toFixed(0))) {
+		if (
+			parseInt((new Date(dataFineVoting as string).getTime() / 1000).toFixed(0)) <
+			parseInt((new Date().getTime() / 1000).toFixed(0))
+		) {
 			fineVoting = true;
 		}
 	}
@@ -36,12 +39,11 @@
 			sessionStorage.getItem('jwt_token') || ''
 		);
 	};
-
 </script>
 
 <!-- <pre>{JSON.stringify(appointment, null, 2)}</pre> -->
 
-<div class="h-52 w-full bg-base-300 relative">
+<div class="relative h-52 w-full bg-base-300">
 	<div class="absolute top-10 z-50 p-6">
 		<p class="text-xl text-white">Dettaglio</p>
 
@@ -53,10 +55,10 @@
 		alt="event"
 	/>
 	<div class="absolute -bottom-10 w-full ">
-		<FriendsBadge {friends}/>
+		<FriendsBadge {friends} />
 	</div>
 </div>
-<div class="p-2 mt-10">
+<div class="mt-10 p-2">
 	<div class="text-xs">{appointment.description}</div>
 	<!-- start date -->
 	<div class="flex items-center ">
@@ -150,9 +152,9 @@
 				{#each appointment.locations as loc}
 					<AppointmentLocationItem
 						location={loc}
-						appointmentId={appointment.id  || 0}
+						appointmentId={appointment.id || 0}
 						IsSingleEvent={appointment.locations.length === 1}
-						fineVoting={fineVoting}
+						{fineVoting}
 					/>
 				{/each}
 			</ul>
