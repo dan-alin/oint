@@ -44,10 +44,10 @@ jobs:
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
           if echo "$RESULT" | grep -q "job_status:failed"; then
-            echo 'status=false' >> "$GITHUB_OUTPUT"
+            echo 'status=failure' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=true' >> "$GITHUB_OUTPUT"
+            echo 'status=success' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:lint
@@ -60,10 +60,10 @@ jobs:
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
           if echo "$RESULT" | grep -q "job_status:failed"; then
-            echo 'status=false'
+            echo 'status=failure' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=true'
+            echo 'status=success' >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run ci:type-check
@@ -76,10 +76,10 @@ jobs:
           echo "output=$RESULT" >> "$GITHUB_OUTPUT"
           
           if echo "$RESULT" | grep -q "job_status:failed"; then
-            echo 'status=false' >> "$GITHUB_OUTPUT"
+            echo 'status=failure' >> "$GITHUB_OUTPUT"
             exit 1
           else
-            echo 'status=true' >> "$GITHUB_OUTPUT"
+            echo 'status=success' >> "$GITHUB_OUTPUT"
           fi
   
 
@@ -120,9 +120,9 @@ jobs:
             
             | Job Name | Status |
             | --- | --- |
-            | Format Check | ${{ needs.checks.outputs.format == "true" && '✅' || '❌' }} |
-            | Lint Check | ${{ needs.checks.outputs.lint == "true" && '✅' || '❌' }} |
-            | Type-Check | ${{ needs.checks.outputs.type_check == "true" && '✅' || '❌' }} |
+            | Format Check | ${{ needs.checks.outputs.format == "success" && '✅' || '❌' }} |
+            | Lint Check | ${{ needs.checks.outputs.lint == "success" && '✅' || '❌' }} |
+            | Type-Check | ${{ needs.checks.outputs.type_check == "success" && '✅' || '❌' }} |
             | Test | ${{ needs.test.result == 'success' && '✅' || '❌' }} |
             
             ## Details
@@ -157,15 +157,16 @@ jobs:
       - name: Check for failures
         id: check-failures
         run: |
-          if [ "${{ needs.checks.outputs.status }}" == "false" ]; then
+          if [ "${{ needs.checks.outputs.format }}" == "failure" ]; then
             echo "Format check failed"
             exit 1
           fi
-          if [ "${{ needs.checks.outputs.lint }}" == "false" ]; then
+          if [ "${{ needs.checks.outputs.lint }}" == "failure" ]; then
             echo "Lint check failed"
             exit 1
           fi
-          if [ "${{ needs.checks.outputs.type_check }}" == "false" ]; then
+          if [ "${{ needs.checks.outputs.type_check }}" == "failure" ]; then
             echo "Type-check failed"
             exit 1
           fi
+
