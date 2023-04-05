@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+    outputs:
+      format: ${{ steps.format.outcome }}
+      lint: ${{ steps.lint.outcome }}
+      type_check: ${{ steps.type_check.outcome }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -76,14 +80,13 @@ jobs:
 
       - name: Print variables
         env:
-          FORMAT: ${{ needs.checks.steps.format.outcome }}
-          LINT: ${{ needs.checks.steps.lint.outcome }}
-          TYPE_CHECK: ${{ needs.checks.steps.type_check.outcome }}
+          FORMAT: ${{ needs.checks.outputs.format }}
+          LINT: ${{ needs.checks.outputs.lint }}
+          TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
           TEST: ${{ needs.test.result }}
           COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
           COMMIT_URL: ${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }}
         run: |
-          echo ${{ needs.checks.steps.format.outcome }}
           echo ${{ env.FORMAT }}
           echo ${{ env.FORMAT == 'success' && '✅' || '❌' }}
           echo ${{ needs.test.result }}
@@ -93,9 +96,9 @@ jobs:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         env:
-          FORMAT: ${{ needs.checks.steps.format.outcome }}
-          LINT: ${{ needs.checks.steps.lint.outcome }}
-          TYPE_CHECK: ${{ needs.checks.steps.type_check.outcome }}
+          FORMAT: ${{ needs.checks.outputs.format }}
+          LINT: ${{ needs.checks.outputs.lint }}
+          TYPE_CHECK: ${{ needs.checks.outputs.type_check }}
           TEST: ${{ needs.test.result }}
           COMMIT_HASH: ${{ github.event.pull_request.head.sha }}
           COMMIT_URL: ${{ github.event.pull_request.head.repo.html_url }}/commit/${{ github.event.pull_request.head.sha }}
