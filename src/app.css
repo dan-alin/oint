@@ -36,6 +36,12 @@
 		-moz-osx-font-smoothing: grayscale;
 	}
 
+	.icon-arrow-right:before {
+		content: '\e92d';
+	}
+	.icon-edit:before {
+		content: '\e92e';
+	}
 	.icon-accepted:before {
 		content: '\e900';
 		color: #4de088;
@@ -185,35 +191,6 @@
 	.icon-checkmark:before {
 		content: '\ea10';
 	}
-
-	/* @font-face {
-		font-family: 'Raleway';
-		src: url('fonts/Raleway/Raleway-Italic.ttf') format('ttf');
-		font-style: italic;
-	}
-	@font-face {
-		font-family: 'Raleway';
-		src: url('fonts/Raleway/Raleway-Bold.ttf') format('ttf');
-		font-weight: bold;
-	}
-
-	@font-face {
-		font-family: 'Raleway';
-		src: url('fonts/Raleway/Raleway-BoldItalic.ttf') format('ttf');
-		font-weight: bold;
-		font-style: italic;
-	}
-	@font-face {
-		font-family: 'Raleway';
-		src: url('fonts/Raleway/Raleway-Thin.ttf') format('ttf');
-		font-weight: thin;
-	}
-	@font-face {
-		font-family: 'Raleway';
-		src: url('fonts/Raleway/Raleway-ThinItalic.ttf') format('ttf');
-		font-weight: thin;
-		font-style: italic;
-	} */
 
 	.bg-container {
 		@apply flex h-full flex-col justify-end bg-cover bg-center bg-no-repeat;
