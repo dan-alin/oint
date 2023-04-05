@@ -128,6 +128,13 @@ jobs:
         with:
           path: outputs
 
+      - name: Read downloaded output files
+        id: read-files
+        run: |
+          echo "FORMAT_OUTPUT=$(cat outputs/format_output.txt)" >> $GITHUB_ENV
+          echo "LINT_OUTPUT=$(cat outputs/lint_output.txt)" >> $GITHUB_ENV
+          echo "TYPE_CHECK_OUTPUT=$(cat outputs/type_check_output.txt)" >> $GITHUB_ENV
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
         env:
@@ -157,7 +164,7 @@ jobs:
             <summary>Format Check Output</summary>
             
             ```
-            ${{ steps.download.outputs.outputs.format_output }}
+            ${{ env.FORMAT_OUTPUT }}
             ```
             
             </details>
@@ -166,7 +173,7 @@ jobs:
             <summary>Lint Check Output</summary>
             
             ```
-            ${{ steps.download.outputs.outputs.lint_output }}
+           ${{ env.LINT_OUTPUT }}
             ```
             
             </details>
@@ -175,7 +182,7 @@ jobs:
             <summary>Type-Check Output</summary>
             
             ```
-            ${{ steps.download.outputs.outputs.type_check_output }}
+            ${{ env.TYPE_CHECK_OUTPUT }}
             ```
             
             </details>
