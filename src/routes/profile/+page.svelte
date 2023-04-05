@@ -15,9 +15,9 @@
 	];
 </script>
 
-<section class="flex flex-col items-center pt-10">
+<section class="flex flex-col items-center pt-4">
 	{#if $userStore}
-		<div class="relative mb-10 flex justify-center">
+		<div class="relative mb-6 flex justify-center">
 			<div class="avatar">
 				<div class="w-[144px] rounded-full">
 					{#if $userStore.image}
@@ -34,8 +34,8 @@
 				</label>
 			</div>
 		</div>
-		<p class="mb-[24px] text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
-		<div class="mb-[57px] flex justify-center">
+		<p class="mb-4 text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
+		<div class="mb-8 flex justify-center">
 			<p class="flex items-center p-2">
 				<span class="mr-1"><Icon icon={Icons.DATE} /></span>{myStats.appointments} eventi
 			</p>
