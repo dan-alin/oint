@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Icon from '../../components/Icon.svelte';
+	import ChangeProfilePictureModal from '../../components/profile/ChangeProfilePictureModal.svelte';
 	import { Icons } from '../../enums';
 	import type { User } from '../../models';
 	import { userStore } from '../../stores/user';
@@ -25,9 +26,12 @@
 						<Icon icon={Icons.PROFILE_FULL} />
 					{/if}
 				</div>
-				<button class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 bg-white">
+				<label
+					class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 bg-white"
+					for="change-profile-picture-modal"
+				>
 					<Icon icon={Icons.EDIT} size="16" />
-				</button>
+				</label>
 			</div>
 		</div>
 		<p class="mb-[24px] text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
@@ -57,4 +61,6 @@
 			<button class=" w-full self-center align-middle font-bold text-primary">Logout</button>
 		</div>
 	</div>
+	<input type="checkbox" id="change-profile-picture-modal" class="modal-toggle" />
+	<ChangeProfilePictureModal />
 </section>
