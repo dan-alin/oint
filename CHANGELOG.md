@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/dan-alin/oint/compare/v1.2.1...v1.3.0) (2023-04-06)
+
+
+### Features
+
+* informazioni account ([59c08cb](https://github.com/dan-alin/oint/commit/59c08cbf462771858657813f436bb9a9d0cdef31))
+
 ## [1.2.1](https://github.com/dan-alin/oint/compare/v1.2.0...v1.2.1) (2023-04-05)
 
 

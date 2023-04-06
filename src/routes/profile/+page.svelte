@@ -9,15 +9,15 @@
 	const { myStats } = data;
 
 	const sections = [
-		{ title: 'Informazioni account', link: '/profile' },
+		{ title: 'Informazioni account', link: '/profile/account-info' },
 		{ title: 'Gestione account', link: '/profile' },
 		{ title: 'Impostazioni generali', link: '/profile' }
 	];
 </script>
 
-<section class="flex flex-col items-center pt-10">
+<section class="flex flex-col items-center pt-4">
 	{#if $userStore}
-		<div class="relative mb-10 flex justify-center">
+		<div class="relative mb-6 flex justify-center">
 			<div class="avatar">
 				<div class="w-[144px] rounded-full">
 					{#if $userStore.image}
@@ -34,8 +34,8 @@
 				</label>
 			</div>
 		</div>
-		<p class="mb-[24px] text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
-		<div class="mb-[57px] flex justify-center">
+		<p class="mb-4 text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
+		<div class="mb-8 flex justify-center">
 			<p class="flex items-center p-2">
 				<span class="mr-1"><Icon icon={Icons.DATE} /></span>{myStats.appointments} eventi
 			</p>
@@ -47,12 +47,12 @@
 	{/if}
 	{#each sections as section}
 		<div class="min-h-12 flex w-full cursor-pointer items-center gap-4 px-4">
-			<div class="flex w-full ">
+			<a href={section.link} class="flex w-full ">
 				<p class=" align-middl w-full self-center font-bold hover:text-warning">
 					{section.title}
 				</p>
-				<a href={section.link}><Icon icon={Icons.ARROW_RIGHT} size="18" /></a>
-			</div>
+				<Icon icon={Icons.ARROW_RIGHT} size="18" /></a
+			>
 		</div>
 		<div class="divider my-0" />
 	{/each}
