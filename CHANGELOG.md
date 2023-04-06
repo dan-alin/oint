@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/dan-alin/oint/compare/v1.3.0...v1.3.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* **app.css:** fix font path ([a91cc42](https://github.com/dan-alin/oint/commit/a91cc42b21652024d5ad88b315436abd71cd3cf1))
+* **fonts:** adds medium, semibold and bold fonts ([7a076ba](https://github.com/dan-alin/oint/commit/7a076bafad164255201fb1b849dd11ef3c3d65f6))
+
 ## [1.3.0](https://github.com/dan-alin/oint/compare/v1.2.1...v1.3.0) (2023-04-06)
 
 
