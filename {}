@@ -1,0 +1,564 @@
+output=
+> oint@1.0.0 ci:lint
+> eslint --no-fix .
+
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/sw.js
+  34:6  error  'importScripts' is not defined  no-undef
+  69:1  error  'define' is not defined         no-undef
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/workbox-6e567876.js
+     1:1   error  'define' is not defined                                       no-undef
+     4:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+     6:33  error  '_' is not defined                                            no-undef
+     7:14  error  Empty block statement                                         no-empty
+   491:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+   493:36  error  '_' is not defined                                            no-undef
+   494:14  error  Empty block statement                                         no-empty
+  1243:49  error  'registration' is not defined                                 no-undef
+  1301:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1303:39  error  '_' is not defined                                            no-undef
+  1304:14  error  Empty block statement                                         no-empty
+  1743:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1745:39  error  '_' is not defined                                            no-undef
+  1746:14  error  Empty block statement                                         no-empty
+  1824:50  error  'ExtendableEvent' is not defined                              no-undef
+  1861:56  error  'FetchEvent' is not defined                                   no-undef
+  1901:9   error  Unexpected constant condition                                 no-constant-condition
+  2399:27  error  'FetchEvent' is not defined                                   no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/AppointmentCard.svelte
+  11:13  warning  Component has unused export property 'invitationStatus'. If it is for external reference only, please consider using `export const invitationStatus`  unused-export-let
+  16:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`          unused-export-let
+  19:8   warning  'endDate' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+  22:8   warning  'endTime' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/Icon.svelte
+  4:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  5:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputAction.svelte
+  6:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputFile.svelte
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputText.svelte
+   4:13  error  Type string trivially inferred from a string literal, remove type annotation    @typescript-eslint/no-inferrable-types
+   7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   9:30  error  Unexpected empty arrow function                                                 @typescript-eslint/no-empty-function
+  10:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  31:6   error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/Select.svelte
+  31:4  error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+
+/Users/alessio.marchi/github-repos/oint/src/components/WorkInProgress.svelte
+  43:20  error  'NodeJS' is not defined  no-undef
+  44:20  error  'NodeJS' is not defined  no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointment-detail/AppointmentLocationItem.svelte
+  13:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  13:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointments/AppointmentCard.svelte
+  10:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`  unused-export-let
+  13:8   warning  'endDate' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+  16:8   warning  'endTime' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/CreateAppointmentModal.svelte
+  12:6  warning  'addedPlaces' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/ImageForm.svelte
+  6:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/friends/FriendCard.svelte
+  37:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+  37:5  warning  A11y: A form label must be associated with a control                 a11y-label-has-associated-control
+  40:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+
+/Users/alessio.marchi/github-repos/oint/src/components/notifications/NotificationCard.svelte
+  10:23  warning  'notificationId' is defined but never used     @typescript-eslint/no-unused-vars
+  10:50  error    Unexpected empty arrow function                @typescript-eslint/no-empty-function
+  17:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  17:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/lib/ReloadPrompt.svelte
+   4:18  error  '__DATE__' is not defined       no-undef
+   5:17  error  '__RELOAD_SW__' is not defined  no-undef
+  13:11  error  Empty block statement           no-empty
+
+/Users/alessio.marchi/github-repos/oint/src/routes/+layout.svelte
+  16:6   warning  'ReloadPrompt' is defined but never used           @typescript-eslint/no-unused-vars
+  16:20  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  19:6   warning  'tokeFirebase' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/appointments/[appointmentId]/+page.svelte
+   9:9   warning  'PageHead' is defined but never used           @typescript-eslint/no-unused-vars
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/change-password/+page.svelte
+  20:19  warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/friends/+page.svelte
+   69:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   90:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  105:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/resetpassword/+page.svelte
+  2:13  warning  'goto' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.server.ts
+  4:44  warning  'event' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.svelte
+  14:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/service-worker.ts
+  2:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/utils/api-call.ts
+  13:38  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  47:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  51:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  62:24  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/utils/show-alert.ts
+   4:22  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+  12:24  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 79 problems (39 errors, 40 warnings)
+  11 errors and 0 warnings potentially fixable with the `--fix` option.
+
+job_status:failed
+status=:x:
+output=
+> oint@1.0.0 ci:lint
+> eslint --no-fix .
+
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/sw.js
+  34:6  error  'importScripts' is not defined  no-undef
+  69:1  error  'define' is not defined         no-undef
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/workbox-6e567876.js
+     1:1   error  'define' is not defined                                       no-undef
+     4:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+     6:33  error  '_' is not defined                                            no-undef
+     7:14  error  Empty block statement                                         no-empty
+   491:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+   493:36  error  '_' is not defined                                            no-undef
+   494:14  error  Empty block statement                                         no-empty
+  1243:49  error  'registration' is not defined                                 no-undef
+  1301:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1303:39  error  '_' is not defined                                            no-undef
+  1304:14  error  Empty block statement                                         no-empty
+  1743:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1745:39  error  '_' is not defined                                            no-undef
+  1746:14  error  Empty block statement                                         no-empty
+  1824:50  error  'ExtendableEvent' is not defined                              no-undef
+  1861:56  error  'FetchEvent' is not defined                                   no-undef
+  1901:9   error  Unexpected constant condition                                 no-constant-condition
+  2399:27  error  'FetchEvent' is not defined                                   no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/AppointmentCard.svelte
+  11:13  warning  Component has unused export property 'invitationStatus'. If it is for external reference only, please consider using `export const invitationStatus`  unused-export-let
+  16:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`          unused-export-let
+  19:8   warning  'endDate' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+  22:8   warning  'endTime' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/Icon.svelte
+  4:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  5:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputAction.svelte
+  6:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputFile.svelte
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputText.svelte
+   4:13  error  Type string trivially inferred from a string literal, remove type annotation    @typescript-eslint/no-inferrable-types
+   7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   9:30  error  Unexpected empty arrow function                                                 @typescript-eslint/no-empty-function
+  10:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  31:6   error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/Select.svelte
+  31:4  error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+
+/Users/alessio.marchi/github-repos/oint/src/components/WorkInProgress.svelte
+  43:20  error  'NodeJS' is not defined  no-undef
+  44:20  error  'NodeJS' is not defined  no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointment-detail/AppointmentLocationItem.svelte
+  13:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  13:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointments/AppointmentCard.svelte
+  10:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`  unused-export-let
+  13:8   warning  'endDate' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+  16:8   warning  'endTime' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/CreateAppointmentModal.svelte
+  12:6  warning  'addedPlaces' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/ImageForm.svelte
+  6:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/friends/FriendCard.svelte
+  37:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+  37:5  warning  A11y: A form label must be associated with a control                 a11y-label-has-associated-control
+  40:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+
+/Users/alessio.marchi/github-repos/oint/src/components/notifications/NotificationCard.svelte
+  10:23  warning  'notificationId' is defined but never used     @typescript-eslint/no-unused-vars
+  10:50  error    Unexpected empty arrow function                @typescript-eslint/no-empty-function
+  17:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  17:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/lib/ReloadPrompt.svelte
+   4:18  error  '__DATE__' is not defined       no-undef
+   5:17  error  '__RELOAD_SW__' is not defined  no-undef
+  13:11  error  Empty block statement           no-empty
+
+/Users/alessio.marchi/github-repos/oint/src/routes/+layout.svelte
+  16:6   warning  'ReloadPrompt' is defined but never used           @typescript-eslint/no-unused-vars
+  16:20  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  19:6   warning  'tokeFirebase' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/appointments/[appointmentId]/+page.svelte
+   9:9   warning  'PageHead' is defined but never used           @typescript-eslint/no-unused-vars
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/change-password/+page.svelte
+  20:19  warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/friends/+page.svelte
+   69:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   90:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  105:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/resetpassword/+page.svelte
+  2:13  warning  'goto' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.server.ts
+  4:44  warning  'event' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.svelte
+  14:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/service-worker.ts
+  2:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/utils/api-call.ts
+  13:38  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  47:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  51:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  62:24  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/utils/show-alert.ts
+   4:22  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+  12:24  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 79 problems (39 errors, 40 warnings)
+  11 errors and 0 warnings potentially fixable with the `--fix` option.
+
+job_status:failed
+status=:x:
+output=
+> oint@1.0.0 ci:lint
+> eslint --no-fix .
+
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/sw.js
+  34:6  error  'importScripts' is not defined  no-undef
+  69:1  error  'define' is not defined         no-undef
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/workbox-6e567876.js
+     1:1   error  'define' is not defined                                       no-undef
+     4:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+     6:33  error  '_' is not defined                                            no-undef
+     7:14  error  Empty block statement                                         no-empty
+   491:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+   493:36  error  '_' is not defined                                            no-undef
+   494:14  error  Empty block statement                                         no-empty
+  1243:49  error  'registration' is not defined                                 no-undef
+  1301:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1303:39  error  '_' is not defined                                            no-undef
+  1304:14  error  Empty block statement                                         no-empty
+  1743:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1745:39  error  '_' is not defined                                            no-undef
+  1746:14  error  Empty block statement                                         no-empty
+  1824:50  error  'ExtendableEvent' is not defined                              no-undef
+  1861:56  error  'FetchEvent' is not defined                                   no-undef
+  1901:9   error  Unexpected constant condition                                 no-constant-condition
+  2399:27  error  'FetchEvent' is not defined                                   no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/AppointmentCard.svelte
+  11:13  warning  Component has unused export property 'invitationStatus'. If it is for external reference only, please consider using `export const invitationStatus`  unused-export-let
+  16:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`          unused-export-let
+  19:8   warning  'endDate' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+  22:8   warning  'endTime' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/Icon.svelte
+  4:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  5:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputAction.svelte
+  6:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputFile.svelte
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputText.svelte
+   4:13  error  Type string trivially inferred from a string literal, remove type annotation    @typescript-eslint/no-inferrable-types
+   7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   9:30  error  Unexpected empty arrow function                                                 @typescript-eslint/no-empty-function
+  10:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  31:6   error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/Select.svelte
+  31:4  error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+
+/Users/alessio.marchi/github-repos/oint/src/components/WorkInProgress.svelte
+  43:20  error  'NodeJS' is not defined  no-undef
+  44:20  error  'NodeJS' is not defined  no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointment-detail/AppointmentLocationItem.svelte
+  13:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  13:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointments/AppointmentCard.svelte
+  10:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`  unused-export-let
+  13:8   warning  'endDate' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+  16:8   warning  'endTime' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/CreateAppointmentModal.svelte
+  12:6  warning  'addedPlaces' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/ImageForm.svelte
+  6:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/friends/FriendCard.svelte
+  37:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+  37:5  warning  A11y: A form label must be associated with a control                 a11y-label-has-associated-control
+  40:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+
+/Users/alessio.marchi/github-repos/oint/src/components/notifications/NotificationCard.svelte
+  10:23  warning  'notificationId' is defined but never used     @typescript-eslint/no-unused-vars
+  10:50  error    Unexpected empty arrow function                @typescript-eslint/no-empty-function
+  17:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  17:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/lib/ReloadPrompt.svelte
+   4:18  error  '__DATE__' is not defined       no-undef
+   5:17  error  '__RELOAD_SW__' is not defined  no-undef
+  13:11  error  Empty block statement           no-empty
+
+/Users/alessio.marchi/github-repos/oint/src/routes/+layout.svelte
+  16:6   warning  'ReloadPrompt' is defined but never used           @typescript-eslint/no-unused-vars
+  16:20  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  19:6   warning  'tokeFirebase' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/appointments/[appointmentId]/+page.svelte
+   9:9   warning  'PageHead' is defined but never used           @typescript-eslint/no-unused-vars
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/change-password/+page.svelte
+  20:19  warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/friends/+page.svelte
+   69:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   90:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  105:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/resetpassword/+page.svelte
+  2:13  warning  'goto' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.server.ts
+  4:44  warning  'event' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.svelte
+  14:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/service-worker.ts
+  2:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/utils/api-call.ts
+  13:38  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  47:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  51:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  62:24  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/utils/show-alert.ts
+   4:22  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+  12:24  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 79 problems (39 errors, 40 warnings)
+  11 errors and 0 warnings potentially fixable with the `--fix` option.
+
+job_status:failed
+status=:x:
+output=
+> oint@1.0.0 ci:lint
+> eslint --no-fix .
+
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/sw.js
+  34:6  error  'importScripts' is not defined  no-undef
+  69:1  error  'define' is not defined         no-undef
+
+/Users/alessio.marchi/github-repos/oint/dev-dist/workbox-6e567876.js
+     1:1   error  'define' is not defined                                       no-undef
+     4:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+     6:33  error  '_' is not defined                                            no-undef
+     7:14  error  Empty block statement                                         no-empty
+   491:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+   493:36  error  '_' is not defined                                            no-undef
+   494:14  error  Empty block statement                                         no-empty
+  1243:49  error  'registration' is not defined                                 no-undef
+  1301:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1303:39  error  '_' is not defined                                            no-undef
+  1304:14  error  Empty block statement                                         no-empty
+  1743:2   error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+  1745:39  error  '_' is not defined                                            no-undef
+  1746:14  error  Empty block statement                                         no-empty
+  1824:50  error  'ExtendableEvent' is not defined                              no-undef
+  1861:56  error  'FetchEvent' is not defined                                   no-undef
+  1901:9   error  Unexpected constant condition                                 no-constant-condition
+  2399:27  error  'FetchEvent' is not defined                                   no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/AppointmentCard.svelte
+  11:13  warning  Component has unused export property 'invitationStatus'. If it is for external reference only, please consider using `export const invitationStatus`  unused-export-let
+  16:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`          unused-export-let
+  19:8   warning  'endDate' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+  22:8   warning  'endTime' is assigned a value but never used                                                                                                          @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/Icon.svelte
+  4:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  5:13  error  Type string trivially inferred from a string literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputAction.svelte
+  6:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputFile.svelte
+  7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/InputText.svelte
+   4:13  error  Type string trivially inferred from a string literal, remove type annotation    @typescript-eslint/no-inferrable-types
+   7:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   8:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+   9:30  error  Unexpected empty arrow function                                                 @typescript-eslint/no-empty-function
+  10:13  error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+  31:6   error  Type boolean trivially inferred from a boolean literal, remove type annotation  @typescript-eslint/no-inferrable-types
+
+/Users/alessio.marchi/github-repos/oint/src/components/Select.svelte
+  31:4  error  Do not use "@ts-ignore" because it alters compilation errors  @typescript-eslint/ban-ts-comment
+
+/Users/alessio.marchi/github-repos/oint/src/components/WorkInProgress.svelte
+  43:20  error  'NodeJS' is not defined  no-undef
+  44:20  error  'NodeJS' is not defined  no-undef
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointment-detail/AppointmentLocationItem.svelte
+  13:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  13:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/appointments/AppointmentCard.svelte
+  10:13  warning  Component has unused export property 'deleteAction'. If it is for external reference only, please consider using `export const deleteAction`  unused-export-let
+  13:8   warning  'endDate' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+  16:8   warning  'endTime' is assigned a value but never used                                                                                                  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/CreateAppointmentModal.svelte
+  12:6  warning  'addedPlaces' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/components/create-appointment-modal/ImageForm.svelte
+  6:20  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/components/friends/FriendCard.svelte
+  37:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+  37:5  warning  A11y: A form label must be associated with a control                 a11y-label-has-associated-control
+  40:5  warning  A11y: noninteractive element cannot have nonnegative tabIndex value  a11y-no-noninteractive-tabindex
+
+/Users/alessio.marchi/github-repos/oint/src/components/notifications/NotificationCard.svelte
+  10:23  warning  'notificationId' is defined but never used     @typescript-eslint/no-unused-vars
+  10:50  error    Unexpected empty arrow function                @typescript-eslint/no-empty-function
+  17:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  17:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/lib/ReloadPrompt.svelte
+   4:18  error  '__DATE__' is not defined       no-undef
+   5:17  error  '__RELOAD_SW__' is not defined  no-undef
+  13:11  error  Empty block statement           no-empty
+
+/Users/alessio.marchi/github-repos/oint/src/routes/+layout.svelte
+  16:6   warning  'ReloadPrompt' is defined but never used           @typescript-eslint/no-unused-vars
+  16:20  warning  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  19:6   warning  'tokeFirebase' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/appointments/[appointmentId]/+page.svelte
+   9:9   warning  'PageHead' is defined but never used           @typescript-eslint/no-unused-vars
+  28:9   warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  28:19  warning  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/change-password/+page.svelte
+  20:19  warning  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/friends/+page.svelte
+   69:19  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   90:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  105:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:17  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/routes/resetpassword/+page.svelte
+  2:13  warning  'goto' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.server.ts
+  4:44  warning  'event' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/routes/sign-up/+page.svelte
+  14:16  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/service-worker.ts
+  2:35  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/alessio.marchi/github-repos/oint/src/utils/api-call.ts
+  13:38  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  47:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  51:25  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+  62:24  warning  'toggleSpinner' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/alessio.marchi/github-repos/oint/src/utils/show-alert.ts
+   4:22  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+  12:24  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 79 problems (39 errors, 40 warnings)
+  11 errors and 0 warnings potentially fixable with the `--fix` option.
+
+job_status:failed
+status=:x:

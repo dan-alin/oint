@@ -3,8 +3,8 @@
 	export let name: string;
 	export let placeholder: string;
 	export let value: string | number | Date | undefined = '';
-	export let required: boolean = false;
-	export let disabled: boolean = false;
+	export let required = false;
+	export let disabled = false;
 	export let action: (searchText: string) => void;
 </script>
 

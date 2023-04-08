@@ -2,15 +2,15 @@
 	import { useRegisterSW } from 'virtual:pwa-register/svelte';
 	// replaced dynamically
 	let buildDate = __DATE__;
-	let reloadSW = __RELOAD_SW__;
 	const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
 		onRegistered(r) {
-			if (reloadSW) {
+			if (__RELOAD_SW__) {
 				r &&
 					setInterval(() => {
 						r.update();
 					}, 20000 /* 20s for testing purposes */);
 			} else {
+				// TODO: implement the else logic
 			}
 		},
 		onRegisterError(error) {

@@ -6,4 +6,6 @@ export type User = {
 	phone: string;
 	birthdate: Date;
 	id?: number;
+	image: string;
+	nickname: string;
 };
