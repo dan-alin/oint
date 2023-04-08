@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Icon from '../../components/Icon.svelte';
+	import Menu from '../../components/Menu.svelte';
 	import ChangeProfilePictureModal from '../../components/profile/ChangeProfilePictureModal.svelte';
 	import { Icons } from '../../enums';
-	import type { User } from '../../models';
 	import { userStore } from '../../stores/user';
 
 	export let data: { myStats: { appointments: number; friends: number } };
@@ -10,7 +10,7 @@
 
 	const sections = [
 		{ title: 'Informazioni account', link: '/profile/account-info' },
-		{ title: 'Gestione account', link: '/profile' },
+		{ title: 'Gestione account', link: '/profile/account-settings' },
 		{ title: 'Impostazioni generali', link: '/profile' }
 	];
 </script>
@@ -45,17 +45,7 @@
 			</p>
 		</div>
 	{/if}
-	{#each sections as section}
-		<div class="min-h-12 flex w-full cursor-pointer items-center gap-4 px-4">
-			<a href={section.link} class="flex w-full ">
-				<p class=" align-middl w-full self-center font-bold hover:text-warning">
-					{section.title}
-				</p>
-				<Icon icon={Icons.ARROW_RIGHT} size="18" /></a
-			>
-		</div>
-		<div class="divider my-0" />
-	{/each}
+	<Menu {sections} />
 	<div class="min-h-12 flex w-full items-center gap-4 px-4">
 		<div class="flex">
 			<button class=" w-full self-center align-middle font-bold text-primary">Logout</button>
