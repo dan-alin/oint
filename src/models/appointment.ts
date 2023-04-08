@@ -44,3 +44,11 @@ export type AppointmentForm = {
 	location_selection_deadline_date: string;
 	location_selection_deadline_time: string;
 };
+
+export type AppointmentDetailSectionData = {
+	icon: Icons;
+	firstRow: string;
+	secondRow: string;
+	btnLabel?: string;
+	callback?: () => void;
+};
