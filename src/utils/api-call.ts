@@ -39,7 +39,13 @@ export const apiCall = async <T>(
 					method: 'DELETE',
 					body
 				});
-
+				break;
+			case 'put':
+				response = await fetch(url, {
+					headers,
+					method: 'PUT',
+					body
+				});
 				break;
 		}
 	} catch (err: unknown) {
@@ -54,7 +60,7 @@ export const apiCall = async <T>(
 		}
 		return await response.json();
 	}
-	if (response?.status === 401) { 
+	if (response?.status === 401) {
 		goto('/login');
 	}
 	const data = await response?.json();
