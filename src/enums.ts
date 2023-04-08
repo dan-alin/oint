@@ -47,3 +47,7 @@ export enum Icons {
 export enum Backgrounds {
 	LOGIN = '/backgrounds/login.svg'
 }
+
+export enum Routes {
+	APPOINTMENTS = '/appointments'
+}
