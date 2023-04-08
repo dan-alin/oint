@@ -1,13 +1,16 @@
 <script lang="ts">
+	import { noop } from 'svelte/internal';
+
 	export let id: string;
 	export let name: string;
-	export let label: string = '';
+	export let label = '';
 	export let placeholder: string;
 	export let value: string | number | Date | File[] | undefined = '';
-	export let required: boolean = false;
-	export let disabled: boolean = false;
-	export let onChange = () => {};
-	export let customValidation: boolean = true;
+	export let required = false;
+	export let disabled = false;
+	export let onChange = noop;
+	export let onInput = noop;
+	export let customValidation = true;
 	export let validate: () => void = () => null;
 	export let type:
 		| 'color'
@@ -28,7 +31,7 @@
 		| 'week'
 		| 'search';
 
-	let isDirty: boolean = false;
+	let isDirty = false;
 
 	const typeAction = (node: HTMLInputElement) => {
 		node.type = type;
@@ -60,6 +63,7 @@
 			isDirty = true;
 		}}
 		on:change={onChange}
+		on:input={onInput}
 		on:blur={validate}
 	/>
 </div>
