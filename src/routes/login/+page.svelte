@@ -24,13 +24,13 @@
 			const response: { access_token: string; user: User } = await apiCall(
 				'/api/login',
 				'post',
-				'Login success',
+				'',
 				JSON.stringify(user)
 			);
 
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
-			goto('/appointments');
+			await goto('/appointments');
 		} catch (error: unknown) {
 			console.error(error);
 		}
@@ -95,12 +95,13 @@
 				/>
 			</div>
 
-			<div class="flex items-center justify-between">
-				<Checkbox
-					label="Rimani connesso"
-					onChange={() => (keepAccess = !keepAccess)}
-					checked={keepAccess}
-				/>
+			<div class="flex items-center justify-end">
+				<!--				Hide chebox until remember me is implemented     -->
+				<!--				<Checkbox-->
+				<!--					label="Rimani connesso"-->
+				<!--					onChange={() => (keepAccess = !keepAccess)}-->
+				<!--					checked={keepAccess}-->
+				<!--				/>-->
 
 				<a class="text-xs text-secondary underline " href="/resetpassword">Password dimenticata?</a>
 			</div>

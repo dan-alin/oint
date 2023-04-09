@@ -13,7 +13,6 @@
 	import { userStore } from '../stores/user';
 	import type { User } from '../models';
 
-	let ReloadPrompt: any;
 	let showSpinner = false;
 	let showAlert: AlertState;
 	let tokeFirebase = '';
@@ -84,7 +83,7 @@
 <div class="h-screen overflow-auto ">
 	<slot />
 </div>
-{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up' && $page.url.pathname !== '/'}
+{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up' && $page.url.pathname !== '/' && $page.url.pathname !== '/create-appointments'}
 	<BottomNav />
 {/if}
 <!-- {#if ReloadPrompt}
