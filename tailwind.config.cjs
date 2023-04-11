@@ -15,7 +15,8 @@ module.exports = {
 				success: 'var(--color-success)',
 				warning: 'var(--color-warning)',
 				error: 'var(--color-error)',
-				disabled: 'var(--color-disabled)'
+				disabled: 'var(--color-disabled)',
+				'light-gray': 'var(--color-light-gray)'
 			},
 			fontFamily: {
 				raleway: ['Raleway', 'sans-serif']
@@ -33,16 +34,16 @@ module.exports = {
 					success: '#4DE088',
 					warning: '#FFDC00',
 					error: '#FF5555'
+				},
+				dark: {
+					...require('daisyui/src/colors/themes')['[data-theme=dark]'],
+					primary: '#FF5580',
+					secondary: '#2E46FF',
+					accent: '#FFDC00',
+					success: '#4DE088',
+					warning: '#FFDC00',
+					error: '#FF5555'
 				}
-				// dark: {
-				// 	...require('daisyui/src/colors/themes')['[data-theme=dark]'],
-				// 	primary: '#2E46FF',
-				// 	secondary: '#FF5580',
-				// 	accent: '#FFDC00',
-				// 	success: '#4DE088',
-				// 	warning: '#FFDC00',
-				// 	error: '#FF5555'
-				// }
 			}
 		]
 	},

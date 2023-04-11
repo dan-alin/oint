@@ -3,13 +3,21 @@
 	import Icon from './Icon.svelte';
 	import { Icons } from '../enums';
 
+	/** Unique id for the modal */
 	export let id: string;
+	/** Title for the modal */
 	export let title: string;
+	/** Subtitle for the modal */
 	export let subTitle: string;
+	/** Label for the confirm button */
 	export let confirmBtnLabel: string;
+	/** Optional label for the cancel button, if not provided the cancel button won't show */
 	export let cancelBtnLabel: string | undefined = undefined;
+	/** Callback for the confirm button */
 	export let onConfirm = noop;
+	/** Optional allback for the cancel button, if not provided the cancel button will simply close the modal */
 	export let onCancel: (() => void) | undefined = undefined;
+	/** Boolean value to programatically open/close the modal. Must use bind:modalOpened from the parent component */
 	export let modalOpened: boolean | undefined = undefined;
 
 	let modalBody: HTMLLabelElement;

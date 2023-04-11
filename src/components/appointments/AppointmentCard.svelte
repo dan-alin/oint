@@ -15,7 +15,6 @@
 
 	const startTime = getTime(appointment.start_date as Date);
 	const endTime = getTime(appointment.end_date as Date);
-	console.log(appointment);
 	const locationSelectionDeadline = parseInt(
 		(
 			new Date(

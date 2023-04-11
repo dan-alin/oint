@@ -1,6 +1,7 @@
 <script lang="ts">
 	import AddFriendList from '../../components/friends/AddFriendList.svelte';
 	import FriendsList from '../../components/friends/FriendsList.svelte';
+	import InputText from '../../components/InputText.svelte';
 	import ModalRadio from '../../components/ModalRadio.svelte';
 	import PageHead from '../../components/PageHead.svelte';
 	import Tabs from '../../components/Tabs.svelte';
@@ -52,8 +53,6 @@
 		notificationsUnread: Notification[];
 	};
 	let { myFriends, friendRequest, notificationsUnread } = data;
-
-	console.log(myFriends);
 
 	let filteredFriends: FriendData[] = [];
 	let filteredRequests: FriendData[] = [];
@@ -238,14 +237,13 @@
 		/>
 		<Tabs {tabs} bind:active={activeTab} />
 
-		<input
-			class="input-bordered input h-10 w-full "
+		<InputText
 			id="search-friend"
 			name="search-friend"
-			placeholder="cerca"
+			placeholder="Cerca"
 			type="search"
 			bind:value={searchText}
-			on:input={activeTab === 'search-friends'
+			onInput={activeTab === 'search-friends'
 				? () => handleLiveSearch()
 				: () => onSearch(myFriends)}
 		/>

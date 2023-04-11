@@ -1,20 +1,19 @@
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST({ request }: RequestEvent) {
-	const invitation = await request.json();
+	const invitees = await request.json();
 	const { VITE_API_HOST } = import.meta.env;
 
 	try {
-		const response = await fetch(`${VITE_API_HOST}appointment/add-invintee`, {
+		const response = await fetch(`${VITE_API_HOST}appointment/change-invitees`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				Authorization: request.headers.get('Authorization') || ''
 			},
-			body: JSON.stringify(invitation)
+			body: JSON.stringify(invitees)
 		});
 		const data = await response.json();
-
 		return new Response(JSON.stringify(data), {
 			status: data.statusCode
 		});

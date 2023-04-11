@@ -12,6 +12,7 @@
 	export let required = false;
 	export let disabled = false;
 	export let onChange = noop;
+	export let onInput = noop;
 	export let customValidation = true;
 	export let validate = noop;
 	export let type:
@@ -75,6 +76,7 @@
 				isDirty = true;
 			}}
 			on:change={onChange}
+			on:input={onInput}
 			on:blur={validate}
 		/>
 		{#if enableShowHide}

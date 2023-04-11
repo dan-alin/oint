@@ -71,7 +71,7 @@
 
 {#if showSpinner}
 	<div
-		class="fixed top-0 left-0  z-50 flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
+		class="fixed top-0 left-0  z-[99] flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
 	>
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
