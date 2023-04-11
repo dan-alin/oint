@@ -2,9 +2,9 @@
 	import type { AppointmentForm, Place } from '../../models';
 	import PageHead from '../PageHead.svelte';
 	import DateAndHoursForm from './DateAndHoursForm.svelte';
-	import ImageForm from './ImageForm.svelte';
+	import ImageForm from '../create-appointments/ImageForm.svelte';
 	import NameDescriptionForm from './NameDescriptionForm.svelte';
-	import SelectLocationsForm from './SelectLocationsForm.svelte';
+	import SelectLocationsForm from '../create-appointments/SelectLocationsForm.svelte';
 	export let action: (form: AppointmentForm) => void;
 	export let closeAction: () => void;
 	let step = 1;
@@ -84,16 +84,16 @@
 					}}
 				/>
 			{/if}
-			<div class="bottom-10  grid grid-cols-2  gap-6">
-				<button class="btn" disabled={step === 1} on:click={prevStep}>{'<'}</button>
-
-				<button
-					disabled={step === 4 && !isValidLocationForm}
-					class="btn"
-					type="submit"
-					form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button
-				>
-			</div>
 		</div>
+	</div>
+	<div class="absolute  bottom-10   gap-6">
+		<button class="btn" disabled={step === 1} on:click={prevStep}>{'<'}</button>
+
+		<button
+			disabled={step === 4 && !isValidLocationForm}
+			class="btn"
+			type="submit"
+			form={`${step}-part`}>{step === 4 ? 'crea' : '>'}</button
+		>
 	</div>
 </div>

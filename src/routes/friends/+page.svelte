@@ -53,8 +53,6 @@
 	};
 	let { myFriends, friendRequest, notificationsUnread } = data;
 
-	console.log(myFriends);
-
 	let filteredFriends: FriendData[] = [];
 	let filteredRequests: FriendData[] = [];
 	let filteredSent: FriendData[] = friendRequest.sent;
