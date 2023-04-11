@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { noop } from 'svelte/internal';
 	import { Icons } from '../../enums';
 	import type { FriendData } from '../../models/friend';
 	import AcceptReject from '../AcceptReject.svelte';
@@ -8,9 +9,9 @@
 
 	export let mode: 'view' | 'request' | 'sent' = 'view';
 
-	export let removeAction: (friendId: number) => void = () => null;
-	export let acceptAction: (friendId: number) => void = () => null;
-	export let declineAction: (friendId: number, isRequest?: boolean) => void = () => null;
+	export let removeAction: (friendId: number) => void = noop;
+	export let acceptAction: (friendId: number) => void = noop;
+	export let declineAction: (friendId: number, isRequest?: boolean) => void = noop;
 </script>
 
 <div class="flex flex-col gap-4">

@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { noop } from 'svelte/internal';
 	import { Icons } from '../../enums';
 	import type { Friend } from '../../models/friend';
 	import BannerRequestSent from '../appointments/BannerRequestSent.svelte';
 	import Icon from '../Icon.svelte';
 
 	export let friend: Friend;
-	export let action: (friendId: number) => void = () => null;
+	export let action: (friendId: number) => void = noop;
 </script>
 
 <div class="flex flex-col gap-4">

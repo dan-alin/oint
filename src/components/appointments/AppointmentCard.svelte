@@ -4,10 +4,11 @@
 	import type { Appointment } from '../../models';
 	import { getDate, getTime } from '../../utils/time';
 	import Icon from '../Icon.svelte';
+	import { noop } from 'svelte/internal';
 
 	export let appointment: Appointment;
 	// export let invitationStatus: 'declined' | 'accepted' | '' = '';
-	export let deleteAction: (appointmentId: number) => void = () => null;
+	export let deleteAction: (appointmentId: number) => void = noop;
 
 	const startDate = getDate(appointment.start_date as Date);
 	const endDate = getDate(appointment.end_date as Date);

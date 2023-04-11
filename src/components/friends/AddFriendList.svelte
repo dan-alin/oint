@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { noop } from 'svelte/internal';
 	import type { Friend } from '../../models/friend';
 
 	import AddFriendCard from './AddFriendCard.svelte';
 
 	export let friends: Friend[];
-	export let action: (friendId: number) => void = () => null;
+	export let action: (friendId: number) => void = noop;
 
 	const handleAction = (friendId: number) => {
 		friends = friends.map((friend) => {
