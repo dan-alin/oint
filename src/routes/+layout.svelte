@@ -12,6 +12,7 @@
 	import { page } from '$app/stores';
 	import { userStore } from '../stores/user';
 	import type { User } from '../models';
+	import { Routes } from '../enums';
 
 	let ReloadPrompt: any;
 	let showSpinner = false;
@@ -20,6 +21,9 @@
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 	toggleAlert.subscribe((value) => (showAlert = value));
+	// to hide the navbar from the route '/example-route', add the string '|(/example-route)' to the hideNavRegExp
+	const hideNavRegExp = new RegExp(`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)`);
+	$: hideNav = hideNavRegExp.test($page.url.pathname);
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 
@@ -84,7 +88,7 @@
 <div class="h-screen overflow-auto ">
 	<slot />
 </div>
-{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up' && $page.url.pathname !== '/'}
+{#if !hideNav}
 	<BottomNav />
 {/if}
 <!-- {#if ReloadPrompt}
