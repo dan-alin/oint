@@ -47,8 +47,6 @@
 		action(notification.id);
 	};
 
-	console.log(notification);
-
 	switch (notification.type) {
 		case EnumNotificationType.FRIEND_REQ:
 			acceptAction = acceptFriendRequest;
