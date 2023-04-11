@@ -1,3 +1,5 @@
+import type { Icons } from '../enums';
+import type { FriendUser } from './friend';
 import type { Invitation } from './invitation';
 import type { Location } from './locations';
 
@@ -13,12 +15,13 @@ export type Appointment = {
 	locations: Location[];
 	invitations?: Invitation[];
 	location_selection_deadline?: Date | string;
-	location_selection_type?: string;
+	location_selection_type?: 'multi' | 'single';
+	creator: FriendUser;
 };
 
 export type InvitedAppointment = {
 	appointment: Appointment;
-	invitationStatus?: 'declined' | 'accepted';
+	invitationStatus: 'declined' | 'accepted' | 'pending';
 };
 
 export type DeletedAppointment = {
@@ -40,4 +43,12 @@ export type AppointmentForm = {
 	location_selection_type: 'single' | 'multi';
 	location_selection_deadline_date: string;
 	location_selection_deadline_time: string;
+};
+
+export type AppointmentDetailSectionData = {
+	icon: Icons;
+	firstRow: string;
+	secondRow: string;
+	btnLabel?: string;
+	callback?: () => void;
 };

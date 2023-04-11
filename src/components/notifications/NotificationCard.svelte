@@ -28,7 +28,7 @@
 
 	const declineFriendRequest = async (friendRequestId: number) => {
 		const response: any = await apiCall(
-			'/api/decline-friend-request',
+			'/api/reject-friend-request',
 			'post',
 			'Request declined',
 			JSON.stringify({ friendRequestId }),

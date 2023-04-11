@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { noop } from 'svelte/internal';
+
 	export let id: string;
 	export let name: string;
 	export let label = '';
@@ -6,7 +8,8 @@
 	export let value: string | number | Date | File[] | undefined = '';
 	export let required = false;
 	export let disabled = false;
-	export let onChange = () => null;
+	export let onChange = noop;
+	export let onInput = noop;
 	export let customValidation = true;
 	export let validate: () => void = () => null;
 	export let type:
@@ -60,6 +63,7 @@
 			isDirty = true;
 		}}
 		on:change={onChange}
+		on:input={onInput}
 		on:blur={validate}
 	/>
 </div>
