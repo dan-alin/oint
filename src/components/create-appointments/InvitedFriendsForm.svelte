@@ -4,10 +4,6 @@
 	export let invitedFriends: FriendData[] = [];
 	export let myFriends: FriendData[] = [];
 	export let onSubmit: () => void = () => null;
-
-	$: {
-		console.log(invitedFriends);
-	}
 </script>
 
 <form class="grid grid-cols-1  gap-6 " id="4-part" on:submit|preventDefault={onSubmit}>
