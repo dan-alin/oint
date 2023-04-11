@@ -1,6 +1,8 @@
 <script lang="ts">
-	export let acceptAction: (id: number) => void = () => null;
-	export let declineAction: (id: number) => void = () => null;
+	import { noop } from 'svelte/internal';
+
+	export let acceptAction: (id: number) => void = noop;
+	export let declineAction: (id: number) => void = noop;
 	export let id: number;
 </script>
 

@@ -49,5 +49,11 @@ export enum Backgrounds {
 }
 
 export enum Routes {
-	APPOINTMENTS = '/appointments'
+	APPOINTMENTS = '/appointments',
+	PROFILE = '/profile',
+	BYE = '/bye'
+}
+
+export enum Endpoints {
+	CHANGE_PASSWORD = '/api/change-password'
 }
