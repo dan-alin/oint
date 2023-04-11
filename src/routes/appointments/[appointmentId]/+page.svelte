@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { noop } from 'svelte/internal';
 	import Icon from '../../../components/Icon.svelte';
+	import ModalSuccess from '../../../components/ModalSuccess.svelte';
 	import AppointmentDetailSection from '../../../components/appointment-detail/AppointmentDetailSection.svelte';
 	import FriendsBadge from '../../../components/appointment-detail/FriendsBadge.svelte';
 	import InviteesModal from '../../../components/appointment-detail/InviteesModal.svelte';
@@ -18,7 +19,7 @@
 	let { appointment, friends } = data;
 
 	const friendUsers = friends.map((f) => f.user);
-	const invitees = appointment.invitations?.map((i) => i.invitee);
+	$: invitees = appointment.invitations?.map((i) => i.invitee);
 	const startDate = getDate(appointment.start_date as Date);
 	const startTime = getTime(appointment.start_date as Date);
 	$: loggedUserInvitation = $invitedAppointmentsStore?.find(
@@ -65,19 +66,6 @@
 		};
 	}
 
-	const deleteAppointment = async () => {
-		const response: any = await apiCall(
-			'/api/delete-appointment',
-			'delete',
-			'Evento eliminato',
-			JSON.stringify({
-				appointmentId: appointment.id
-			}),
-			sessionStorage.getItem('jwt_token') || ''
-		);
-		goto(Routes.APPOINTMENTS);
-	};
-
 	const acceptAppointment = async () => {
 		appointment.id &&
 			invitationService.acceptAppointment(
@@ -113,6 +101,23 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 		}
+	};
+
+	const deleteAppointment = async () => {
+		const response: any = await apiCall(
+			'/api/delete-appointment',
+			'delete',
+			'Evento eliminato',
+			JSON.stringify({
+				appointmentId: appointment.id
+			}),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+		goto(Routes.APPOINTMENTS);
+	};
+
+	const updateAppointment = (updatedAppointment: Appointment) => {
+		appointment = updatedAppointment;
 	};
 </script>
 
@@ -202,15 +207,15 @@
 		<!-- Actions -->
 		<div class="absolute left-0 bottom-10 w-full px-6">
 			{#if loggedUserIsOwner}
-				<button class="btn-outline btn-primary btn w-full" on:click={deleteAppointment}>
+				<label for="delete-appointment-modal" class="btn-outline btn-primary btn w-full">
 					Elimina evento
-				</button>
+				</label>
 			{:else if invitationPending}
 				<div class="flex gap-1">
 					<button class="btn-outline btn-primary btn flex-1" on:click={declineAppointment}>
 						Rifiuta
 					</button>
-					<button class="btn-primary btn flex-1" on:click={acceptAppointment}> Partecipa </button>
+					<button class="btn-primary btn flex-1" on:click={acceptAppointment}>Partecipa</button>
 				</div>
 			{:else}
 				<div class="flex w-full flex-col gap-4">
@@ -242,7 +247,7 @@
 			{/if}
 		</div>
 
-		<!-- Modal -->
+		<!-- Modals -->
 		<InviteesModal
 			bind:open={openModal}
 			viewType={modalViewType}
@@ -250,6 +255,16 @@
 			appointmentId={appointment.id}
 			{invitees}
 			creatorId={appointment.creator.id}
+			{updateAppointment}
+		/>
+
+		<ModalSuccess
+			id="delete-appointment-modal"
+			title="Sei sicuro di voler eliminare questo evento?"
+			subTitle="Ricordati che non c'è modo di tornare indietro... è un po’ come quando tagli i capelli troppo corti e poi ti penti immediatamente"
+			confirmBtnLabel="Conferma"
+			cancelBtnLabel="Annulla"
+			onConfirm={deleteAppointment}
 		/>
 	</div>
 {/if}

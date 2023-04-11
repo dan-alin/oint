@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Icons } from '../../enums';
-	import type { FriendUser } from '../../models';
+	import type { Appointment, FriendUser } from '../../models';
 	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 	import Icon from '../Icon.svelte';
@@ -14,6 +14,7 @@
 	export let invitees: FriendUser[] = [];
 	export let appointmentId: number | undefined;
 	export let creatorId: number;
+	export let updateAppointment: (updatedAppointment: Appointment) => void;
 
 	let loggedUserId = $userStore.id;
 	invitees = invitees.filter((i) => i.id !== creatorId);
@@ -31,8 +32,6 @@
 		filteredFriends = friends;
 	}
 	let invitedFriendsIds = invitees.map((i) => i.id);
-	const inviteesToAdd: number[] = [];
-	$: group = [...invitedFriendsIds, ...inviteesToAdd];
 	let searchValue: string;
 	let modalBody: HTMLDivElement;
 
@@ -60,20 +59,23 @@
 	const saveInvitees = async () => {
 		const inviteesToRemove = invitees
 			.map((i) => i.id)
-			.filter((id) => !invitedFriendsIds.includes(id));
+			.filter((id) => !invitedFriendsIds.includes(id) && id !== loggedUserId);
+		const inviteesToAdd = invitedFriendsIds.filter((id) => !invitees.map((i) => i.id).includes(id));
 
-		// wait for change-invitees endpoint
-		// const response: any = await apiCall(
-		// 	'/api/change-invitees',
-		// 	'post',
-		// 	'Invitati modificati con successo',
-		// 	JSON.stringify({
-		// 		appointmentId,
-		// 		inviteesToAdd,
-		// 		inviteesToRemove
-		// 	}),
-		// 	sessionStorage.getItem('jwt_token') || ''
-		// );
+		const updatedAppointment = await apiCall<Appointment>(
+			'/api/change-invitees',
+			'post',
+			'Invitati modificati con successo',
+			JSON.stringify({
+				appointmentId,
+				inviteesToAdd,
+				inviteesToRemove
+			}),
+			sessionStorage.getItem('jwt_token') || ''
+		);
+
+		updateAppointment(updatedAppointment);
+		open = false;
 	};
 </script>
 
@@ -144,10 +146,10 @@
 					{#if viewType === 'owner' || viewType === 'inviteeEdit'}
 						<input
 							type="checkbox"
-							bind:group
+							bind:group={invitedFriendsIds}
 							name="invitedFriendIds"
 							value={friend.id}
-							disabled={viewType === 'inviteeEdit' && invitedFriendsIds.includes(friend.id)}
+							disabled={viewType === 'inviteeEdit' && invitees.some((i) => i.id === friend.id)}
 							class="checkbox-secondary checkbox checkbox-xs ml-auto rounded"
 						/>
 					{/if}
