@@ -237,6 +237,10 @@
 		--color-disabled: #989a9e;
 		--color-light-gray: #dedede;
 	}
+
+	.btn {
+		text-transform: none !important;
+	}
 }
 
 @layer components {
@@ -316,7 +320,6 @@ ul,
 li,
 fieldset,
 form,
-label,
 legend,
 table,
 caption,
@@ -334,6 +337,16 @@ td {
 	vertical-align: baseline;
 	background: transparent;
 }
+
+label {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
 body {
 	line-height: 1;
 	width: 100%;
