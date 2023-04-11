@@ -1,3 +1,4 @@
+import type { FriendData, FriendUser } from './friend';
 import type { Invitation } from './invitation';
 import type { Location } from './locations';
 
@@ -14,6 +15,7 @@ export type Appointment = {
 	invitations?: Invitation[];
 	location_selection_deadline?: Date | string;
 	location_selection_type?: string;
+	invitees: FriendUser[];
 };
 
 export type InvitedAppointment = {
@@ -40,4 +42,5 @@ export type AppointmentForm = {
 	location_selection_type: 'single' | 'multi';
 	location_selection_deadline_date: string;
 	location_selection_deadline_time: string;
+	invitees?: FriendData[];
 };

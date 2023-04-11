@@ -1,11 +1,67 @@
 <script lang="ts">
-	import { afterNavigate } from '$app/navigation';
+	import { afterNavigate, goto } from '$app/navigation';
 	import HeaderMenu from '../../components/HeaderMenu.svelte';
 	import { base } from '$app/paths';
-	import type { AppointmentForm, FriendData } from '../../models';
-	import DescAndTimeForm from '../../components/create-appointments/DescAndTimeForm.svelte';
+	import type { Appointment, AppointmentForm, FriendData, FriendUser } from '../../models';
 	import ImageForm from '../../components/create-appointments/ImageForm.svelte';
 	import InvitedFriendsForm from '../../components/create-appointments/InvitedFriendsForm.svelte';
+	import DateAndTimeForm from '../../components/create-appointments/DateAndTimeForm.svelte';
+	import NameAndDesc from '../../components/create-appointments/NameAndDesc.svelte';
+	import { apiCall } from '../../utils/api-call';
+	import fileToBase64 from '../../utils/to-base64';
+	import { myAppointmentsStore } from '../../stores/apointments';
+	import LocationForm from '../../components/create-appointments/LocationForm.svelte';
+
+	const createAppointment = async (formData: AppointmentForm) => {
+		let image = '';
+		if (formData.image) {
+			image = await fileToBase64(formData.image?.[0] as File);
+		}
+
+		let invitees: FriendUser[] = [];
+
+		if (formData.invitees) {
+			invitees = formData.invitees.map((invitee) => invitee.user);
+		}
+
+		const newAppointment: Appointment = {
+			title: formData.title,
+			description: formData.description,
+			start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
+			end_date: new Date(
+				`${formData.end_date || formData.start_date} ${formData.end_time}`
+			).toISOString(),
+			image,
+			can_be_forwarded: formData.can_be_forwarded,
+			locations: formData.locations,
+			location_selection_type: formData.location_selection_type,
+			invitees
+		};
+
+		if (newAppointment.location_selection_type === 'multi') {
+			if (formData.location_selection_deadline_date && formData.location_selection_deadline_time) {
+				newAppointment.location_selection_deadline = new Date(
+					`${formData.location_selection_deadline_date} ${formData.location_selection_deadline_time}`
+				).toISOString();
+			} else if (formData.location_selection_deadline_date) {
+				newAppointment.location_selection_deadline = new Date(
+					`${formData.location_selection_deadline_date}`
+				).toISOString();
+			}
+		}
+
+		const response: Appointment = await apiCall(
+			'/api/create-appointment',
+			'post',
+			'',
+			JSON.stringify(newAppointment),
+
+			sessionStorage.getItem('jwt_token') || '',
+			false
+		);
+		myAppointmentsStore.update((appointments) => [...appointments, response]);
+		goto('/appointments');
+	};
 
 	let previousPage: string = base;
 	afterNavigate(({ from }) => {
@@ -22,6 +78,11 @@
 			firstRow: 'Organizza un',
 			secondRow: 'nuovo evento!',
 			paragraph: 'Non aspettare il divertimento, crealo! Inizia a stupire tutti i tuoi amici'
+		},
+		{
+			firstRow: 'Dimmi',
+			secondRow: 'data e ora',
+			paragraph: 'Uomo avvisato, mezzo salvato: non arrivare in ritardo!'
 		},
 		{
 			firstRow: 'Aggiungi',
@@ -41,10 +102,9 @@
 		}
 	];
 
-	let step = 3;
+	let step = 0;
+	let isValidNameForm = true;
 	let isValidDateForm = false;
-
-	let invitedFriends: FriendData[] = [];
 
 	let acceptLastDay = false;
 	let formData: AppointmentForm = {
@@ -59,7 +119,8 @@
 		location_selection_type: 'single',
 		locations: [],
 		location_selection_deadline_date: '',
-		location_selection_deadline_time: ''
+		location_selection_deadline_time: '',
+		invitees: []
 	};
 
 	const nextStep = () => step++;
@@ -85,40 +146,52 @@
 		<div class="h-24 w-full bg-green-100" />
 		<!-- TODO accept until the day before -->
 		{#if step === 0}
-			<DescAndTimeForm
-				onSubmit={nextStep}
+			<NameAndDesc
 				bind:name={formData.title}
 				bind:description={formData.description}
+				bind:isValid={isValidNameForm}
+				onSubmit={nextStep}
+			/>
+		{:else if step === 1}
+			<DateAndTimeForm
 				bind:start_date={formData.start_date}
 				bind:end_date={formData.end_date}
 				bind:start_time={formData.start_time}
 				bind:end_time={formData.end_time}
 				bind:acceptLastDay
 				bind:isValid={isValidDateForm}
+				onSubmit={nextStep}
 			/>
-		{:else if step === 1}
+		{:else if step === 2}
 			<ImageForm
 				onSubmit={nextStep}
 				bind:image={formData.image}
 				bind:can_be_forwarded={formData.can_be_forwarded}
 			/>
-		{:else if step === 2}
-			step 3
 		{:else if step === 3}
-			<InvitedFriendsForm bind:invitedFriends {myFriends} onSubmit={nextStep} />
+			<LocationForm
+				bind:location_selection_type={formData.location_selection_type}
+				bind:locations={formData.locations}
+				onSubmit={nextStep}
+			/>
+		{:else if step === 4}
+			<InvitedFriendsForm
+				bind:invitedFriends={formData.invitees}
+				{myFriends}
+				onSubmit={() => createAppointment(formData)}
+			/>
 		{/if}
 		<div class=" grid  grid-cols-1 gap-6 md:grid-cols-3">
 			<!-- TODO add validation to forms to enable/disable button -->
 			<button
-				disabled={step === 0 && !isValidDateForm}
+				disabled={(step === 0 && !isValidNameForm) ||
+					(step === 1 && !isValidDateForm) ||
+					(step === 3 && formData.locations.length === 0)}
 				class="disabled:disabled-primary btn-primary btn-sm btn h-10  capitalize "
 				type="submit"
 				form={`${step}-part`}
-				>{step === 2 ? 'Ci siamo!' : step === 3 ? 'Invita!' : 'Conferma'}</button
+				>{step === 3 ? 'Ci siamo!' : step === 4 ? 'Invita!' : 'Conferma'}</button
 			>
 		</div>
 	</div>
 </div>
-
-<style>
-</style>

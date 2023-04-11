@@ -226,10 +226,6 @@
 	.ellipsis {
 		@apply overflow-hidden text-ellipsis whitespace-nowrap;
 	}
-
-	.disabled-primary {
-		@apply bg-primary text-white opacity-50;
-	}
 }
 
 :root {

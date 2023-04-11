@@ -11,7 +11,7 @@
 
 <form
 	class="grid grid-cols-1  gap-6 "
-	id="1-part"
+	id="2-part"
 	name="file-form"
 	on:submit|preventDefault={onSubmit}
 >

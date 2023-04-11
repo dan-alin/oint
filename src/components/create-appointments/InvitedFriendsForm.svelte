@@ -10,7 +10,7 @@
 	}
 </script>
 
-<form class="grid grid-cols-1  gap-6 " id="0-part" on:submit|preventDefault={onSubmit}>
+<form class="grid grid-cols-1  gap-6 " id="4-part" on:submit|preventDefault={onSubmit}>
 	{#each myFriends as friend}
 		<label class=" label  w-full cursor-pointer">
 			<div>{friend.user.name}</div>

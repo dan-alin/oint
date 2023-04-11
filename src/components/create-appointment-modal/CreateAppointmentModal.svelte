@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { AppointmentForm, Place } from '../../models';
 	import PageHead from '../PageHead.svelte';
-	import DateAndHoursForm from './DateAndHoursForm.svelte';
+
 	import ImageForm from '../create-appointments/ImageForm.svelte';
-	import NameDescriptionForm from './NameDescriptionForm.svelte';
-	import SelectLocationsForm from '../create-appointments/SelectLocationsForm.svelte';
+
+	import SelectLocationsForm from './SelectLocationsForm.svelte';
 	export let action: (form: AppointmentForm) => void;
 	export let closeAction: () => void;
 	let step = 1;
@@ -51,19 +51,9 @@
 				<li class="step" class:step-primary={step === 4} />
 			</ul> -->
 			{#if step === 1}
-				<NameDescriptionForm
-					onSubmit={nextStep}
-					bind:name={formData.title}
-					bind:description={formData.description}
-				/>
+				1
 			{:else if step === 2}
-				<DateAndHoursForm
-					bind:start_date={formData.start_date}
-					bind:end_date={formData.end_date}
-					bind:start_time={formData.start_time}
-					bind:end_time={formData.end_time}
-					onSubmit={nextStep}
-				/>
+				1
 			{:else if step === 3}
 				<ImageForm
 					bind:image={formData.image}

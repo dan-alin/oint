@@ -6,8 +6,6 @@
 	export let end_date: string;
 	export let start_time: string;
 	export let end_time: string;
-	export let name: string;
-	export let description: string;
 	export let acceptLastDay = false;
 	let eventType: 'continuous' | 'once' = 'once';
 
@@ -22,29 +20,14 @@
 
 	$: {
 		if (eventType === 'once') {
-			isValid = !!name && !!description && !!start_date && !!start_time && !!end_time;
+			isValid = !!start_date && !!start_time && !!end_time;
 		} else {
-			isValid = !!name && !!description && !!start_date && !!end_date && !!start_time && !!end_time;
+			isValid = !!start_date && !!end_date && !!start_time && !!end_time;
 		}
 	}
 </script>
 
-<form class="grid grid-cols-1  gap-6 " id="0-part" on:submit|preventDefault={onSubmit}>
-	<InputText
-		type="text"
-		id="title"
-		name="title"
-		placeholder="Nome evento"
-		required
-		bind:value={name}
-	/>
-
-	<textarea
-		placeholder="Descrizione evento"
-		class="textarea-sm textarea-bordered textarea w-full "
-		bind:value={description}
-	/>
-
+<form class="grid grid-cols-1  gap-6 " id="1-part" on:submit|preventDefault={onSubmit}>
 	<div class="tabs h-4 gap-4">
 		<button
 			id="once"
