@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { Icons } from '../enums';
 	import Icon from './Icon.svelte';
 	import { noop } from 'svelte/internal';
