@@ -12,6 +12,10 @@ export const getNotificationMessage = (
 			return `Ops, sembra che ${prefix} non voglia far parte dei tuoi amici`;
 		case EnumNotificationType.INVITATION_REQ:
 			return `${prefix} ti ha invitato a <b><u>${suffix}</u></b>`;
+		case EnumNotificationType.INVITATION_ACC:
+			return `${prefix} ha accettato il tuo invito a <b><u>${suffix}</u></b>`;
+		case EnumNotificationType.INVITATION_REJ:
+			return `${prefix} ha rifiutato il tuo invito a <b><u>${suffix}</u></b>`;
 	}
 };
 

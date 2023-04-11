@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { Icons } from '../enums';
+	import Icon from './Icon.svelte';
+
 	export let firstRow: string;
 	export let secondRow: string;
+	export let goto: string;
 </script>
 
 <div class="mb-8 flex items-center justify-between">
@@ -13,8 +17,8 @@
 	</div>
 	<a
 		class="flex h-[50px] w-[50px] cursor-pointer items-center justify-center font-bold"
-		href={`/notifications`}
+		href={goto}
 	>
-		X
+		<Icon icon={Icons.CLOSE} />
 	</a>
 </div>

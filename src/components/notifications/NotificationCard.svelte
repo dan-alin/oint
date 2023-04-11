@@ -28,7 +28,7 @@
 
 	const declineFriendRequest = async (friendRequestId: number) => {
 		const response: any = await apiCall(
-			'/api/decline-friend-request',
+			'/api/reject-friend-request',
 			'post',
 			'Request declined',
 			JSON.stringify({ friendRequestId }),
@@ -77,7 +77,7 @@
 								`${notification.message.user.name} ${notification.message.user.surname}`
 							)}
 						</p>
-					{:else if notification.type === EnumNotificationType.INVITATION_REQ}
+					{:else if notification.type === EnumNotificationType.INVITATION_REQ || notification.type === EnumNotificationType.INVITATION_ACC}
 						<p class=" w-full self-center align-middle font-bold">
 							{@html getNotificationMessage(
 								notification.type,

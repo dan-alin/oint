@@ -39,7 +39,13 @@ export const apiCall = async <T>(
 					method: 'DELETE',
 					body
 				});
-
+				break;
+			case 'put':
+				response = await fetch(url, {
+					headers,
+					method: 'PUT',
+					body
+				});
 				break;
 		}
 	} catch (err: unknown) {

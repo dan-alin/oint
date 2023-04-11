@@ -1,16 +1,17 @@
 import type { RequestEvent } from '@sveltejs/kit';
 
 export async function POST({ request }: RequestEvent) {
-	const resetPassword = await request.json();
+	const password = await request.json();
 	const { VITE_API_HOST } = import.meta.env;
 
 	try {
-		const response = await fetch(`${VITE_API_HOST}users/change-password-after-reset`, {
+		const response = await fetch(`${VITE_API_HOST}users/change-password`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				Authorization: request.headers.get('Authorization') || ''
 			},
-			body: JSON.stringify(resetPassword)
+			body: JSON.stringify(password)
 		});
 		const data = await response.json();
 		return new Response(JSON.stringify(data), {

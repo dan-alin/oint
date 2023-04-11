@@ -29,11 +29,11 @@
 
 	@font-face {
 		font-family: 'icomoon';
-		src: url('/fonts/icomoon.eot?v2w29e');
-		src: url('/fonts/icomoon.eot?v2w29e#iefix') format('embedded-opentype'),
-			url('/fonts/icomoon.ttf?v2w29e') format('truetype'),
-			url('/fonts/icomoon.woff?v2w29e') format('woff'),
-			url('/fonts/icomoon.svg?v2w29e#icomoon') format('svg');
+		src: url('/fonts/Icomoon/icomoon.eot');
+		src: url('/fonts/Icomoon/icomoon.eot') format('embedded-opentype'),
+			url('/fonts/Icomoon/icomoon.ttf') format('truetype'),
+			url('/fonts/Icomoon/icomoon.woff') format('woff'),
+			url('/fonts/Icomoon/icomoon.svg') format('svg');
 		font-weight: normal;
 		font-style: normal;
 		font-display: block;
@@ -214,6 +214,33 @@
 	.bg-container {
 		@apply flex h-full flex-col justify-end bg-cover bg-center bg-no-repeat;
 	}
+
+	:root {
+		--color-primary: #2e46ff;
+		--color-secondary: #ff5580;
+		--color-accent: #ffd700;
+		--color-success: #4de088;
+		--color-warning: #ffc107;
+		--color-error: #ff5555;
+		--color-disabled: #989a9e;
+		--color-light-gray: #dedede;
+	}
+
+	[data-theme='dark'] {
+		/* TODO: modificare colori per dark mode */
+		--color-primary: #ff5580;
+		--color-secondary: #2e46ff;
+		--color-accent: #ffd700;
+		--color-success: #4de088;
+		--color-warning: #ffc107;
+		--color-error: #ff5555;
+		--color-disabled: #989a9e;
+		--color-light-gray: #dedede;
+	}
+
+	.btn {
+		text-transform: none !important;
+	}
 }
 
 @layer components {
@@ -226,16 +253,6 @@
 	.ellipsis {
 		@apply overflow-hidden text-ellipsis whitespace-nowrap;
 	}
-}
-
-:root {
-	--color-primary: #2e46ff;
-	--color-secondary: #ff5580;
-	--color-accent: #ffd700;
-	--color-success: #4de088;
-	--color-warning: #ffc107;
-	--color-error: #ff5555;
-	--color-disabled: #989a9e;
 }
 
 * {
@@ -303,7 +320,6 @@ ul,
 li,
 fieldset,
 form,
-label,
 legend,
 table,
 caption,
@@ -321,6 +337,16 @@ td {
 	vertical-align: baseline;
 	background: transparent;
 }
+
+label {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
 body {
 	line-height: 1;
 	width: 100%;
@@ -360,4 +386,8 @@ table {
 ::-webkit-scrollbar {
 	width: 0px;
 	background: transparent; /* make scrollbar transparent */
+}
+
+textarea {
+	resize: none;
 }

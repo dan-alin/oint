@@ -4,7 +4,7 @@
 
 	export let id: string;
 	export let name: string;
-	export let label: string;
+	export let label = '';
 	export let options: Option[];
 	export let disabled = false;
 	export let required = false;
@@ -14,13 +14,15 @@
 </script>
 
 <div class="form-control w-full">
-	<label class="label" for={id}>
-		<span class="label-text font-bold"
-			>{label}{#if required}*{/if}</span
-		>
-	</label>
+	{#if label}
+		<label class="label" for={id}>
+			<span class="label-text font-bold"
+				>{label}{#if required}*{/if}</span
+			>
+		</label>
+	{/if}
 	<select
-		class="select-bordered select w-full max-w-xs"
+		class="select-bordered select  w-full"
 		class:input-error={required && isDirty}
 		{id}
 		{name}
