@@ -1,15 +1,67 @@
 <script lang="ts">
+	import { noop } from 'svelte/internal';
+	import Icon from './Icon.svelte';
+	import { Icons } from '../enums';
+
 	export let id: string;
-	export let closeModal: () => void;
+	export let title: string;
+	export let subTitle: string;
+	export let confirmBtnLabel: string;
+	export let cancelBtnLabel: string | undefined = undefined;
+	export let onConfirm = noop;
+	export let onCancel: (() => void) | undefined = undefined;
+	export let modalOpened: boolean | undefined = undefined;
+
+	let modalBody: HTMLLabelElement;
+
+	const handleClickOutside = (e: MouseEvent | KeyboardEvent) => {
+		if (modalOpened === undefined) return;
+		if (e.type == 'click') {
+			if (e.target && !modalBody.contains(e.target as Node)) modalOpened = false;
+		} else {
+			const keyboardE = e as KeyboardEvent;
+			if (keyboardE.key === 'Escape') modalOpened = false;
+		}
+	};
 </script>
 
-<div class="modal z-[51]  md:modal-middle " {id}>
-	<div class="modal-box  bg-base-200 pb-10 ">
-		<h3 class="text-center text-xl font-bold">Le tue informazioni sono state salvate</h3>
-		<p class="mt-6 text-center text-base">
-			certo, non vorrai mica cambiare il tuo nome... però ecco, siamo contenti che le tue
-			informazioni siano aggiornate!
+{#if modalOpened === undefined}
+	<input type="checkbox" {id} class="modal-toggle" />
+{/if}
+<label
+	for={id}
+	class="modal z-[51] cursor-pointer  md:modal-middle"
+	on:click={handleClickOutside}
+	on:keydown={handleClickOutside}
+	class:modal-open={modalOpened}
+>
+	<label bind:this={modalBody} for="" class="modal-box mt-7 bg-base-200 pb-10">
+		<div class="ml-auto flex justify-end">
+			{#if modalOpened === undefined}
+				<label for={id}>
+					<Icon icon={Icons.CLOSE} />
+				</label>
+			{:else}
+				<button on:click={() => (modalOpened = false)}>
+					<Icon icon={Icons.CLOSE} />
+				</button>
+			{/if}
+		</div>
+		<h3 class="mt-7 text-center text-xl font-bold">{title}</h3>
+		<p class="mt-6 text-center text-sm">
+			{subTitle}
 		</p>
-		<button class="btn-primary btn mt-4 w-full" on:click={closeModal}>OK</button>
-	</div>
-</div>
+		<div class="mt-6 flex gap-4">
+			{#if cancelBtnLabel}
+				{#if onCancel}
+					<button class="btn-outline btn-primary btn flex-1" on:click={onCancel}
+						>{cancelBtnLabel}</button
+					>
+				{:else}
+					<label for={id} class="btn-outline btn-primary btn flex-1">{cancelBtnLabel}</label>
+				{/if}
+			{/if}
+			<button class="btn-primary btn flex-1" on:click={onConfirm}>{confirmBtnLabel}</button>
+		</div>
+	</label>
+</label>
