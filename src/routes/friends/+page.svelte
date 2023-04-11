@@ -194,6 +194,7 @@
 					}
 					return 0;
 				});
+
 				break;
 			case 'recent':
 				orderedArray = [...orderedArray].sort((a, b) => {

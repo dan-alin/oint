@@ -1,7 +1,6 @@
 <script lang="ts">
-	export let label: string;
 	export let id: string;
-	export let accept: string;
+	export let accept = '.jpeg, .jpg, .png';
 	export let name: string;
 	export let files: FileList | undefined;
 	export let required = false;
@@ -14,13 +13,8 @@
 </script>
 
 <div class="form-control w-full">
-	<label class="label" for={id}>
-		<span class="label-text font-bold"
-			>{label}{#if required}*{/if}</span
-		>
-	</label>
 	<input
-		class="file-input-bordered file-input w-full"
+		class=" file-input-bordered file-input  relative flex h-10  w-full"
 		type="file"
 		{accept}
 		{name}
@@ -31,3 +25,19 @@
 		bind:files
 	/>
 </div>
+
+<style>
+	input[type='file'] {
+		color: var(--color-disabled);
+	}
+	.file-input::file-selector-button {
+		color: transparent;
+		width: 40px;
+		aspect-ratio: 1;
+		height: 100%;
+		border: none;
+		margin: 0;
+		background: url('/icons/upload.svg') no-repeat center center;
+		filter: opacity(0.5);
+	}
+</style>

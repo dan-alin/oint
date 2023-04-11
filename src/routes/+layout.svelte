@@ -14,7 +14,6 @@
 	import type { User } from '../models';
 	import { Routes } from '../enums';
 
-	let ReloadPrompt: any;
 	let showSpinner = false;
 	let showAlert: AlertState;
 	let tokeFirebase = '';
@@ -23,7 +22,7 @@
 	toggleAlert.subscribe((value) => (showAlert = value));
 	// to hide the navbar from the route '/example-route', add the string '|(/example-route)' to the hideNavRegExp
 	const hideNavRegExp = new RegExp(
-		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})`
+		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})`
 	);
 	$: hideNav = hideNavRegExp.test($page.url.pathname);
 

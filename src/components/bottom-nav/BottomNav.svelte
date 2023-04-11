@@ -5,7 +5,7 @@
 	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
-	import CreateAppointmentModal from '../create-appointment-modal/CreateAppointmentModal.svelte';
+
 	import Icon from '../Icon.svelte';
 	import NavItem from './NavItem.svelte';
 	let unique = {};
@@ -87,17 +87,10 @@
 			/>
 		</div>
 		<div class="navbar-center">
-			<!-- modal -->
-			<label for="create-appointment-modal" class="ratio-h-w btn-primary btn-circle btn  mb-16 "
-				><Icon icon={Icons.ADD} size="26" /></label
+			<a href="/create-appointments" class="ratio-h-w btn-primary btn-circle btn  mb-16 "
+				><Icon icon={Icons.ADD} size="26" /></a
 			>
 		</div>
-		<input type="checkbox" id="create-appointment-modal" class="modal-toggle" />
-
-		<!-- restart the component after closing it to clean form and steps -->
-		{#key unique}
-			<CreateAppointmentModal action={createAppointment} closeAction={closeModal} />
-		{/key}
 
 		<div class="navbar-end justify-evenly text-xs">
 			<NavItem
