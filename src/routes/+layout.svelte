@@ -12,6 +12,7 @@
 	import { page } from '$app/stores';
 	import { userStore } from '../stores/user';
 	import type { User } from '../models';
+	import { Routes } from '../enums';
 
 	let showSpinner = false;
 	let showAlert: AlertState;
@@ -19,6 +20,11 @@
 
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 	toggleAlert.subscribe((value) => (showAlert = value));
+	// to hide the navbar from the route '/example-route', add the string '|(/example-route)' to the hideNavRegExp
+	const hideNavRegExp = new RegExp(
+		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})`
+	);
+	$: hideNav = hideNavRegExp.test($page.url.pathname);
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
 
@@ -53,8 +59,8 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			userStore.update(() => user);
+			getTokenFirebase(setFirebaseToken);
 		}
-		getTokenFirebase(setFirebaseToken);
 	});
 </script>
 
@@ -64,7 +70,7 @@
 
 {#if showSpinner}
 	<div
-		class="fixed top-0 left-0  z-50 flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
+		class="fixed top-0 left-0  z-[99] flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
 	>
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>
@@ -83,7 +89,7 @@
 <div class="h-screen overflow-auto ">
 	<slot />
 </div>
-{#if $page.url.pathname !== '/login' && $page.url.pathname !== '/sign-up' && $page.url.pathname !== '/' && $page.url.pathname !== '/create-appointments'}
+{#if !hideNav}
 	<BottomNav />
 {/if}
 <!-- {#if ReloadPrompt}

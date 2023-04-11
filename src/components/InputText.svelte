@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { Icons } from '../enums';
+	import Icon from './Icon.svelte';
+	import { noop } from 'svelte/internal';
+
 	export let id: string;
 	export let name: string;
 	export let label = '';
@@ -6,9 +10,10 @@
 	export let value: string | number | Date | File[] | undefined = '';
 	export let required = false;
 	export let disabled = false;
-	export let onChange = () => null;
+	export let onChange = noop;
+	export let onInput = noop;
 	export let customValidation = true;
-	export let validate: () => void = () => null;
+	export let validate = noop;
 	export let type:
 		| 'color'
 		| 'date'
@@ -27,11 +32,19 @@
 		| 'url'
 		| 'week'
 		| 'search';
+	export let enableShowHide = false;
+	let show = false;
+	let component: HTMLInputElement;
+
+	const toggleShow = () => {
+		show = !show;
+		component.type = show ? 'text' : type;
+	};
 
 	let isDirty = false;
 
 	const typeAction = (node: HTMLInputElement) => {
-		node.type = type;
+		node.type = show ? 'text' : type;
 	};
 </script>
 
@@ -46,20 +59,37 @@
 			{/if}
 		</label>
 	{/if}
-	<input
-		class="input-bordered input h-10 w-full"
-		class:input-error={(required && isDirty && !value) || !customValidation}
-		use:typeAction
-		{placeholder}
-		{name}
-		{id}
-		{required}
-		{disabled}
-		bind:value
-		on:keydown={() => {
-			isDirty = true;
-		}}
-		on:change={onChange}
-		on:blur={validate}
-	/>
+	<div class="relative">
+		<input
+			bind:this={component}
+			class="input-bordered input h-10 w-full"
+			class:input-error={(required && isDirty && !value) || !customValidation}
+			use:typeAction
+			{placeholder}
+			{name}
+			{id}
+			{required}
+			{disabled}
+			bind:value
+			on:keydown={() => {
+				isDirty = true;
+			}}
+			on:change={onChange}
+			on:input={onInput}
+			on:blur={validate}
+		/>
+		{#if enableShowHide}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div
+				class="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5"
+				on:click={toggleShow}
+			>
+				{#if !show}
+					<Icon icon={Icons.NOTIFICATION_OUTLINE} />
+				{:else}
+					<Icon icon={Icons.NOTIFICATION_FULL} />
+				{/if}
+			</div>
+		{/if}
+	</div>
 </div>

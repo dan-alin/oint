@@ -2,6 +2,7 @@
 	import { Icons } from '../../enums';
 	import type { Appointment, AppointmentForm } from '../../models';
 	import { myAppointmentsStore } from '../../stores/apointments';
+	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
 
@@ -23,7 +24,11 @@
 			image,
 			can_be_forwarded: formData.can_be_forwarded,
 			locations: formData.locations,
-			location_selection_type: formData.location_selection_type
+			location_selection_type: formData.location_selection_type,
+			creator: {
+				...$userStore,
+				id: $userStore?.id as number
+			}
 		};
 
 		if (newAppointment.location_selection_type === 'multi') {

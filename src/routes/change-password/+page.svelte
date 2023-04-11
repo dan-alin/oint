@@ -18,7 +18,7 @@
 				throw new Error('Password mismatch');
 			}
 			const response: { access_token: string; user: User } = await apiCall(
-				'/api/change-password',
+				'/api/change-password-after-reset',
 				'post',
 				'Reset password success',
 				JSON.stringify(resetPassword)

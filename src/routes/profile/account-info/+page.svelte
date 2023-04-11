@@ -4,7 +4,6 @@
 	import { userStore } from '../../../stores/user';
 	import ModalSuccess from '../../../components/ModalSuccess.svelte';
 	import { apiCall } from '../../../utils/api-call';
-	import type { User } from '../../../models';
 
 	let birthdate = '';
 	let disabled = true;
@@ -20,11 +19,10 @@
 	const toggleEdit = () => (disabled = !disabled);
 
 	const onSubmit = async () => {
-		console.log($userStore);
 		const response: any = await apiCall(
 			'/api/users',
 			'post',
-			'User updated',
+			'',
 			JSON.stringify({
 				name: $userStore.name,
 				surname: $userStore.surname,
@@ -36,6 +34,7 @@
 			sessionStorage.getItem('jwt_token') || ''
 		);
 		modalOpened = true;
+		disabled = true;
 	};
 
 	const closeModal = () => (modalOpened = false);
@@ -49,7 +48,7 @@
 <section class="h-full px-6 pt-8">
 	<HeaderMenu firstRow="informazioni" secondRow="Account" goto="/profile" />
 	{#if $userStore}
-		<form class="flex h-4/6  flex-col justify-between" on:submit|preventDefault={onSubmit}>
+		<form class="flex  h-5/6 flex-col justify-between" on:submit|preventDefault={onSubmit}>
 			<div>
 				<h2 class="mb-2 text-base font-bold">Dati anagrafici</h2>
 				<div class="mb-6 flex flex-col gap-4">
@@ -99,7 +98,7 @@
 						placeholder="Mail"
 						required
 						bind:value={$userStore.email}
-						{disabled}
+						disabled={true}
 					/>
 					<InputText
 						type="text"
@@ -122,5 +121,11 @@
 		</form>
 	{/if}
 </section>
-<input type="checkbox" id="prova" class="modal-toggle" checked={modalOpened} />
-<ModalSuccess id="prova" {closeModal} />
+<ModalSuccess
+	{modalOpened}
+	id="successModal"
+	onConfirm={closeModal}
+	title="Le tue nuove informazioni sono state salvate!"
+	subTitle="Certo, non vorrai mica cambiare il tuo nome... però ecco siamo felici di avere le tue informazioni aggiornate!"
+	confirmBtnLabel="Ok"
+/>

@@ -5,7 +5,7 @@ export async function POST({ request }: RequestEvent) {
 	const { VITE_API_HOST } = import.meta.env;
 
 	try {
-		const response = await fetch(`${VITE_API_HOST}appointment/addEventee`, {
+		const response = await fetch(`${VITE_API_HOST}appointment/add-invintee`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

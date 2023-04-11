@@ -1,6 +1,5 @@
 import type { Appointment, InvitedAppointment } from '../../models';
 import type { PageServerLoad } from './$types';
-//
 
 export const prerender = false;
 
