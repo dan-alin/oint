@@ -56,8 +56,7 @@
 			'',
 			JSON.stringify(newAppointment),
 
-			sessionStorage.getItem('jwt_token') || '',
-			false
+			sessionStorage.getItem('jwt_token') || ''
 		);
 		myAppointmentsStore.update((appointments) => [...appointments, response]);
 		goto('/appointments');
