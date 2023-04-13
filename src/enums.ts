@@ -11,7 +11,7 @@ export enum Icons {
 	ADD = 'icon-add',
 	ARROW = 'icon-arrow',
 	ATTACH = 'icon-attach',
-	BBOKMARKS = 'icon-bookmarks',
+	BOOKMARKS = 'icon-bookmarks',
 	CHAT = 'icon-chat',
 	CHECK_DONE = 'icon-check-done',
 	CHEVRON = 'icon-chevron',
@@ -49,5 +49,12 @@ export enum Backgrounds {
 }
 
 export enum Routes {
-	APPOINTMENTS = '/appointments'
+	APPOINTMENTS = '/appointments',
+	PROFILE = '/profile',
+	BYE = '/bye',
+	CREATE_APPOINMENTS = '/create-appointments'
+}
+
+export enum Endpoints {
+	CHANGE_PASSWORD = '/api/change-password'
 }

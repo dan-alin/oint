@@ -1,5 +1,5 @@
+import type { FriendData, FriendUser } from './friend';
 import type { Icons } from '../enums';
-import type { FriendUser } from './friend';
 import type { Invitation } from './invitation';
 import type { Location } from './locations';
 
@@ -15,6 +15,7 @@ export type Appointment = {
 	locations: Location[];
 	invitations?: Invitation[];
 	location_selection_deadline?: Date | string;
+	invitees: FriendUser[];
 	location_selection_type?: 'multi' | 'single';
 	creator: FriendUser;
 };
@@ -43,6 +44,7 @@ export type AppointmentForm = {
 	location_selection_type: 'single' | 'multi';
 	location_selection_deadline_date: string;
 	location_selection_deadline_time: string;
+	invitees?: FriendData[];
 };
 
 export type AppointmentDetailSectionData = {

@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/dan-alin/oint/compare/v1.3.1...v1.4.0) (2023-04-11)
+
+
+### Features
+
+* add change password and modify profile call ([699c2fb](https://github.com/dan-alin/oint/commit/699c2fb30fe1e4b9b58badee7e7de22ceb6ed6d4))
+* **enum:** adds Routes enum ([45e352c](https://github.com/dan-alin/oint/commit/45e352c418639118bbe128bf9924f9c71152ec83))
+
+
+### Bug Fixes
+
+* **root layout:** hides navbar from the appointment detail page ([80f709c](https://github.com/dan-alin/oint/commit/80f709c543fbaed88512ca72fc9dbb734d1f0808))
+
 ## [1.3.1](https://github.com/dan-alin/oint/compare/v1.3.0...v1.3.1) (2023-04-06)
 
 

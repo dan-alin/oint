@@ -14,7 +14,6 @@
 	import type { User } from '../models';
 	import { Routes } from '../enums';
 
-	let ReloadPrompt: any;
 	let showSpinner = false;
 	let showAlert: AlertState;
 	let tokeFirebase = '';
@@ -22,7 +21,9 @@
 	toggleSpinner.subscribe((value) => (showSpinner = value));
 	toggleAlert.subscribe((value) => (showAlert = value));
 	// to hide the navbar from the route '/example-route', add the string '|(/example-route)' to the hideNavRegExp
-	const hideNavRegExp = new RegExp(`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)`);
+	const hideNavRegExp = new RegExp(
+		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})`
+	);
 	$: hideNav = hideNavRegExp.test($page.url.pathname);
 
 	$: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : '';
@@ -58,8 +59,8 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			userStore.update(() => user);
+			getTokenFirebase(setFirebaseToken);
 		}
-		getTokenFirebase(setFirebaseToken);
 	});
 </script>
 

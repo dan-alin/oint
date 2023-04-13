@@ -10,9 +10,14 @@
 
 	const sections = [
 		{ title: 'Informazioni account', link: '/profile/account-info' },
-		{ title: 'Gestione account', link: '/profile/account-settings' },
-		{ title: 'Impostazioni generali', link: '/profile' }
+		{ title: 'Gestione account', link: '/profile/account-settings' }
+		/*{ title: 'Impostazioni generali', link: '/profile' }*/
 	];
+
+	const logout = () => {
+		sessionStorage.removeItem('jwt_token');
+		window.location.href = '/login';
+	};
 </script>
 
 <section class="flex flex-col items-center pt-4">
@@ -48,7 +53,9 @@
 	<Menu {sections} />
 	<div class="min-h-12 flex w-full items-center gap-4 px-4">
 		<div class="flex">
-			<button class=" w-full self-center align-middle font-bold text-primary">Logout</button>
+			<button class=" w-full self-center align-middle font-bold text-primary" on:click={logout}
+				>Logout</button
+			>
 		</div>
 	</div>
 	<input type="checkbox" id="change-profile-picture-modal" class="modal-toggle" />
