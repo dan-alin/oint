@@ -1,4 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
+const withOpacity = (variableName) => {
+	return ({ opacityValue }) => {
+		if (opacityValue !== undefined) {
+			return `rgba(var(${variableName}), ${opacityValue})`;
+		}
+		return `rgb(var(${variableName}))`;
+	};
+};
+
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	safelist: [{ pattern: /w-1\/\d*/ }],
@@ -9,14 +19,15 @@ module.exports = {
 				175: '1.75'
 			},
 			colors: {
-				primary: 'var(--color-primary)',
-				secondary: 'var(--color-secondary)',
-				accent: 'var(--color-accent)',
-				success: 'var(--color-success)',
-				warning: 'var(--color-warning)',
-				error: 'var(--color-error)',
-				disabled: 'var(--color-disabled)',
-				'light-gray': 'var(--color-light-gray)'
+				primary: withOpacity('--color-primary'),
+				secondary: withOpacity('--color-secondary'),
+				accent: withOpacity('--color-accent'),
+				success: withOpacity('--color-success'),
+				warning: withOpacity('--color-warning'),
+				error: withOpacity('--color-error'),
+				disabled: withOpacity('--color-disabled'),
+				'light-gray': withOpacity('--color-light-gray'),
+				background: withOpacity('--color-background')
 			},
 			fontFamily: {
 				raleway: ['Raleway', 'sans-serif']
@@ -28,21 +39,21 @@ module.exports = {
 			{
 				light: {
 					...require('daisyui/src/colors/themes')['[data-theme=light]'],
-					primary: '#2E46FF',
-					secondary: '#FF5580',
-					accent: '#FFDC00',
-					success: '#4DE088',
-					warning: '#FFDC00',
-					error: '#FF5555'
+					primary: 'rgb(46, 70, 255)',
+					secondary: 'rgb(255, 85, 128)',
+					accent: 'rgb(255, 220, 0)',
+					success: 'rgb(77, 224, 136)',
+					warning: 'rgb(255, 220, 0)',
+					error: 'rgb(255, 85, 85)'
 				},
 				dark: {
 					...require('daisyui/src/colors/themes')['[data-theme=dark]'],
-					primary: '#FF5580',
-					secondary: '#2E46FF',
-					accent: '#FFDC00',
-					success: '#4DE088',
-					warning: '#FFDC00',
-					error: '#FF5555'
+					primary: 'rgb(255, 85, 128)',
+					secondary: 'rgb(46, 70, 255)',
+					accent: 'rgb(255, 220, 0)',
+					success: 'rgb(77, 224, 136)',
+					warning: 'rgb(255, 220, 0)',
+					error: 'rgb(255, 85, 85)'
 				}
 			}
 		]
