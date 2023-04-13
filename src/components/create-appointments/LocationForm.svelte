@@ -6,13 +6,24 @@
 	import Icon from '../Icon.svelte';
 	import AddLocationModal from './AddLocationModal.svelte';
 
-	export let location_selection_type: 'single' | 'multi';
+	export let location_selection_type: 'single' | 'multi' = 'single';
 	export let locations: { name: string; address: string }[] = [];
 	export let onSubmit: () => void;
 
+	let isModalOpen = false;
+
 	let unique = {};
 
+	//reset modal whenever it closes
+	$: if (!isModalOpen) {
+		unique = {};
+	}
+
 	const getLocations = (location: { name: string; address: string }) => {
+		//trigger click on checkbox to close modal
+		const modalLocationCheck = document.getElementById('modal-location') as HTMLInputElement;
+		modalLocationCheck.click();
+
 		locations = [...locations, location];
 	};
 
@@ -46,7 +57,8 @@
 			>Aggiungi location</label
 		>
 	{/if}
+
 	{#key unique}
-		<AddLocationModal action={getLocations} />
+		<AddLocationModal action={getLocations} bind:isModalOpen />
 	{/key}
 </form>
