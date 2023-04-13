@@ -1,5 +1,6 @@
 import type { EnumNotificationType } from '../utils/notification-messages';
 import type { Appointment } from './appointment';
+import type { Invitation } from './invitation';
 import type { User } from './user';
 
 export type Notification = {
@@ -9,7 +10,8 @@ export type Notification = {
 	message: {
 		friendRequestId: number;
 		user: User;
-		invitation?: { appointment: Appointment; appointment_id: number };
+		appointment: Appointment;
+		invitation?: Invitation;
 	};
 	type: EnumNotificationType;
 };

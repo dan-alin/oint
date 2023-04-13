@@ -82,9 +82,11 @@
 							{@html getNotificationMessage(
 								notification.type,
 								`${notification.message.user.name} ${notification.message.user.surname}`,
-								`${notification.message.invitation?.appointment.title}`
+								`${notification.message.appointment.title}`
 							)}
 						</p>
+					{:else}
+						<p>{notification.type} Notifica non gestita</p>
 					{/if}
 				</div>
 			</div>
