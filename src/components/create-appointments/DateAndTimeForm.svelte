@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { it } from '../../utils/datepicker-it';
 	import InputText from '../InputText.svelte';
 
 	export let onSubmit: () => void;
@@ -55,6 +56,7 @@
 			bind:value={start_date}
 			inputId="start_date"
 			name="start date"
+			i18n={it}
 		/>
 
 		{#if eventType === 'continuous'}
@@ -66,6 +68,7 @@
 					bind:value={end_date}
 					inputId="end_date"
 					name="end date"
+					i18n={it}
 				/>
 			</div>
 		{/if}
@@ -80,6 +83,7 @@
 			inputId="start_time"
 			name="start time"
 			mode="time"
+			i18n={it}
 		/>
 		<div>
 			<SveltyPicker
@@ -90,6 +94,7 @@
 				inputId="end_time"
 				name="end time"
 				mode="time"
+				i18n={it}
 			/>
 		</div>
 	</div>
