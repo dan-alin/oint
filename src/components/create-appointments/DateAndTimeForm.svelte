@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { it } from '../../utils/datepicker-it';
-	import InputText from '../InputText.svelte';
 
 	export let onSubmit: () => void;
 	export let start_date: string;
