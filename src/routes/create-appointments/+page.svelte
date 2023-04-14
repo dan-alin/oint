@@ -67,7 +67,11 @@
 
 	let previousPage: string = base;
 	afterNavigate(({ from }) => {
-		previousPage = from?.url.pathname || previousPage;
+		if (!from || from?.url.pathname.includes('/create-appointments')) {
+			previousPage = '/appointments';
+		} else {
+			previousPage = from?.url.pathname || previousPage;
+		}
 	});
 
 	export let data: {
