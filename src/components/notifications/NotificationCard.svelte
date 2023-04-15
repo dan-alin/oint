@@ -77,7 +77,7 @@
 								`${notification.message.user.name} ${notification.message.user.surname}`
 							)}
 						</p>
-					{:else if notification.type === EnumNotificationType.INVITATION_REQ || notification.type === EnumNotificationType.INVITATION_ACC}
+					{:else if notification.type === EnumNotificationType.INVITATION_REQ || notification.type === EnumNotificationType.INVITATION_ACC || notification.type === EnumNotificationType.EVENT_DELETED}
 						<p class=" w-full self-center align-middle font-bold">
 							{@html getNotificationMessage(
 								notification.type,
