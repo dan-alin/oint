@@ -76,7 +76,7 @@
 	<div class="columns-2">
 		<SveltyPicker
 			inputClasses="input-bordered input h-10 w-full"
-			format="hh:mm"
+			format="hh:ii"
 			placeholder="--:--"
 			bind:value={start_time}
 			inputId="start_time"
@@ -87,7 +87,7 @@
 		<div>
 			<SveltyPicker
 				inputClasses="input-bordered input h-10 w-full"
-				format="hh:mm"
+				format="hh:ii"
 				placeholder="--:--"
 				bind:value={end_time}
 				inputId="end_time"
