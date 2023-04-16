@@ -16,3 +16,36 @@ export const getTime = (date: Date) => {
 		minute: '2-digit'
 	});
 };
+
+export const getTimeDifference = (start: Date, end: Date) => {
+	const timeDiff = Math.abs(end.getTime() - start.getTime());
+	const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
+	const diffHours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
+	const diffMinutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
+	const diffSeconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+	let tokens = 0;
+	let formattedString = '';
+	if (diffDays > 0) {
+		const formattedDays = diffDays.toString().padStart(2, '0');
+		formattedString = `${formattedDays}d `;
+		tokens++;
+	}
+	if (tokens <= 1) {
+		const formattedHours = diffHours.toString().padStart(2, '0');
+		formattedString += `${formattedHours}h`;
+		if (tokens < 1) formattedString += ' : ';
+		tokens++;
+	}
+	if (tokens <= 1) {
+		const formattedMinutes = diffMinutes.toString().padStart(2, '0');
+		formattedString += `${formattedMinutes}m`;
+		if (tokens < 1) formattedString += ' : ';
+		tokens++;
+	}
+	if (tokens == 1) {
+		const formattedSeconds = diffSeconds.toString().padStart(2, '0');
+		formattedString += `${formattedSeconds}s`;
+	}
+	return formattedString;
+};
