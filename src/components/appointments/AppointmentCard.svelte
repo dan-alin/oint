@@ -40,7 +40,7 @@
 
 <a
 	href={`/appointments/${appointment.id}`}
-	class="card card-side h-24 w-full cursor-pointer rounded bg-white p-4 shadow"
+	class="card card-side h-24 w-full cursor-pointer gap-4 rounded bg-white p-4 shadow"
 	in:fade
 >
 	<img
@@ -48,20 +48,23 @@
 		src={appointment.image ? appointment.image : '/wp.jpg'}
 		alt="Event"
 	/>
-	<div class="card-body w-32 gap-[2px] p-0 pl-4">
-		<p class="ellipsis text-xs font-bold capitalize text-yellow-400 ">
-			{startDate} - {startTime}
-		</p>
-		<p class="ellipsis  font-bold">
-			{appointment.title.toUpperCase()}
-		</p>
-		<p class="ellipsis  text-xs">
-			{appointment.description}
-		</p>
+	<div class="card-body w-32  justify-between gap-[2px] p-0">
+		<div class="flex flex-col gap-[2px]">
+			<p class="ellipsis text-[10px] font-bold capitalize text-yellow-400 ">
+				{startDate} - {startTime}
+			</p>
+
+			<p class="ellipsis text-xs font-bold  capitalize">
+				{appointment.title}
+			</p>
+			<p class="ellipsis text-[8px]  capitalize">
+				{appointment.description}
+			</p>
+		</div>
 
 		<div>
 			{#if !isVotingOpen()}
-				<li class="flex items-center gap-1 text-xs text-gray-400">
+				<li class="flex items-center gap-1 text-[10px] capitalize text-gray-400">
 					<Icon icon={Icons.LOCATION_FULL} size="12" />
 					<p class="ellipsis">
 						{`${getMostRatedLocation.name} - ${getMostRatedLocation.address}`}
@@ -70,7 +73,9 @@
 			{:else}
 				<p class="flex">
 					<Icon icon={Icons.LOCATION_FULL} size="12" />
-					<span class="ellipsis ml-1 text-xs font-bold text-secondary">Work in progressssssss</span>
+					<span class="ellipsis ml-1 text-[10px] font-bold text-secondary"
+						>Work in progressssssss</span
+					>
 				</p>
 			{/if}
 		</div>
