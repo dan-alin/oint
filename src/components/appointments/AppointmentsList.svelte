@@ -5,6 +5,7 @@
 	import { invitedAppointmentsStore, myAppointmentsStore } from '../../stores/apointments';
 	import { apiCall } from '../../utils/api-call';
 	import AcceptReject from '../AcceptReject.svelte';
+	import EventAcceptedRefused from '../EventAcceptedRefused.svelte';
 	import AppointmentCard from './AppointmentCard.svelte';
 	import NoAppointments from './NoAppointments.svelte';
 
@@ -36,10 +37,10 @@
 	};
 </script>
 
-<div class=" grid gap-6 px-6 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
+<div class=" grid gap-6 px-6 pt-2 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
-			{#if invitedOccurrence.invitationStatus !== 'accepted'}
+			{#if invitedOccurrence.invitationStatus === 'pending'}
 				<AppointmentCard appointment={invitedOccurrence.appointment} />
 				<AcceptReject
 					id={invitedOccurrence.appointment.id || -1}
@@ -47,6 +48,11 @@
 					declineAction={declineAppointment}
 				/>
 				<div class="divider my-0" />
+			{:else}
+				<div>
+					<AppointmentCard appointment={invitedOccurrence.appointment} />
+					<EventAcceptedRefused accepted={invitedOccurrence.invitationStatus === 'accepted'} />
+				</div>
 			{/if}
 		{:else}
 			<NoAppointments
