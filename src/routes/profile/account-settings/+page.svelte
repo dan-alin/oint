@@ -14,9 +14,8 @@
 	];
 </script>
 
-<section class="h-full pt-8">
-	<div class="px-6">
-		<HeaderMenu firstRow="Gestione" secondRow="Account" goto="/profile" />
-	</div>
+<section class="h-full px-6 pt-8">
+	<HeaderMenu firstRow="Gestione" secondRow="Account" goto="/profile" />
+
 	<Menu {sections} />
 </section>

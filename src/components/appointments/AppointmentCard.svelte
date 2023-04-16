@@ -8,7 +8,7 @@
 
 	export let appointment: Appointment;
 	// export let invitationStatus: 'declined' | 'accepted' | '' = '';
-	export let deleteAction: (appointmentId: number) => void = noop;
+	// export let deleteAction: (appointmentId: number) => void = noop;
 
 	const startDate = getDate(appointment.start_date as Date);
 	const endDate = getDate(appointment.end_date as Date);
