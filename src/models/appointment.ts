@@ -17,7 +17,7 @@ export type Appointment = {
 	location_selection_deadline?: Date | string;
 	invitees: FriendUser[];
 	location_selection_type?: 'multi' | 'single';
-	creator: FriendUser;
+	creator?: FriendUser;
 };
 
 export type InvitedAppointment = {
