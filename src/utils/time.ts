@@ -1,3 +1,8 @@
+import { onDestroy } from 'svelte';
+import type { Appointment } from '../models';
+import type { Countdown } from '../models/time';
+import { identity } from 'svelte/internal';
+
 export const getDate = (date: Date) => {
 	const strDate = new Date(date).toLocaleDateString('it-IT', {
 		weekday: 'short',
@@ -17,35 +22,72 @@ export const getTime = (date: Date) => {
 	});
 };
 
-export const getTimeDifference = (start: Date, end: Date) => {
-	const timeDiff = Math.abs(end.getTime() - start.getTime());
+export const getTimeDifference = (start: Date, end: Date): Countdown => {
+	const timeDiff = end.getTime() - start.getTime();
+	console.log(timeDiff);
 	const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
 	const diffHours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
 	const diffMinutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
 	const diffSeconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-	let tokens = 0;
-	let formattedString = '';
-	if (diffDays > 0) {
-		const formattedDays = diffDays.toString().padStart(2, '0');
-		formattedString = `${formattedDays}d `;
-		tokens++;
-	}
-	if (tokens <= 1) {
-		const formattedHours = diffHours.toString().padStart(2, '0');
-		formattedString += `${formattedHours}h`;
-		if (tokens < 1) formattedString += ' : ';
-		tokens++;
-	}
-	if (tokens <= 1) {
-		const formattedMinutes = diffMinutes.toString().padStart(2, '0');
-		formattedString += `${formattedMinutes}m`;
-		if (tokens < 1) formattedString += ' : ';
-		tokens++;
-	}
-	if (tokens == 1) {
-		const formattedSeconds = diffSeconds.toString().padStart(2, '0');
-		formattedString += `${formattedSeconds}s`;
-	}
-	return formattedString;
+	return {
+		days: diffDays,
+		hours: diffHours,
+		minutes: diffMinutes,
+		seconds: diffSeconds
+	};
+};
+
+/**
+ * Hook-like function to calculate the countdown and the tokensToShow object.
+ * it uses an interval to update the countdown every second, and it clears the interval on destroy.
+ * You need to pass the updater function to update the countdown.
+ * @param appointment appointment to get the deadline from
+ * @param updater updater function to update the countdown and the tokensToShow object
+ */
+export const updateCountDown = (
+	appointment: Appointment,
+	updater: (_value: Countdown, _tokensToShow: Record<keyof Countdown, boolean>) => void
+) => {
+	let deadline = new Date(appointment.location_selection_deadline as string);
+
+	//// TEST ///////
+	// 35 minutes from now
+	deadline = new Date(new Date().getTime() - 5 * 1000);
+
+	//// TEST ///////
+	const { countdown, tokensToShow } = calcCountDownAndTokensToShow(deadline);
+	updater(countdown, tokensToShow);
+	// update every second
+	const interval = setInterval(() => {
+		const { countdown, tokensToShow } = calcCountDownAndTokensToShow(deadline);
+		updater(countdown, tokensToShow);
+		if (
+			countdown.days <= 0 &&
+			countdown.hours <= 0 &&
+			countdown.minutes <= 0 &&
+			countdown.seconds <= 0
+		) {
+			clearInterval(interval);
+		}
+	}, 1000);
+
+	onDestroy(() => {
+		clearInterval(interval);
+	});
+};
+
+const calcCountDownAndTokensToShow = (deadline: Date) => {
+	const countdown = getTimeDifference(new Date(), deadline);
+	const tokensToShow = {
+		days: false,
+		hours: false,
+		minutes: false,
+		seconds: false
+	};
+	tokensToShow.days = !!countdown.days;
+	tokensToShow.hours = !!countdown.days || (!countdown.days && !!countdown.hours);
+	tokensToShow.minutes = Object.values(tokensToShow).filter(identity).length < 2;
+	tokensToShow.seconds = Object.values(tokensToShow).filter(identity).length < 2;
+	return { countdown, tokensToShow };
 };

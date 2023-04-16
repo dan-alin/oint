@@ -53,7 +53,8 @@ export enum Routes {
 	PROFILE = '/profile',
 	BYE = '/bye',
 	CREATE_APPOINMENTS = '/create-appointments',
-	POLL = '/poll'
+	POLL = '/poll',
+	POLL_EXPIRING = '/poll-expiring'
 }
 
 export enum Endpoints {
