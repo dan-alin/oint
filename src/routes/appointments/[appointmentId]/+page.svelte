@@ -31,7 +31,7 @@
 	let checked = appointment.can_be_forwarded;
 	let openModal = false;
 	let modalViewType: 'owner' | 'inviteeRead' | 'inviteeEdit' = 'owner';
-	let votingAllowed = false;
+	let votingAllowed = true;
 	if (
 		appointment.location_selection_type === 'multi' &&
 		new Date(locationSelectionDeadline as string).getTime() > new Date().getTime()
@@ -41,11 +41,9 @@
 
 	const calcLocationBtnData = (): [string, () => void] => {
 		if (appointment.location_selection_type === 'multi') {
-			if (votingAllowed) {
-				const userHasVoted = appointment.locations.some((loc) => loc.i_voted_this_location);
-				return userHasVoted ? ['Guarda il sondaggio', noop] : ['Vota!!!!', noop];
-			}
-			return ['Apri con Maps', noop];
+			return votingAllowed
+				? ['Vota!!!!', () => goto(`${Routes.APPOINTMENTS}/${appointment.id}${Routes.POLL}`)]
+				: ['Apri con Maps', noop];
 		} else {
 			return loggedUserIsOwner ? ['Cambia locassscion', noop] : ['Apri con Maps', noop];
 		}
