@@ -14,8 +14,8 @@
 	let countdown: Countdown | undefined;
 	let tokensToShow: Record<keyof Countdown, boolean> | undefined;
 	let countdownExpired = false;
-	updateCountDown(appointment, (newCountdown, newTokensToShow) => {
-		countdownExpired = Object.values(newCountdown).reduce((acc, curr) => acc + curr, 0) <= 0;
+	updateCountDown(appointment, (newCountdown, newTokensToShow, newCountdownExpired) => {
+		countdownExpired = newCountdownExpired;
 		if (countdownExpired) return;
 		countdown = newCountdown;
 		tokensToShow = newTokensToShow;

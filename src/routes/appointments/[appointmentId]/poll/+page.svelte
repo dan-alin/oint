@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { onDestroy } from 'svelte';
 	import Icon from '../../../../components/Icon.svelte';
 	import ModalSuccess from '../../../../components/ModalSuccess.svelte';
 	import { Endpoints, Icons, Routes } from '../../../../enums';
 	import type { Appointment } from '../../../../models';
+	import type { Countdown } from '../../../../models/time';
 	import { apiCall } from '../../../../utils/api-call';
-	import { getTimeDifference } from '../../../../utils/time';
+	import { updateCountDown } from '../../../../utils/time';
 
 	export let data: { appointment: Appointment };
 	let { appointment } = data;
@@ -36,17 +36,15 @@
 			color: colors[i % colors.length]
 		};
 	});
-	$: deadline = new Date(appointment.location_selection_deadline as string);
 	let modalOpened = false;
-
-	$: countdown = getTimeDifference(new Date(), deadline);
-	// update every second
-	$: interval = setInterval(() => {
-		countdown = getTimeDifference(new Date(), deadline);
-	}, 1000);
-
-	onDestroy(() => {
-		clearInterval(interval);
+	let countdown: Countdown | undefined;
+	let tokensToShow: Record<keyof Countdown, boolean> | undefined;
+	let countdownExpired = false;
+	updateCountDown(appointment, (newCountdown, newTokensToShow, newCountdownExpired) => {
+		countdownExpired = newCountdownExpired;
+		if (countdownExpired) return;
+		countdown = newCountdown;
+		tokensToShow = newTokensToShow;
 	});
 
 	export const voteLocations = async () => {
@@ -79,9 +77,9 @@
 
 <section class="page-container">
 	<h1>
-		<p class="text-xl text-disabled">Vota la tua</p>
+		<p class="text-xl text-disabled">{countdownExpired ? 'il tempo è' : 'Vota la tua'}</p>
 		<div class="flex justify-between">
-			<p class="text-2xl font-bold">Locassshion</p>
+			<p class="text-2xl font-bold">{countdownExpired ? 'Scaduto!' : 'Locassshion'}</p>
 			<a href={`${Routes.APPOINTMENTS}/${appointment.id}`}>
 				<Icon icon={Icons.CLOSE} />
 			</a>
@@ -90,15 +88,29 @@
 
 	<div class="mt-8 text-sm">
 		<p>
-			Scegli tra queste possibilità, puoi anche votarne più di una! Hai ancora del tempo a
-			disposizione:
+			{countdownExpired
+				? "Notizia dell'ultima ora: i partecipanti hanno finalmente deciso dove andare! Hanno lanciato una monetina, fatto una danza tribale e persino consultato un oracolo. Alla fine, la location scelta è...."
+				: 'Scegli tra queste possibilità, puoi anche votarne più di una! Hai ancora del tempo a disposizione:'}
 		</p>
 
 		<!-- Countdown -->
-		<div class="mt-4 flex justify-center font-bold text-primary">
-			<Icon icon={Icons.CLOCK} />
-			<span class="ml-2">{countdown}</span>
-		</div>
+		{#if !countdownExpired}
+			<div class="mt-4 flex justify-center font-bold text-primary">
+				<Icon icon={Icons.CLOCK} />
+				{#if countdown && tokensToShow}
+					<span class="countdown">
+						<!-- days -->
+						{#if tokensToShow.days}<span style={'--value:' + countdown.days} />d{/if}
+						<!-- hours -->
+						{#if tokensToShow.hours}<span style={'--value:' + countdown.hours} />h{/if}
+						<!-- minutes -->
+						{#if tokensToShow.minutes}<span style={'--value:' + countdown.minutes} />m{/if}
+						<!-- seconds -->
+						{#if tokensToShow.seconds}<span style={'--value:' + countdown.seconds} />s{/if}
+					</span>
+				{/if}
+			</div>
+		{/if}
 
 		<!-- Locations -->
 		<div class="mt-4 flex flex-col">
@@ -108,6 +120,7 @@
 						<input
 							id={'check-' + location.id}
 							bind:group={selectedLocations}
+							disabled={countdownExpired}
 							value={location.id}
 							type="checkbox"
 							class="checkbox-secondary checkbox checkbox-xs rounded border-disabled bg-background"
@@ -134,9 +147,18 @@
 	</div>
 	<!-- Actions -->
 	<div class="mt-auto">
-		<button class="btn-primary btn-sm btn h-10 w-full" on:click={voteLocations}
-			>{iVoted ? 'Modifica voto' : 'Vota'}</button
-		>
+		{#if countdownExpired}
+			<a
+				href={`${Routes.APPOINTMENTS}/${appointment.id}`}
+				class="btn-primary btn-sm btn h-10 w-full"
+			>
+				Vai all’evento!
+			</a>
+		{:else}
+			<button class="btn-primary btn-sm btn h-10 w-full" on:click={voteLocations}
+				>{iVoted ? 'Modifica voto' : 'Vota'}</button
+			>
+		{/if}
 	</div>
 </section>
 

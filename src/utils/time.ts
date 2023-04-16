@@ -47,29 +47,21 @@ export const getTimeDifference = (start: Date, end: Date): Countdown => {
  */
 export const updateCountDown = (
 	appointment: Appointment,
-	updater: (_value: Countdown, _tokensToShow: Record<keyof Countdown, boolean>) => void
+	updater: (
+		_value: Countdown,
+		_tokensToShow: Record<keyof Countdown, boolean>,
+		_countdownExpired: boolean
+	) => void
 ) => {
-	let deadline = new Date(appointment.location_selection_deadline as string);
+	const deadline = new Date(appointment.location_selection_deadline as string);
 
-	//// TEST ///////
-	// 35 minutes from now
-	deadline = new Date(new Date().getTime() - 5 * 1000);
-
-	//// TEST ///////
-	const { countdown, tokensToShow } = calcCountDownAndTokensToShow(deadline);
-	updater(countdown, tokensToShow);
+	const { countdown, tokensToShow, countdownExpired } = calcCountDownAndTokensToShow(deadline);
+	updater(countdown, tokensToShow, countdownExpired);
 	// update every second
 	const interval = setInterval(() => {
-		const { countdown, tokensToShow } = calcCountDownAndTokensToShow(deadline);
-		updater(countdown, tokensToShow);
-		if (
-			countdown.days <= 0 &&
-			countdown.hours <= 0 &&
-			countdown.minutes <= 0 &&
-			countdown.seconds <= 0
-		) {
-			clearInterval(interval);
-		}
+		const { countdown, tokensToShow, countdownExpired } = calcCountDownAndTokensToShow(deadline);
+		updater(countdown, tokensToShow, countdownExpired);
+		countdownExpired && clearInterval(interval);
 	}, 1000);
 
 	onDestroy(() => {
@@ -89,5 +81,7 @@ const calcCountDownAndTokensToShow = (deadline: Date) => {
 	tokensToShow.hours = !!countdown.days || (!countdown.days && !!countdown.hours);
 	tokensToShow.minutes = Object.values(tokensToShow).filter(identity).length < 2;
 	tokensToShow.seconds = Object.values(tokensToShow).filter(identity).length < 2;
-	return { countdown, tokensToShow };
+
+	const countdownExpired = Object.values(countdown).every((value) => value <= 0);
+	return { countdown, tokensToShow, countdownExpired };
 };
