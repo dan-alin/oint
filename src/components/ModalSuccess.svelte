@@ -66,10 +66,14 @@
 						>{cancelBtnLabel}</button
 					>
 				{:else}
-					<label for={id} class="btn-outline btn-primary btn flex-1">{cancelBtnLabel}</label>
+					<label for={id} class="btn-outline btn-primary btn-sm btn h-10 flex-1"
+						>{cancelBtnLabel}</label
+					>
 				{/if}
 			{/if}
-			<button class="btn-primary btn flex-1" on:click={onConfirm}>{confirmBtnLabel}</button>
+			<button class="btn-primary btn-sm btn h-10 flex-1" on:click={onConfirm}
+				>{confirmBtnLabel}</button
+			>
 		</div>
 	</label>
 </label>
