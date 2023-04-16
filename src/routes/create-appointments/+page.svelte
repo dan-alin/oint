@@ -23,7 +23,10 @@
 		if (formData.invitees) {
 			invitees = formData.invitees.map((invitee) => invitee.user);
 		}
-
+		formData.start_date = formData.start_date.split('/').reverse().join('-');
+		if (formData.end_date) {
+			formData.end_date = formData.end_date.split('/').reverse().join('-');
+		}
 		const newAppointment: Appointment = {
 			title: formData.title,
 			description: formData.description,
@@ -64,7 +67,11 @@
 
 	let previousPage: string = base;
 	afterNavigate(({ from }) => {
-		previousPage = from?.url.pathname || previousPage;
+		if (!from || from?.url.pathname.includes('/create-appointments')) {
+			previousPage = '/appointments';
+		} else {
+			previousPage = from?.url.pathname || previousPage;
+		}
 	});
 
 	export let data: {

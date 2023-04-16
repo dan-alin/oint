@@ -5,6 +5,7 @@
 
 	export let data: { myNotifications: Notification[] };
 	let myNotifications = data.myNotifications.filter((notification) => !notification.read);
+
 	const filterNotifications = (notificationId: number) => {
 		myNotifications = myNotifications.filter((notification) => notification.id !== notificationId);
 	};
