@@ -37,7 +37,7 @@
 	};
 </script>
 
-<div class=" grid gap-6 px-6 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
+<div class=" grid gap-6 px-6 pt-2 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
 	{#if invited}
 		{#each $invitedAppointmentsStore as invitedOccurrence}
 			{#if invitedOccurrence.invitationStatus === 'pending'}

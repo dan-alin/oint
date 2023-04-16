@@ -83,28 +83,29 @@
 		{
 			firstRow: 'Organizza un',
 			secondRow: 'nuovo evento!',
-			paragraph: 'Non aspettare il divertimento, crealo! Inizia a stupire tutti i tuoi amici'
+			paragraph: 'Non aspettare il divertimento, crealo! \nInizia a stupire tutti i tuoi amici'
 		},
 		{
 			firstRow: 'Dimmi',
 			secondRow: 'data e ora',
-			paragraph: 'Uomo avvisato, mezzo salvato: non arrivare in ritardo!'
+			paragraph: 'Uomo avvisato, mezzo salvato: \nnon arrivare in ritardo!'
 		},
 		{
 			firstRow: 'Aggiungi',
 			secondRow: "l'immagine giusta",
-			paragraph: 'Un evento senza l`immagine è come un cielo senza stelle... scegli quella giusta!'
+			paragraph:
+				'Un evento senza l`immagine è come un cielo senza \nstelle... scegli quella giusta!'
 		},
 		{
 			firstRow: 'E ora...',
 			secondRow: 'scegli la locassshion!',
-			paragraph: 'Aggiungi un tocco di magia al tuo evento con una location da 10.'
+			paragraph: 'Aggiungi un tocco di magia al tuo evento con una \nlocation da 10.'
 		},
 		{
 			firstRow: 'Invita tutti',
 			secondRow: 'i tuoi amici!',
 			paragraph:
-				'Attento a chi inviti... ricordati di scegliere anche chi rimane a mettere a posto!'
+				'Attento a chi inviti... ricordati di scegliere anche chi \nrimane a mettere a posto!'
 		}
 	];
 
@@ -137,7 +138,7 @@
 	<meta name="description" content="create events form" />
 </svelte:head>
 
-<div class="h-full bg-base-100 px-6 py-8">
+<div class="flex h-full flex-col bg-base-100 px-6 pt-8 pb-10">
 	<div class="flex flex-col gap-4 ">
 		<HeaderMenu
 			firstRow={pageHeaders[step].firstRow}
@@ -145,11 +146,14 @@
 			goto={previousPage}
 		/>
 
-		<p class="text-sm">
+		<p class="whitespace-pre text-sm">
 			{pageHeaders[step].paragraph}
 		</p>
 
-		<div class="h-24 w-full bg-green-100" />
+		<div class="relative flex h-24 w-full items-center justify-center">
+			<img class="h-24" src="/icons/colored_lines_bg.svg" alt="colored lines background" />
+			<img class="absolute z-10 h-12" src={`/icons/wiz-${step + 1}.svg`} alt="step" />
+		</div>
 		<!-- TODO accept until the day before -->
 		{#if step === 0}
 			<NameAndDesc
@@ -178,7 +182,7 @@
 			<LocationForm
 				bind:location_selection_type={formData.location_selection_type}
 				bind:locations={formData.locations}
-				onSubmit={nextStep}
+				on:submit={nextStep}
 			/>
 		{:else if step === 4}
 			<InvitedFriendsForm
@@ -187,17 +191,13 @@
 				onSubmit={() => createAppointment(formData)}
 			/>
 		{/if}
-		<div class=" grid  grid-cols-1 gap-6 md:grid-cols-3">
-			<!-- TODO add validation to forms to enable/disable button -->
-			<button
-				disabled={(step === 0 && !isValidNameForm) ||
-					(step === 1 && !isValidDateForm) ||
-					(step === 3 && formData.locations.length === 0)}
-				class="disabled:disabled-primary btn-primary btn-sm btn h-10  capitalize "
-				type="submit"
-				form={`${step}-part`}
-				>{step === 3 ? 'Ci siamo!' : step === 4 ? 'Invita!' : 'Conferma'}</button
-			>
-		</div>
 	</div>
+	<button
+		disabled={(step === 0 && !isValidNameForm) ||
+			(step === 1 && !isValidDateForm) ||
+			(step === 3 && formData.locations.length === 0)}
+		class="disabled:disabled-primary btn-primary btn-sm btn mt-auto  h-10 capitalize"
+		type="submit"
+		form={`${step}-part`}>{step === 3 ? 'Ci siamo!' : step === 4 ? 'Invita!' : 'Conferma'}</button
+	>
 </div>
