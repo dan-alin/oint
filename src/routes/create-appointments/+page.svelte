@@ -160,7 +160,7 @@
 				bind:name={formData.title}
 				bind:description={formData.description}
 				bind:isValid={isValidNameForm}
-				onSubmit={nextStep}
+				on:submit={nextStep}
 			/>
 		{:else if step === 1}
 			<DateAndTimeForm
@@ -170,11 +170,11 @@
 				bind:end_time={formData.end_time}
 				bind:acceptLastDay
 				bind:isValid={isValidDateForm}
-				onSubmit={nextStep}
+				on:submit={nextStep}
 			/>
 		{:else if step === 2}
 			<ImageForm
-				onSubmit={nextStep}
+				on:submit={nextStep}
 				bind:image={formData.image}
 				bind:can_be_forwarded={formData.can_be_forwarded}
 			/>
@@ -188,7 +188,7 @@
 			<InvitedFriendsForm
 				bind:invitedFriends={formData.invitees}
 				{myFriends}
-				onSubmit={() => createAppointment(formData)}
+				on:submit={() => createAppointment(formData)}
 			/>
 		{/if}
 	</div>
@@ -196,7 +196,7 @@
 		disabled={(step === 0 && !isValidNameForm) ||
 			(step === 1 && !isValidDateForm) ||
 			(step === 3 && formData.locations.length === 0)}
-		class="disabled:disabled-primary btn-primary btn-sm btn mt-auto  h-10 capitalize"
+		class="disabled:disabled-primary btn-primary btn-sm btn mt-auto h-10 capitalize"
 		type="submit"
 		form={`${step}-part`}>{step === 3 ? 'Ci siamo!' : step === 4 ? 'Invita!' : 'Conferma'}</button
 	>
