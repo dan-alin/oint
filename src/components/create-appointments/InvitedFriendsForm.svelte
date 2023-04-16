@@ -13,7 +13,24 @@
 	{#each myFriends as friend}
 		<div>
 			<label class=" label  w-full cursor-pointer">
-				<div>{friend.user.name}</div>
+				<div class="flex items-center gap-4">
+					<span class="h-12 w-12 rounded-full">
+						{#if friend.user.image}
+							<img
+								class="h-12 w-12 rounded-full object-cover"
+								src={friend.user.image}
+								alt="friend"
+							/>
+						{:else}
+							<img
+								class="h-12 w-12 rounded-full object-cover"
+								src="/icons/profile-gray.svg"
+								alt="friend"
+							/>
+						{/if}
+					</span>
+					{friend.user.name}
+				</div>
 				<input
 					type="checkbox"
 					class="checkbox-secondary checkbox checkbox-sm"
