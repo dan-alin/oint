@@ -1,5 +1,37 @@
 # Changelog
 
+## [1.5.0](https://github.com/dan-alin/oint/compare/v1.4.0...v1.5.0) (2023-04-17)
+
+
+### Features
+
+* **app.css:** adds page-container utility class ([f5d24c0](https://github.com/dan-alin/oint/commit/f5d24c0901ed6f301bb698db1e2e55bfd986a796))
+* **appointment/appointmentId:** refactors +page.server to +layout.server ([57dcb89](https://github.com/dan-alin/oint/commit/57dcb897caebef9060b38f3c772c53654d6cb919))
+* **create-appointments:** adds deadline date and time picker ([3ad472f](https://github.com/dan-alin/oint/commit/3ad472f7c364a97c98716e8917e06749529c1948))
+* **InvitedFriendsForm:** add avatar for friends ([f05d723](https://github.com/dan-alin/oint/commit/f05d7234ac218baaf971634861e0162549dec600))
+* **poll-expiring:** implements poll-expiring page ([ae81a15](https://github.com/dan-alin/oint/commit/ae81a15f3ebde995f9572d2070e2128954c7fe3a))
+* **poll:** implements expired countdown logic ([0f480da](https://github.com/dan-alin/oint/commit/0f480da8f80180f9545397d0e3114c60299613d1))
+* **poll:** implements poll page ([520232d](https://github.com/dan-alin/oint/commit/520232d4d792d29720e8e4c0e0e4a18653fac0e8))
+* **tailwind.config:** adds withOpacity function ([ba39580](https://github.com/dan-alin/oint/commit/ba395805ef38283d94b5071c103d1e008f7e8f42))
+
+
+### Bug Fixes
+
+* **addlocationmdal:** reset modal when gets closed & disabled button if no values provided ([ab97285](https://github.com/dan-alin/oint/commit/ab972852266492088cb9176c43a8170d7d1131e2))
+* **appointment-detail:** fix type errors ([6536e93](https://github.com/dan-alin/oint/commit/6536e93ef0aa37972b74894e2690da04df5ef340))
+* **AppointmentCard:** ficed spacing and font size in appointment card) ([f89a080](https://github.com/dan-alin/oint/commit/f89a080e7081d29e3e51650a3545d4e413fc1c6c))
+* change picker ([#193](https://github.com/dan-alin/oint/issues/193)) ([c5821c8](https://github.com/dan-alin/oint/commit/c5821c88fa1cd3102d40bd6dc9baaa7c7772f283))
+* **create-appoinmtnet:** add loader in create appointment ([e3f50a0](https://github.com/dan-alin/oint/commit/e3f50a0c740330d2fbf9bb9a92fc8e0bd21f7376))
+* **create-appointment:** add step images and fix multi location choice ([b0b6cc7](https://github.com/dan-alin/oint/commit/b0b6cc76cf54cd344c06c9efd9f0d148b2c12adc))
+* handling accept decline invitation ([#194](https://github.com/dan-alin/oint/issues/194)) ([b9793c2](https://github.com/dan-alin/oint/commit/b9793c2c61651616779bd0b9f2901b800dc7b638))
+* **invitedfriends:** fixed friends scrolling and bind submit ([c76c3f9](https://github.com/dan-alin/oint/commit/c76c3f9f09cd9c4ca76e3264e57caeae414662ef))
+* **ModalSuccess:** fix modal btn size ([5a2a68b](https://github.com/dan-alin/oint/commit/5a2a68b14a2452b0efbb8cf63dc01cd675d3331d))
+* **poll:** add invalidate to retrigger get appointment ([69f8f2e](https://github.com/dan-alin/oint/commit/69f8f2e4fe01373d3872d455607d6176427519a9))
+* **poll:** fix response type ([43f19cf](https://github.com/dan-alin/oint/commit/43f19cf925e682f3a3320f5c40a35cf07d10c229))
+* **profile:** profile line bg & image size ([050ecbb](https://github.com/dan-alin/oint/commit/050ecbb20326caf1cd46572301b39bbb1b2b1cbc))
+* **style:** spacing in account-settings ([1a17180](https://github.com/dan-alin/oint/commit/1a17180d053c10e0b2342c9b0b2ab704e4e2c7c1))
+* **svgs:** changed wiz-3 and 4 svg ([fe8eb04](https://github.com/dan-alin/oint/commit/fe8eb041ca1b98ceeee13416e277230e39f86704))
+
 ## [1.4.0](https://github.com/dan-alin/oint/compare/v1.3.1...v1.4.0) (2023-04-11)
 
 
