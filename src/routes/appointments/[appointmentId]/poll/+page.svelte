@@ -169,7 +169,7 @@
 	subTitle="...ma nulla è ancora deciso, gli altri voti potrebbero confermare o ribaltare la situazione!"
 	confirmBtnLabel="Torna all’evento"
 	onConfirm={() => {
-		goto(`${Routes.APPOINTMENTS}/${appointment.id}`);
+		goto(`${Routes.APPOINTMENTS}/${appointment.id}`, { invalidateAll: true });
 	}}
 	bind:modalOpened
 />
