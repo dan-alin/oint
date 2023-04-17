@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { afterNavigate, goto } from '$app/navigation';
-	import HeaderMenu from '../../components/HeaderMenu.svelte';
 	import { base } from '$app/paths';
-	import type { Appointment, AppointmentForm, FriendData, FriendUser } from '../../models';
+	import HeaderMenu from '../../components/HeaderMenu.svelte';
+	import DateAndTimeForm from '../../components/create-appointments/DateAndTimeForm.svelte';
 	import ImageForm from '../../components/create-appointments/ImageForm.svelte';
 	import InvitedFriendsForm from '../../components/create-appointments/InvitedFriendsForm.svelte';
-	import DateAndTimeForm from '../../components/create-appointments/DateAndTimeForm.svelte';
+	import LocationForm from '../../components/create-appointments/LocationForm.svelte';
 	import NameAndDesc from '../../components/create-appointments/NameAndDesc.svelte';
+	import type { Appointment, AppointmentForm, FriendData, FriendUser } from '../../models';
+	import { myAppointmentsStore } from '../../stores/apointments';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
-	import { myAppointmentsStore } from '../../stores/apointments';
-	import LocationForm from '../../components/create-appointments/LocationForm.svelte';
 
 	const createAppointment = async (formData: AppointmentForm) => {
 		let image = '';
@@ -27,6 +27,11 @@
 		if (formData.end_date) {
 			formData.end_date = formData.end_date.split('/').reverse().join('-');
 		}
+		formData.location_selection_deadline_date = formData.location_selection_deadline_date
+			.split('/')
+			.reverse()
+			.join('-');
+
 		const newAppointment: Appointment = {
 			title: formData.title,
 			description: formData.description,
@@ -182,6 +187,8 @@
 			<LocationForm
 				bind:location_selection_type={formData.location_selection_type}
 				bind:locations={formData.locations}
+				bind:location_selection_deadline_date={formData.location_selection_deadline_date}
+				bind:location_selection_deadline_time={formData.location_selection_deadline_time}
 				on:submit={nextStep}
 			/>
 		{:else if step === 4}

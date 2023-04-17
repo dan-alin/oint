@@ -24,7 +24,6 @@ export const getTime = (date: Date) => {
 
 export const getTimeDifference = (start: Date, end: Date): Countdown => {
 	const timeDiff = end.getTime() - start.getTime();
-	console.log(timeDiff);
 	const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
 	const diffHours = Math.floor((timeDiff % (1000 * 3600 * 24)) / (1000 * 3600));
 	const diffMinutes = Math.floor((timeDiff % (1000 * 3600)) / (1000 * 60));
