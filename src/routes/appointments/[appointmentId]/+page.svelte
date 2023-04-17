@@ -165,7 +165,7 @@
 		<AppointmentDetailSection
 			data={{
 				icon: Icons.PROFILE_FULL,
-				firstRow: `${appointment.creator.name} ${appointment.creator.surname} ${
+				firstRow: `${appointment.creator?.name} ${appointment.creator?.surname} ${
 					loggedUserIsOwner ? ' (tu)' : ''
 				}`,
 				secondRow: 'Owner evento'
@@ -246,15 +246,17 @@
 		</div>
 
 		<!-- Modals -->
-		<InviteesModal
-			bind:open={openModal}
-			viewType={modalViewType}
-			friends={friendUsers}
-			appointmentId={appointment.id}
-			{invitees}
-			creatorId={appointment.creator.id}
-			{updateAppointment}
-		/>
+		{#if appointment.creator}
+			<InviteesModal
+				bind:open={openModal}
+				viewType={modalViewType}
+				friends={friendUsers}
+				appointmentId={appointment.id}
+				{invitees}
+				creatorId={appointment.creator.id}
+				{updateAppointment}
+			/>
+		{/if}
 
 		<ModalSuccess
 			id="delete-appointment-modal"
