@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { it } from '../../utils/datepicker-it';
-
-	export let onSubmit: () => void;
 	export let start_date: string;
 	export let end_date: string;
 	export let start_time: string;
@@ -28,7 +26,7 @@
 	}
 </script>
 
-<form class="grid grid-cols-1  gap-6 " id="1-part" on:submit|preventDefault={onSubmit}>
+<form class="grid grid-cols-1  gap-6 " id="1-part" on:submit|preventDefault>
 	<div class="tabs h-4 gap-4">
 		<button
 			id="once"

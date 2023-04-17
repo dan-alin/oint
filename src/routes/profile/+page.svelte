@@ -29,7 +29,6 @@
 					{#if $userStore.image}
 						<img src={$userStore.image} alt="avatar" />
 					{:else}
-						<!-- <Icon icon={Icons.PROFILE_FULL} size={'128'} /> -->
 						<img src={'/icons/profile-gray.svg'} alt="avatar" />
 					{/if}
 				</div>
