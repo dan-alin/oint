@@ -16,6 +16,10 @@ export const getNotificationMessage = (
 			return `${prefix} ha accettato il tuo invito a <b><u>${suffix}</u></b>`;
 		case EnumNotificationType.INVITATION_REJ:
 			return `${prefix} ha rifiutato il tuo invito a <b><u>${suffix}</u></b>`;
+		case EnumNotificationType.EVENT_DELETED:
+			return `${prefix} ha eliminato l'evento <b><u>${suffix}</u></b>`;
+		default:
+			return notificationType;
 	}
 };
 

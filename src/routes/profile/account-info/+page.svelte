@@ -4,6 +4,8 @@
 	import { userStore } from '../../../stores/user';
 	import ModalSuccess from '../../../components/ModalSuccess.svelte';
 	import { apiCall } from '../../../utils/api-call';
+	import SveltyPicker from 'svelty-picker';
+	import { it } from '../../../utils/datepicker-it';
 
 	let birthdate = '';
 	let disabled = true;
@@ -79,13 +81,14 @@
 						bind:value={$userStore.nickname}
 						{disabled}
 					/>
-					<InputText
-						type="date"
-						id="birthdate"
-						name="birthdate"
-						placeholder="birthdate"
-						required
+					<SveltyPicker
+						inputClasses="input-bordered input h-10 w-full"
+						format="dd/mm/yyyy"
+						placeholder="gg/mm/aaaa"
 						bind:value={birthdate}
+						inputId="birthdate"
+						name="birthdate"
+						i18n={it}
 						{disabled}
 					/>
 				</div>

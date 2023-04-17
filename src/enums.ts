@@ -52,9 +52,14 @@ export enum Routes {
 	APPOINTMENTS = '/appointments',
 	PROFILE = '/profile',
 	BYE = '/bye',
-	CREATE_APPOINMENTS = '/create-appointments'
+	CREATE_APPOINMENTS = '/create-appointments',
+	POLL = '/poll',
+	POLL_EXPIRING = '/poll-expiring'
 }
 
 export enum Endpoints {
-	CHANGE_PASSWORD = '/api/change-password'
+	CHANGE_PASSWORD = '/api/change-password',
+	CHANGE_VOTES = '/api/change-votes',
+	VOTE_LOCATION = '/api/vote',
+	UNVOTE_LOCATION = '/api/unvote'
 }

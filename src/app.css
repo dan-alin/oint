@@ -216,26 +216,28 @@
 	}
 
 	:root {
-		--color-primary: #2e46ff;
-		--color-secondary: #ff5580;
-		--color-accent: #ffd700;
-		--color-success: #4de088;
-		--color-warning: #ffc107;
-		--color-error: #ff5555;
-		--color-disabled: #989a9e;
-		--color-light-gray: #dedede;
+		--color-primary: 46, 70, 255;
+		--color-secondary: 255, 85, 128;
+		--color-accent: 255, 215, 0;
+		--color-success: 77, 224, 136;
+		--color-warning: 255, 193, 7;
+		--color-error: 255, 85, 85;
+		--color-disabled: 152, 154, 158;
+		--color-light-gray: 222, 222, 222;
+		--color-background: 245, 245, 245;
+		background-color: rgb(var(--color-background));
 	}
 
 	[data-theme='dark'] {
 		/* TODO: modificare colori per dark mode */
-		--color-primary: #ff5580;
-		--color-secondary: #2e46ff;
-		--color-accent: #ffd700;
-		--color-success: #4de088;
-		--color-warning: #ffc107;
-		--color-error: #ff5555;
-		--color-disabled: #989a9e;
-		--color-light-gray: #dedede;
+		--color-primary: 255, 85, 128;
+		--color-secondary: 46, 70, 255;
+		--color-accent: 255, 215, 0;
+		--color-success: 77, 224, 136;
+		--color-warning: 255, 193, 7;
+		--color-error: 255, 85, 85;
+		--color-disabled: 152, 154, 158;
+		--color-light-gray: 222, 222, 222;
 	}
 
 	.btn {
@@ -246,6 +248,10 @@
 @layer components {
 	.tab-act {
 		@apply border-b-2 border-primary font-bold text-primary !important;
+	}
+
+	.page-container {
+		@apply flex h-screen flex-col px-6 pt-8 pb-10;
 	}
 }
 

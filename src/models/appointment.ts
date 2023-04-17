@@ -3,20 +3,23 @@ import type { Icons } from '../enums';
 import type { Invitation } from './invitation';
 import type { Location } from './locations';
 
-export type Appointment = {
-	id?: number;
-	creator_id?: number;
+export type AppointmentRequest = {
 	title: string;
 	description: string;
 	start_date: Date | string;
 	end_date: Date | string;
-	can_be_forwarded: boolean;
+	creator_id: number;
 	image: string;
-	locations: Location[];
-	invitations?: Invitation[];
-	location_selection_deadline?: Date | string;
+	can_be_forwarded: boolean;
 	invitees: FriendUser[];
-	location_selection_type?: 'multi' | 'single';
+	locations: Location[];
+	location_selection_deadline: Date | string;
+	location_selection_type: 'multi' | 'single';
+};
+
+export type Appointment = AppointmentRequest & {
+	id: number;
+	invitations: Invitation[];
 	creator: FriendUser;
 };
 

@@ -20,26 +20,27 @@
 	};
 </script>
 
-<section class="flex flex-col items-center pt-4">
+<section class="flex h-screen flex-col  px-6 pt-8 pb-10">
 	{#if $userStore}
-		<div class="relative mb-6 flex justify-center">
-			<div class="avatar">
-				<div class="w-[144px] rounded-full">
+		<div class="relative  flex w-full items-center justify-center">
+			<img class="m-auto" height="190x" src="/icons/colored_lines_bg.svg" alt="" />
+			<div class="avatar absolute z-10 mb-4">
+				<div class=" w-[120px] rounded-full">
 					{#if $userStore.image}
 						<img src={$userStore.image} alt="avatar" />
 					{:else}
-						<Icon icon={Icons.PROFILE_FULL} />
+						<img src={'/icons/profile-gray.svg'} alt="avatar" />
 					{/if}
 				</div>
 				<label
-					class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 bg-white"
+					class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 z-20 bg-white"
 					for="change-profile-picture-modal"
 				>
 					<Icon icon={Icons.EDIT} size="16" />
 				</label>
 			</div>
 		</div>
-		<p class="mb-4 text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
+		<p class="mb-4 text-center text-3xl font-bold">{`${$userStore.name} ${$userStore.surname}`}</p>
 		<div class="mb-8 flex justify-center">
 			<p class="flex items-center p-2">
 				<span class="mr-1"><Icon icon={Icons.DATE} /></span>{myStats.appointments} eventi
@@ -51,7 +52,7 @@
 		</div>
 	{/if}
 	<Menu {sections} />
-	<div class="min-h-12 flex w-full items-center gap-4 px-4">
+	<div class="min-h-12 flex w-full items-center gap-4 ">
 		<div class="flex">
 			<button class=" w-full self-center align-middle font-bold text-primary" on:click={logout}
 				>Logout</button
