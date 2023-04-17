@@ -7,8 +7,7 @@
 	import FriendsBadge from '../../../components/appointment-detail/FriendsBadge.svelte';
 	import InviteesModal from '../../../components/appointment-detail/InviteesModal.svelte';
 	import { Icons, Routes } from '../../../enums';
-	import type { Appointment, FriendData } from '../../../models';
-	import type { AppointmentDetailSectionData } from '../../../models/appointment';
+	import type { Appointment, FriendData, AppointmentDetailSectionData } from '../../../models';
 	import { invitationService } from '../../../services/invitation.service';
 	import { invitedAppointmentsStore } from '../../../stores/apointments';
 	import { userStore } from '../../../stores/user';
@@ -26,12 +25,12 @@
 		(inv) => inv.appointment.id === appointment.id
 	);
 	$: invitationPending = loggedUserInvitation?.invitationStatus === 'pending';
-	$: loggedUserIsOwner = $userStore?.id === appointment.creator_id;
+	$: loggedUserIsOwner = $userStore.id === appointment.creator_id;
 	const locationSelectionDeadline = appointment.location_selection_deadline;
 	let checked = appointment.can_be_forwarded;
 	let openModal = false;
 	let modalViewType: 'owner' | 'inviteeRead' | 'inviteeEdit' = 'owner';
-	let votingAllowed = true;
+	let votingAllowed = appointment.location_selection_type === 'multi';
 	if (
 		appointment.location_selection_type === 'multi' &&
 		new Date(locationSelectionDeadline as string).getTime() > new Date().getTime()
@@ -165,7 +164,7 @@
 		<AppointmentDetailSection
 			data={{
 				icon: Icons.PROFILE_FULL,
-				firstRow: `${appointment.creator?.name} ${appointment.creator?.surname} ${
+				firstRow: `${appointment.creator.name} ${appointment.creator.surname} ${
 					loggedUserIsOwner ? ' (tu)' : ''
 				}`,
 				secondRow: 'Owner evento'
@@ -246,17 +245,15 @@
 		</div>
 
 		<!-- Modals -->
-		{#if appointment.creator}
-			<InviteesModal
-				bind:open={openModal}
-				viewType={modalViewType}
-				friends={friendUsers}
-				appointmentId={appointment.id}
-				{invitees}
-				creatorId={appointment.creator.id}
-				{updateAppointment}
-			/>
-		{/if}
+		<InviteesModal
+			bind:open={openModal}
+			viewType={modalViewType}
+			friends={friendUsers}
+			appointmentId={appointment.id}
+			{invitees}
+			creatorId={appointment.creator.id}
+			{updateAppointment}
+		/>
 
 		<ModalSuccess
 			id="delete-appointment-modal"

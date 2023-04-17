@@ -3,15 +3,19 @@
 	import { fade } from 'svelte/transition';
 	import AccountForm from '../../components/registration/AccountForm.svelte';
 	import RegistryForm from '../../components/registration/RegistryForm.svelte';
-
 	import { t } from '../../i18n/i18n';
-
 	import { apiCall } from '../../utils/api-call';
+	import type { CreateUserRequest } from '../../models';
+
+	type CreateUserForm = CreateUserRequest & {
+		prefix: string;
+		passwordConfirmation: string;
+	};
 
 	// export let data: { phonePrefixes: Option[] };
 
 	let step = 1;
-	let formData: any = {
+	let formData: CreateUserForm = {
 		name: '',
 		surname: '',
 		nickname: '',
@@ -31,7 +35,7 @@
 			password: formData.password,
 			email: formData.email,
 			phone: `${formData.prefix}${formData.phone}`,
-			birthdate: formData.birthdate
+			birthdate: new Date(formData.birthdate).toISOString()
 		};
 		try {
 			await apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));

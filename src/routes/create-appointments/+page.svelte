@@ -7,8 +7,15 @@
 	import InvitedFriendsForm from '../../components/create-appointments/InvitedFriendsForm.svelte';
 	import LocationForm from '../../components/create-appointments/LocationForm.svelte';
 	import NameAndDesc from '../../components/create-appointments/NameAndDesc.svelte';
-	import type { Appointment, AppointmentForm, FriendData, FriendUser } from '../../models';
+	import type {
+		AppointmentForm,
+		Appointment,
+		FriendData,
+		FriendUser,
+		AppointmentRequest
+	} from '../../models';
 	import { myAppointmentsStore } from '../../stores/apointments';
+	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
 
@@ -32,7 +39,7 @@
 			.reverse()
 			.join('-');
 
-		const newAppointment: Appointment = {
+		const newAppointment: AppointmentRequest = {
 			title: formData.title,
 			description: formData.description,
 			start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
@@ -43,7 +50,9 @@
 			can_be_forwarded: formData.can_be_forwarded,
 			locations: formData.locations,
 			location_selection_type: formData.location_selection_type,
-			invitees
+			location_selection_deadline: formData.location_selection_deadline_date,
+			invitees,
+			creator_id: $userStore.id
 		};
 
 		if (newAppointment.location_selection_type === 'multi') {
