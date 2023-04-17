@@ -7,8 +7,7 @@
 	import FriendsBadge from '../../../components/appointment-detail/FriendsBadge.svelte';
 	import InviteesModal from '../../../components/appointment-detail/InviteesModal.svelte';
 	import { Icons, Routes } from '../../../enums';
-	import type { Appointment, FriendData } from '../../../models';
-	import type { AppointmentDetailSectionData } from '../../../models/appointment';
+	import type { Appointment, FriendData, AppointmentDetailSectionData } from '../../../models';
 	import { invitationService } from '../../../services/invitation.service';
 	import { invitedAppointmentsStore } from '../../../stores/apointments';
 	import { userStore } from '../../../stores/user';
@@ -26,12 +25,12 @@
 		(inv) => inv.appointment.id === appointment.id
 	);
 	$: invitationPending = loggedUserInvitation?.invitationStatus === 'pending';
-	$: loggedUserIsOwner = $userStore?.id === appointment.creator_id;
+	$: loggedUserIsOwner = $userStore.id === appointment.creator_id;
 	const locationSelectionDeadline = appointment.location_selection_deadline;
 	let checked = appointment.can_be_forwarded;
 	let openModal = false;
 	let modalViewType: 'owner' | 'inviteeRead' | 'inviteeEdit' = 'owner';
-	let votingAllowed = false;
+	let votingAllowed = appointment.location_selection_type === 'multi';
 	if (
 		appointment.location_selection_type === 'multi' &&
 		new Date(locationSelectionDeadline as string).getTime() > new Date().getTime()
@@ -41,11 +40,9 @@
 
 	const calcLocationBtnData = (): [string, () => void] => {
 		if (appointment.location_selection_type === 'multi') {
-			if (votingAllowed) {
-				const userHasVoted = appointment.locations.some((loc) => loc.i_voted_this_location);
-				return userHasVoted ? ['Guarda il sondaggio', noop] : ['Vota!!!!', noop];
-			}
-			return ['Apri con Maps', noop];
+			return votingAllowed
+				? ['Vota!!!!', () => goto(`${Routes.APPOINTMENTS}/${appointment.id}${Routes.POLL}`)]
+				: ['Apri con Maps', noop];
 		} else {
 			return loggedUserIsOwner ? ['Cambia locassscion', noop] : ['Apri con Maps', noop];
 		}

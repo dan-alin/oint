@@ -1,16 +1,23 @@
 <script lang="ts">
 	import { afterNavigate, goto } from '$app/navigation';
-	import HeaderMenu from '../../components/HeaderMenu.svelte';
 	import { base } from '$app/paths';
-	import type { Appointment, AppointmentForm, FriendData, FriendUser } from '../../models';
+	import HeaderMenu from '../../components/HeaderMenu.svelte';
+	import DateAndTimeForm from '../../components/create-appointments/DateAndTimeForm.svelte';
 	import ImageForm from '../../components/create-appointments/ImageForm.svelte';
 	import InvitedFriendsForm from '../../components/create-appointments/InvitedFriendsForm.svelte';
-	import DateAndTimeForm from '../../components/create-appointments/DateAndTimeForm.svelte';
+	import LocationForm from '../../components/create-appointments/LocationForm.svelte';
 	import NameAndDesc from '../../components/create-appointments/NameAndDesc.svelte';
+	import type {
+		AppointmentForm,
+		Appointment,
+		FriendData,
+		FriendUser,
+		AppointmentRequest
+	} from '../../models';
+	import { myAppointmentsStore } from '../../stores/apointments';
+	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
 	import fileToBase64 from '../../utils/to-base64';
-	import { myAppointmentsStore } from '../../stores/apointments';
-	import LocationForm from '../../components/create-appointments/LocationForm.svelte';
 
 	const createAppointment = async (formData: AppointmentForm) => {
 		let image = '';
@@ -27,7 +34,12 @@
 		if (formData.end_date) {
 			formData.end_date = formData.end_date.split('/').reverse().join('-');
 		}
-		const newAppointment: Appointment = {
+		formData.location_selection_deadline_date = formData.location_selection_deadline_date
+			.split('/')
+			.reverse()
+			.join('-');
+
+		const newAppointment: AppointmentRequest = {
 			title: formData.title,
 			description: formData.description,
 			start_date: new Date(`${formData.start_date} ${formData.start_time}`).toISOString(),
@@ -38,7 +50,9 @@
 			can_be_forwarded: formData.can_be_forwarded,
 			locations: formData.locations,
 			location_selection_type: formData.location_selection_type,
-			invitees
+			location_selection_deadline: formData.location_selection_deadline_date,
+			invitees,
+			creator_id: $userStore.id
 		};
 
 		if (newAppointment.location_selection_type === 'multi') {
@@ -182,6 +196,8 @@
 			<LocationForm
 				bind:location_selection_type={formData.location_selection_type}
 				bind:locations={formData.locations}
+				bind:location_selection_deadline_date={formData.location_selection_deadline_date}
+				bind:location_selection_deadline_time={formData.location_selection_deadline_time}
 				on:submit={nextStep}
 			/>
 		{:else if step === 4}
