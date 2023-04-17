@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/dan-alin/oint/compare/v1.5.0...v1.5.1) (2023-04-17)
+
+
+### Bug Fixes
+
+* **notification:** event Rej management ([4601659](https://github.com/dan-alin/oint/commit/46016597438ee9394edf70f7a096e88eeb6a5f0c))
+
 ## [1.5.0](https://github.com/dan-alin/oint/compare/v1.4.0...v1.5.0) (2023-04-17)
 
 
