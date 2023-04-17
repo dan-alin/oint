@@ -56,7 +56,7 @@
 		);
 
 		if ((votesToAdd && votesToAdd.length > 0) || (votesToRemove && votesToRemove.length > 0)) {
-			const newAppointment = await apiCall<{ appointment: Appointment }>(
+			const newAppointment = await apiCall<Appointment>(
 				Endpoints.CHANGE_VOTES,
 				'post',
 				'Location votate',
@@ -68,7 +68,7 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 
-			appointment = newAppointment.appointment;
+			appointment = newAppointment;
 		}
 
 		modalOpened = true;
