@@ -4,7 +4,6 @@
 	import type { Appointment } from '../../models';
 	import { getDate, getTime } from '../../utils/time';
 	import Icon from '../Icon.svelte';
-	import { noop } from 'svelte/internal';
 
 	export let appointment: Appointment;
 	// export let invitationStatus: 'declined' | 'accepted' | '' = '';
