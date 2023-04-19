@@ -35,7 +35,6 @@
 	const declineAppointment = async (appointmentId: number) => {
 		invitationService.declineAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '');
 	};
-	console.log($invitedAppointmentsStore);
 </script>
 
 <div class=" grid gap-6 px-6 pt-2 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
