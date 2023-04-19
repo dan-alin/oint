@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { text } from 'svelte/internal';
 	import { Icons } from '../enums';
 	import Icon from './Icon.svelte';
 
