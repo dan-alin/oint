@@ -39,21 +39,31 @@
 
 <div class=" grid gap-6 px-6 pt-2 pb-32 md:grid-cols-2  xl:grid-cols-3 ">
 	{#if invited}
-		{#each $invitedAppointmentsStore as invitedOccurrence}
-			{#if invitedOccurrence.invitationStatus === 'pending'}
-				<AppointmentCard appointment={invitedOccurrence.appointment} />
-				<AcceptReject
-					id={invitedOccurrence.appointment.id || -1}
-					acceptAction={acceptAppointment}
-					declineAction={declineAppointment}
-				/>
-				<div class="divider my-0" />
-			{:else}
-				<div>
+		{#each $invitedAppointmentsStore as invitedOccurrence, index}
+			<div>
+				{#if index !== 0}
+					<div class="divider mt-0 mb-6" />
+				{/if}
+				<h2 class="mb-1 text-xs font-bold">
+					Invito da {invitedOccurrence.appointment.invitations[0].invitee.name}
+					{invitedOccurrence.appointment.invitations[0].invitee.surname}
+				</h2>
+				{#if invitedOccurrence.invitationStatus === 'pending'}
 					<AppointmentCard appointment={invitedOccurrence.appointment} />
-					<EventAcceptedRefused accepted={invitedOccurrence.invitationStatus === 'accepted'} />
-				</div>
-			{/if}
+					<div class="mt-6">
+						<AcceptReject
+							id={invitedOccurrence.appointment.id || -1}
+							acceptAction={acceptAppointment}
+							declineAction={declineAppointment}
+						/>
+					</div>
+				{:else}
+					<div>
+						<AppointmentCard appointment={invitedOccurrence.appointment} />
+						<EventAcceptedRefused accepted={invitedOccurrence.invitationStatus === 'accepted'} />
+					</div>
+				{/if}
+			</div>
 		{:else}
 			<NoAppointments
 				icon={Icons.INVITE}
