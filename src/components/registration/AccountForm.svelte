@@ -26,6 +26,16 @@
 		}
 		passwordValidation = input.validity.valid;
 	};
+
+	const validatePhone = () => {
+		let input = document.getElementById('phone') as HTMLInputElement;
+		const phoneNrRegEx = /^3[\d]{9}$/;
+		if (phoneNrRegEx.test(input.value)) {
+			input.setCustomValidity('');
+		} else {
+			input.setCustomValidity('Inserire un numero di telefono valido');
+		}
+	};
 </script>
 
 <form
@@ -40,6 +50,7 @@
 		placeholder="Cellulare"
 		required
 		bind:value={phone}
+		validate={validatePhone}
 	/>
 	<InputText type="email" id="email" name="email" placeholder="Email" required bind:value={email} />
 	<InputText
