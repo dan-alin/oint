@@ -18,7 +18,7 @@
 			{placeholder}
 			{disabled}
 			bind:value
-			class="input-bordered input  w-full "
+			class="input-bordered input  w-full bg-transparent "
 		/>
 		<button type="button" class="btn-square btn " on:click={() => action(`${value}`)}>
 			<svg

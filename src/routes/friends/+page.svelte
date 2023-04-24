@@ -229,7 +229,7 @@
 	<meta name="description" content="A friend list" />
 </svelte:head>
 
-<div class="sticky left-0 top-0 z-50 w-full  bg-base-100 px-6 py-8">
+<div class="sticky left-0 top-0 z-50 w-full  bg-background px-6 py-8">
 	<div class="flex flex-col gap-8 ">
 		<PageHead
 			firstRow={tabs.find((tab) => tab.id === activeTab)?.firstRow || ''}

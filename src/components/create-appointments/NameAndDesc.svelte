@@ -22,7 +22,7 @@
 
 	<textarea
 		placeholder="Descrizione evento"
-		class="textarea-sm textarea-bordered textarea w-full "
+		class="textarea-sm textarea-bordered textarea w-full bg-transparent "
 		bind:value={description}
 	/>
 </form>
