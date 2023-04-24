@@ -7,7 +7,7 @@
 	import AcceptReject from '../AcceptReject.svelte';
 	import EventAcceptedRefused from '../EventAcceptedRefused.svelte';
 	import AppointmentCard from './AppointmentCard.svelte';
-	import NoAppointments from './NoAppointments.svelte';
+	import NoContent from './NoContent.svelte';
 
 	export let invited = false;
 
@@ -65,7 +65,7 @@
 				{/if}
 			</div>
 		{:else}
-			<NoAppointments
+			<NoContent
 				icon={Icons.INVITE}
 				size="50"
 				heading="Non hai inviti per questa settimana"
@@ -76,7 +76,7 @@
 		{#each $myAppointmentsStore as occurrence}
 			<AppointmentCard appointment={occurrence} deleteAction={cancelAppointment} />
 		{:else}
-			<NoAppointments
+			<NoContent
 				icon={Icons.DATE}
 				size="50"
 				heading="Non hai eventi in programma questa settimana"
