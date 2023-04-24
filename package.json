@@ -1,6 +1,6 @@
 {
 	"name": "oint",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"private": true,
 	"scripts": {
 		"ci:format": "prettier --write .",
