@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.2](https://github.com/dan-alin/oint/compare/v1.5.1...v1.5.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* invitations list style ([#204](https://github.com/dan-alin/oint/issues/204)) ([d5a465c](https://github.com/dan-alin/oint/commit/d5a465c226071e60cb7fa444c166915f0ee206bd))
+* **notifications:** adds no notifications message ([#205](https://github.com/dan-alin/oint/issues/205)) ([3a5144d](https://github.com/dan-alin/oint/commit/3a5144d645b395589cc2359361953f7dc50d1826))
+* **sign-up:** adds phone nr validation ([#206](https://github.com/dan-alin/oint/issues/206)) ([698b2f9](https://github.com/dan-alin/oint/commit/698b2f9e8229ad361561c3a2a7898d0518057743))
+
 ## [1.5.1](https://github.com/dan-alin/oint/compare/v1.5.0...v1.5.1) (2023-04-17)
 
 
