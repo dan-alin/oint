@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import Icon from '../../components/Icon.svelte';
 	import Menu from '../../components/Menu.svelte';
-	import ChangeProfilePictureModal from '../../components/profile/ChangeProfilePictureModal.svelte';
 	import { Icons } from '../../enums';
 	import { userStore } from '../../stores/user';
 	import { apiCall } from '../../utils/api-call';
