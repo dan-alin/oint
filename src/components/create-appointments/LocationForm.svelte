@@ -79,7 +79,7 @@
 			<p class="text-disabled">Dai un tempo ai tuoi amici per proporre e scegliere</p>
 			<div class="mt-6 flex gap-2">
 				<SveltyPicker
-					inputClasses="input-bordered input h-10 grow text-sm px-1.5"
+					inputClasses="input-bordered input h-10 grow text-sm px-1.5 bg-transparent"
 					format="dd/mm/yyyy"
 					placeholder="Giorno di scadenza"
 					bind:value={location_selection_deadline_date}
@@ -88,7 +88,7 @@
 					i18n={it}
 				/>
 				<SveltyPicker
-					inputClasses="input-bordered input h-10 grow text-sm px-1.5"
+					inputClasses="input-bordered input h-10 grow text-sm px-1.5 bg-transparent"
 					format="hh:ii"
 					placeholder="Ora di scadenza"
 					bind:value={location_selection_deadline_time}

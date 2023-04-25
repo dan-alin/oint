@@ -1,4 +1,4 @@
-<div class="navbar sticky  left-0 top-0 z-50 h-24 w-screen  border-b-4  bg-base-100  px-6">
+<div class="navbar sticky  left-0 top-0 z-50 h-24 w-screen  border-b-4  bg-background  px-6">
 	<div class="navbar-start" />
 	<a href="/" class="navbar-center">
 		<div class="h-12">

@@ -47,9 +47,9 @@
 	</div>
 	<div class:columns-2={eventType === 'continuous'}>
 		<SveltyPicker
-			inputClasses="input-bordered input h-10 w-full"
-			format="dd/mm/yyyy"
-			placeholder="gg/mm/aaaa"
+			inputClasses="svelty-pckr"
+			format="dd/mm/yy"
+			placeholder="gg/mm/aa"
 			bind:value={start_date}
 			inputId="start_date"
 			name="start date"
@@ -59,9 +59,9 @@
 		{#if eventType === 'continuous'}
 			<div>
 				<SveltyPicker
-					inputClasses="input-bordered input h-10 w-full"
-					format="dd/mm/yyyy"
-					placeholder="gg/mm/aaaa"
+					inputClasses="svelty-pckr"
+					format="dd/mm/yy"
+					placeholder="gg/mm/aa"
 					bind:value={end_date}
 					inputId="end_date"
 					name="end date"
@@ -73,7 +73,7 @@
 
 	<div class="columns-2">
 		<SveltyPicker
-			inputClasses="input-bordered input h-10 w-full"
+			inputClasses="svelty-pckr"
 			format="hh:ii"
 			placeholder="--:--"
 			bind:value={start_time}
@@ -84,7 +84,7 @@
 		/>
 		<div>
 			<SveltyPicker
-				inputClasses="input-bordered input h-10 w-full"
+				inputClasses="svelty-pckr"
 				format="hh:ii"
 				placeholder="--:--"
 				bind:value={end_time}
@@ -99,7 +99,7 @@
 	<label class=" label w-full cursor-pointer justify-start gap-6  ">
 		<input
 			type="checkbox"
-			class="toggle-secondary toggle toggle-sm"
+			class="toggle-secondary toggle toggle-sm "
 			bind:checked={acceptLastDay}
 			id="forwardable"
 		/><span class="label-text text-xs">Consenti di accettare fino al giorno prima</span>

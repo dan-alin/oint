@@ -44,7 +44,7 @@
 		bind:value={nickname}
 	/>
 	<SveltyPicker
-		inputClasses="input-bordered input h-10 w-full"
+		inputClasses="svelty-pckr"
 		format="dd/mm/yyyy"
 		name="birthdate"
 		inputId="birthdate"
