@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.3](https://github.com/dan-alin/oint/compare/v1.5.2...v1.5.3) (2023-04-25)
+
+
+### Bug Fixes
+
+* change profile image ([#210](https://github.com/dan-alin/oint/issues/210)) ([d117ea4](https://github.com/dan-alin/oint/commit/d117ea4ac584d693caffaa983d876a30d1ba08ed))
+* **notification:** notifcation scroll and backgrounds ([8a45863](https://github.com/dan-alin/oint/commit/8a45863555dda934a58884876c0da7f488974758))
+* **svelty picker:** transparent bg ([23a0123](https://github.com/dan-alin/oint/commit/23a0123d749c8e19523b34ac7834b39dcc6763c9))
+
 ## [1.5.2](https://github.com/dan-alin/oint/compare/v1.5.1...v1.5.2) (2023-04-24)
 
 
