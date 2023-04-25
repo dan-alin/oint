@@ -14,7 +14,7 @@
 
 <div class="form-control w-full">
 	<input
-		class=" file-input-bordered file-input  relative flex h-10  w-full"
+		class=" file-input-bordered file-input relative flex h-10 w-full  bg-transparent"
 		type="file"
 		{accept}
 		{name}

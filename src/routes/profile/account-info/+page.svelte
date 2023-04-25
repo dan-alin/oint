@@ -82,7 +82,7 @@
 						{disabled}
 					/>
 					<SveltyPicker
-						inputClasses="input-bordered input h-10 w-full"
+						inputClasses="svelty-pckr"
 						format="dd/mm/yyyy"
 						placeholder="gg/mm/aaaa"
 						bind:value={birthdate}

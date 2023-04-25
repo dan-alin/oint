@@ -8,7 +8,7 @@
 	export let showNotification = false;
 </script>
 
-<div class="flex items-center justify-between">
+<div class="flex items-center justify-between ">
 	<div>
 		<p class="text-xl text-gray-400">{firstRow}</p>
 

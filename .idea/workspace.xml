@@ -6,16 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f4d4735a-fdde-4582-8c71-8a34fae3b9e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/create-appointment-modal/CreateAppointmentModal.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/create-appointment-modal/CreateAppointmentModal.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/+layout.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/+layout.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/friends/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/friends/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/login/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/login/+page.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/icomoon.eot" beforeDir="false" afterPath="$PROJECT_DIR$/static/fonts/Icomoon/icomoon.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/icomoon.svg" beforeDir="false" afterPath="$PROJECT_DIR$/static/fonts/Icomoon/icomoon.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/icomoon.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/static/fonts/Icomoon/icomoon.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/icomoon.woff" beforeDir="false" afterPath="$PROJECT_DIR$/static/fonts/Icomoon/icomoon.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/selection.json" beforeDir="false" afterPath="$PROJECT_DIR$/static/fonts/Icomoon/selection.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,11 +37,7 @@
                 <list>
                   <RecentBranch>
                     <option name="branchName" value="develop" />
-                    <option name="lastUsedInstant" value="1680707476" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="feature/github-actions" />
-                    <option name="lastUsedInstant" value="1680613496" />
+                    <option name="lastUsedInstant" value="1682372830" />
                   </RecentBranch>
                 </list>
               </option>
@@ -81,24 +67,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "develop",
-    "last_opened_file_path": "/Users/alin.ioan.dan/Projects/oint",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/alin.ioan.dan/Projects/oint/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/Users/alin.ioan.dan/Projects/oint/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/alin.ioan.dan/Projects/oint&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/alin.ioan.dan/Projects/oint/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/alin.ioan.dan/Projects/oint/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/fonts/Icomoon" />
@@ -140,6 +126,7 @@
       <workItem from="1679163714777" duration="276000" />
       <workItem from="1680613421116" duration="12570000" />
       <workItem from="1680943066855" duration="5275000" />
+      <workItem from="1682372794213" duration="589000" />
     </task>
     <servers />
   </component>
