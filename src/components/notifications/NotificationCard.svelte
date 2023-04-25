@@ -90,7 +90,8 @@
 								{@html getNotificationMessage(
 									notification.type,
 									`${notification.message.user.name} ${notification.message.user.surname}`,
-									`${notification.message.appointment?.title}`
+									`${notification.message.appointment?.title}`,
+									`${notification.message.appointment?.id}`
 								)}
 							</p>
 						{/if}
