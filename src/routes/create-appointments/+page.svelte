@@ -152,7 +152,7 @@
 	<meta name="description" content="create events form" />
 </svelte:head>
 
-<div class="flex h-full flex-col bg-base-100 px-6 pt-8 pb-10">
+<div class="flex h-full flex-col bg-background px-6 pt-8 pb-10">
 	<div class="flex flex-col gap-4 ">
 		<HeaderMenu
 			firstRow={pageHeaders[step].firstRow}

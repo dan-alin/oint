@@ -60,54 +60,57 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4">
-	<div class="min-h-12 flex items-center gap-4 text-xs">
-		<div class="placeholder avatar h-12 w-12 ">
-			<div class="h-12 w-12 rounded-full bg-gray-400 text-neutral-content shadow ">
-				{#if notification.message.user.image}
-					<img
-						src={notification.message.user.image}
-						alt={'Foto profilo di ' + notification.message.user.name}
-					/>
-				{:else}
-					<span class="text-3xl">{notification.message.user.name.charAt(0)}</span>
-				{/if}
-			</div>
-		</div>
-		<div class="flex w-full flex-col">
-			<div class="w-full">
-				<div class="mb-2  w-full ">
-					{#if notification.type === EnumNotificationType.FRIEND_REQ || notification.type === EnumNotificationType.FRIEND_ACC || notification.type === EnumNotificationType.FRIEND_REJ}
-						<p class=" w-full self-center align-middle font-bold">
-							{getNotificationMessage(
-								notification.type,
-								`${notification.message.user.name} ${notification.message.user.surname}`
-							)}
-						</p>
-					{:else if notification.type === EnumNotificationType.INVITATION_REQ || notification.type === EnumNotificationType.INVITATION_ACC || notification.type === EnumNotificationType.EVENT_DELETED || notification.type === EnumNotificationType.INVITATION_REJ}
-						<p class=" w-full self-center align-middle font-bold">
-							{@html getNotificationMessage(
-								notification.type,
-								`${notification.message.user.name} ${notification.message.user.surname}`,
-								`${notification.message.appointment?.title}`
-							)}
-						</p>
+<div>
+	<div class="flex flex-col ">
+		<div class="min-h-12 flex  gap-4 text-xs">
+			<div class="placeholder avatar h-12 w-12 ">
+				<div class="h-12 w-12 rounded-full bg-gray-400 text-neutral-content shadow ">
+					{#if notification.message.user.image}
+						<img
+							src={notification.message.user.image}
+							alt={'Foto profilo di ' + notification.message.user.name}
+						/>
+					{:else}
+						<span class="text-3xl">{notification.message.user.name.charAt(0)}</span>
 					{/if}
 				</div>
 			</div>
-			{#if notification.type === EnumNotificationType.FRIEND_REQ || notification.type === EnumNotificationType.INVITATION_REQ}
-				<div class="mb-4">
-					<AcceptReject {acceptAction} {declineAction} id={actionId} />
+			<div class="flex w-full flex-col">
+				<div class="w-full">
+					<div class="mb-2  w-full ">
+						{#if notification.type === EnumNotificationType.FRIEND_REQ || notification.type === EnumNotificationType.FRIEND_ACC || notification.type === EnumNotificationType.FRIEND_REJ}
+							<p class=" w-full self-center align-middle font-bold">
+								{getNotificationMessage(
+									notification.type,
+									`${notification.message.user.name} ${notification.message.user.surname}`
+								)}
+							</p>
+						{:else if notification.type === EnumNotificationType.INVITATION_REQ || notification.type === EnumNotificationType.INVITATION_ACC || notification.type === EnumNotificationType.EVENT_DELETED || notification.type === EnumNotificationType.INVITATION_REJ}
+							<p class=" w-full self-center align-middle font-bold">
+								{@html getNotificationMessage(
+									notification.type,
+									`${notification.message.user.name} ${notification.message.user.surname}`,
+									`${notification.message.appointment?.title}`,
+									`${notification.message.appointment?.id}`
+								)}
+							</p>
+						{/if}
+					</div>
 				</div>
-			{/if}
+				{#if notification.type === EnumNotificationType.FRIEND_REQ || notification.type === EnumNotificationType.INVITATION_REQ}
+					<div class="mb-4">
+						<AcceptReject {acceptAction} {declineAction} id={actionId} />
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
-</div>
-<div class="flex justify-end text-xs text-gray-400">
-	{notificationTimeString(new Date(notification.created_at))}
-</div>
+	<div class="flex justify-end text-xs text-gray-400">
+		{notificationTimeString(new Date(notification.created_at))}
+	</div>
 
-<div class="divider my-0" />
+	<div class="divider my-0" />
+</div>
 
 <style>
 	.shadow {

@@ -61,5 +61,6 @@ export enum Endpoints {
 	CHANGE_PASSWORD = '/api/change-password',
 	CHANGE_VOTES = '/api/change-votes',
 	VOTE_LOCATION = '/api/vote',
-	UNVOTE_LOCATION = '/api/unvote'
+	UNVOTE_LOCATION = '/api/unvote',
+	CHANGE_PROFILE_IMAGE = '/api/profile-image'
 }

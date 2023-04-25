@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Icon from '../../components/Icon.svelte';
 	import Menu from '../../components/Menu.svelte';
-	import ChangeProfilePictureModal from '../../components/profile/ChangeProfilePictureModal.svelte';
-	import { Icons } from '../../enums';
+	import { Endpoints, Icons } from '../../enums';
 	import { userStore } from '../../stores/user';
+	import { apiCall } from '../../utils/api-call';
 
 	export let data: { myStats: { appointments: number; friends: number } };
 	const { myStats } = data;
@@ -14,9 +14,27 @@
 		/*{ title: 'Impostazioni generali', link: '/profile' }*/
 	];
 
+	let inputFile: HTMLInputElement;
+
 	const logout = () => {
 		sessionStorage.removeItem('jwt_token');
 		window.location.href = '/login';
+	};
+
+	const handleFileInputChange = (event: any) => {
+		const filereader = new FileReader();
+		filereader.readAsDataURL(event.target.files[0]);
+		filereader.onload = async (evt: any) => {
+			const base64 = evt.target.result;
+			await apiCall(
+				Endpoints.CHANGE_PROFILE_IMAGE,
+				'post',
+				'Request sent',
+				JSON.stringify({ image: base64 }),
+				sessionStorage.getItem('jwt_token') || ''
+			);
+			userStore.update((user) => ({ ...user, image: base64 }));
+		};
 	};
 </script>
 
@@ -34,8 +52,16 @@
 				</div>
 				<label
 					class="btn-outline btn-sm btn-circle btn absolute bottom-1 right-0 z-20 bg-white"
-					for="change-profile-picture-modal"
+					for="change-profile-picture"
 				>
+					<input
+						type="file"
+						id="change-profile-picture"
+						class="hidden"
+						bind:this={inputFile}
+						on:change={handleFileInputChange}
+					/>
+
 					<Icon icon={Icons.EDIT} size="16" />
 				</label>
 			</div>
@@ -59,6 +85,6 @@
 			>
 		</div>
 	</div>
-	<input type="checkbox" id="change-profile-picture-modal" class="modal-toggle" />
-	<ChangeProfilePictureModal />
+	<!-- <input type="checkbox" id="change-profile-picture-modal" class="modal-toggle" />
+	<ChangeProfilePictureModal /> -->
 </section>
