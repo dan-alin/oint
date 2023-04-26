@@ -43,9 +43,25 @@
 	};
 
 	onMount(async () => {
+		window.addEventListener('storage', async (e) => {
+			if (e.key === 'fcm_token') {
+				console.log('fcm_token', e.newValue);
+				if (e.newValue && e.newValue !== e.oldValue) {
+					await apiCall(
+						'/api/add-token-device',
+						'post',
+						'',
+						JSON.stringify({
+							token: e.newValue
+						}),
+						sessionStorage.getItem('jwt_token') || ''
+					);
+				}
+			}
+		});
+
 		//SW registration to check app updates
 		// pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default);
-		const { getTokenFirebase } = await import('../firebase');
 		if (
 			$page.url.pathname !== '/login' &&
 			$page.url.pathname !== '/sign-up' &&
@@ -59,7 +75,10 @@
 				sessionStorage.getItem('jwt_token') || ''
 			);
 			userStore.update(() => user);
-			getTokenFirebase(setFirebaseToken);
+			if (!window.isRNWebView) {
+				const { getTokenFirebase } = await import('../firebase');
+				getTokenFirebase(setFirebaseToken);
+			}
 		}
 	});
 </script>
