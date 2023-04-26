@@ -29,13 +29,14 @@
 			);
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
-			if (sessionStorage.hasItem('fcm_token')) {
+			const fcmToken = await sessionStorage.getItem('fcm_token');
+			if (fcmToken) {
 				await apiCall(
 					'/api/add-token-device',
 					'post',
 					'',
 					JSON.stringify({
-						token: sessionStorage.getItem('fcm_token') || ''
+						token: fcmToken
 					}),
 					sessionStorage.getItem('jwt_token') || ''
 				);
