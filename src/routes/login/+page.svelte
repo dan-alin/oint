@@ -29,6 +29,18 @@
 			);
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
+			if (sessionStorage.hasItem('fcm_token')) {
+				await apiCall(
+					'/api/add-token-device',
+					'post',
+					'',
+					JSON.stringify({
+						token: sessionStorage.getItem('fcm_token') || ''
+					}),
+					sessionStorage.getItem('jwt_token') || ''
+				);
+			}
+
 			await goto('/appointments');
 		} catch (error: unknown) {
 			console.error(error);
