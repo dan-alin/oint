@@ -46,6 +46,7 @@
 		window.addEventListener('storage', async (e) => {
 			if (e.key === 'fcm_token') {
 				console.log('fcm_token', e.newValue);
+				alert('fcm_token' + e.newValue);
 				if (e.newValue && e.newValue !== e.oldValue) {
 					await apiCall(
 						'/api/add-token-device',
