@@ -30,6 +30,7 @@
 
 			sessionStorage.setItem('jwt_token', await `Bearer ${response['access_token']}`);
 			userStore.update(() => response.user);
+			window.postMessage({ type: 'login', token: response['access_token'] }, '*');
 			await goto('/appointments');
 		} catch (error: unknown) {
 			console.error(error);
