@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.6.0](https://github.com/dan-alin/oint/compare/v1.5.3...v1.6.0) (2023-04-27)
+
+
+### Features
+
+* **post message to react native code:** post message ([68e74b4](https://github.com/dan-alin/oint/commit/68e74b41c9eaf25be6a3e5018afc9a1cc1ce7d21))
+* **post message to react native code:** post message ([c3681d3](https://github.com/dan-alin/oint/commit/c3681d35b6f2706da6e653a6a5bf9ff892c530c5))
+* **removed fix:** removed fix ([5553f49](https://github.com/dan-alin/oint/commit/5553f493c12d176a6fb07979343b5837a6d23873))
+* **removed fix:** removed fix ([397a77b](https://github.com/dan-alin/oint/commit/397a77b0349f2253667a7f34dc112bf92a9087c5))
+
+
+### Bug Fixes
+
+* **bg-color:** changed background color from gray to white ([25d8887](https://github.com/dan-alin/oint/commit/25d8887353f019798315ff9c7d972cd098933d11))
+* **manage fcm token:** manage fcm token ([ad9169f](https://github.com/dan-alin/oint/commit/ad9169fb12fe9f262fa073ad8994b45d99c189d2))
+* **manage fcm token:** manage fcm token ([75c7f34](https://github.com/dan-alin/oint/commit/75c7f34efb7e60e9e8cfa8061a8cf80d780926f6))
+* **manage token received from react native app 2:** manage token received from react native app 2 ([d20424d](https://github.com/dan-alin/oint/commit/d20424dffbb74f0542488fa3926e75c55660ca54))
+* **manage token received from react native app 2:** manage token received from react native app 2 ([f0bfd92](https://github.com/dan-alin/oint/commit/f0bfd921e3d2c91b28c8fdbb038eb04763f3663a))
+* **manage token received from react native app 3:** manage token received from react native app 3 ([12e602b](https://github.com/dan-alin/oint/commit/12e602bf05fb0a150aadfd66cbb8f76de14ef720))
+* **manage token received from react native app 3:** manage token received from react native app 3 ([3efdd32](https://github.com/dan-alin/oint/commit/3efdd32a95f357fb575a41b71c1c7eb02acc9b35))
+* **test token value:** tst ([9f97813](https://github.com/dan-alin/oint/commit/9f978131b6c0361ddf9e98aec9faa62e55ee051d))
+* **test token value:** tst ([9efab18](https://github.com/dan-alin/oint/commit/9efab18059511d514a9e9bcb7146513d00ac5c35))
+
 ## [1.5.3](https://github.com/dan-alin/oint/compare/v1.5.2...v1.5.3) (2023-04-25)
 
 
