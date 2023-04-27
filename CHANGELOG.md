@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/dan-alin/oint/compare/v1.6.0...v1.6.1) (2023-04-27)
+
+
+### Bug Fixes
+
+* **create-appointment & sign-up:** sign-up format date & revert picker date format & rm unused code ([e7d0925](https://github.com/dan-alin/oint/commit/e7d0925df9c4dd11b607478aee9032476097bfa5))
+
 ## [1.6.0](https://github.com/dan-alin/oint/compare/v1.5.3...v1.6.0) (2023-04-27)
 
 
