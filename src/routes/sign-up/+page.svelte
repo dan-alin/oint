@@ -35,7 +35,7 @@
 			password: formData.password,
 			email: formData.email,
 			phone: `${formData.prefix}${formData.phone}`,
-			birthdate: new Date(formData.birthdate).toISOString()
+			birthdate: new Date(formData.birthdate.split('/').reverse().join('-')).toISOString()
 		};
 		try {
 			await apiCall('/api/user', 'post', 'Signup success', JSON.stringify(user));
