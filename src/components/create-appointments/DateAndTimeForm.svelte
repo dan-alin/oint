@@ -48,8 +48,8 @@
 	<div class:columns-2={eventType === 'continuous'}>
 		<SveltyPicker
 			inputClasses="svelty-pckr"
-			format="dd/mm/yy"
-			placeholder="gg/mm/aa"
+			format="dd/mm/yyyy"
+			placeholder="gg/mm/aaaa"
 			bind:value={start_date}
 			inputId="start_date"
 			name="start date"
@@ -60,8 +60,8 @@
 			<div>
 				<SveltyPicker
 					inputClasses="svelty-pckr"
-					format="dd/mm/yy"
-					placeholder="gg/mm/aa"
+					format="dd/mm/yyyy"
+					placeholder="gg/mm/aaaa"
 					bind:value={end_date}
 					inputId="end_date"
 					name="end date"
