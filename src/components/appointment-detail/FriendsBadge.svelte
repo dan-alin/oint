@@ -21,7 +21,7 @@
 		{/each}
 		<!-- display as many avatars are needed to have to at least 3 -->
 		{#if friends.length < 3}
-			{#each new Array(friends.length) as _}
+			{#each new Array(friends.length > 3 ? 3 : friends.length) as _}
 				<div class="avatar">
 					<div class="w-[30px] bg-white">
 						<Icon icon={Icons.PROFILE_FULL} size="30" />
