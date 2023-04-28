@@ -54,6 +54,7 @@
 			inputId="start_date"
 			name="start date"
 			i18n={it}
+			startDate={new Date()}
 		/>
 
 		{#if eventType === 'continuous'}
@@ -66,6 +67,7 @@
 					inputId="end_date"
 					name="end date"
 					i18n={it}
+					startDate={new Date()}
 				/>
 			</div>
 		{/if}
