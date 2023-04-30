@@ -14,7 +14,6 @@
 	$: initial = accepted;
 
 	const editInvitation = async () => {
-		console.log('se', selected, 'initial', initial);
 		if (selected === initial) {
 			inputEl.checked = false;
 			return;
