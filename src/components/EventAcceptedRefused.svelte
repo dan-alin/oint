@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { Icons } from '../enums';
+	import type { InvitedAppointment } from '../models';
+	import EditInvitationModal from './EditInvitationModal.svelte';
 	import Icon from './Icon.svelte';
 
-	export let accepted: boolean;
+	export let appointment: InvitedAppointment;
+	export let index: number;
+
+	$: accepted = appointment.invitationStatus === 'accepted';
 </script>
 
 <div
@@ -23,5 +28,16 @@
 			Evento rifiutato
 		{/if}
 	</div>
-	<button class="link-secondary link text-sm font-bold"> Modifica partecipazione </button>
+	<label
+		for={'edit-invitation-modal' + index}
+		class="link-secondary link text-center text-sm font-bold"
+	>
+		Modifica partecipazione
+	</label>
 </div>
+
+<EditInvitationModal
+	id={'edit-invitation-modal' + index}
+	{accepted}
+	appointmentId={appointment.appointment.id}
+/>
