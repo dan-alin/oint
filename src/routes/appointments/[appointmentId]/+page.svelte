@@ -4,10 +4,12 @@
 	import Icon from '../../../components/Icon.svelte';
 	import ModalSuccess from '../../../components/ModalSuccess.svelte';
 	import AppointmentDetailSection from '../../../components/appointment-detail/AppointmentDetailSection.svelte';
+	import EditDateTimeModal from '../../../components/appointment-detail/EditDateTimeModal.svelte';
+	import EditLocationModal from '../../../components/appointment-detail/EditLocationModal.svelte';
 	import FriendsBadge from '../../../components/appointment-detail/FriendsBadge.svelte';
 	import InviteesModal from '../../../components/appointment-detail/InviteesModal.svelte';
 	import { Icons, Routes } from '../../../enums';
-	import type { Appointment, FriendData, AppointmentDetailSectionData } from '../../../models';
+	import type { Appointment, AppointmentDetailSectionData, FriendData } from '../../../models';
 	import { invitationService } from '../../../services/invitation.service';
 	import { invitedAppointmentsStore } from '../../../stores/apointments';
 	import { userStore } from '../../../stores/user';
@@ -18,19 +20,21 @@
 	let { appointment, friends } = data;
 
 	const friendUsers = friends.map((f) => f.user);
-	$: invitees = appointment.invitations?.map((i) => i.invitee);
+	$: invitees = appointment.invitations.map((i) => i.invitee);
 	const startDate = getDate(appointment.start_date as Date);
 	const startTime = getTime(appointment.start_date as Date);
 	$: loggedUserInvitation = $invitedAppointmentsStore?.find(
-		(inv) => inv.appointment.id === appointment.id
+		(inv) => inv.appointment?.id === appointment.id
 	);
 	$: invitationPending = loggedUserInvitation?.invitationStatus === 'pending';
-	$: loggedUserIsOwner = $userStore.id === appointment.creator_id;
+	$: loggedUserIsOwner = $userStore?.id === appointment.creator_id;
 	const locationSelectionDeadline = appointment.location_selection_deadline;
 	let checked = appointment.can_be_forwarded;
-	let openModal = false;
-	let modalViewType: 'owner' | 'inviteeRead' | 'inviteeEdit' = 'owner';
-	let votingAllowed = appointment.location_selection_type === 'multi';
+	let editLocationModalOpen = false;
+	let inviteesModalOpen = false;
+	let editDateModalOpen = false;
+	let inviteesModalViewType: 'owner' | 'inviteeRead' | 'inviteeEdit' = 'owner';
+	let votingAllowed = false;
 	if (
 		appointment.location_selection_type === 'multi' &&
 		new Date(locationSelectionDeadline as string).getTime() > new Date().getTime()
@@ -44,7 +48,9 @@
 				? ['Vota!!!!', () => goto(`${Routes.APPOINTMENTS}/${appointment.id}${Routes.POLL}`)]
 				: ['Apri con Maps', noop];
 		} else {
-			return loggedUserIsOwner ? ['Cambia locassscion', noop] : ['Apri con Maps', noop];
+			return loggedUserIsOwner
+				? ['Cambia locassscion', () => (editLocationModalOpen = true)]
+				: ['Apri con Maps', noop];
 		}
 	};
 
@@ -79,9 +85,9 @@
 			);
 	};
 
-	const triggerOpenModal = (viewType: 'owner' | 'inviteeRead' | 'inviteeEdit') => {
-		modalViewType = viewType;
-		openModal = true;
+	const openInviteesModal = (viewType: 'owner' | 'inviteeRead' | 'inviteeEdit') => {
+		inviteesModalViewType = viewType;
+		inviteesModalOpen = true;
 	};
 
 	const toggleForwardable = async (changeEvent: Event) => {
@@ -112,10 +118,6 @@
 		);
 		goto(Routes.APPOINTMENTS);
 	};
-
-	const updateAppointment = (updatedAppointment: Appointment) => {
-		appointment = updatedAppointment;
-	};
 </script>
 
 {#if $userStore}
@@ -139,7 +141,7 @@
 			<FriendsBadge friends={invitees} />
 		</div>
 		<button
-			on:click={() => triggerOpenModal(loggedUserIsOwner ? 'owner' : 'inviteeRead')}
+			on:click={() => openInviteesModal(loggedUserIsOwner ? 'owner' : 'inviteeRead')}
 			class="link-secondary mx-auto mt-8 block cursor-pointer text-center text-sm font-bold underline"
 		>
 			{loggedUserIsOwner ? 'Modifica partecipanti' : 'Vedi tutti i partecipanti'}
@@ -154,7 +156,8 @@
 				icon: Icons.DATE,
 				firstRow: startDate,
 				secondRow: 'Ora ' + startTime,
-				btnLabel: loggedUserIsOwner ? 'Cambia data e ora' : 'Aggiungi al calendario'
+				btnLabel: loggedUserIsOwner ? 'Cambia data e ora' : 'Aggiungi al calendario',
+				callback: loggedUserIsOwner ? () => (editDateModalOpen = true) : noop
 			}}
 		/>
 		<!-- Location -->
@@ -193,7 +196,7 @@
 			</label>
 			{#if checked && !loggedUserIsOwner}
 				<button
-					on:click={() => triggerOpenModal('inviteeEdit')}
+					on:click={() => openInviteesModal('inviteeEdit')}
 					class="link-secondary link ml-auto font-bold"
 				>
 					Estendi
@@ -246,13 +249,11 @@
 
 		<!-- Modals -->
 		<InviteesModal
-			bind:open={openModal}
-			viewType={modalViewType}
+			bind:open={inviteesModalOpen}
+			bind:appointment
+			viewType={inviteesModalViewType}
 			friends={friendUsers}
-			appointmentId={appointment.id}
 			{invitees}
-			creatorId={appointment.creator.id}
-			{updateAppointment}
 		/>
 
 		<ModalSuccess
@@ -263,5 +264,13 @@
 			cancelBtnLabel="Annulla"
 			onConfirm={deleteAppointment}
 		/>
+
+		<EditLocationModal
+			id="edit-location-modal"
+			bind:open={editLocationModalOpen}
+			bind:appointment
+		/>
+
+		<EditDateTimeModal id="edit-date-time-modal" bind:open={editDateModalOpen} bind:appointment />
 	</div>
 {/if}
