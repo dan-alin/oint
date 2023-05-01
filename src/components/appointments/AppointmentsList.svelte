@@ -1,32 +1,13 @@
 <script lang="ts">
 	import { Icons } from '../../enums';
-	import type { DeletedAppointment } from '../../models';
 	import { invitationService } from '../../services/invitation.service';
 	import { invitedAppointmentsStore, myAppointmentsStore } from '../../stores/apointments';
-	import { apiCall } from '../../utils/api-call';
 	import AcceptReject from '../AcceptReject.svelte';
 	import EventAcceptedRefused from '../EventAcceptedRefused.svelte';
 	import AppointmentCard from './AppointmentCard.svelte';
 	import NoContent from './NoContent.svelte';
 
 	export let invited = false;
-
-	const cancelAppointment = async (appointmentId: number) => {
-		const response: DeletedAppointment = await apiCall(
-			'/api/delete-appointment',
-			'delete',
-			'',
-			JSON.stringify({
-				appointmentId
-			}),
-			sessionStorage.getItem('jwt_token') || '',
-			false
-		);
-
-		myAppointmentsStore.update((appointments) =>
-			appointments.filter((event) => event.id !== response.appointmentId)
-		);
-	};
 
 	const acceptAppointment = async (appointmentId: number) => {
 		invitationService.acceptAppointment(appointmentId, sessionStorage.getItem('jwt_token') || '');
@@ -60,7 +41,7 @@
 				{:else}
 					<div>
 						<AppointmentCard appointment={invitedOccurrence.appointment} />
-						<EventAcceptedRefused accepted={invitedOccurrence.invitationStatus === 'accepted'} />
+						<EventAcceptedRefused {index} appointment={invitedOccurrence} />
 					</div>
 				{/if}
 			</div>
@@ -74,7 +55,7 @@
 		{/each}
 	{:else}
 		{#each $myAppointmentsStore as occurrence}
-			<AppointmentCard appointment={occurrence} deleteAction={cancelAppointment} />
+			<AppointmentCard appointment={occurrence} />
 		{:else}
 			<NoContent
 				icon={Icons.DATE}

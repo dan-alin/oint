@@ -15,6 +15,7 @@
 	import { userStore } from '../../../stores/user';
 	import { apiCall } from '../../../utils/api-call';
 	import { getDate, getTime } from '../../../utils/time';
+	import EditInvitationModal from '../../../components/EditInvitationModal.svelte';
 
 	export let data: { appointment: Appointment; friends: FriendData[] };
 	let { appointment, friends } = data;
@@ -235,14 +236,9 @@
 							? 'Evento accettato'
 							: 'Evento rifiutato'}
 					</button>
-					<button
-						class="link-secondary link font-bold"
-						on:click={() => {
-							invitationPending = true;
-						}}
-					>
+					<label class="link-secondary link text-center font-bold" for="edit-invitation-modal">
 						Modifica partecipazione
-					</button>
+					</label>
 				</div>
 			{/if}
 		</div>
@@ -272,5 +268,11 @@
 		/>
 
 		<EditDateTimeModal id="edit-date-time-modal" bind:open={editDateModalOpen} bind:appointment />
+
+		<EditInvitationModal
+			accepted={loggedUserInvitation?.invitationStatus === 'accepted'}
+			appointmentId={appointment.id}
+			id="edit-invitation-modal"
+		/>
 	</div>
 {/if}
