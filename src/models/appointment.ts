@@ -1,7 +1,7 @@
-import type { FriendData, FriendUser } from './friend';
 import type { Icons } from '../enums';
+import type { FriendData, FriendUser } from './friend';
 import type { Invitation } from './invitation';
-import type { Location } from './locations';
+import type { LocationRequest } from './locations';
 
 export type AppointmentRequest = {
 	title: string;
@@ -12,7 +12,7 @@ export type AppointmentRequest = {
 	image: string;
 	can_be_forwarded: boolean;
 	invitees: FriendUser[];
-	locations: Location[];
+	locations: LocationRequest[];
 	location_selection_deadline: Date | string;
 	location_selection_type: 'multi' | 'single';
 };
@@ -43,7 +43,7 @@ export type AppointmentForm = {
 	end_time: string;
 	can_be_forwarded: boolean;
 	image: FileList | undefined;
-	locations: Location[];
+	locations: LocationRequest[];
 	location_selection_type: 'single' | 'multi';
 	location_selection_deadline_date: string;
 	location_selection_deadline_time: string;

@@ -1,8 +1,11 @@
-export type Location = {
-	id?: number;
+export type LocationRequest = {
 	name: string;
 	address: string;
-	votes_count?: number;
-	votes?: string[];
-	i_voted_this_location?: boolean;
+};
+
+export type Location = LocationRequest & {
+	id: number;
+	votes_count: number;
+	votes: string[];
+	i_voted_this_location: boolean;
 };

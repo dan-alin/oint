@@ -2,7 +2,7 @@ export type { User, CreateUserRequest } from './user';
 export type { PhonePrefix } from './phone-prefix';
 export type { Option } from './option';
 export type { Invitation } from './invitation';
-export type { Location } from './locations';
+export type { Location, LocationRequest } from './locations';
 export type { Place } from './place';
 export type { Friend, FriendData, FriendUser } from './friend';
 export type { FriendRequests } from './friend-requests';
