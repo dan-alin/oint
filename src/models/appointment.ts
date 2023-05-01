@@ -1,7 +1,7 @@
 import type { Icons } from '../enums';
 import type { FriendData, FriendUser } from './friend';
 import type { Invitation } from './invitation';
-import type { LocationRequest } from './locations';
+import type { Location, LocationRequest } from './locations';
 
 export type AppointmentRequest = {
 	title: string;
@@ -17,10 +17,11 @@ export type AppointmentRequest = {
 	location_selection_type: 'multi' | 'single';
 };
 
-export type Appointment = AppointmentRequest & {
+export type Appointment = Omit<AppointmentRequest, 'locations'> & {
 	id: number;
 	invitations: Invitation[];
 	creator: FriendUser;
+	locations: Location[];
 };
 
 export type InvitedAppointment = {

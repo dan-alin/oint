@@ -13,7 +13,8 @@
 	const initialAddress = appointment.locations[0].address;
 
 	$: submitDisabled = locationData.address === '' || locationData.name === '';
-	let locationData: LocationRequest = {
+	let locationData: LocationRequest & { id: number } = {
+		id: appointment.locations[0].id,
 		name: initialName,
 		address: initialAddress
 	};
