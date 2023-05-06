@@ -52,7 +52,7 @@
 		"dotenv": "^16.0.3",
 		"esbuild": "0.14.14",
 		"firebase": "^9.17.1",
-		"svelty-picker": "^3.4.6"
+		"svelty-picker": "^3.5.0"
 	},
 	"config": {
 		"commitizen": {
