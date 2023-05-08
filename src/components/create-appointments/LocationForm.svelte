@@ -10,8 +10,22 @@
 	export let locations: { name: string; address: string }[] = [];
 	export let location_selection_deadline_date: string | undefined = undefined;
 	export let location_selection_deadline_time: string | undefined = undefined;
+	export let isValid: boolean;
+	export let startDate: string;
+	export let startTime: string;
 	let isModalOpen = false;
 	let unique = {};
+
+	$: {
+		if (location_selection_type === 'single') {
+			isValid = locations.length > 0;
+		} else {
+			isValid =
+				!!location_selection_deadline_date &&
+				!!location_selection_deadline_time &&
+				locations.length > 1;
+		}
+	}
 
 	//reset modal whenever it closes
 	$: if (!isModalOpen) {
@@ -86,6 +100,7 @@
 					inputId="deadline_date"
 					name="deadline date"
 					i18n={it}
+					endDate={startDate}
 				/>
 				<SveltyPicker
 					inputClasses="input-bordered input h-10 grow text-sm px-1.5 bg-transparent"
@@ -96,6 +111,7 @@
 					name="deadline time"
 					mode="time"
 					i18n={it}
+					endDate={startTime}
 				/>
 			</div>
 		</div>
