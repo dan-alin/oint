@@ -126,6 +126,7 @@
 	let step = 0;
 	let isValidNameForm = true;
 	let isValidDateForm = false;
+	let isValidLocationForm = false;
 
 	let acceptLastDay = false;
 	let formData: AppointmentForm = {
@@ -198,6 +199,9 @@
 				bind:locations={formData.locations}
 				bind:location_selection_deadline_date={formData.location_selection_deadline_date}
 				bind:location_selection_deadline_time={formData.location_selection_deadline_time}
+				bind:isValid={isValidLocationForm}
+				startDate={formData.start_date}
+				startTime={formData.start_time}
 				on:submit={nextStep}
 			/>
 		{:else if step === 4}
@@ -211,7 +215,7 @@
 	<button
 		disabled={(step === 0 && !isValidNameForm) ||
 			(step === 1 && !isValidDateForm) ||
-			(step === 3 && formData.locations.length === 0)}
+			(step === 3 && !isValidLocationForm)}
 		class="disabled:disabled-primary btn-primary btn-sm btn mt-auto h-10 capitalize"
 		type="submit"
 		form={`${step}-part`}>{step === 3 ? 'Ci siamo!' : step === 4 ? 'Invita!' : 'Conferma'}</button

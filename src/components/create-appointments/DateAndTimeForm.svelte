@@ -94,6 +94,7 @@
 				name="end time"
 				mode="time"
 				i18n={it}
+				startDate={start_time}
 			/>
 		</div>
 	</div>
