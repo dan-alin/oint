@@ -12,11 +12,11 @@
 	<HeaderMenu firstRow={'Informativa '} secondRow={'sulla privacy'} goto={'/sign-up'} />
 	<div class="flex  flex-col overflow-auto p-2 shadow-inner">
 		<p>
-			Questa Informativa sulla privacy regola il modo in cui <strong>Oint</strong>
+			Questa Informativa sulla privacy regola il modo in cui <strong>Oin</strong>
 			raccoglie, utilizza, conserva e divulga le informazioni personali raccolte dagli utenti dell'applicazione
-			mobile <strong>Oint</strong>. Questa politica si applica all'App e a tutti i prodotti e
-			servizi offerti da
-			<strong>Oint</strong>.
+			mobile <strong>Oin</strong>. Questa politica si applica all'App e a tutti i prodotti e servizi
+			offerti da
+			<strong>Oin</strong>.
 		</p>
 		<br />
 		<h2 class="font-bold">1. Informazioni che raccogliamo</h2>
