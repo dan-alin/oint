@@ -50,7 +50,7 @@
 <section class="h-full px-6 pt-8">
 	<HeaderMenu firstRow="informazioni" secondRow="Account" goto="/profile" />
 	{#if $userStore}
-		<form class="flex  h-5/6 flex-col justify-between" on:submit|preventDefault={onSubmit}>
+		<form class="mt-8 flex  h-5/6 flex-col justify-between" on:submit|preventDefault={onSubmit}>
 			<div>
 				<h2 class="mb-2 text-base font-bold">Dati anagrafici</h2>
 				<div class="mb-6 flex flex-col gap-4">

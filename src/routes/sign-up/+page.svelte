@@ -97,6 +97,9 @@
 			<span>Hai già un account?</span>
 			<a class="text-secondary underline" href="/login">Accedi</a>
 		</div>
+		<div class="flex justify-center text-xs">
+			<a class="text-secondary underline" href="/privacy-policy">Informativa sulla privacy</a>
+		</div>
 	</div>
 </div>
 

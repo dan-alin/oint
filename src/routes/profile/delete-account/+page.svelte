@@ -27,7 +27,7 @@
 
 <section class="h-full px-6 pt-8">
 	<HeaderMenu firstRow="Cancella" secondRow="Account" goto="/profile" />
-	<div class="flex h-5/6 flex-col justify-between">
+	<div class="mt-8 flex h-5/6 flex-col justify-between">
 		<div>
 			<p class="mb-6 text-base">
 				Se deisderi puoi anche lasciarci... ma sappi che i membri del nostro team, i tuoi amici e

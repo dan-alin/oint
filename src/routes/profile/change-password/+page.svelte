@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import HeaderMenu from '../../../components/HeaderMenu.svelte';
 	import Icon from '../../../components/Icon.svelte';
 	import InputText from '../../../components/InputText.svelte';
 	import ModalSuccess from '../../../components/ModalSuccess.svelte';
 	import { Endpoints, Icons } from '../../../enums';
 	import type { User } from '../../../models';
-	import { userStore } from '../../../stores/user';
 	import { apiCall } from '../../../utils/api-call';
 
 	let password = '';
@@ -53,7 +51,7 @@
 
 <section class="h-full px-6 pt-8">
 	<HeaderMenu firstRow="Modifica" secondRow="Password" goto="/profile" />
-	<form class="flex h-5/6 flex-col justify-between" on:submit|preventDefault={onSubmit}>
+	<form class="mt-8 flex h-5/6 flex-col justify-between" on:submit|preventDefault={onSubmit}>
 		<div>
 			<p class="mb-6 text-base">
 				Qua puoi modificare la password associata al tuo account. Ti servirà per effettuare

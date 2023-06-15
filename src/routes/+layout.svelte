@@ -22,7 +22,7 @@
 	toggleAlert.subscribe((value) => (showAlert = value));
 	// to hide the navbar from the route '/example-route', add the string '|(/example-route)' to the hideNavRegExp
 	const hideNavRegExp = new RegExp(
-		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})`
+		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})|(${Routes.PRIVACY_POLICY})`
 	);
 	$: hideNav = hideNavRegExp.test($page.url.pathname);
 
@@ -86,11 +86,25 @@
 
 <svelte:head>
 	{@html webManifest}
+	<!-- Google Tag Manager -->
+	<script>
+		(function (w, d, s, l, i) {
+			w[l] = w[l] || [];
+			w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+			var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s),
+				dl = l != 'dataLayer' ? '&l=' + l : '';
+			j.async = true;
+			j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+			f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-WT6PRB7');
+	</script>
+	<!-- End Google Tag Manager -->
 </svelte:head>
 
 {#if showSpinner}
 	<div
-		class="fixed top-0 left-0  z-[99] flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
+		class="fixed left-0 top-0  z-[99] flex h-full w-full flex-col items-center justify-center bg-white opacity-75"
 	>
 		<Jumper size="60" color="#FF3E00" unit="px" duration="1s" />
 	</div>

@@ -62,7 +62,7 @@
 	<div class="relative">
 		<input
 			bind:this={component}
-			class="input-bordered input h-10 w-full bg-transparent"
+			class="input-bordered input input-sm h-10 w-full bg-transparent"
 			class:input-error={(required && isDirty && !value) || !customValidation}
 			use:typeAction
 			{placeholder}
