@@ -22,7 +22,7 @@
 	toggleAlert.subscribe((value) => (showAlert = value));
 	// to hide the navbar from the route '/example-route', add the string '|(/example-route)' to the hideNavRegExp
 	const hideNavRegExp = new RegExp(
-		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})`
+		`(/login)|(/sign-up)|(/$)|(${Routes.APPOINTMENTS})/(\\d+)|(${Routes.PROFILE})/(\\w+)|(${Routes.BYE})|(${Routes.CREATE_APPOINMENTS})|(${Routes.PRIVACY_POLICY})`
 	);
 	$: hideNav = hideNavRegExp.test($page.url.pathname);
 
