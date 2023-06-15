@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.7.0](https://github.com/dan-alin/oint/compare/v1.6.1...v1.7.0) (2023-06-15)
+
+
+### Features
+
+* **EditInvitationModal:** adds EditInvitationModal component ([#219](https://github.com/dan-alin/oint/issues/219)) ([347e197](https://github.com/dan-alin/oint/commit/347e19796d597491d2348b32391bf4a4a2f952aa))
+* **privacy-policy:** privacy policy page ([3deb492](https://github.com/dan-alin/oint/commit/3deb492e96a56a9354a20ab191fd9a1c7d28bd95))
+
+
+### Bug Fixes
+
+* **create-appointment:** adds date and time selection limits ([c980ac9](https://github.com/dan-alin/oint/commit/c980ac905ea744c3c51c174ae64830edb583a993))
+* friend badge ([f84ff7e](https://github.com/dan-alin/oint/commit/f84ff7e105c21f0b092d06c39fb105fc0a683098))
+* friend badges & start date ([1bd1908](https://github.com/dan-alin/oint/commit/1bd190895fe16a8f9f06097fcac95bc6f486c79f))
+* **inputText:** changed input text size to match design ([d3bdd13](https://github.com/dan-alin/oint/commit/d3bdd1349c809913cb9bb652317bd1fb86ce13b4))
+
 ## [1.6.1](https://github.com/dan-alin/oint/compare/v1.6.0...v1.6.1) (2023-04-27)
 
 
