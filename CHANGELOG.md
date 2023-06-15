@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/dan-alin/oint/compare/v1.7.0...v1.7.1) (2023-06-15)
+
+
+### Bug Fixes
+
+* **privacy-policy:** changed name from oint to Oin ([00c3e6a](https://github.com/dan-alin/oint/commit/00c3e6a44b12647aa27aae955461a33a73630a26))
+
 ## [1.7.0](https://github.com/dan-alin/oint/compare/v1.6.1...v1.7.0) (2023-06-15)
 
 
