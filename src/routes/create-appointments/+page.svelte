@@ -153,8 +153,8 @@
 	<meta name="description" content="create events form" />
 </svelte:head>
 
-<div class="flex h-full flex-col bg-background px-6 pt-8 pb-10">
-	<div class="flex flex-col gap-4 ">
+<div class="flex h-full flex-col bg-background px-6 pb-10 pt-8">
+	<div class=" flex flex-col gap-4 pb-24">
 		<HeaderMenu
 			firstRow={pageHeaders[step].firstRow}
 			secondRow={pageHeaders[step].secondRow}
@@ -212,12 +212,23 @@
 			/>
 		{/if}
 	</div>
-	<button
-		disabled={(step === 0 && !isValidNameForm) ||
-			(step === 1 && !isValidDateForm) ||
-			(step === 3 && !isValidLocationForm)}
-		class="disabled:disabled-primary btn-primary btn-sm btn mt-auto h-10 capitalize"
-		type="submit"
-		form={`${step}-part`}>{step === 3 ? 'Ci siamo!' : step === 4 ? 'Invita!' : 'Conferma'}</button
+	<div
+		class="  absolute bottom-0 left-0 grid    h-24 w-full gap-4 bg-gradient-to-t from-white  from-75%  px-6 "
+		class:grid-cols-2={step > 0}
 	>
+		{#if step > 0}
+			<button
+				class="btn-outline btn-primary btn-sm btn my-auto  h-10 w-full  capitalize"
+				on:click={() => step--}>Indietro</button
+			>
+		{/if}
+		<button
+			disabled={(step === 0 && !isValidNameForm) ||
+				(step === 1 && !isValidDateForm) ||
+				(step === 3 && !isValidDateForm)}
+			class="disabled:disabled-primary btn-primary btn-sm  btn my-auto  h-10 w-full capitalize"
+			type="submit"
+			form={`${step}-part`}>Conferma</button
+		>
+	</div>
 </div>

@@ -51,7 +51,7 @@
 	};
 </script>
 
-<form class="grid grid-cols-1 grid-rows-3 gap-6" id="3-part" on:submit|preventDefault>
+<form class="grid grid-cols-1 gap-6" id="3-part" on:submit|preventDefault>
 	<Select
 		id="select-location-type"
 		name="select-location-type"
@@ -61,34 +61,41 @@
 			{ text: 'Multi', value: 'multi' }
 		]}
 	/>
-	<div class="flex max-h-32 flex-col gap-4 overflow-auto">
-		{#each locations as location, i}
-			<div class="flex flex-row items-center justify-between">
-				<div class="flex items-center gap-4">
-					<div class="text-light-gray">
-						<Icon icon={Icons.LOCATION_FULL} />
+	{#if locations.length}
+		<div class="flex  flex-col gap-4 overflow-auto">
+			{#each locations as location, i}
+				<div class="flex flex-row items-center justify-between">
+					<div class="flex items-center gap-4">
+						<div class="text-light-gray">
+							<Icon icon={Icons.LOCATION_FULL} />
+						</div>
+						<div>
+							<p class="text-xs font-semibold capitalize ">{location.name}</p>
+							<p class="text-xs capitalize ">{location.address}</p>
+						</div>
 					</div>
-					<div>
-						<p class="text-xs font-semibold capitalize ">{location.name}</p>
-						<p class="text-xs capitalize ">{location.address}</p>
-					</div>
+					<button
+						class="flex h-4 w-4 items-center justify-center rounded-full bg-secondary text-white"
+						on:click={() => removeLocation(i)}
+					>
+						<Icon icon={Icons.CLOSE} size="14" />
+					</button>
 				</div>
-				<button
-					class="flex h-4 w-4 items-center justify-center rounded-full bg-secondary text-white"
-					on:click={() => removeLocation(i)}
-				>
-					<Icon icon={Icons.CLOSE} size="14" />
-				</button>
-			</div>
-		{/each}
-	</div>
-	{#if (location_selection_type === 'single' && locations.length < 1) || (location_selection_type === 'multi' && locations.length < 5)}
-		<label for="modal-location" class="text-sm capitalize text-secondary underline">
-			Aggiungi location
-		</label>
+			{/each}
+		</div>
 	{/if}
+	<!-- {#if (location_selection_type === 'single' && locations.length < 1) || (location_selection_type === 'multi' && locations.length < 5)} -->
+	<label
+		for="modal-location"
+		class="text-sm capitalize text-secondary underline"
+		class:disabled={(location_selection_type === 'single' && locations.length > 0) ||
+			(location_selection_type === 'multi' && locations.length > 4)}
+	>
+		Aggiungi location
+	</label>
+	<!-- {/if} -->
 	{#if location_selection_type === 'multi'}
-		<div class="text-sm">
+		<div class="pb-8 text-sm">
 			<p class="font-bold">Mettiamo la location a sondaggio!</p>
 			<p class="text-disabled">Dai un tempo ai tuoi amici per proporre e scegliere</p>
 			<div class="mt-6 flex gap-2">
@@ -121,3 +128,10 @@
 {#key unique}
 	<AddLocationModal action={getLocations} bind:isModalOpen />
 {/key}
+
+<style>
+	.disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+</style>

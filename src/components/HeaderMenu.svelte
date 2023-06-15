@@ -7,7 +7,7 @@
 	export let goto: string;
 </script>
 
-<div class="mb-8 flex items-center justify-between">
+<div class=" flex items-center justify-between">
 	<div>
 		<h1 class="flex flex-col">
 			<span class="text-xl text-gray-400">{firstRow}</span>
