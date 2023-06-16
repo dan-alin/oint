@@ -33,6 +33,8 @@
 		| 'week'
 		| 'search';
 	export let enableShowHide = false;
+	/** icon to be shown on the right side of the input. N.B. : if `enableShowHide` is set to `true` the icon won't appear */
+	export let icon: Icons | undefined = undefined;
 	let show = false;
 	let component: HTMLInputElement;
 
@@ -89,6 +91,10 @@
 				{:else}
 					<Icon icon={Icons.NOTIFICATION_FULL} />
 				{/if}
+			</div>
+		{:else if icon}
+			<div class="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5">
+				<Icon {icon} />
 			</div>
 		{/if}
 	</div>

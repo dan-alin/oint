@@ -5,7 +5,7 @@
 	export let start_time: string;
 	export let end_time: string;
 	export let acceptLastDay = false;
-	let eventType: 'continuous' | 'once' = 'once';
+	export let eventType: 'continuous' | 'once' = 'once';
 	import SveltyPicker from 'svelty-picker';
 
 	export let isValid = false;
@@ -19,11 +19,19 @@
 
 	$: {
 		if (eventType === 'once') {
+			end_date = '';
 			isValid = !!start_date && !!start_time && !!end_time;
 		} else {
 			isValid = !!start_date && !!end_date && !!start_time && !!end_time;
 		}
 	}
+
+	const plusOneDay = (date: string) => {
+		const [day, month, year] = date.split('/').map(Number);
+		const newDate = new Date(year, month - 1, day);
+		newDate.setDate(newDate.getDate() + 1);
+		return newDate;
+	};
 </script>
 
 <form class="grid grid-cols-1  gap-6 " id="1-part" on:submit|preventDefault>
@@ -67,7 +75,7 @@
 					inputId="end_date"
 					name="end date"
 					i18n={it}
-					startDate={new Date()}
+					startDate={start_date ? plusOneDay(start_date) : new Date()}
 				/>
 			</div>
 		{/if}
